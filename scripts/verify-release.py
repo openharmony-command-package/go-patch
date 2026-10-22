@@ -81,7 +81,9 @@ source=a.source.resolve()
 port_sources=[p for p in (ROOT/'patch/source-paths.txt').read_text().splitlines() if p and not p.startswith('#')]
 bundle_files=[ROOT/name for name in ['README.md','README.zh-CN.md','CONTRIBUTING.md',
                                    'CONTRIBUTING.zh-CN.md','LICENSE','THIRD-PARTY-NOTICES.md','manifest.json']]
-for directory in ['docs','patch','scripts','tests']:
+bundle_directories=['docs','patch','scripts','tests']
+if (ROOT/'mobile').is_dir():bundle_directories.append('mobile')
+for directory in bundle_directories:
     bundle_files.extend(path for path in (ROOT/directory).rglob('*')
                         if path.is_file() and '__pycache__' not in path.parts and path.suffix!='.pyc')
 results=[]

@@ -23,7 +23,7 @@ ARM64 C20 完整套件为 **450 pass / 249 skip / 0 fail**，退出状态 0；�
 macOS arm64/amd64（含 Rosetta）已运行 C20 Go，构建三目标 pure/cgo/c-shared/
 c-archive。Linux arm64/amd64（容器）已运行 C20 Go 并构建三目标纯 Go 程序。
 Windows 两架构构建完成，仍只有静态格式证据；不计为 Windows 实际运行通过。
-九种归档正从已受测工具链重包到本地 dist；重包必须保持 [72 项原生文件及四种宿主 Go
+九种候选归档已在本地 dist 生成；重包必须保持 [72 项原生文件及四种宿主 Go
 校验和](test-results/tested-toolchains.json) 不变。
 
 C20 补丁已在全新官方归档基线上应用，全部 190 个适配源码逐文件一致，见
