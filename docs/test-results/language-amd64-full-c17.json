@@ -1,0 +1,42 @@
+{
+  "arch": "amd64",
+  "method": "official runOnHost -target; signed execution in full-system OHOS QEMU",
+  "run_id": "full-c17",
+  "diagnostic_filter": null,
+  "exit_status": 0,
+  "test_cases": 2733,
+  "expected_cases": 2733,
+  "target_timeout_seconds": 7200,
+  "recipe_timeout_scale": 20,
+  "target_stdlib_archive_sha256": "076970cacf94b18978a29ff41831aee67ad5b4f256cfc7fc67482477c257aadf",
+  "target_stdlib_packages": 376,
+  "tests": {
+    "pass": 2686,
+    "skip": 47
+  },
+  "target_executions": 1250,
+  "failures": [],
+  "infrastructure_errors": [],
+  "accepted": true,
+  "patch_sha256": "df5494a401403fa9464d8d3e5f9f2d9a56f5eb21b7f0cbea4b7d3aef43f5a2bc",
+  "input_hashes": {
+    "/Users/ranger/Documents/ChatGPT/go-patch/patch/go-ohos-1.27.3.patch": "df5494a401403fa9464d8d3e5f9f2d9a56f5eb21b7f0cbea4b7d3aef43f5a2bc",
+    "/Users/ranger/Documents/ChatGPT/go-patch/.work/upstream/go/src/cmd/internal/testdir/testdir_test.go": "0904d876438380655df5b386c26e1867675d5072caacf95f3924a153cbf42465",
+    "/Users/ranger/Documents/ChatGPT/go-patch/scripts/qemu-exec.py": "f1f578e871f6cf7508576e2097eefeef7bc07fff61c5c74c63703bef3af7e486",
+    "/Users/ranger/Documents/ChatGPT/go-patch/scripts/test-language.py": "43967c1b496dd14435adb62af5a92fed00a81b7eb517ca371debb6f5d77a2807"
+  },
+  "inputs_unchanged": true,
+  "driver_sha256": "569a64af85c0c717d2f70255e22638510eb6d333c4148e35b9779f66b7496dcb",
+  "qemu": {
+    "pid": 90142,
+    "port": 5571,
+    "server": 18769,
+    "hdc": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/hdc",
+    "archive_sha256": "a1173c39b4bd9ae3e46de176867b501af51eff605466811b86d8370caeccd7ca",
+    "profile": "stock",
+    "qmp": "/Users/ranger/Documents/ChatGPT/go-patch/.work/qemu/x86_64/qmp.sock",
+    "memory_mib": 8192,
+    "power_policy": "powermgr stopped during headless Go tests"
+  },
+  "log_sha256": "104f9d4622266d7d15093f8560be1ba37910c5253738fce6824d2a5b8dffc529"
+}

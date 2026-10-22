@@ -1,0 +1,12 @@
+{
+  "arch": "arm64",
+  "patch_sha256": "58bc568264a43a993ba6a9156a2916259fb599b91a0869f937a62702338a5bb3",
+  "go_version": "go1.27.3",
+  "script_sha256": "0286e0694da4e1f1e879257ec623ae6656d6d2d114845c63df01f17be082248c",
+  "accepted": true,
+  "linux_build_without_signer": true,
+  "ohos_build_without_signer_rejected": true,
+  "ohos_signed_build_direct_execution": true,
+  "go_binary_sha256": "5b9c640b270138fe1a7cfce583059b21767f1c0b4d986b7fa448326b57c52be0",
+  "log_sha256": "ae2fe3833ed431bb3b7b60fd2c38c98a9a60e4e4766a52a8a7e5231dd6e9cc12"
+}

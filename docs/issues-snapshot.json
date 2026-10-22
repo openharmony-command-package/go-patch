@@ -1,0 +1,4071 @@
+[
+  {
+    "id": 4316515,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/75",
+    "number": "75",
+    "state": "open",
+    "title": "net: add cgo implements for interfaceTable&interfaceAddrTable on openharmony system",
+    "body": "Due to security permission controls in the openharmony, it is not possible to communicate with the system kernel through netlink sockets to obtain network interfaces information. Therefore, we add cgo implements for interfaceTable&interfaceAddrTable on openharmony system by using corresponding interfaces of the musl-C standard library.",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-09-08T15:00:52+08:00",
+    "updated_at": "2026-09-08T15:00:52+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 4316424,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/74",
+    "number": "74",
+    "state": "open",
+    "title": "runtIme: move SP to makesure __tlsdesc-stub does not overwrite FP saved at SP-8",
+    "body": "runtIme: move SP to makesure __tlsdesc-stub does not overwrite FP saved at SP-8",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-09-08T14:32:48+08:00",
+    "updated_at": "2026-09-08T14:32:48+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 4316420,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/73",
+    "number": "73",
+    "state": "open",
+    "title": "cmd/link: add missing fields in Shlibs",
+    "body": "cmd/link: add missing fields in Shlibs",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-09-08T14:31:14+08:00",
+    "updated_at": "2026-09-08T14:31:14+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 4316398,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/72",
+    "number": "72",
+    "state": "open",
+    "title": "cmd/link: prefer to use the path specified by the AR enviroment variable as the path of the ar command.",
+    "body": "cmd/link: prefer to use the path specified by the AR enviroment variable as the path of the ar command.",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-09-08T14:26:24+08:00",
+    "updated_at": "2026-09-08T14:26:24+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 4316342,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/71",
+    "number": "71",
+    "state": "open",
+    "title": "runtime: get environ from global symbol instead of /proc/self/environ",
+    "body": "runtime: get environ from global symbol instead of /proc/self/environ",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-09-08T14:06:08+08:00",
+    "updated_at": "2026-09-08T14:06:08+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 4316203,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/70",
+    "number": "70",
+    "state": "open",
+    "title": "test: Enable cgo cshared tests on openharmony",
+    "body": "test: Enable cgo cshared tests on openharmony",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-09-08T11:55:57+08:00",
+    "updated_at": "2026-09-08T11:55:57+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 4316186,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/69",
+    "number": "69",
+    "state": "open",
+    "title": "cmd/asm,cmd/link,cmd/go: Add dynamic TLS model for ARM64",
+    "body": "cmd/asm,cmd/link,cmd/go: Add dynamic TLS model for ARM64\n\nAdd a flag -tls=[IE,LE,GD] in the asm tool to specify tls model. Pass two flags from cmd/go for the c-shared mode for supporting targets (currently only ARM64): -D=TLS_GD -tls=GD. Update test runner under internal/testdir with a new test run option: objcheck. Update cmd/link with a new relocation type R_ARM64_TLS_GD which relies on external linker relocations, similar to existing R_ARM64_TLS_IE.\n\nThe general dynamic TLS model uses a stub call, and we pass additional preprocessor flag to assembler to handle cases without a stack frame (to allow it temporarily keep the return address in some register).\nThe new objcheck test option is similar to asmcheck, but uses'go tool objdump' on the go object file instead of checking assembly.This allows writing specific tests for relocations emitted in the object file. Added three testcases for the new -tls option.",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-09-08T11:47:45+08:00",
+    "updated_at": "2026-09-08T11:47:45+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 4316163,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/68",
+    "number": "68",
+    "state": "open",
+    "title": "test: Enabled carchive_test.go on openharmony",
+    "body": "test: Enabled carchive_test.go on openharmony\n\nEnable testcarchive/carchive_test.go on openharmony",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-09-08T11:43:08+08:00",
+    "updated_at": "2026-09-08T11:43:08+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 4316085,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/67",
+    "number": "67",
+    "state": "open",
+    "title": "runtime: fix segfault due to missing argv on musl-linux c-archive",
+    "body": "This change fixes a segmentation fault that occurs on musl-based systems\nwhen using c-archive (or c-shared with LD_PRELOAD). The issue was caused\nby uninitialized argv and envp, which led to crashes at runtime.\n\nThis fix ensures that both argv and envp are correctly initialized,\npreventing the segmentation fault.\n\nWhile this fix addresses crashes due to missing argv and envp, it does\nnot\naddress the error described in issue #54805, where a c-shared library\nloaded with dlopen triggers an error related to initial-exec access to\nTLS\nobjects [1] in a dynamically loaded library.\n\n[1]:\nhttp://git.musl-libc.org/cgit/musl/commit/?id=5c2f46a214fceeee3c3e41700c51415e0a4f1acd\n",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-09-08T11:27:59+08:00",
+    "updated_at": "2026-09-08T11:27:59+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 4316077,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/66",
+    "number": "66",
+    "state": "open",
+    "title": "runtime: skip registration error for 43 signal",
+    "body": "runtime: skip registration error for 43 signal",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-09-08T11:25:42+08:00",
+    "updated_at": "2026-09-08T11:25:42+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 4316063,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/65",
+    "number": "65",
+    "state": "open",
+    "title": "net: set preferCgo=true for openharmony",
+    "body": "net: set preferCgo=true for openharmony",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-09-08T11:23:22+08:00",
+    "updated_at": "2026-09-08T11:23:22+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 4316049,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/64",
+    "number": "64",
+    "state": "open",
+    "title": "internal/platform: use external link when ohos using cgo",
+    "body": "internal/platform: use external link when ohos using cgo",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-09-08T11:19:34+08:00",
+    "updated_at": "2026-09-08T11:19:34+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 4316042,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/63",
+    "number": "63",
+    "state": "open",
+    "title": "CMD/Link: read gcdata address from relocation info in shlib",
+    "body": "CMD/Link: read gcdata address from relocation info in shlib",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-09-08T11:16:46+08:00",
+    "updated_at": "2026-09-08T11:16:46+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 4315702,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/62",
+    "number": "62",
+    "state": "open",
+    "title": "all: Adaptation on openharmony/arm64 platform.",
+    "body": "需求价值】：\n支持使用go语言开发的软件在openharmony/arm64上运行。\n\n【需求描述】：\n为go语言添加一种新的目标操作系统：openharmony，仅在arm64架构上支持；通过交叉编译的方式支持，编译机器为Linux/x86。\n\n【方案描述】：\n1、引入GOOS=openharmony标志目标操作系统为openharmony的情况。\n2、当GOOS=openharmony时，会匹配命中\"linux\" build tag，就像当GOOS=android时会匹配命中\"linux\" build tag和当GOOS=illumos时匹配命中\"solaris\" build tag一样。\n3、对于源码中的GOOS==\"linux\"，大部分需要修改为 (GOOS==\"linux\" || GOOS=\"openharmony\")；当openharmony系统和linux系统在很多地方是存在差别的，仅在openharmony上有效的分支使用 GOOS==\"openharmony\"作为if语句的条件。\n4、当前仅支持在Linux/x86上通过交叉编译的方式支持openharmony/arm64。\n5、通过环境变量指定 GOOS=\"openharmony\" GOARCH=\"arm64\"生成openharmony/arm64目标文件。\n\n【配套文档】：\n1、golang/go基线版本：go1.24。\n2、使用方式：交叉编译；编译机器：Linux/x86；目标机器：openharmony/arm64。\n3、openharmony系统版本：OpenHarmony v5.0.0 Release以上版本，不支持更早的版本。\n4、cgo配套C编译器版本信息：\n\nOHOS (dev) clang version 15.0.4 (llvm-project ef33c3575763937746833063de4d2e1fd184bbf7)\nTarget: x86_64-unknown-linux-gnu\n\nC编译工具链下载地址：https://developer.huawei.com/consumer/cn/download/\n\n【验收标准】：\n使用当前go编译器可以编译出openharmony/arm64目标文件，可以在openharmony/arm64上稳定运行且功能正常。\n\n【遗留问题】：\n当前有部分测试用例因系统差异无法通过，我们将在后续的合入中对这部分用例进行适配。",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-09-08T09:58:57+08:00",
+    "updated_at": "2026-09-08T16:41:53+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 4256944,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/61",
+    "number": "61",
+    "state": "closed",
+    "title": "Correction of the directory after bootstrapping.",
+    "body": "Correction of the directory after bootstrapping.",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-08-17T16:25:08+08:00",
+    "updated_at": "2026-08-17T16:54:20+08:00",
+    "finished_at": "2026-08-17T16:54:18+08:00",
+    "labels": [],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 4221622,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/60",
+    "number": "60",
+    "state": "open",
+    "title": "go升级到1.26.5",
+    "body": "我的代码现在在 https://github.com/star4277/ohos-go main分支适配了最新的1.26.5的代码，还实现了鸿蒙模拟器x64版本的工具链，你们看看要不要合过来？\n\n![d54c4acb63eeffef2e8f99999bca1541.png](https://raw.gitcode.com/user-images/assets/4469098/c11d803d-87b6-4321-9586-4088899de64a/d54c4acb63eeffef2e8f99999bca1541.png 'd54c4acb63eeffef2e8f99999bca1541.png')\n\n![a6665cf367c58d0b18424e6ce5b813c3.png](https://raw.gitcode.com/user-images/assets/4469098/08243be1-b14a-4429-84d6-5020fb26e74e/a6665cf367c58d0b18424e6ce5b813c3.png 'a6665cf367c58d0b18424e6ce5b813c3.png')\n![b072f0549919755d588c79172ae9f362.png](https://raw.gitcode.com/user-images/assets/4469098/eb22db21-6f56-4b54-be0f-cbd0772171fc/b072f0549919755d588c79172ae9f362.png 'b072f0549919755d588c79172ae9f362.png')\n\n这是我自己实现的一个flutter + go的代码生成器，运行在鸿蒙x86模拟器上的截图",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/ff/ed/21f9055f670745e587d52b60c2ca692201055708edc1408afa849abb6ebecb82.png?time=1779157203095",
+      "html_url": "https://gitcode.com/star4277",
+      "id": "67d59d3ab317c359bddae17d",
+      "object_id": "67d59d3ab317c359bddae17d",
+      "login": "star4277",
+      "name": "Star4277"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-08-05T17:56:00+08:00",
+    "updated_at": "2026-08-05T17:56:38+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "意向",
+    "comments": 0,
+    "issue_type": "咨询",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "意向",
+      "serial": 16,
+      "id": 2641545
+    },
+    "issue_type_detail": {
+      "title": "咨询",
+      "id": 820566,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 4221132,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/59",
+    "number": "59",
+    "state": "closed",
+    "title": "Add a patch to temporaily replace syscall.Fallocate(), which is not supported on HarmonyOS yet.",
+    "body": "Add a patch to temporaily replace syscall.Fallocate(), which is not supported on HarmonyOS yet.",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/ff/fd/75f56f329f3d1d573071f5c0d44adcd5d2380a45be8f0472ef11651655103129.jpg",
+      "html_url": "https://gitcode.com/weixin_46232894",
+      "id": "66d182892eb7293cb7b50566",
+      "object_id": "66d182892eb7293cb7b50566",
+      "login": "weixin_46232894",
+      "name": "gaoyuchao"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-08-05T16:24:33+08:00",
+    "updated_at": "2026-08-07T10:53:11+08:00",
+    "finished_at": "2026-08-07T10:53:09+08:00",
+    "labels": [],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 4196294,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/58",
+    "number": "58",
+    "state": "closed",
+    "title": "Integrate external-binary signing method into the ohos_golang_go workflow, enabled direct complier usage on HiShell.",
+    "body": "Integrate external-binary signing method into the ohos_golang_go workflow, enabled direct complier usage on HiShell. Additionally, several test cases fixed.",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-07-27T10:08:47+08:00",
+    "updated_at": "2026-08-07T10:53:18+08:00",
+    "finished_at": "2026-08-07T10:53:17+08:00",
+    "labels": [],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 4196246,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/57",
+    "number": "57",
+    "state": "closed",
+    "title": "Add a patch to temporaily replace syscall.Fallocate(), which is not supported on HarmonyOS yet.",
+    "body": "Add a patch to temporaily replace syscall.Fallocate(), which is not supported on HarmonyOS yet. In purpose of support cross-compilation of a bootstrap toolchain for compiler bootstrapping on HarmonyOS terminal HiShell.",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-07-27T09:56:24+08:00",
+    "updated_at": "2026-08-13T18:03:41+08:00",
+    "finished_at": "2026-08-13T18:03:41+08:00",
+    "labels": [],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 4045052,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/56",
+    "number": "56",
+    "state": "open",
+    "title": "改用tar.gz等通用压缩格式",
+    "body": "![image.png](https://raw.gitcode.com/user-images/assets/4469098/850ac5bf-e68d-42a7-9ad5-ad6fabaad703/image.png 'image.png')\nzip包会丢失执行权限。\n在x64解压后，手动chmod +x\n建议直接用 tar.gz等linux下通用格式",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/df/fc/df577f5448395cd20feb94848724d09803989adb3c9cbf11d607e6c5599b99b7.png?time=1740671064329",
+      "html_url": "https://gitcode.com/seer671",
+      "id": "67bfc80d8f6bc32244703865",
+      "object_id": "67bfc80d8f6bc32244703865",
+      "login": "seer671",
+      "name": "牧羊人"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-05-25T21:54:57+08:00",
+    "updated_at": "2026-05-25T21:54:57+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "需求",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "需求",
+      "id": 251718,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3825452,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/55",
+    "number": "55",
+    "state": "open",
+    "title": "对 golang 官方版本更新跟进的计划",
+    "body": "请问下现在有对 golang 官方版本更新进行跟进的road map吗? 用到的一个库的最新版本要求 go 1.25 +",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/cf/ff/95926cf81ff9b7abee3a802c7d1c39cc93eaef0f85aeea96f1ae589608234028.jpg",
+      "html_url": "https://gitcode.com/shpirt",
+      "id": "69663097a6d740747c41161d",
+      "object_id": "69663097a6d740747c41161d",
+      "login": "shpirt",
+      "name": "vcx"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2026-03-28T01:16:26+08:00",
+    "updated_at": "2026-03-28T01:16:26+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3702588,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/54",
+    "number": "54",
+    "state": "open",
+    "title": "编译得到的二进制如何在鸿蒙中运行",
+    "body": "第一次进行鸿蒙应用开发。\n开发环境搭建完毕，检查正确。\n根据“应用编译指南”-“源码编译说明”-“纯go源码编译”的操作，已成功编译出可执行程序，该程序应该如何在鸿蒙系统中运行？",
+    "user": {
+      "html_url": "https://gitcode.com/Croton_D",
+      "id": "670ddf5e4195f70b53612e98",
+      "object_id": "670ddf5e4195f70b53612e98",
+      "login": "Croton_D",
+      "name": "Croton_D"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-12-31T16:01:19+08:00",
+    "updated_at": "2026-03-25T15:26:30+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "意向",
+    "comments": 1,
+    "issue_type": "咨询",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "意向",
+      "serial": 16,
+      "id": 2641545
+    },
+    "issue_type_detail": {
+      "title": "咨询",
+      "id": 820566,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3491277,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/53",
+    "number": "53",
+    "state": "closed",
+    "title": "net: add cgo implements for interfaceTable&interfaceAddrTable on openharmony system",
+    "body": "Due to security permission controls in the openharmony, it is not possible to communicate with the system kernel through netlink sockets to obtain network interfaces information. Therefore, we add cgo implements for interfaceTable&interfaceAddrTable on openharmony system by using corresponding interfaces of the musl-C standard library.",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-12-04T23:11:44+08:00",
+    "updated_at": "2026-02-09T17:27:21+08:00",
+    "finished_at": "2026-02-09T17:27:21+08:00",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3392377,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/52",
+    "number": "52",
+    "state": "open",
+    "title": "大概什么时候可以将opehharmony合并到官方golang仓库",
+    "body": "想咨询下大概什么时候可以将opehharmony合并到官方golang仓库",
+    "user": {
+      "html_url": "https://gitcode.com/PZDF_Fly",
+      "id": "685cf094d8f0940af0521b58",
+      "object_id": "685cf094d8f0940af0521b58",
+      "login": "PZDF_Fly",
+      "name": "PZDF_Fly"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-11-14T17:17:40+08:00",
+    "updated_at": "2025-11-14T17:17:40+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "意向",
+    "comments": 0,
+    "issue_type": "咨询",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "意向",
+      "serial": 16,
+      "id": 2641545
+    },
+    "issue_type_detail": {
+      "title": "咨询",
+      "id": 820566,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3353194,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/51",
+    "number": "51",
+    "state": "closed",
+    "title": "crypto/x509: rework fix for CVE-2025-58187",
+    "body": "crypto/x509: rework fix for CVE-2025-58187\n\n\nIn CL 709854 we enabled strict validation for a number of properties of\ndomain names (and their constraints). This caused significant breakage,\nsince we didn't previously disallow the creation of certificates which\ncontained these malformed domains.\n\nRollback a number of the properties we enforced, making domainNameValid\nonly enforce the same properties that domainToReverseLabels does. Since\nthis also undoes some of the DoS protections our initial fix enabled,\nthis change also adds caching of constraints in isValid (which perhaps\nis the fix we should've initially chosen).\n\nUpdates #75835\nUpdates #75828\nFixes #75860\n\nChange-Id: Ie6ca6b4f30e9b8a143692b64757f7bbf4671ed0e\nReviewed-on: https://go-review.googlesource.com/c/go/+/710735\nLUCI-TryBot-Result: Go LUCI <golang-scoped@luci-project-accounts.iam.gserviceaccount.com>\nReviewed-by: Damien Neil <dneil@google.com>\n(cherry picked from commit 1cd71689f2ed8f07031a0cc58fc3586ca501839f)\nReviewed-on: https://go-review.googlesource.com/c/go/+/710879\nReviewed-by: Michael Pratt <mpratt@google.com>\nAuto-Submit: Michael Pratt <mpratt@google.com>\n",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-10-21T20:17:55+08:00",
+    "updated_at": "2025-10-23T15:26:09+08:00",
+    "finished_at": "2025-10-23T15:26:09+08:00",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3353185,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/50",
+    "number": "50",
+    "state": "closed",
+    "title": "archive/tar: set a limit on the size of GNU sparse file 1.0 regions",
+    "body": "archive/tar: set a limit on the size of GNU sparse file 1.0 regions\n\n\nSparse files in tar archives contain only the non-zero components\nof the file. There are several different encodings for sparse\nfiles. When reading GNU tar pax 1.0 sparse files, archive/tar did\nnot set a limit on the size of the sparse region data. A malicious\narchive containing a large number of sparse blocks could cause\narchive/tar to read an unbounded amount of data from the archive\ninto memory.\n\nSince a malicious input can be highly compressable, a small\ncompressed input could cause very large allocations.\n\nCap the size of the sparse block data to the same limit used\nfor PAX headers (1 MiB).\n\nThanks to Harshit Gupta (Mr HAX) (https://www.linkedin.com/in/iam-harshit-gupta/)\nfor reporting this issue.\n\nFixes CVE-2025-58183\nFor #75677\nFixes #75710\n\nChange-Id: I70b907b584a7b8676df8a149a1db728ae681a770\nReviewed-on: https://go-internal-review.googlesource.com/c/go/+/2800\nReviewed-by: Roland Shoemaker <bracewell@google.com>\nReviewed-by: Nicholas Husin <husin@google.com>\nReviewed-on: https://go-internal-review.googlesource.com/c/go/+/2967\nReviewed-by: Damien Neil <dneil@google.com>\nReviewed-on: https://go-review.googlesource.com/c/go/+/709843\nReviewed-by: Carlos Amedee <carlos@golang.org>\nTryBot-Bypass: Michael Pratt <mpratt@google.com>\nAuto-Submit: Michael Pratt <mpratt@google.com>\n",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-10-21T20:12:18+08:00",
+    "updated_at": "2026-03-25T15:30:18+08:00",
+    "finished_at": "2026-03-25T15:30:18+08:00",
+    "labels": [],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3353177,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/49",
+    "number": "49",
+    "state": "closed",
+    "title": "encoding/pem: make Decode complexity linear",
+    "body": " encoding/pem: make Decode complexity linear\n\n\nBecause Decode scanned the input first for the first BEGIN line, and\nthen the first END line, the complexity of Decode is quadratic. If the\ninput contained a large number of BEGINs and then a single END right at\nthe end of the input, we would find the first BEGIN, and then scan the\nentire input for the END, and fail to parse the block, so move onto the\nnext BEGIN, scan the entire input for the END, etc.\n\nInstead, look for the first END in the input, and then the first BEGIN\nthat precedes the found END. We then process the bytes between the BEGIN\nand END, and move onto the bytes after the END for further processing.\nThis gives us linear complexity.\n\nFixes CVE-2025-61723\nFor #75676\nFixes #75708\n\nChange-Id: I813c4f63e78bca4054226c53e13865c781564ccf\nReviewed-on: https://go-internal-review.googlesource.com/c/go/+/2921\nReviewed-by: Nicholas Husin <husin@google.com>\nReviewed-by: Damien Neil <dneil@google.com>\nReviewed-on: https://go-internal-review.googlesource.com/c/go/+/2986\nReviewed-on: https://go-review.googlesource.com/c/go/+/709842\nTryBot-Bypass: Michael Pratt <mpratt@google.com>\nAuto-Submit: Michael Pratt <mpratt@google.com>\nReviewed-by: Carlos Amedee <carlos@golang.org>\n",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-10-21T20:08:07+08:00",
+    "updated_at": "2026-03-25T15:30:53+08:00",
+    "finished_at": "2026-03-25T15:30:53+08:00",
+    "labels": [],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3353173,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/48",
+    "number": "48",
+    "state": "closed",
+    "title": "encoding/asn1: prevent memory exhaustion when parsing using internal/saferio",
+    "body": "encoding/asn1: prevent memory exhaustion when parsing using internal/saferio\n\n\nWithin parseSequenceOf, reflect.MakeSlice is being used to pre-allocate\na slice that is needed in order to fully validate the given DER payload.\nThe size of the slice allocated are also multiple times larger than the\ninput DER:\n\n- When using asn1.Unmarshal directly, the allocated slice is ~28x\n  larger.\n- When passing in DER using x509.ParseCertificateRequest, the allocated\n  slice is ~48x larger.\n- When passing in DER using ocsp.ParseResponse, the allocated slice is\n  ~137x larger.\n\nAs a result, a malicious actor can craft a big empty DER payload,\nresulting in an unnecessary large allocation of memories. This can be a\nway to cause memory exhaustion.\n\nTo prevent this, we now use SliceCapWithSize within internal/saferio to\nenforce a memory allocation cap.\n\nThanks to Jakub Ciolek for reporting this issue.\n\nFor #75671\nFixes #75704\nFixes CVE-2025-58185\n\nChange-Id: Id50e76187eda43f594be75e516b9ca1d2ae6f428\nReviewed-on: https://go-internal-review.googlesource.com/c/go/+/2700\nReviewed-by: Roland Shoemaker <bracewell@google.com>\nReviewed-by: Damien Neil <dneil@google.com>\nReviewed-on: https://go-internal-review.googlesource.com/c/go/+/2984\nReviewed-by: Nicholas Husin <husin@google.com>\nReviewed-on: https://go-review.googlesource.com/c/go/+/709841\nReviewed-by: Carlos Amedee <carlos@golang.org>\nAuto-Submit: Michael Pratt <mpratt@google.com>\nTryBot-Bypass: Michael Pratt <mpratt@google.com>\n",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-10-21T20:04:29+08:00",
+    "updated_at": "2026-03-25T15:31:01+08:00",
+    "finished_at": "2026-03-25T15:31:01+08:00",
+    "labels": [],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3353162,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/47",
+    "number": "47",
+    "state": "closed",
+    "title": "net/http: add httpcookiemaxnum GODEBUG option to limit number of cookies parsed",
+    "body": "net/http: add httpcookiemaxnum GODEBUG option to limit number of cookies parsed\n\n\nWhen handling HTTP headers, net/http does not currently limit the number\nof cookies that can be parsed. The only limitation that exists is for\nthe size of the entire HTTP header, which is controlled by\nMaxHeaderBytes (defaults to 1 MB).\n\nUnfortunately, this allows a malicious actor to send HTTP headers which\ncontain a massive amount of small cookies, such that as much cookies as\npossible can be fitted within the MaxHeaderBytes limitation. Internally,\nthis causes us to allocate a massive number of Cookie struct.\n\nFor example, a 1 MB HTTP header with cookies that repeats \"a=;\" will\ncause an allocation of ~66 MB in the heap. This can serve as a way for\nmalicious actors to induce memory exhaustion.\n\nTo fix this, we will now limit the number of cookies we are willing to\nparse to 3000 by default. This behavior can be changed by setting a new\nGODEBUG option: GODEBUG=httpcookiemaxnum. httpcookiemaxnum can be set to\nallow a higher or lower cookie limit. Setting it to 0 will also allow an\ninfinite number of cookies to be parsed.\n\nThanks to jub0bs for reporting this issue.\n\nFor #75672\nFixes #75706\nFixes CVE-2025-58186\n\nChange-Id: Ied58b3bc8acf5d11c880f881f36ecbf1d5d52622\nReviewed-on: https://go-internal-review.googlesource.com/c/go/+/2720\nReviewed-by: Roland Shoemaker <bracewell@google.com>\nReviewed-by: Damien Neil <dneil@google.com>\nReviewed-on: https://go-internal-review.googlesource.com/c/go/+/2983\nReviewed-by: Nicholas Husin <husin@google.com>\nReviewed-on: https://go-review.googlesource.com/c/go/+/709840\nTryBot-Bypass: Michael Pratt <mpratt@google.com>\nAuto-Submit: Michael Pratt <mpratt@google.com>\nReviewed-by: Carlos Amedee <carlos@golang.org>\n",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-10-21T19:58:56+08:00",
+    "updated_at": "2026-03-25T15:31:10+08:00",
+    "finished_at": "2026-03-25T15:31:10+08:00",
+    "labels": [],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3353139,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/46",
+    "number": "46",
+    "state": "closed",
+    "title": "net/textproto: avoid quadratic complexity in Reader.ReadResponse",
+    "body": " net/textproto: avoid quadratic complexity in Reader.ReadResponse\n\n\nReader.ReadResponse constructed a response string from repeated\nstring concatenation, permitting a malicious sender to cause excessive\nmemory allocation and CPU consumption by sending a response consisting\nof many short lines.\n\nUse a strings.Builder to construct the string instead.\n\nThanks to Jakub Ciolek for reporting this issue.\n\nFixes CVE-2025-61724\nFor #75716\nFixes #75717\n\nChange-Id: I1a98ce85a21b830cb25799f9ac9333a67400d736\nReviewed-on: https://go-internal-review.googlesource.com/c/go/+/2940\nReviewed-by: Roland Shoemaker <bracewell@google.com>\nReviewed-by: Nicholas Husin <husin@google.com>\nReviewed-on: https://go-internal-review.googlesource.com/c/go/+/2980\nReviewed-by: Damien Neil <dneil@google.com>\nReviewed-on: https://go-review.googlesource.com/c/go/+/709837\nReviewed-by: Carlos Amedee <carlos@golang.org>\nTryBot-Bypass: Michael Pratt <mpratt@google.com>\nAuto-Submit: Michael Pratt <mpratt@google.com>\n",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-10-21T19:51:10+08:00",
+    "updated_at": "2026-03-25T15:31:20+08:00",
+    "finished_at": "2026-03-25T15:31:20+08:00",
+    "labels": [],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3353125,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/45",
+    "number": "45",
+    "state": "closed",
+    "title": "crypto/x509: mitigate DoS vector when intermediate certificate contains DSA public key",
+    "body": "crypto/x509: mitigate DoS vector when intermediate certificate contains DSA public key\n\n\nAn attacker could craft an intermediate X.509 certificate\ncontaining a DSA public key and can crash a remote host\nwith an unauthenticated call to any endpoint that\nverifies the certificate chain.\n\nThank you to Jakub Ciolek for reporting this issue.\n\nFixes CVE-2025-58188\nFor #75675\nFixes #75702\n\nChange-Id: I2ecbb87b9b8268dbc55c8795891e596ab60f0088\nReviewed-on: https://go-internal-review.googlesource.com/c/go/+/2780\nReviewed-by: Damien Neil <dneil@google.com>\nReviewed-by: Roland Shoemaker <bracewell@google.com>\nReviewed-on: https://go-internal-review.googlesource.com/c/go/+/2964\nReviewed-on: https://go-review.googlesource.com/c/go/+/709836\nTryBot-Bypass: Michael Pratt <mpratt@google.com>\nReviewed-by: Carlos Amedee <carlos@golang.org>\nAuto-Submit: Michael Pratt <mpratt@google.com>\n",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-10-21T19:45:08+08:00",
+    "updated_at": "2026-03-25T15:31:27+08:00",
+    "finished_at": "2026-03-25T15:31:27+08:00",
+    "labels": [],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3351886,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/44",
+    "number": "44",
+    "state": "closed",
+    "title": "crypto/x509: improve domain name verification",
+    "body": "crypto/x509: improve domain name verification\nDon't use domainToReverseLabels to check if domain names are valid,\nsince it is not particularly performant, and can contribute to DoS\nvectors. Instead just iterate over the name and enforce the properties\nwe care about.\n\nThis also enforces that DNS names, both in SANs and name constraints,\nare valid. We previously allowed invalid SANs, because some\nintermediates had these weird names (see #23995), but there are\ncurrently no trusted intermediates that have this property, and since we\ntarget the web PKI, supporting this particular case is not a high\npriority.\n\nThank you to Jakub Ciolek for reporting this issue.\n\nFixes CVE-2025-58187\nFor #75681\nFixes #75714\n\nChange-Id: I6ebce847dcbe5fc63ef2f9a74f53f11c4c56d3d1\nReviewed-on: https://go-internal-review.googlesource.com/c/go/+/2820\nReviewed-by: Damien Neil <dneil@google.com>\nReviewed-by: Roland Shoemaker <bracewell@google.com>\nReviewed-on: https://go-internal-review.googlesource.com/c/go/+/2982\nReviewed-by: Nicholas Husin <husin@google.com>\nReviewed-on: https://go-review.googlesource.com/c/go/+/709839\nAuto-Submit: Michael Pratt <mpratt@google.com>\nReviewed-by: Carlos Amedee <carlos@golang.org>\nTryBot-Bypass: Michael Pratt <mpratt@google.com>",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-10-21T00:01:08+08:00",
+    "updated_at": "2026-03-25T15:31:35+08:00",
+    "finished_at": "2026-03-25T15:31:35+08:00",
+    "labels": [],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3351883,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/43",
+    "number": "43",
+    "state": "closed",
+    "title": "net/url: enforce stricter parsing of bracketed IPv6 hostnames",
+    "body": "net/url: enforce stricter parsing of bracketed IPv6 hostnames\n- Previously, url.Parse did not enforce validation of hostnames within\n  square brackets.\n- RFC 3986 stipulates that only IPv6 hostnames can be embedded within\n  square brackets in a URL.\n- Now, the parsing logic should strictly enforce that only IPv6\n  hostnames can be resolved when in square brackets. IPv4, IPv4-mapped\n  addresses and other input will be rejected.\n- Update url_test to add test cases that cover the above scenarios.\n\nThanks to Enze Wang, Jingcheng Yang and Zehui Miao of Tsinghua\nUniversity for reporting this issue.\n\nFixes CVE-2025-47912\nFixes #75678\nFixes #75712\n\nChange-Id: Iaa41432bf0ee86de95a39a03adae5729e4deb46c\nReviewed-on: https://go-internal-review.googlesource.com/c/go/+/2680\nReviewed-by: Damien Neil <dneil@google.com>\nReviewed-by: Roland Shoemaker <bracewell@google.com>\nReviewed-on: https://go-internal-review.googlesource.com/c/go/+/2968\nReviewed-by: Nicholas Husin <husin@google.com>\nReviewed-on: https://go-review.googlesource.com/c/go/+/709838\nTryBot-Bypass: Michael Pratt <mpratt@google.com>\nReviewed-by: Carlos Amedee <carlos@golang.org>\nAuto-Submit: Michael Pratt <mpratt@google.com>",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-10-20T23:57:31+08:00",
+    "updated_at": "2026-03-25T15:31:46+08:00",
+    "finished_at": "2026-03-25T15:31:46+08:00",
+    "labels": [],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3351878,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/42",
+    "number": "42",
+    "state": "closed",
+    "title": "net/mail: avoid quadratic behavior in mail address parsing",
+    "body": "net/mail: avoid quadratic behavior in mail address parsing\nRFC 5322 domain-literal parsing built the dtext value one character\nat a time with string concatenation, resulting in excessive\nresource consumption when parsing very large domain-literal values.\n\nReplace with a subslice.\n\nBenchmark not included in this CL because it's too narrow to be\nof general ongoing use, but for:\n\n    ParseAddress(\"alice@[\" + strings.Repeat(\"a\", 0x40000) + \"]\")\n\ngoos: darwin\ngoarch: arm64\npkg: net/mail\ncpu: Apple M4 Pro\n                │  /tmp/bench.0  │            /tmp/bench.1             │\n                │     sec/op     │   sec/op     vs base                │\nParseAddress-14   1987.732m ± 9%   1.524m ± 5%  -99.92% (p=0.000 n=10)\n\n                │   /tmp/bench.0   │             /tmp/bench.1              │\n                │       B/op       │     B/op      vs base                 │\nParseAddress-14   33692.767Mi ± 0%   1.282Mi ± 0%  -100.00% (p=0.000 n=10)\n\n                │  /tmp/bench.0  │            /tmp/bench.1            │\n                │   allocs/op    │ allocs/op   vs base                │\nParseAddress-14   263711.00 ± 0%   17.00 ± 0%  -99.99% (p=0.000 n=10)\n\nThanks to Philippe Antoine (Catena cyber) for reporting this issue.\n\nFixes CVE-2025-61725\nFor #75680\nFixes #75700\n\nChange-Id: Id971c2d5b59882bb476e22fceb7e01ec08234bb7\nReviewed-on: https://go-internal-review.googlesource.com/c/go/+/2840\nReviewed-by: Roland Shoemaker <bracewell@google.com>\nReviewed-by: Nicholas Husin <husin@google.com>\nReviewed-on: https://go-internal-review.googlesource.com/c/go/+/2962\nReviewed-by: Damien Neil <dneil@google.com>\nReviewed-on: https://go-review.googlesource.com/c/go/+/709835\nAuto-Submit: Michael Pratt <mpratt@google.com>\nTryBot-Bypass: Michael Pratt <mpratt@google.com>\nReviewed-by: Carlos Amedee <carlos@golang.org>",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-10-20T23:47:38+08:00",
+    "updated_at": "2026-03-25T15:31:55+08:00",
+    "finished_at": "2026-03-25T15:31:55+08:00",
+    "labels": [],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3351872,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/41",
+    "number": "41",
+    "state": "closed",
+    "title": "crypto/tls: quote protocols in ALPN error message",
+    "body": "Quote the protocols sent by the client when returning the ALPN\nnegotiation error message.\n\nFixes CVE-2025-58189\nUpdates #75652\nFixes #75660\n\nChange-Id: Ie7b3a1ed0b6efcc1705b71f0f1e8417126661330\nReviewed-on: https://go-review.googlesource.com/c/go/+/707776\nAuto-Submit: Roland Shoemaker <roland@golang.org>\nReviewed-by: Neal Patel <nealpatel@google.com>\nReviewed-by: Nicholas Husin <nsh@golang.org>\nAuto-Submit: Nicholas Husin <nsh@golang.org>\nReviewed-by: Nicholas Husin <husin@google.com>\nTryBot-Bypass: Roland Shoemaker <roland@golang.org>\nReviewed-by: Daniel McCarney <daniel@binaryparadox.net>\n(cherry picked from commit 4e9006a716533fe1c7ee08df02dfc73078f7dc19)\nReviewed-on: https://go-review.googlesource.com/c/go/+/708096\nLUCI-TryBot-Result: Go LUCI <golang-scoped@luci-project-accounts.iam.gserviceaccount.com>\nReviewed-by: Carlos Amedee <carlos@golang.org>\n",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-10-20T23:33:20+08:00",
+    "updated_at": "2026-03-25T15:32:08+08:00",
+    "finished_at": "2026-03-25T15:32:08+08:00",
+    "labels": [],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3330793,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/40",
+    "number": "40",
+    "state": "closed",
+    "title": "database/sql: avoid closing Rows while scan is in progress",
+    "body": "[release-branch.go1.24] database/sql: avoid closing Rows while scan is in progress\n\nA database/sql/driver.Rows can return database-owned data\nfrom Rows.Next. The driver.Rows documentation doesn't explicitly\ndocument the lifetime guarantees for this data, but a reasonable\nexpectation is that the caller of Next should only access it\nuntil the next call to Rows.Close or Rows.Next.\n\nAvoid violating that constraint when a query is cancelled while\na call to database/sql.Rows.Scan (note the difference between\nthe two different Rows types!) is in progress. We previously\ntook care to avoid closing a driver.Rows while the user has\naccess to driver-owned memory via a RawData, but we could still\nclose a driver.Rows while a Scan call was in the process of\nreading previously-returned driver-owned data.\n\nUpdate the fake DB used in database/sql tests to invalidate\nreturned data to help catch other places we might be\nincorrectly retaining it.\n\nUpdates #74831\nFixes #74833\n\n\nChange-Id: Ice45b5fad51b679c38e3e1d21ef39156b56d6037\nReviewed-on: https://go-internal-review.googlesource.com/c/go/+/2540\nReviewed-by: Roland Shoemaker <bracewell@google.com>\nReviewed-by: Neal Patel <nealpatel@google.com>\nReviewed-on: https://go-internal-review.googlesource.com/c/go/+/2620\nReviewed-on: https://go-review.googlesource.com/c/go/+/693616\nReviewed-by: Dmitri Shuralyov <dmitshur@google.com>\nAuto-Submit: Dmitri Shuralyov <dmitshur@google.com>\nTryBot-Bypass: Dmitri Shuralyov <dmitshur@golang.org>\nReviewed-by: Mark Freeman <markfreeman@google.com>\nSigned-off-by: LuJing<lujing63@h-partners.com>",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-09-29T10:38:39+08:00",
+    "updated_at": "2025-09-30T11:49:53+08:00",
+    "finished_at": "2025-09-30T11:49:53+08:00",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3292464,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/39",
+    "number": "39",
+    "state": "closed",
+    "title": "runtime: move SP to make sure __tlsdesc-stub does not overwrite FP saved at SP-8",
+    "body": "运行编译器用例 TestSignalHandlersWithNotify 运行时失败。\n定位后发现奔溃点在 entersyscallblock 函数内部，执行完 systemstack(entersyscallblock_handoff) 之后 再调用getcallerfp()时奔溃。\n\n查看 getcallerfp() 函数的实现逻辑，是从 SP-8的位置获取FP的值，gdb单步调试发现这个对应的值在systemstack(entersyscallblock_handoff) 里面执行 save_g函数的时候被破坏了，进一步调试发现破坏的点在 获取tls线程局部变量的函数里面。由于这个用例测试的是c-shared编译模式，所以这里获取tls本地变量用的是musl标准库里的函数，而musl标准库中在动态库模式下获取tls的函数的第一条指令就是 stp x1,x2, \\[sp, #-16]。这里就把FP的值破话掉了，导致如果在这之后在尝试获取FP的值，就会奔溃。\n\n于是我们想到一个解决办法：在c-shared模式下，调用 获取 tls的函数之前先把SP的值减去16，调用完毕再加回来，这样就可以避免在获取tls的时候FP被破坏了。",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-09-12T10:34:07+08:00",
+    "updated_at": "2025-09-15T10:01:38+08:00",
+    "finished_at": "2025-09-15T10:01:38+08:00",
+    "labels": [],
+    "issue_state": "进行中",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "进行中",
+      "serial": 1,
+      "id": 877566
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3291380,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/38",
+    "number": "38",
+    "state": "closed",
+    "title": "cmd/link: add missing fields in Shlibs",
+    "body": "cmd/link: add missing fields in Shlibs",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-09-11T15:38:30+08:00",
+    "updated_at": "2025-09-12T14:25:53+08:00",
+    "finished_at": "2025-09-12T14:25:53+08:00",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3291125,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/37",
+    "number": "37",
+    "state": "closed",
+    "title": "cmd/link: prefer to use the path specified by the AR environment variable as the path of the ar command",
+    "body": "cmd/link: prefer to use the path specified by the AR environment variable as the path of the ar command",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-09-11T11:02:34+08:00",
+    "updated_at": "2025-09-11T18:00:16+08:00",
+    "finished_at": "2025-09-11T18:00:16+08:00",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3252697,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/36",
+    "number": "36",
+    "state": "closed",
+    "title": "runtime: get environ from global symbol instead of /proc/self/environ",
+    "body": "runtime: get environ from global symbol instead of /proc/self/environ",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-08-20T20:35:09+08:00",
+    "updated_at": "2025-08-21T15:32:58+08:00",
+    "finished_at": "2025-08-21T15:32:58+08:00",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3252637,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/35",
+    "number": "35",
+    "state": "closed",
+    "title": "test: Enable cgo cshared tests on openharmony",
+    "body": "test: Enable cgo cshared tests on openharmony",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-08-20T19:30:42+08:00",
+    "updated_at": "2025-09-23T11:18:14+08:00",
+    "finished_at": "2025-09-23T11:18:14+08:00",
+    "labels": [],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3252228,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/34",
+    "number": "34",
+    "state": "closed",
+    "title": "cmd/asm,cmd/link,cmd/go: Add dynamic TLS model for ARM64",
+    "body": "cmd/asm,cmd/link,cmd/go: Add dynamic TLS model for ARM64\n\nAdd a flag -tls=[IE,LE,GD] in the asm tool to specify tls model. Pass two flags from cmd/go for the c-shared mode for supporting targets (currently only ARM64): -D=TLS_GD -tls=GD. Update test runner under internal/testdir with a new test run option: objcheck. Update cmd/link with a new relocation type R_ARM64_TLS_GD which relies on external linker relocations, similar to existing R_ARM64_TLS_IE.\n\nThe general dynamic TLS model uses a stub call, and we pass additional preprocessor flag to assembler to handle cases without a stack frame (to allow it temporarily keep the return address in some register). The new objcheck test option is similar to asmcheck, but uses 'go tool objdump' on the go object file instead of checking assembly. This allows writing specific tests for relocations emitted in the object file. Added three testcases for the new -tls option.",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-08-20T14:30:54+08:00",
+    "updated_at": "2025-09-23T11:18:06+08:00",
+    "finished_at": "2025-09-23T11:18:06+08:00",
+    "labels": [],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3251925,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/33",
+    "number": "33",
+    "state": "closed",
+    "title": "test: Enable carchive_test.go on openharmony",
+    "body": "Enable testcarchive/carchive_test.go on openharmony",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-08-20T10:25:39+08:00",
+    "updated_at": "2025-08-20T14:13:21+08:00",
+    "finished_at": "2025-08-20T14:13:21+08:00",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3251018,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/32",
+    "number": "32",
+    "state": "closed",
+    "title": "runtime: fix segfault due to missing argv on musl-linux c-archive",
+    "body": "runtime: fix segfault due to missing argv on musl-linux c-archive\n\nThis change fixes a segmentation fault that occurs on musl-based systems\nwhen using c-archive (or c-shared with LD_PRELOAD). The issue was caused\nby uninitialized argv and envp, which led to crashes at runtime.\n\nThis fix ensures that both argv and envp are correctly initialized,\npreventing the segmentation fault.\n\nWhile this fix addresses crashes due to missing argv and envp, it does not\naddress the error described in issue #54805, where a c-shared library\nloaded with dlopen triggers an error related to initial-exec access to TLS\nobjects [1] in a dynamically loaded library.",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-08-19T17:06:43+08:00",
+    "updated_at": "2025-08-20T10:26:58+08:00",
+    "finished_at": "2025-08-20T10:26:58+08:00",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3250827,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/31",
+    "number": "31",
+    "state": "closed",
+    "title": "runtime: skip registration error for 43 signal",
+    "body": "runtime: skip registration error for 43 signal",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-08-19T15:58:31+08:00",
+    "updated_at": "2025-08-19T16:26:13+08:00",
+    "finished_at": "2025-08-19T16:26:13+08:00",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3250797,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/30",
+    "number": "30",
+    "state": "closed",
+    "title": "net: set preferCgo=true for openharmony",
+    "body": "net: set preferCgo=true for openharmony",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-08-19T15:46:40+08:00",
+    "updated_at": "2025-08-19T16:12:29+08:00",
+    "finished_at": "2025-08-19T16:12:29+08:00",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3250788,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/29",
+    "number": "29",
+    "state": "closed",
+    "title": "internal/platform: use external link when ohos using cgo",
+    "body": "internal/platform: use external link when ohos using cgo",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-08-19T15:38:35+08:00",
+    "updated_at": "2025-08-19T16:07:38+08:00",
+    "finished_at": "2025-08-19T16:07:38+08:00",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3249196,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/27",
+    "number": "27",
+    "state": "closed",
+    "title": "cmd/link: read gcdata address from relocation info in shlib",
+    "body": "cmd/link: read gcdata address from relocation info in shlib",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-08-18T16:59:19+08:00",
+    "updated_at": "2025-08-19T11:09:54+08:00",
+    "finished_at": "2025-08-19T11:09:54+08:00",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3249194,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/26",
+    "number": "26",
+    "state": "closed",
+    "title": "all: use runtime.IsOpenharmony instead of runtime.GOOS==\"openharmony\"",
+    "body": "all: use runtime.IsOpenharmony instead of runtime.GOOS==\"openharmony\"\n\nChange the value of runtime.GOOS from \"openharmony\" to \"linux\" when target os is openharmony,so that we don't need to change `runtime.GOOS == \"linux\"` to `runtime.GOOS == \"linux\" || runtime.GOOS == \"openharmony\"` for tens of thousands of existing Go open source projects.\n\nAdd runtime.IsOpenharmony to specify openharmony.",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/dc/be/111d302c15be929c51dbee184ffae05d5715b1a2b110539c1db0432971660955.jpg",
+      "html_url": "https://gitcode.com/LuJingl30079059",
+      "id": "6881ff405294102de27f35f4",
+      "object_id": "6881ff405294102de27f35f4",
+      "login": "LuJingl30079059",
+      "name": "YueX-Nam"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-08-18T16:58:55+08:00",
+    "updated_at": "2025-08-19T09:34:50+08:00",
+    "finished_at": "2025-08-19T09:34:50+08:00",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3246513,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/25",
+    "number": "25",
+    "state": "open",
+    "title": "验证TestSetgidStress用例",
+    "body": "From: https://gitcode.com/openharmony-sig/ohos_golang_go/pull/20\n![image.png](https://raw.gitcode.com/user-images/assets/4469098/0296201d-65d9-44c3-b5e8-805d3815632d/image.png 'image.png')\n\n1.24这个用例应该解决了。我们可以放开这个用例。",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/ec/cb/e9c114c1b750d7d6e4f708f836dcb4e7ca819358576fc99215f5b0455fd29048.png",
+      "html_url": "https://gitcode.com/wingrez",
+      "id": "673466b768f60c72a6d7e48e",
+      "object_id": "673466b768f60c72a6d7e48e",
+      "login": "wingrez",
+      "name": "wingrez"
+    },
+    "assignee": {
+      "avatar_url": "https://cdn-img.gitcode.com/ec/cb/e9c114c1b750d7d6e4f708f836dcb4e7ca819358576fc99215f5b0455fd29048.png",
+      "html_url": "https://gitcode.com/wingrez",
+      "id": "673466b768f60c72a6d7e48e",
+      "object_id": "673466b768f60c72a6d7e48e",
+      "login": "wingrez",
+      "name": "wingrez"
+    },
+    "assignees": [
+      {
+        "avatar_url": "https://cdn-img.gitcode.com/ec/cb/e9c114c1b750d7d6e4f708f836dcb4e7ca819358576fc99215f5b0455fd29048.png",
+        "html_url": "https://gitcode.com/wingrez",
+        "id": "673466b768f60c72a6d7e48e",
+        "object_id": "673466b768f60c72a6d7e48e",
+        "login": "wingrez",
+        "name": "wingrez"
+      }
+    ],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-08-15T14:21:33+08:00",
+    "updated_at": "2025-08-15T14:21:33+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3244775,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/24",
+    "number": "24",
+    "state": "closed",
+    "title": "proposal: all: support openharmony/arm64",
+    "body": "需求价值】：\n支持使用go语言开发的软件在openharmony/arm64上运行。\n\n【需求描述】：\n为go语言添加一种新的目标操作系统：openharmony，仅在arm64架构上支持；通过交叉编译的方式支持，编译机器为Linux/x86。\n\n【方案描述】：\n1、引入GOOS=openharmony标志目标操作系统为openharmony的情况。\n2、当GOOS=openharmony时，会匹配命中\"linux\" build tag，就像当GOOS=android时会匹配命中\"linux\" build tag和当GOOS=illumos时匹配命中\"solaris\" build tag一样。\n3、对于源码中的GOOS==\"linux\"，大部分需要修改为 (GOOS==\"linux\" || GOOS=\"openharmony\")；当openharmony系统和linux系统在很多地方是存在差别的，仅在openharmony上有效的分支使用 GOOS==\"openharmony\"作为if语句的条件。\n4、当前仅支持在Linux/x86上通过交叉编译的方式支持openharmony/arm64。\n5、通过环境变量指定 GOOS=\"openharmony\" GOARCH=\"arm64\"生成openharmony/arm64目标文件。\n\n【配套文档】：\n1、golang/go基线版本：go1.24。\n2、使用方式：交叉编译；编译机器：Linux/x86；目标机器：openharmony/arm64。\n3、openharmony系统版本：OpenHarmony v5.0.0 Release以上版本，不支持更早的版本。\n4、cgo配套C编译器版本信息：\n\nOHOS (dev) clang version 15.0.4 (llvm-project ef33c3575763937746833063de4d2e1fd184bbf7)\nTarget: x86_64-unknown-linux-gnu\n\nC编译工具链下载地址：https://developer.huawei.com/consumer/cn/download/\n\n【验收标准】：\n使用当前go编译器可以编译出openharmony/arm64目标文件，可以在openharmony/arm64上稳定运行且功能正常。\n\n【遗留问题】：\n当前有部分测试用例因系统差异无法通过，我们将在后续的合入中对这部分用例进行适配。",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-08-13T20:17:38+08:00",
+    "updated_at": "2025-08-18T14:34:43+08:00",
+    "finished_at": "2025-08-18T14:34:43+08:00",
+    "labels": [],
+    "issue_state": "开发中",
+    "comments": 0,
+    "issue_type": "需求",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "开发中",
+      "serial": 6,
+      "id": 877571
+    },
+    "issue_type_detail": {
+      "title": "需求",
+      "id": 251718,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3244754,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/23",
+    "number": "23",
+    "state": "closed",
+    "title": "ci: add build scirpts",
+    "body": "【任务描述】\n需要添加流水线构建脚本，用于项目构建和测试。\n\n【解决方案】\n添加构建脚本，集成到主干分支，后续新增提交pr时会触发构建脚本，对提交内容进行测试验证。\n\n【任务来源】\n社区门禁要求。",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-08-13T19:35:33+08:00",
+    "updated_at": "2025-09-23T11:16:13+08:00",
+    "finished_at": "2025-09-23T11:16:13+08:00",
+    "labels": [],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3228635,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/22",
+    "number": "22",
+    "state": "closed",
+    "title": "runtime: c-shared lib crash when using release mode to build openharmony app",
+    "body": "\n\nThanks for helping us improve! 🙏 Please answer these questions and provide as much information as possible about your problem.\n\n### Go version\n            \ngo1.22.5\n### Output of `go env` in your module/workspace:\n            \n```shell\nGO111MODULE=''\nGOARCH='arm64'\nGOBIN=''\nGOCACHE='/home/demo/.cache/go-build'\nGOENV='/home/demo/.config/go/env'\nGOEXE=''\nGOEXPERIMENT=''\nGOFLAGS=''\nGOHOSTARCH='amd64'\nGOHOSTOS='linux'\nGOINSECURE=''\nGOMODCACHE='/home/demo/golang/gopath/pkg/mod'\nGONOPROXY=''\nGONOSUMDB=''\nGOOS='openharmony'\nGOPATH='/home/demo/golang/gopath'\nGOPRIVATE=''\nGOPROXY='https://proxy.golang.org,direct'\nGOROOT='/home/demo/golang/go'\nGOSUMDB='sum.golang.org'\nGOTMPDIR=''\nGOTOOLCHAIN='auto'\nGOTOOLDIR='/home/demo/golang/go/pkg/tool/linux_amd64'\nGOVCS=''\nGOVERSION='go1.22.5'\nGCCGO='gccgo'\nGOAMD64='v1'\nAR='/xxx/command-line-tools/sdk/default/openharmony/native/llvm/bin/llvm-ar'\nCC='/xxx/command-line-tools/sdk/default/openharmony/native/llvm/bin/aarch64-unknown-linux-ohos-clang'\nCXX='/xxx/command-line-tools/sdk/default/openharmony/native/llvm/bin/aarch64-unknown-linux-ohos-clang++'\nCGO_ENABLED='1'\nGOMOD='/dev/null'\nGOWORK=''\nCGO_CFLAGS='-O2 -g'\nCGO_CPPFLAGS=''\nCGO_CXXFLAGS='-O2 -g'\nCGO_FFLAGS='-O2 -g'\nCGO_LDFLAGS='-O2 -g'\nPKG_CONFIG='pkg-config'\nGOGCCFLAGS='-fPIC -m64 -Wl,--no-gc-sections -fmessage-length=0 -ffile-prefix-map=/tmp/go-build1671390361=/tmp/go-build -gno-record-gcc-switches'\n```\n### What did you do?\n            \nI built a c-shared lib and used cgo to call a go function from C.\n### What did you see happen?\n            \nProcess crashed when C call the go function.\n### What did you expect to see?\n            \nNo crash and C call go function success.\n",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-07-30T10:47:41+08:00",
+    "updated_at": "2025-08-19T12:13:10+08:00",
+    "finished_at": "2025-08-19T12:13:10+08:00",
+    "labels": [],
+    "issue_state": "修复中",
+    "comments": 0,
+    "issue_type": "缺陷",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "修复中",
+      "serial": 8,
+      "id": 877573
+    },
+    "issue_type_detail": {
+      "title": "缺陷",
+      "id": 251719,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 3161061,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/20",
+    "number": "20",
+    "state": "open",
+    "title": "有时候需要在模拟器上使用，但是没有支持openharmony/amd64，后续可以考虑支持吗",
+    "body": "如题",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/eb/ee/eb8e4edf118ea9a6bee85719d6cc806a38ae9c8f6b43b7eb0109de03912232dd.png",
+      "html_url": "https://gitcode.com/jingbin",
+      "id": "6747f5944a95f5059cdedda8",
+      "object_id": "6747f5944a95f5059cdedda8",
+      "login": "jingbin",
+      "name": "相敬如斌"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-06-10T12:28:34+08:00",
+    "updated_at": "2025-06-10T12:29:08+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "需求",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "需求",
+      "id": 251718,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 2992818,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/18",
+    "number": "18",
+    "state": "closed",
+    "title": "net/http: reject bare LF in chunked encoding",
+    "body": "【任务描述】\n同步上游社区 [CVE-2025-22871](https://github.com/golang/go/issues/71988) 漏洞修复[net/http: reject newlines in chunk-size lines](https://go.dev/cl/652998)\n\n【解决方案】\n同步上游社区修复代码。\n\n【任务来源】\n上游社区漏洞发布。",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/bf/ba/68981645b865f36b374a93755fe0bd1cf90f3c73980faf3608015e1dda6ec638.jpg",
+      "html_url": "https://gitcode.com/machangwang",
+      "id": "6788c23bf7201c694a15e53f",
+      "object_id": "6788c23bf7201c694a15e53f",
+      "login": "machangwang",
+      "name": "machangwang"
+    },
+    "assignee": {
+      "avatar_url": "https://cdn-img.gitcode.com/bf/ba/68981645b865f36b374a93755fe0bd1cf90f3c73980faf3608015e1dda6ec638.jpg",
+      "html_url": "https://gitcode.com/machangwang",
+      "id": "6788c23bf7201c694a15e53f",
+      "object_id": "6788c23bf7201c694a15e53f",
+      "login": "machangwang",
+      "name": "machangwang"
+    },
+    "assignees": [
+      {
+        "avatar_url": "https://cdn-img.gitcode.com/bf/ba/68981645b865f36b374a93755fe0bd1cf90f3c73980faf3608015e1dda6ec638.jpg",
+        "html_url": "https://gitcode.com/machangwang",
+        "id": "6788c23bf7201c694a15e53f",
+        "object_id": "6788c23bf7201c694a15e53f",
+        "login": "machangwang",
+        "name": "machangwang"
+      }
+    ],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-03-12T14:55:39+08:00",
+    "updated_at": "2025-03-17T11:16:29+08:00",
+    "finished_at": "2025-03-17T11:16:29+08:00",
+    "labels": [
+      {
+        "id": 65,
+        "name": "SIG_Security",
+        "color": "#1083d6",
+        "created_at": "2025-04-22T20:33:33+08:00",
+        "updated_at": "2025-04-30T19:26:05+08:00"
+      }
+    ],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "安全问题",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "安全问题",
+      "id": 263123,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 2988315,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/17",
+    "number": "17",
+    "state": "closed",
+    "title": "security: fix CVE-2025-22870",
+    "body": "【任务描述】\n同步上游社区 [CVE-2025-22870](https://github.com/golang/go/issues/71985)漏洞修复 [all: updated vendored x/net with security fix](https://go-internal-review.googlesource.com/c/go/+/2141) \n\n【解决方案】\n同步上游社区修复代码。\n\n【任务来源】\n上游社区漏洞发布。",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/bf/ba/68981645b865f36b374a93755fe0bd1cf90f3c73980faf3608015e1dda6ec638.jpg",
+      "html_url": "https://gitcode.com/machangwang",
+      "id": "6788c23bf7201c694a15e53f",
+      "object_id": "6788c23bf7201c694a15e53f",
+      "login": "machangwang",
+      "name": "machangwang"
+    },
+    "assignee": {
+      "avatar_url": "https://cdn-img.gitcode.com/bf/ba/68981645b865f36b374a93755fe0bd1cf90f3c73980faf3608015e1dda6ec638.jpg",
+      "html_url": "https://gitcode.com/machangwang",
+      "id": "6788c23bf7201c694a15e53f",
+      "object_id": "6788c23bf7201c694a15e53f",
+      "login": "machangwang",
+      "name": "machangwang"
+    },
+    "assignees": [
+      {
+        "avatar_url": "https://cdn-img.gitcode.com/bf/ba/68981645b865f36b374a93755fe0bd1cf90f3c73980faf3608015e1dda6ec638.jpg",
+        "html_url": "https://gitcode.com/machangwang",
+        "id": "6788c23bf7201c694a15e53f",
+        "object_id": "6788c23bf7201c694a15e53f",
+        "login": "machangwang",
+        "name": "machangwang"
+      }
+    ],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-03-11T11:22:39+08:00",
+    "updated_at": "2025-03-12T14:32:55+08:00",
+    "finished_at": "2025-03-12T14:32:55+08:00",
+    "labels": [
+      {
+        "id": 65,
+        "name": "SIG_Security",
+        "color": "#1083d6",
+        "created_at": "2025-04-22T20:33:33+08:00",
+        "updated_at": "2025-04-30T19:26:05+08:00"
+      }
+    ],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "安全问题",
+    "priority": 4,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "安全问题",
+      "id": 263123,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "严重",
+      "id": 10
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 2911253,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/16",
+    "number": "16",
+    "state": "closed",
+    "title": "Add dynamic TLS model for ARM64",
+    "body": "This is sub-item of #6 \"runtime: fix crash with musllibc\" for the TLS support implementation",
+    "user": {
+      "html_url": "https://gitcode.com/amusman",
+      "id": "67c02bc231aa5d740a9da5a1",
+      "object_id": "67c02bc231aa5d740a9da5a1",
+      "login": "amusman",
+      "name": "amusman"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-03-04T15:00:34+08:00",
+    "updated_at": "2025-07-22T10:01:24+08:00",
+    "finished_at": "2025-07-22T10:01:24+08:00",
+    "labels": [],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 2897809,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/14",
+    "number": "14",
+    "state": "closed",
+    "title": "crypto/internal/fips140/nistec: make p256NegCond constant time on ppc64le",
+    "body": "**【任务描述】**\r\n同步上游社区CVE漏洞修复 https://go-review.googlesource.com/c/go/+/645535： crypto/internal/fips140/nistec: make p256NegCond constant time on ppc64le\r\n\r\n**【解决方案】**\r\n同步上游社区修复代码。\r\n\r\n**【任务来源】**\r\n上游社区漏洞发布。\r\n\r\n",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignee": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignees": [
+      {
+        "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+        "html_url": "https://gitcode.com/lycodestore1",
+        "id": "672deb5e33741160e6740e50",
+        "object_id": "672deb5e33741160e6740e50",
+        "login": "lycodestore1",
+        "name": "WuGuangyao"
+      }
+    ],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-02-07T19:24:21+08:00",
+    "updated_at": "2025-02-08T11:28:30+08:00",
+    "finished_at": "2025-02-08T03:28:30+08:00",
+    "labels": [
+      {
+        "id": 65,
+        "name": "SIG_Security",
+        "color": "#1083d6",
+        "created_at": "2025-04-22T20:33:33+08:00",
+        "updated_at": "2025-04-30T19:26:06+08:00"
+      }
+    ],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 4,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "严重",
+      "id": 10
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 2897647,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/9",
+    "number": "9",
+    "state": "closed",
+    "title": "cmd/compile: fix write barrier coalescing",
+    "body": "**【任务描述】**\r\n同步上游社区写屏障问题修复：https://go-review.googlesource.com/c/go/+/642499\r\n**【解决方案】**\r\n同步上游社区修复代码。\r\n**【任务来源】**\r\n上游社区问题修复代码回合。",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignee": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignees": [
+      {
+        "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+        "html_url": "https://gitcode.com/lycodestore1",
+        "id": "672deb5e33741160e6740e50",
+        "object_id": "672deb5e33741160e6740e50",
+        "login": "lycodestore1",
+        "name": "WuGuangyao"
+      }
+    ],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-01-22T20:02:44+08:00",
+    "updated_at": "2025-01-24T14:34:28+08:00",
+    "finished_at": "2025-01-24T06:34:28+08:00",
+    "labels": [
+      {
+        "id": 49,
+        "name": "bug",
+        "color": "#DB2828",
+        "created_at": "2025-04-22T20:33:32+08:00",
+        "updated_at": "2025-04-30T19:26:06+08:00"
+      }
+    ],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 3,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "主要",
+      "id": 9
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 2898623,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/15",
+    "number": "15",
+    "state": "closed",
+    "title": "net/http: persist header stripping across repeated redirects",
+    "body": "**【任务描述】**\n同步上游社区CVE漏洞修复 https://go-review.googlesource.com/c/go/+/643106： net/http: persist header stripping across repeated redirects\n**【解决方案】**\n同步上游社区修复代码。\n**【任务来源】**\n上游社区漏洞发布。",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignee": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignees": [
+      {
+        "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+        "html_url": "https://gitcode.com/lycodestore1",
+        "id": "672deb5e33741160e6740e50",
+        "object_id": "672deb5e33741160e6740e50",
+        "login": "lycodestore1",
+        "name": "WuGuangyao"
+      }
+    ],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-01-21T19:53:30+08:00",
+    "updated_at": "2025-01-22T14:45:56+08:00",
+    "finished_at": "2025-01-22T06:45:56+08:00",
+    "labels": [
+      {
+        "id": 65,
+        "name": "SIG_Security",
+        "color": "#1083d6",
+        "created_at": "2025-04-22T20:33:33+08:00",
+        "updated_at": "2025-04-30T19:26:06+08:00"
+      }
+    ],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 4,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "严重",
+      "id": 10
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 2897426,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/7",
+    "number": "7",
+    "state": "closed",
+    "title": "crypto/x509: properly check for IPv6 hosts in URIs",
+    "body": "**【任务描述】**\n同步上游社区cve漏洞修复 https://go-review.googlesource.com/c/go/+/643105: crypto/x509: properly check for IPv6 hosts in URIs\n**【解决方案】**\n同步上游社区修复代码。\n**【任务来源】**\n上游社区漏洞发布。",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignee": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignees": [
+      {
+        "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+        "html_url": "https://gitcode.com/lycodestore1",
+        "id": "672deb5e33741160e6740e50",
+        "object_id": "672deb5e33741160e6740e50",
+        "login": "lycodestore1",
+        "name": "WuGuangyao"
+      }
+    ],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-01-21T19:41:06+08:00",
+    "updated_at": "2025-01-22T11:11:34+08:00",
+    "finished_at": "2025-01-22T03:06:11+08:00",
+    "labels": [
+      {
+        "id": 65,
+        "name": "SIG_Security",
+        "color": "#1083d6",
+        "created_at": "2025-04-22T20:33:33+08:00",
+        "updated_at": "2025-04-30T19:26:07+08:00"
+      }
+    ],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 4,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "严重",
+      "id": 10
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 2897423,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/4",
+    "number": "4",
+    "state": "closed",
+    "title": "runtime: hold traceAcquire across casgstatus in injectglist",
+    "body": "**【任务描述】**\n同步上游社区trace工具问题修复：https://go-review.googlesource.com/c/go/+/638558\n**【解决方案】**\n同步上游社区修复代码。\n**【任务来源】**\n上游社区问题修复代码回合。",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignee": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignees": [
+      {
+        "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+        "html_url": "https://gitcode.com/lycodestore1",
+        "id": "672deb5e33741160e6740e50",
+        "object_id": "672deb5e33741160e6740e50",
+        "login": "lycodestore1",
+        "name": "WuGuangyao"
+      }
+    ],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-01-21T19:35:48+08:00",
+    "updated_at": "2025-01-22T15:59:19+08:00",
+    "finished_at": "2025-01-22T07:59:19+08:00",
+    "labels": [
+      {
+        "id": 49,
+        "name": "bug",
+        "color": "#DB2828",
+        "created_at": "2025-04-22T20:33:32+08:00",
+        "updated_at": "2025-04-30T19:26:07+08:00"
+      }
+    ],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 3,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "主要",
+      "id": 9
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 2897427,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/8",
+    "number": "8",
+    "state": "open",
+    "title": "有计划将opehharmony的支持合并到官方golang仓库吗？",
+    "body": "如题",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/ad/af/1a6506da58f90f59ccb490ea8e8f42f5094223196aae77d9330edf219fd1974f.jpg",
+      "html_url": "https://gitcode.com/afocustm",
+      "id": "67b2d6abea9d1738030d6bc2",
+      "object_id": "67b2d6abea9d1738030d6bc2",
+      "login": "afocustm",
+      "name": "afocustm"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-01-08T11:58:52+08:00",
+    "updated_at": "2026-09-15T17:33:00+08:00",
+    "finished_at": "",
+    "labels": [],
+    "issue_state": "意向",
+    "comments": 11,
+    "issue_type": "咨询",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "意向",
+      "serial": 16,
+      "id": 2641545
+    },
+    "issue_type_detail": {
+      "title": "咨询",
+      "id": 820566,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 2897425,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/6",
+    "number": "6",
+    "state": "open",
+    "title": "runtime: fix crash with musllibc",
+    "body": "Relate issues: \nhttps://github.com/golang/go/issues/13492\nhttps://github.com/golang/go/issues/54805\n",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/cb/dc/cb7d3c614138a4e02ced7f14e40e91ac301e5b55f81f5d23398d2de77dd0a89b.png",
+      "html_url": "https://gitcode.com/RangerOvO",
+      "id": "672ceebafbbddc0c200896e6",
+      "object_id": "672ceebafbbddc0c200896e6",
+      "login": "RangerOvO",
+      "name": "RangerOvO"
+    },
+    "assignees": [],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-01-07T17:48:16+08:00",
+    "updated_at": "2025-02-27T20:13:21+08:00",
+    "finished_at": "",
+    "labels": [
+      {
+        "id": 51,
+        "name": "feature",
+        "color": "#B5CC18",
+        "created_at": "2025-04-22T20:33:32+08:00",
+        "updated_at": "2025-04-30T19:26:07+08:00"
+      }
+    ],
+    "issue_state": "待办的",
+    "comments": 2,
+    "issue_type": "需求",
+    "priority": 0,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "需求",
+      "id": 251718,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "无优先级",
+      "id": 6
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 2897808,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/13",
+    "number": "13",
+    "state": "closed",
+    "title": "cmd/link: function \"decodetypeGcmask\" read gcdata from shared object file may not correct when use lld link",
+    "body": "**【模块名_概率】简要描述：**\r\narm64架构下使用lld链接器时的通用问题，已有开发者在golang/go社区提交issue，缺陷详细信息可以参考：https://github.com/golang/go/issues/69466",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignee": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignees": [
+      {
+        "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+        "html_url": "https://gitcode.com/lycodestore1",
+        "id": "672deb5e33741160e6740e50",
+        "object_id": "672deb5e33741160e6740e50",
+        "login": "lycodestore1",
+        "name": "WuGuangyao"
+      }
+    ],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-01-06T11:33:02+08:00",
+    "updated_at": "2025-01-07T11:42:18+08:00",
+    "finished_at": "2025-01-07T03:42:18+08:00",
+    "labels": [
+      {
+        "id": 117,
+        "name": "product-issue",
+        "color": "#20c22e",
+        "created_at": "2025-04-22T20:33:59+08:00",
+        "updated_at": "2025-04-30T19:26:08+08:00"
+      }
+    ],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "缺陷",
+    "priority": 3,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "缺陷",
+      "id": 251719,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "主要",
+      "id": 9
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 2897421,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/2",
+    "number": "2",
+    "state": "closed",
+    "title": "internal/platform: use external link when ohos using cgo",
+    "body": "**【任务描述】**\n当前在编译目标系统为openharmony时，如果涉及cgo调用，默认使用的是内部链接器。musl当中可能存在一些变量是在libc的__init_libc中初始化的，如果cgo程序引用了这些变量并且使用的是内部链接器，则会导致访问未初始化变量的问题，为了解决这个问题，当我们编译openharmony cgo程序时，应该默认使用外部链接器。\n\n**【解决方案】**\n当编译的openharmony程序包含cgo调用时，默认使用外部链接器。\n\n**【任务来源】**\nopenharmony适配。",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignee": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignees": [
+      {
+        "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+        "html_url": "https://gitcode.com/lycodestore1",
+        "id": "672deb5e33741160e6740e50",
+        "object_id": "672deb5e33741160e6740e50",
+        "login": "lycodestore1",
+        "name": "WuGuangyao"
+      }
+    ],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-01-06T11:13:06+08:00",
+    "updated_at": "2025-01-07T11:54:22+08:00",
+    "finished_at": "2025-01-07T03:54:22+08:00",
+    "labels": [
+      {
+        "id": 117,
+        "name": "product-issue",
+        "color": "#20c22e",
+        "created_at": "2025-04-22T20:33:59+08:00",
+        "updated_at": "2025-04-30T19:26:08+08:00"
+      }
+    ],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 3,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "主要",
+      "id": 9
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 2897420,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/1",
+    "number": "1",
+    "state": "closed",
+    "title": "net: set preferCgo to ture on openharmony",
+    "body": "**【任务描述】**\r\n当前在openharmony上进行dns域名解析时，默认使用的是纯go实现的方案，在这个方案下程序会根据系统的 /etc/resolv.conf 文件的内容查找默认的域名服务器进行dns解析，但是默认的dns服务器可能无法正常访问；如果使用cgo实现的dns解析方案，通过调用系统API实现dns解析，成功率就会高很多，因此我们设置在openharmony上优先使用cgo实现方案进行dns解析。\r\n\r\n**【解决方案】**\r\n1、当编译目标系统为openharmony时，设置优先使用cgo实现的dns解析方式。\r\n\r\n**【任务来源】**\r\nopenharmony适配。",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignee": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignees": [
+      {
+        "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+        "html_url": "https://gitcode.com/lycodestore1",
+        "id": "672deb5e33741160e6740e50",
+        "object_id": "672deb5e33741160e6740e50",
+        "login": "lycodestore1",
+        "name": "WuGuangyao"
+      }
+    ],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-01-06T11:00:55+08:00",
+    "updated_at": "2025-01-07T11:55:13+08:00",
+    "finished_at": "2025-01-07T03:55:13+08:00",
+    "labels": [
+      {
+        "id": 117,
+        "name": "product-issue",
+        "color": "#20c22e",
+        "created_at": "2025-04-22T20:33:59+08:00",
+        "updated_at": "2025-04-30T19:26:08+08:00"
+      }
+    ],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 3,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "主要",
+      "id": 9
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 2897422,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/3",
+    "number": "3",
+    "state": "closed",
+    "title": "runtime: skip registration error for 43 sig",
+    "body": "**【任务描述】**\r\nopenharmony系统上存在43信号被占用的情况，而go运行时启动时会尝试给给43信号注册一个处理函数，如果43信号已经被占用的情况下go运行时再去注册，就会导致运行时启动失败，go程序退出，因此在openharmony系统上，如果遇到43信号处理函数注册失败的问题，直接跳过，进行后续的步骤。\r\n\r\n**【解决方案】**\r\n1、运行时启动时尝试给43信号注册回调函数，若注册成功，则正常往下走，流程与之前一致。\r\n2、若注册失败，则说明43信号被占用了，则跳过该信号的注册流程。\r\n\r\n**【任务来源】**\r\nopenharmony适配",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignee": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignees": [
+      {
+        "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+        "html_url": "https://gitcode.com/lycodestore1",
+        "id": "672deb5e33741160e6740e50",
+        "object_id": "672deb5e33741160e6740e50",
+        "login": "lycodestore1",
+        "name": "WuGuangyao"
+      }
+    ],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-01-06T10:46:49+08:00",
+    "updated_at": "2025-01-07T10:45:55+08:00",
+    "finished_at": "2025-01-07T02:45:55+08:00",
+    "labels": [
+      {
+        "id": 117,
+        "name": "product-issue",
+        "color": "#20c22e",
+        "created_at": "2025-04-22T20:33:59+08:00",
+        "updated_at": "2025-04-30T19:26:09+08:00"
+      }
+    ],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 3,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "主要",
+      "id": 9
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 2897649,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/11",
+    "number": "11",
+    "state": "closed",
+    "title": "proposal: all: use runtime.IsOpenharmony instead of runtime.GOOS==\"openharmony\"",
+    "body": "**【需求价值】：**\n背景：\n在这个PR https://gitee.com/openharmony-sig/ohos_golang_go/pulls/2 之后，我们可以通过runtime.GOOS==\"openharmony\"的值来判断当前的操作系统是否是openharmony，在这个PR中，我们在很多处做了这样的修改：把runtime.GOOS == \"linux\" 修改为 runtime.GOOS == \"linux\" || runtime.GOOS == \"openharmony\"。这是因为多数情况下openharmony和linux应该走同一个分支。除了编译器和运行时，在很多流行的go语言开源软件中也有这样的条件判断，这就导致，如果我们开发的go应用程序依赖了这些开源软件并且我们想在openharmony上运行这个go应用，我们就需要对这些开源软件做上述同样的修改。对go三方开源软件进行侵入式修改一是工作量比较大，二是开源软件升级维护困难。为了方便开发者快速构建openharmony go应用或将go应用从linux迁移到openharmony，我们决定对之前的方案作出如下改动：（1）当编译目标系统为openharmony时，runtime.GOOS的值由原来的\"openhamrony\" 修改为 \"linux\"；（2）新增runtime.IsOpenharmony用于确认当前系统是否为openharmony系统。这样，对于大多数的开源软件，我们无需做侵入式修改即可在openharmony上使用，同时对于openharmony系统的特定适配，我们可以使用runtime.IsOpenharmony来完成。\n\n价值：\n大多数在linux上流行的go开源软件可以不用做任何修改，直接在openharmony上使用。\n\n**【需求描述】：**\n1、当编译目标系统为openharmony时，runtime.GOOS的值由原来的\"openharmony\"修改为\"linux\"。\n2、新增runtime.IsOpenharmony API，用于openharmony系统特定的适配。\n\n**【方案描述】：**\n1、修改zgoos_openharmony.go文件，将 GOOS=`openharmony` 修改为 GOOS=`linux`。\n2、回退上个PR的修改，将 runtime.GOOS == \"linux\" || runtime.GOOS == \"openharmony\" 回退为 runtime.GOOS == \"linux\"。\n3、openharmony特定逻辑使用runtime.IsOpenharmony来判断，将 runtime.GOOS == \"openharmony\" 修改为 runtime.IsOpenharmony。\n4、使用当前编译器编译openharmony go应用时操作流程不变，依旧使用环境变量指定GOOS=\"openharmony\" GOARCH=\"arm64\"。\n\n**【配套文档】：**\n1、golang/go基线版本：go1.22。\n2、使用方式：交叉编译；编译机器：Linux/x86；目标机器：openharmony/arm64。\n3、openharmony系统版本：OpenHarmony v5.0.0 Release以上版本，不支持更早的版本。\n4、cgo配套C编译器版本信息：\n\nOHOS (dev) clang version 15.0.4 (llvm-project ef33c3575763937746833063de4d2e1fd184bbf7)\nTarget: x86_64-unknown-linux-gnu\nC编译工具链下载地址：https://developer.huawei.com/consumer/cn/download/\n**【验收标准】：**\n使用当前go编译器可以编译出openharmony/arm64目标文件，可以在openharmony/arm64上稳定运行且功能正常。\n\n",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignee": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignees": [
+      {
+        "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+        "html_url": "https://gitcode.com/lycodestore1",
+        "id": "672deb5e33741160e6740e50",
+        "object_id": "672deb5e33741160e6740e50",
+        "login": "lycodestore1",
+        "name": "WuGuangyao"
+      }
+    ],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-01-04T19:15:39+08:00",
+    "updated_at": "2025-01-06T10:49:01+08:00",
+    "finished_at": "2025-01-06T02:49:01+08:00",
+    "labels": [
+      {
+        "id": 51,
+        "name": "feature",
+        "color": "#B5CC18",
+        "created_at": "2025-04-22T20:33:32+08:00",
+        "updated_at": "2025-04-30T19:26:09+08:00"
+      }
+    ],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "需求",
+    "priority": 3,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "需求",
+      "id": 251718,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "主要",
+      "id": 9
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 2897775,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/12",
+    "number": "12",
+    "state": "open",
+    "title": "cmd: remove special treatment for elf section named  \".note.ohos.ident\" ",
+    "body": "**【任务描述】**\n读取ELF文件时，不要针对名称为\".note.ohos.ident\" 做特殊的跳过处理，之前跳过是因为musl-libc的问题导致如果不跳过无法正常处理ELF文件，但是该问题已经在：https://gitee.com/openharmony/third_party_musl/pulls/1613中修复，因此这个适配动作不再被需要；而且从责任边界的角度来看，这个也不应该是go编译器或者三方库应该去主动适配的内容。\n\n**【解决方案】**\n删除代码仓中所有针对名称为\".note.ohos.ident\"的ELF节的特殊处理逻辑。\n\n**【任务来源】**\n代码检视",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignee": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignees": [
+      {
+        "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+        "html_url": "https://gitcode.com/lycodestore1",
+        "id": "672deb5e33741160e6740e50",
+        "object_id": "672deb5e33741160e6740e50",
+        "login": "lycodestore1",
+        "name": "WuGuangyao"
+      }
+    ],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-01-04T18:19:50+08:00",
+    "updated_at": "2025-01-08T10:31:26+08:00",
+    "finished_at": "",
+    "labels": [
+      {
+        "id": 117,
+        "name": "product-issue",
+        "color": "#20c22e",
+        "created_at": "2025-04-22T20:33:59+08:00",
+        "updated_at": "2025-04-30T19:26:09+08:00"
+      }
+    ],
+    "issue_state": "待办的",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 2,
+    "issue_state_detail": {
+      "title": "待办的",
+      "serial": 0,
+      "id": 877565
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "次要",
+      "id": 8
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 2897424,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/5",
+    "number": "5",
+    "state": "closed",
+    "title": "proposal: all: support openharmony/arm64",
+    "body": "**【需求价值】：**\n支持使用go语言开发的软件在openharmony/arm64上运行。\n\n**【需求描述】：**\n为go语言添加一种新的目标操作系统：openharmony，仅在arm64架构上支持；通过交叉编译的方式支持，编译机器为Linux/x86。\n\n**【方案描述】：**\n1、引入GOOS=openharmony标志目标操作系统为openharmony的情况。\n2、当GOOS=openharmony时，会匹配命中\"linux\" build tag，就像当GOOS=android时会匹配命中\"linux\" build tag和当GOOS=illumos时匹配命中\"solaris\" build tag一样。\n3、对于源码中的GOOS==\"linux\"，大部分需要修改为 (GOOS==\"linux\" || GOOS=\"openharmony\")；当openharmony系统和linux系统在很多地方是存在差别的，仅在openharmony上有效的分支使用 GOOS==\"openharmony\"作为if语句的条件。\n4、当前仅支持在Linux/x86上通过交叉编译的方式支持openharmony/arm64。\n5、通过环境变量指定 GOOS=\"openharmony\" GOARCH=\"arm64\"生成openharmony/arm64目标文件。\n\n**【配套文档】：**\n1、golang/go基线版本：go1.22。\n2、使用方式：交叉编译；编译机器：Linux/x86；目标机器：openharmony/arm64。\n3、openharmony系统版本：OpenHarmony v5.0.0 Release以上版本，不支持更早的版本。\n4、cgo配套C编译器版本信息：\n```\nOHOS (dev) clang version 15.0.4 (llvm-project ef33c3575763937746833063de4d2e1fd184bbf7)\nTarget: x86_64-unknown-linux-gnu\n```\nC编译工具链下载地址：https://developer.huawei.com/consumer/cn/download/\n\n\n**【验收标准】：**\n使用当前go编译器可以编译出openharmony/arm64目标文件，可以在openharmony/arm64上稳定运行且功能正常。\n\n**【遗留问题】：**\n当前有部分测试用例因系统差异无法通过，我们将在后续的合入中对这部分用例进行适配。\n",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignee": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignees": [
+      {
+        "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+        "html_url": "https://gitcode.com/lycodestore1",
+        "id": "672deb5e33741160e6740e50",
+        "object_id": "672deb5e33741160e6740e50",
+        "login": "lycodestore1",
+        "name": "WuGuangyao"
+      }
+    ],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2025-01-02T20:00:33+08:00",
+    "updated_at": "2025-01-04T18:24:38+08:00",
+    "finished_at": "2025-01-04T10:24:38+08:00",
+    "labels": [
+      {
+        "id": 51,
+        "name": "feature",
+        "color": "#B5CC18",
+        "created_at": "2025-04-22T20:33:32+08:00",
+        "updated_at": "2025-04-30T19:26:10+08:00"
+      }
+    ],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "需求",
+    "priority": 3,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "需求",
+      "id": 251718,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "主要",
+      "id": 9
+    },
+    "visibility_reason": "public"
+  },
+  {
+    "id": 2897648,
+    "html_url": "https://gitcode.com/openharmony-sig/ohos_golang_go/issues/10",
+    "number": "10",
+    "state": "closed",
+    "title": "ci: add build scirpts",
+    "body": "**【任务描述】**\r\n需要添加流水线构建脚本，用于项目构建和测试。\r\n\r\n**【解决方案】**\r\n添加构建脚本，集成到主干分支，后续新增提交pr时会触发构建脚本，对提交内容进行测试验证。\r\n\r\n**【任务来源】**\r\n社区门禁要求。",
+    "user": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignee": {
+      "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+      "html_url": "https://gitcode.com/lycodestore1",
+      "id": "672deb5e33741160e6740e50",
+      "object_id": "672deb5e33741160e6740e50",
+      "login": "lycodestore1",
+      "name": "WuGuangyao"
+    },
+    "assignees": [
+      {
+        "avatar_url": "https://cdn-img.gitcode.com/cc/ec/655552c75c5e707c206f2110d328f31f34211acdc94ad4d165916c473e71d153.jpg",
+        "html_url": "https://gitcode.com/lycodestore1",
+        "id": "672deb5e33741160e6740e50",
+        "object_id": "672deb5e33741160e6740e50",
+        "login": "lycodestore1",
+        "name": "WuGuangyao"
+      }
+    ],
+    "repository": {
+      "id": 4469098,
+      "full_name": "openharmony-sig/ohos_golang_go",
+      "path": "ohos_golang_go",
+      "name": "ohos_golang_go",
+      "description": "go语言编译器、运行时、标准库和工具链代码仓",
+      "created_at": "2024-12-17T14:24:38+08:00",
+      "updated_at": "2025-10-29T10:01:02+08:00",
+      "assigner": {},
+      "paas": ""
+    },
+    "created_at": "2024-12-27T20:39:38+08:00",
+    "updated_at": "2025-01-06T10:51:48+08:00",
+    "finished_at": "2025-01-03T07:32:33+08:00",
+    "labels": [
+      {
+        "id": 51,
+        "name": "feature",
+        "color": "#B5CC18",
+        "created_at": "2025-04-22T20:33:32+08:00",
+        "updated_at": "2025-04-30T19:26:10+08:00"
+      }
+    ],
+    "issue_state": "已完成",
+    "comments": 0,
+    "issue_type": "任务",
+    "priority": 3,
+    "issue_state_detail": {
+      "title": "已完成",
+      "serial": 2,
+      "id": 877567
+    },
+    "issue_type_detail": {
+      "title": "任务",
+      "id": 251717,
+      "is_system": false
+    },
+    "issue_priority_detail": {
+      "title": "主要",
+      "id": 9
+    },
+    "visibility_reason": "public"
+  }
+]

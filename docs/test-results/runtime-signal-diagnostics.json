@@ -1,0 +1,45 @@
+{
+  "go_version": "go1.27.3",
+  "patch_sha256": "58bc568264a43a993ba6a9156a2916259fb599b91a0869f937a62702338a5bb3",
+  "recorded_at": "2026-10-21T09:07:07.701873+00:00",
+  "resolved": true,
+  "observed_problem": "ARM and AMD r4 native dist runtime failed with SIGSEGV at TestSetPanicOnFault. Later isolated AMD runtime passed; cause remains unresolved.",
+  "diagnostics": [
+    {
+      "run": "gotest-full",
+      "method": "native go test runtime; no debugger or source modifications",
+      "arch": "amd64",
+      "log_sha256": "3bd0c7af00127125b8e4f3cc59561b7ac609cc6e04d4e4af90e22b0fb17bacf1",
+      "log": ".work/logs/amd64-runtime-gotest-full.log",
+      "fault_case_pass": true,
+      "exit_status": 0,
+      "package_elapsed_seconds": 1328.511,
+      "full_suite_acceptance": false
+    },
+    {
+      "run": "ptrace-full-v2",
+      "method": "native full runtime test binary under PTRACE; diagnostic only",
+      "arch": "amd64",
+      "log_sha256": "00e933579165411643c7c6e5fdca3e6a3b01c041ff04ac2a6c4d7e9dfe2074ee",
+      "log": ".work/logs/amd64-runtime-ptrace-full-v2.log",
+      "fault_case_pass": true,
+      "exit_status": 0,
+      "package_elapsed_seconds": null,
+      "full_suite_acceptance": false
+    },
+    {
+      "run": "gotest-inprocess",
+      "method": "filtered native go test; diagnostic only",
+      "arch": "amd64",
+      "log_sha256": "303f2fc4e1c8c63a326fc3c4140c32b245c04a2ae85fa9030563a032219001d2",
+      "log": ".work/logs/amd64-runtime-gotest-inprocess.log",
+      "fault_case_pass": true,
+      "exit_status": 0,
+      "package_elapsed_seconds": null,
+      "full_suite_acceptance": false
+    }
+  ],
+  "previous_patch_sha256": "df5494a401403fa9464d8d3e5f9f2d9a56f5eb21b7f0cbea4b7d3aef43f5a2bc",
+  "resolution": "Per-M fork-child flag prevents concurrent vfork children from clearing the global flag and entering libc sigaction while sharing parent OHOS sigchain state.",
+  "regression": "vfork-signal-regression.json"
+}

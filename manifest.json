@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "go": {
+    "tag": "go1.27.3",
+    "version": "go1.27.3",
+    "commit": "2aae1000ea1d4b28923b96db28acf4e3b99d6aff",
+    "source": {
+      "filename": "go1.27.3.src.tar.gz",
+      "os": "",
+      "arch": "",
+      "version": "go1.27.3",
+      "sha256": "6e7749035cf360f06b2575d162ea79df9fda8ef671889e5c375f8e50777f26bb",
+      "size": 35134035,
+      "kind": "source"
+    },
+    "bootstrap": [
+      {
+        "filename": "go1.27.3.darwin-amd64.tar.gz",
+        "os": "darwin",
+        "arch": "amd64",
+        "version": "go1.27.3",
+        "sha256": "b6f8e931e4ab497fcde6da8ae4499a58f9d258e55c8a80824a516eae5950a750",
+        "size": 71697771,
+        "kind": "archive"
+      },
+      {
+        "filename": "go1.27.3.darwin-arm64.tar.gz",
+        "os": "darwin",
+        "arch": "arm64",
+        "version": "go1.27.3",
+        "sha256": "dd3908cf20959d798c1e06ebe5b72213f0505ce01373b40ce3110975a6cd99c2",
+        "size": 68196737,
+        "kind": "archive"
+      },
+      {
+        "filename": "go1.27.3.linux-amd64.tar.gz",
+        "os": "linux",
+        "arch": "amd64",
+        "version": "go1.27.3",
+        "sha256": "65efbc80fdc1fa2cd2631cad5b481777a68e8725f34e89f50fc6ac714e379b40",
+        "size": 70588678,
+        "kind": "archive"
+      },
+      {
+        "filename": "go1.27.3.linux-arm64.tar.gz",
+        "os": "linux",
+        "arch": "arm64",
+        "version": "go1.27.3",
+        "sha256": "a06e99309dbcbdca1a8ccd2282c3ee146e55930886e26b4f1193269587165f49",
+        "size": 67076044,
+        "kind": "archive"
+      }
+    ]
+  },
+  "patch": {
+    "filename": "go-ohos-1.27.3.patch",
+    "abi_revision": 1
+  },
+  "references": {
+    "ohos": {
+      "repository": "https://gitcode.com/openharmony-sig/ohos_golang_go.git",
+      "branch": "release-branch.go1.24",
+      "commit": "302a5306b6fad2f47196360b82561d1db1f954cf"
+    },
+    "musl_tls": {
+      "url": "https://github.com/golang/go/pull/75048",
+      "commit": "1a087d05b5cf9573876b18812d8d5516f16bbe57",
+      "status": "unmerged reference; ported locally"
+    }
+  },
+  "hosts": [
+    {
+      "name": "darwin-arm64",
+      "goos": "darwin",
+      "goarch": "arm64"
+    },
+    {
+      "name": "darwin-amd64",
+      "goos": "darwin",
+      "goarch": "amd64"
+    },
+    {
+      "name": "linux-arm64",
+      "goos": "linux",
+      "goarch": "arm64"
+    },
+    {
+      "name": "linux-amd64",
+      "goos": "linux",
+      "goarch": "amd64"
+    },
+    {
+      "name": "windows-arm64",
+      "goos": "windows",
+      "goarch": "arm64"
+    },
+    {
+      "name": "windows-amd64",
+      "goos": "windows",
+      "goarch": "amd64"
+    }
+  ],
+  "native": [
+    {
+      "name": "openharmony-arm64",
+      "goos": "openharmony",
+      "goarch": "arm64",
+      "qemu_arch": "arm64"
+    },
+    {
+      "name": "openharmony-arm",
+      "goos": "openharmony",
+      "goarch": "arm",
+      "qemu_arch": "armv7a"
+    },
+    {
+      "name": "openharmony-amd64",
+      "goos": "openharmony",
+      "goarch": "amd64",
+      "qemu_arch": "x86_64"
+    }
+  ],
+  "qemu": {
+    "repository": "https://github.com/harmony-contrib/ohos-qemu.git",
+    "revision": "5cda62c3b9e5107cfbb303e42c30051bfb9c2571",
+    "targets": [
+      {
+        "name": "arm64",
+        "zig_target": "aarch64-linux-ohos",
+        "ohos_qemu_product": "arm64_virt",
+        "package": "openharmony-qemu-arm64-arm64_virt.tar.gz",
+        "sha256": "86c1d6ce17ea42b8732d2aa64a3081da7e704e084ba0c70923b72cc8a4cdfbd9"
+      },
+      {
+        "name": "armv7a",
+        "zig_target": "arm-linux-ohoseabi",
+        "ohos_qemu_product": "armv7a_virt",
+        "package": "openharmony-qemu-armv7a-armv7a_virt.tar.gz",
+        "sha256": "98dda34c8120948605d36d3f2d546086a2c8e2370e24aa8f06f95d6eaac3ce25"
+      },
+      {
+        "name": "x86_64",
+        "zig_target": "x86_64-linux-ohos",
+        "ohos_qemu_product": "x86_64_virt",
+        "package": "openharmony-qemu-x86_64-x86_64_virt.tar.gz",
+        "sha256": "a1173c39b4bd9ae3e46de176867b501af51eff605466811b86d8370caeccd7ca"
+      }
+    ]
+  },
+  "sdk": {
+    "version": "26.0.0.105",
+    "api": "26"
+  },
+  "test_dependencies": {
+    "hapsigner": {
+      "repository": "https://gitcode.com/openharmony/developtools_hapsigner.git",
+      "commit": "f5f158687ccbaafb683662f62cc6da77ec3c80ee"
+    },
+    "native_zig_version": "0.17.0",
+    "native_zig_frontend_version": "clang 22.1.8",
+    "sdk_compiler_runtime_directory": "15.0.4",
+    "full_system_userdata_gib": 24,
+    "armv7a_test_profile": "posix: private foundation/graphic critical[0]=0, stop foundation/render_service; stock image panics without Go",
+    "hapsigner_arm32_patch": {
+      "file": "patch/hapsigner-arm32.patch",
+      "sha256": "f26981727ca48b1c36d9dba3ca5f2b72578d12d1b7f13205a25b8ee2fcaf0a0d"
+    },
+    "native_cc_link_max_page_size": 4096
+  }
+}

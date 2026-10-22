@@ -1,0 +1,32 @@
+{
+  "host": "arm64",
+  "go_version": "go1.27.3",
+  "patch_sha256": "df5494a401403fa9464d8d3e5f9f2d9a56f5eb21b7f0cbea4b7d3aef43f5a2bc",
+  "native_go_sha256": "33bf402afc68d3847569a52077deac77da3758de4ac1979202faae01ab678c13",
+  "script_sha256": "b3ae95f4ddd928e4373ceabaf6a6208a64c0d0a7c4e1602dfc5c0f4e80e0ce68",
+  "deployment_resigned": false,
+  "accepted": true,
+  "cases": [
+    {
+      "host": "arm64",
+      "target": "arm64",
+      "program_sha256": "8c6dd440dadca920b5c31792dd9ce07f81a88e46a0c3b93e7a8a8decf956b199",
+      "output": "NATIVE_TARGET_OK arm64",
+      "exit_status": 0
+    },
+    {
+      "host": "arm64",
+      "target": "arm",
+      "program_sha256": "c4c28acd11a12ace3db2bb2a25ec032c0392aa7bf62ee1668f1f8817c857d349",
+      "output": "NATIVE_TARGET_OK arm",
+      "exit_status": 0
+    },
+    {
+      "host": "arm64",
+      "target": "amd64",
+      "program_sha256": "914d72f81f8d42d01032cde0f5117dd8e19fc817c83a78f56e9db72b0f7f3a7e",
+      "output": "NATIVE_TARGET_OK amd64",
+      "exit_status": 0
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-21",
+  "sdk_version": "26.0.0.105",
+  "native_toolchain_inputs": {
+    "arm64": {
+      "zig_prefix": "zig-aarch64-linux-ohos-baseline",
+      "zig_binary_sha256": "04a2ef0c1890786621d455367e0b6a30650894d2cd9e9773793af6699ed4d192",
+      "binary_sign_tool_sha256": "8b21a15093f5d83785cf9edec477107062a11fe54d21f3cf1c71c158b9576fe0"
+    },
+    "arm": {
+      "zig_prefix": "zig-arm-linux-ohoseabi-generic+v7a",
+      "zig_binary_sha256": "c60473c53fcd5fbc4ea58ba330dd7457b7b44c2efdd64b9559f97ea8b37c652f",
+      "binary_sign_tool_sha256": "f7a562aa8f3b40840fdcd777e60fd3d19d3a12320e7ba55316faa390a23741a0"
+    },
+    "amd64": {
+      "zig_prefix": "zig-x86_64-linux-ohos-baseline",
+      "zig_binary_sha256": "f5b9efabe40911b49a43c8a5e93a4b0e047b9caf9e8abdbe5bd818cc62f321b1",
+      "binary_sign_tool_sha256": "0f69c8bf60d08dd6c7b66d80b0b8d1df3f0513f092cd01119fd6d71b3764d711"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "arch": "arm64",
+  "run_id": "arm64-cgo1-r5",
+  "exit_status": 0,
+  "packages": {
+    "pass": 450,
+    "skip": 245
+  },
+  "failures": {},
+  "build_failures": [],
+  "log_sha256": "6a59667381a829b0d877ac36a6edc9046996444508b958db396f075fb5c8ef3b",
+  "qemu": {
+    "pid": 56963,
+    "port": 5569,
+    "server": 18769,
+    "hdc": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/hdc",
+    "archive_sha256": "86c1d6ce17ea42b8732d2aa64a3081da7e704e084ba0c70923b72cc8a4cdfbd9"
+  }
+}

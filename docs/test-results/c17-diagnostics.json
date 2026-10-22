@@ -1,0 +1,28 @@
+{
+  "accepted": true,
+  "scope": "diagnostic only, not aggregate full acceptance",
+  "arm_native_signal_cases": [
+    "TestCgoTracebackSigpanic",
+    "TestCgoPanicCallback",
+    "TestCgoSigfwd",
+    "TestCatchPanic",
+    "TestSegv",
+    "TestCgoTraceback"
+  ],
+  "arm_native_signal_elapsed_seconds": 723.961,
+  "dwarf_real_binary_entries": 391334,
+  "dwarf_original_failure": "DW_FORM_rnglistx indirect offset out of range at 0x5b7e7a",
+  "dwarf_fixed_full_package_pass": true,
+  "host_dwarf_full_package_pass": true,
+  "host_regression_fails_before_fix": true,
+  "recorded_at": "2026-10-20T23:14:15.277802+00:00",
+  "patch_sha256": "df5494a401403fa9464d8d3e5f9f2d9a56f5eb21b7f0cbea4b7d3aef43f5a2bc",
+  "logs_sha256": {
+    "arm-libcsig-fp-focused-complete.json": "5ab4dcf96bee018c483dad6b67846ddf8c8d8ff19b2fd834d32ec618f3ecbc01",
+    "arm-dwarf-reader-before.log": "3361dc1243e1378000df560eae81775373a2cfb8902b211edb209f3f72e79b35",
+    "arm-dwarf-reader-after.log": "6e967f984f9f37187ab0d9e466832af21dfabe6ce518304fb6edaae026ae5d14",
+    "arm-dwarf-full-diagnostic.log": "31ca5155ee4b3a374ab3ad301d88c39367c4c1d0ab16d8d6f38d6033fe6a122a",
+    "dwarf-base-regression-before.log": "bdbe176b372b4ad0edd1db2ca95d24c58fabd84bdec050dd3d9b581eb2567c74",
+    "dwarf-base-regression-after.log": "6b768acab880c3dd06ad9527cbf501f26bc7b3d54c7181f4582d50bd382c454b"
+  }
+}

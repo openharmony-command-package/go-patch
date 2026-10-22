@@ -1,0 +1,79 @@
+{
+  "patch_sha256": "58bc568264a43a993ba6a9156a2916259fb599b91a0869f937a62702338a5bb3",
+  "go_version": "go1.27.3",
+  "host_go_sha256": "2a01e906edfcc3b01abf0a2861487fce83eabfacede70260111eb99a0b9531da",
+  "accepted": true,
+  "scope": "SDK builds, real signing and full-system OHOS execution; pure Go, cgo, dlopen, four C thread callbacks, GC, 16384-byte environment and c-archive",
+  "targets": [
+    {
+      "arch": "arm64",
+      "result": "pass",
+      "elapsed_seconds": 1.6274900436401367,
+      "qemu": {
+        "pid": 3166,
+        "port": 5569,
+        "server": 18769,
+        "hdc": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/hdc",
+        "archive_sha256": "86c1d6ce17ea42b8732d2aa64a3081da7e704e084ba0c70923b72cc8a4cdfbd9",
+        "profile": "stock",
+        "qmp": "/Users/ranger/Documents/ChatGPT/go-patch/.work/qemu/arm64/qmp.sock",
+        "memory_mib": 4096,
+        "power_policy": "powermgr stopped during headless Go tests"
+      },
+      "binaries_sha256": {
+        "smoke": "41bcf645fd68a888224582c90a6f9cdcfc66c42e1d60d8771a0a129ade7f088e",
+        "smoke-pure": "46a981926e04d80342105c6c6e961dc64e373086fc436d1df6066c2252433b9e",
+        "libanswer.so": "ada0d9775a875366630c3d3d03ad46c430915a9a116c3234a6c0047994f66927",
+        "loader": "bdfa957f87593ad6eb2331bfc722131a25d3cb139c27e215bbe90590e8db93ac",
+        "archive-loader": "1d4c69f1bfbb5bca15327c67c366923f136c9f40c6e03c0da95c46d5eaa2e016"
+      },
+      "runtime_log_sha256": "fb1c62c1ecf127673782f80170acf1418cba11e78bb1d8ef3e86d15b104ace98"
+    },
+    {
+      "arch": "arm",
+      "result": "pass",
+      "elapsed_seconds": 152.06049823760986,
+      "qemu": {
+        "pid": 72368,
+        "port": 5570,
+        "server": 18769,
+        "hdc": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/hdc",
+        "archive_sha256": "98dda34c8120948605d36d3f2d546086a2c8e2370e24aa8f06f95d6eaac3ce25",
+        "profile": "posix",
+        "power_policy": "powermgr stopped during headless Go tests (applied while run active)"
+      },
+      "binaries_sha256": {
+        "smoke": "e28e1707d13a107ad7add0e10807e8feb6f4358094ff6cd9532f766d28b9db3f",
+        "smoke-pure": "b41af55f129c2205a32c458b5acd307bcfb1d73792b0b4c8f16466d45177505f",
+        "libanswer.so": "a16dbf0139e3580790e6e58ca777f595b0bd131f0f815b88762ae99066119268",
+        "loader": "34e298dd002b6eaa45cd5589c41e7d28aa27c235b77a5e372279238dec06f73c",
+        "archive-loader": "076f082e5bea18bfb55d3404f07447d1a0a6678cc4d3088cabcb2fdb2575c10f"
+      },
+      "runtime_log_sha256": "b05601def4742d20b29599e34c6b554650599c0fc16cb6fdad035f0293deb015"
+    },
+    {
+      "arch": "amd64",
+      "result": "pass",
+      "elapsed_seconds": 102.69609999656677,
+      "qemu": {
+        "pid": 90142,
+        "port": 5571,
+        "server": 18769,
+        "hdc": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/hdc",
+        "archive_sha256": "a1173c39b4bd9ae3e46de176867b501af51eff605466811b86d8370caeccd7ca",
+        "profile": "stock",
+        "qmp": "/Users/ranger/Documents/ChatGPT/go-patch/.work/qemu/x86_64/qmp.sock",
+        "memory_mib": 8192,
+        "power_policy": "powermgr stopped during headless Go tests"
+      },
+      "binaries_sha256": {
+        "smoke": "765e574a78781af3da25c003a7223975486750531dc89aeb7f21f24f291364c2",
+        "smoke-pure": "b30e8f2451767033d022eb75fe88702ce37239f5581f6a64347bb2549ed28e29",
+        "libanswer.so": "88668b9b45bcf5fb036fdb3656e62637d1e9f9e72fde8c9bd7ebb408a1c5b779",
+        "loader": "d368fa8fd07422d5a26523b424e78b479cafcdfed7017d4c3b3c73071cec410d",
+        "archive-loader": "084fb67606806996da4bc65ba5e7fb011994b03e44a38bbe4beb6b5c37803cc2"
+      },
+      "runtime_log_sha256": "61013ba3c4dde75a880daa855a84eb12656c5ca2351aa9cfc55c19a52f2a3e9f"
+    }
+  ]
+}

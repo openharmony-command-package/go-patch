@@ -1,0 +1,12 @@
+diff --git a/hapsigntool_cpp/common/src/byte_buffer.cpp b/hapsigntool_cpp/common/src/byte_buffer.cpp
+--- a/hapsigntool_cpp/common/src/byte_buffer.cpp
++++ b/hapsigntool_cpp/common/src/byte_buffer.cpp
+@@ -23,7 +23,7 @@
+ 
+ const int32_t ByteBuffer::MAX_PRINT_LENGTH = 200;
+ const int32_t ByteBuffer::HEX_PRINT_LENGTH = 3;
+-const int64_t MAX_MEMORY = 2L * 1024L * 1024L * 1024L;
++const int64_t MAX_MEMORY = 2LL * 1024LL * 1024LL * 1024LL;
+ 
+ template<typename T>
+ std::shared_ptr<T> make_shared_array(size_t size)
