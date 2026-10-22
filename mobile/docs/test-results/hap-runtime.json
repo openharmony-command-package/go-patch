@@ -1,9 +1,9 @@
 {
   "accepted": false,
-  "mobile_patch_sha256": "ad21eedc994b950fdb8e075bf83c8aaf52f646ead4428367ca50af685d2ff9de",
-  "har_sha256": "86a9a0018007ff9ec73620d45baa4023ba9f4547c1a8ed2e9326658bc214e692",
-  "unsigned_hap_sha256": "075b523e5277364b0381ac1df62afb2f04bfe2bf381386d4c167354513e47174",
-  "signed_hap_sha256": "8af60600477bbcbf27c812cb74f679840ddff494c88b6bb18ded8f8d45b1b3ec",
+  "mobile_patch_sha256": "5a8ce153a45eb0abf4a8e9bc553ab70908335e4dce4de98377903d904b988923",
+  "har_sha256": "2350bf2901c27e6f7ac454961ce7510fa032ef9ef030db317681f4310de56237",
+  "unsigned_hap_sha256": "a153339af4ee6cf2b5607ef379a207b6a5299adf3de5fc981450a624e49cda91",
+  "signed_hap_sha256": "b9695aef5b81c26bba672d64e1aa701c79a9d3dcc336830c89e8afd36880a290",
   "normal_signing": true,
   "normal_installation": true,
   "install_error": 9568404,

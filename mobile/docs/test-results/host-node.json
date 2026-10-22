@@ -1,14 +1,14 @@
 {
   "accepted": true,
   "scope": "host Node N-API conformance; not OHOS execution",
-  "patch_sha256": "ad21eedc994b950fdb8e075bf83c8aaf52f646ead4428367ca50af685d2ff9de",
+  "patch_sha256": "5a8ce153a45eb0abf4a8e9bc553ab70908335e4dce4de98377903d904b988923",
   "go_binary_sha256": "723b4531ad6a3eb0df5c54cd57f6cc60d25bd5acae35764edd7bb3a43398b90c",
-  "gobind_binary_sha256": "4f7596534ea256b4da550fd526b85c0c95bf7a9ce417750f1285e339db0f5e24",
-  "suite_sha256": "50e938b10cf191893d47c0e093a46ea3e0d3ccedddbb00771200d348034a01d2",
+  "gobind_binary_sha256": "0133e8b24325106fc792256ad480874db3c327ebaf43b4821c58c31053760c82",
+  "suite_sha256": "605e7847c249786755fbe6e7ae6424b7dd96cabad2360e31e409ace623e7e4d5",
   "typecheck_sha256": "7827ac4989a8697c272cd07ab014a6db52797a8deeae9c6adc2d4ede74f8f20c",
   "cases": 27,
   "typescript_strict": true,
   "node_version": "v24.14.1",
-  "native_library_sha256": "7bf3c718e52b5542616ffcdbc067e4ec25237f7a7e9b4bc43e2d572bdf5d3fea",
-  "raw_log_sha256": "38f59f00db0ec79a8c3ef44c5877243c83b68cfc760405a275f4b2f9c8d10a7c"
+  "native_library_sha256": "c9ef938aeb8b1395e5fd23b5a196dfce3e0ab9c1b02508f602c9f9df18e461a6",
+  "raw_log_sha256": "af99810f7f154cdc035b84d9dc2ff22f1e90e29544850b573aa842dcf48bf7b2"
 }

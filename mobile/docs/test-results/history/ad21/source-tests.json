@@ -1,0 +1,57 @@
+{
+  "patch_sha256": "ad21eedc994b950fdb8e075bf83c8aaf52f646ead4428367ca50af685d2ff9de",
+  "upstream_commit": "19777044486779222400e9ca16c4306f9c6dbfa9",
+  "ohos_targeted_tests_accepted": true,
+  "ohos_test_log_sha256": "08878bff932cb18d699be7b4a4f74971101204cc158e188fb68005b1e6b312de",
+  "upstream_suite_accepted": false,
+  "pristine_failures": [
+    "TestGenGoObjcWrappers",
+    "TestBindApple",
+    "TestBindAppleAll",
+    "TestBindWithGoModules",
+    "TestBuildWithGoModules",
+    "TestWriter"
+  ],
+  "patched_failures": [
+    "TestGenGoObjcWrappers",
+    "TestBindApple",
+    "TestBindAppleAll",
+    "TestBindWithGoModules",
+    "TestBuildWithGoModules",
+    "TestWriter"
+  ],
+  "same_failure_set": true,
+  "pristine_log_sha256": "19690aa47ac4955411300261757d84bcf71a949cd65b413dc30c2044ccafee93",
+  "patched_log_sha256": "31e4080a97b14ba18c95ee0a35929c8d60553a981957611ed366c9d1f8500180",
+  "limitations": [
+    "Foundation clang headers: TargetConditionals.h missing",
+    "Android aapt fixture output differs",
+    "Upstream Apple/module dry-run output fixture differences; see matching pristine log"
+  ],
+  "initial_host_environment": {
+    "pristine_failures": [
+      "TestGenGoObjcWrappers",
+      "TestBindAndroid",
+      "TestBindApple",
+      "TestBindAppleAll",
+      "TestBindWithGoModules",
+      "TestAppleBuild",
+      "TestBuildWithGoModules",
+      "TestWriter"
+    ],
+    "patched_failures": [
+      "TestGenGoObjcWrappers",
+      "TestBindAndroid",
+      "TestBindApple",
+      "TestBindAppleAll",
+      "TestBindWithGoModules",
+      "TestAppleBuild",
+      "TestBuildWithGoModules",
+      "TestWriter"
+    ],
+    "pristine_log_sha256": "7bde8496634c33b03a28dcf6da524f465b4f9428779209019d288a057004f357",
+    "patched_log_sha256": "1355fe001d39f9dacfdc2145529d33a005ad2f07011273cdfdcd1b5968314afc",
+    "same_failure_set": true
+  },
+  "controlled_host_tools": true
+}

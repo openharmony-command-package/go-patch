@@ -3,7 +3,7 @@
 [中文](VALIDATION.zh-CN.md)
 
 The current artifacts are **candidates**. The mobile patch SHA256 is
-`ad21eedc994b950fdb8e075bf83c8aaf52f646ead4428367ca50af685d2ff9de`.
+`5a8ce153a45eb0abf4a8e9bc553ab70908335e4dce4de98377903d904b988923`.
 The example HAR was built with Go 1.27.3 and Go patch
 `cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69`.
 The parent Go port has its own full-suite and signing gates; passing mobile
@@ -26,7 +26,7 @@ checks does not replace those gates.
 The 29 Ark checks cover 27 functional cases and two checks in a second runtime
 environment. They exercise UTF-8/NUL, bytes, bigint limits, objects, errors and
 panic rejection, interface values, retained and concurrent callbacks, nested Go
-calls, external named types, non-finite floats, and environment cleanup. Go
+calls, external named types, non-finite floats and negative zero, and environment cleanup. Go
 observes the exact Context files/cache/temp paths and writes a file into the
 provided files directory. These are explicit shell sandbox paths, not evidence
 of an installed application's private directory permissions.

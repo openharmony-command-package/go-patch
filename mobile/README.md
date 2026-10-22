@@ -52,7 +52,7 @@ HAP with the application's SDK tooling. See [validation](docs/VALIDATION.md)
 for actual test evidence and remaining limits; a compiled HAR alone does not
 prove execution in an OHOS application.
 
-Use `dispose(value)` for returned Go interface objects. Go `int`/`uint` map to safe JavaScript integers; use `int64`/`uint64` for the full bigint range. Non-finite floating-point values are preserved. Unsupported maps, channels, variadic and generic APIs fail during generation.
+Use `dispose(value)` for returned Go interface objects. Go `int`/`uint` map to safe JavaScript integers; use `int64`/`uint64` for the full bigint range. Non-finite floating-point values and negative zero are preserved. Unsupported maps, channels, variadic and generic APIs fail during generation.
 
 
 Native OHOS tool archives include `scripts/sign-installed.sh` for initial

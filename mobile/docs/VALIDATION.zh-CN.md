@@ -3,7 +3,7 @@
 [English](VALIDATION.md)
 
 当前产物为**候选包**。gomobile 补丁 SHA256：
-`ad21eedc994b950fdb8e075bf83c8aaf52f646ead4428367ca50af685d2ff9de`。
+`5a8ce153a45eb0abf4a8e9bc553ab70908335e4dce4de98377903d904b988923`。
 示例 HAR 使用 Go 1.27.3，Go 补丁 SHA256：
 `cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69`。
 Go 自身的完整套件、签名和原生构建门槛独立验收，gomobile 的通过不能替代。
@@ -24,7 +24,7 @@ Go 自身的完整套件、签名和原生构建门槛独立验收，gomobile �
 
 Ark 的 29 项由首个运行时的 27 项功能测试及第二个运行时的两项清理测试组成，
 覆盖 UTF-8/NUL、字节、大整数边界、对象、error/panic、接口返回值、保留和并发
-回调、回调再次调用 Go、外部命名类型、非有限浮点数和环境关闭。Go 侧可读取
+回调、回调再次调用 Go、外部命名类型、非有限浮点数、负零和环境关闭。Go 侧可读取
 传入的 files/cache/temp 路径，且成功写入指定 files 目录。这里使用显式 shell
 沙箱目录，不能据此声称已验证安装应用的私有目录权限。
 

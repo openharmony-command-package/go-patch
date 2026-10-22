@@ -49,7 +49,7 @@ async function check(name,fn) { await fn(); checks.push(name); }
  await check('Go-interface-result',async()=>{const l=await hello.NewListener();assert.equal(await l.OnMessage('x'),'Go: x');dispose(l);});
  await check('retained-callback',async()=>{await hello.SaveListener({OnMessage:s=>'Retained '+s});collect();assert.equal(await hello.FireSaved('later'),'Retained later');await hello.SaveListener(null);collect();});
  await check('concurrent-callbacks',async()=>{const out=await Promise.all(Array.from({length:40},(_,i)=>hello.InvokeLater({OnMessage:async s=>s+'!'},String(i))));assert.deepEqual(out,Array.from({length:40},(_,i)=>i+'!'));});
- await check('nonfinite-float-values',async()=>{for(const n of [NaN,Infinity,-Infinity]){assert.ok(Object.is(await hello.EchoFloat(n),n));assert.ok(Object.is(await hello.EchoFloat32(n),n));}assert.equal(await hello.EchoFloat32(0.1),Math.fround(0.1));});
+ await check('floating-point-special-values',async()=>{for(const n of [NaN,Infinity,-Infinity,-0]){assert.ok(Object.is(await hello.EchoFloat(n),n));assert.ok(Object.is(await hello.EchoFloat32(n),n));}assert.equal(await hello.EchoFloat32(0.1),Math.fround(0.1));});
  await check('callback-external-named-type',async()=>assert.equal(await hello.ClockDelay({Delay:async d=>d+3n},9223372036854775800n),9223372036854775803n));
  await check('callback-returning-interface',async()=>assert.equal(await hello.InvokeFactory({Create:async()=>({OnMessage:s=>'Factory '+s})},'OK'),'Factory OK'));
  await check('callback-object-bytes-bigint',async()=>{const result=await hello.InvokeObject({Update:async(c,b,n)=>{assert.deepEqual(b,new Uint8Array([0,128,255]));assert.equal(n,9223372036854775807n);await c.Add(5);return c;}});assert.equal(await result.GetValue(),15);result.dispose();});

@@ -1,14 +1,14 @@
 {
   "host": "linux-amd64",
   "accepted": true,
-  "patch_sha256": "ad21eedc994b950fdb8e075bf83c8aaf52f646ead4428367ca50af685d2ff9de",
+  "patch_sha256": "5a8ce153a45eb0abf4a8e9bc553ab70908335e4dce4de98377903d904b988923",
   "binaries_sha256": {
-    "gomobile": "8130591fc6ef798f9349a86ac0777d4bb5f3b1c52cab5a45fbc698d1481685bd",
-    "gobind": "52e73de278527af9eeaa08993a5d457861ee1b3eedd49eac4f4007dbd08dd8df"
+    "gomobile": "f6c884807b42bfb667dfdb102204227f0cb008807c068d4e91d83a78a8352341",
+    "gobind": "d6a4a0923e16c8621b18f034467b36c2e3468e50ee8e3a97aae5f1759f31991d"
   },
   "scope": "paired command execution; not full SDK bind on this host",
   "host_go_sha256": "26226148ab2c6c9deaa1943ebb9edf337ef6e351455e211bb0cc21f24567e977",
   "image": "sha256:2a96bd19eac5b76f4930e550d8a34d16ede5e791cad461e8c526d3a19b2d5eeb",
-  "output": "gomobile OHOS ad21eedc994b950fdb8e075bf83c8aaf52f646ead4428367ca50af685d2ff9de (openharmony/arm64,openharmony/arm,openharmony/amd64)\ngobind ohos ad21eedc994b950fdb8e075bf83c8aaf52f646ead4428367ca50af685d2ff9de",
-  "raw_log_sha256": "271f6517c4fcfa30c130d0b597ca670d54824c8ebe8e50d5ce540d171c4c07b9"
+  "output": "gomobile OHOS 5a8ce153a45eb0abf4a8e9bc553ab70908335e4dce4de98377903d904b988923 (openharmony/arm64,openharmony/arm,openharmony/amd64)\ngobind ohos 5a8ce153a45eb0abf4a8e9bc553ab70908335e4dce4de98377903d904b988923",
+  "raw_log_sha256": "16b9dadf34eb4c17acf89f56dfbe322942e26f1f68621be476b11c7f164ef5a1"
 }

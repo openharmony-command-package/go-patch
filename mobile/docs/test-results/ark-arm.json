@@ -1,23 +1,23 @@
 {
   "accepted": true,
   "arch": "arm",
-  "run_id": "c20-final-r2",
+  "run_id": "c20-final-r3",
   "scope": "OHOS Ark N-API shell sandbox, two runtime environments",
   "hap_installation": false,
   "application_private_directory_test": false,
-  "har_sha256": "86a9a0018007ff9ec73620d45baa4023ba9f4547c1a8ed2e9326658bc214e692",
+  "har_sha256": "2350bf2901c27e6f7ac454961ce7510fa032ef9ef030db317681f4310de56237",
   "runner_sha256": "9886369361991086b6984d632d987603653a270479abd3b7a3ba6dcc149b90ae",
-  "suite_sha256": "a74ca625c3eec91ec0b08fb87c176855a28a603dc1a3dd57c123c2caf954ceea",
+  "suite_sha256": "63db7ad838287f583f1d22dbb1a9a22cbffc809c72ddbe617b5b8ca3bc263032",
   "compile_driver_sha256": "940d9124c4f987c49d3ab30e50b15fa3e4966a60ac6176ff99bb5803b4c5c4c2",
   "harness_header": {
     "commit": "4bb2d6b20afb63d3de5ea767d32c9306a25e4901",
     "date": "2026-07-04T16:22:27Z",
     "source_url": "https://github.com/openharmony/ability_ability_runtime/commit/4bb2d6b20afb63d3de5ea767d32c9306a25e4901"
   },
-  "started_at": "2026-10-22T19:22:39Z",
-  "mobile_patch_sha256": "ad21eedc994b950fdb8e075bf83c8aaf52f646ead4428367ca50af685d2ff9de",
+  "started_at": "2026-10-22T20:34:06Z",
+  "mobile_patch_sha256": "5a8ce153a45eb0abf4a8e9bc553ab70908335e4dce4de98377903d904b988923",
   "go_patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
-  "native_library_sha256": "75a494d032b08fe39fbc272432724fb528c1b2161b9138a399d7227bd0a23b70",
+  "native_library_sha256": "b541d0665cd546b8abb6c3dc073afbd6b9f6f1a3aa601435c33c491e8264f7e2",
   "go_executable_sha256": "723b4531ad6a3eb0df5c54cd57f6cc60d25bd5acae35764edd7bb3a43398b90c",
   "runtime_reports": [
     {
@@ -46,7 +46,7 @@
         "Go-interface-result",
         "retained-callback",
         "concurrent-callbacks",
-        "nonfinite-float-values",
+        "floating-point-special-values",
         "callback-external-named-type",
         "callback-returning-interface",
         "callback-object-bytes-bigint",
@@ -68,7 +68,7 @@
   ],
   "cases": 29,
   "runner_binary_sha256": "bccfdf12ed29fd94e87e830e26fd001ff546d4117147555ffb645af7a46feee1",
-  "bytecode_sha256": "8b65c36b7d7d70e9eb2de021fbee7bed2d8071c15a30d3ea6bac33dcf56f25fa",
-  "raw_log_sha256": "f51b5d150efe18c085e155f4b7c39dbe85967b508094fd7cb4e15c779e991fce",
-  "finished_at": "2026-10-22T19:23:25Z"
+  "bytecode_sha256": "71f114531ee922100d4296f0034f92f972fcb2e4346379d40f555df70add095b",
+  "raw_log_sha256": "98de6d6c0d9c67c3b369833d9d8e043807aaad773478a3a357757e902bd1c453",
+  "finished_at": "2026-10-22T20:34:41Z"
 }

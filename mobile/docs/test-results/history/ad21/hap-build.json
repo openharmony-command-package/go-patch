@@ -1,0 +1,35 @@
+{
+  "accepted": true,
+  "scope": "ArkTS caller compilation and embedded library checks",
+  "runtime_accepted": false,
+  "mobile_patch_sha256": "ad21eedc994b950fdb8e075bf83c8aaf52f646ead4428367ca50af685d2ff9de",
+  "har_sha256": "86a9a0018007ff9ec73620d45baa4023ba9f4547c1a8ed2e9326658bc214e692",
+  "example_sources_sha256": {
+    ".gitignore": "fcad43b934c0d7d003dc1587dd8c83bc2dbec8ee2e329066ddd2e5ae8d5337ce",
+    "AppScope/app.json5": "bf63c593628f64151562e4a3e77b70a2024108e5a3fa1615d72f3085740c96a4",
+    "AppScope/resources/base/element/string.json": "6e26c6ee38f2d10af29708fd313d7809c870cae0c7cff09c189dcb917e1b9a23",
+    "AppScope/resources/base/media/app_icon.svg": "3218c22a82e396f91569056cae9c653954c35ac1bb99011c40e84fb16be98a35",
+    "README.md": "d61598cf1322069e5429c1698b531e186a34d7409c36117ed9627f39b6d8e214",
+    "README.zh-CN.md": "e6d945c1f3183eb9ac639077ff42d33dab9c88337965d2022801233ecac956f5",
+    "build-profile.json5": "636257a06c269c587168fbb2667127e0789d938f8944c5cb587f788ec56b63f4",
+    "entry/build-profile.json5": "f80d7698d73940d47a7cf1af2946a296dcd9f32d002672ebe93aa2373a3d0541",
+    "entry/hvigorfile.ts": "f547983dcab9c8fff87cc3ddedb22bb98063663c5b8afe18bb32e131311ec289",
+    "entry/oh-package.json5": "7e5f3ff9aa19e9c2ed42685bb55c610eac051f26296fba8b0aa2374b02ee747d",
+    "entry/src/main/ets/entryability/EntryAbility.ets": "44b9cd6f84f7237be7d21b256b52d4076f99fab25330f5ec9e9d5bf5bdae015a",
+    "entry/src/main/ets/pages/Index.ets": "720b4fa1ceabe23d1a78e018e9e1fdfb1ab3030cbbd3e8e95b969aeab884fbe9",
+    "entry/src/main/module.json5": "2af3e58972cb750d658237cff95534849059dbc8d33ff6a253f306ec081e4c97",
+    "entry/src/main/resources/base/element/color.json": "26f6e195ab88786f18e15ea7a9769faaf968c0a631192ed8100fd2cf17d87d97",
+    "entry/src/main/resources/base/element/string.json": "fd289bde7bc23705409512189146264de070bac80670f2682543894000bf2c1e",
+    "entry/src/main/resources/base/profile/main_pages.json": "f21984fb1d5096f0db41314da0bb94c573e7ad018e5afae3044f8d5ff71b0bfc",
+    "hvigor/hvigor-config.json5": "322eaec60323114fe17400b00062d98b8ad23ca6f6310651ffc9756622d5869f",
+    "hvigorfile.ts": "2378c5e0c5246005ada73a67e8c9834fa08adb9ffd6fb6c219051456753bed5a",
+    "oh-package.json5": "72961e01916b513f092d1c45b63b1babc294f5f9a807f230f6802689edce81c1"
+  },
+  "hap_sha256": "075b523e5277364b0381ac1df62afb2f04bfe2bf381386d4c167354513e47174",
+  "native_libraries_sha256": {
+    "arm64-v8a": "16399c2a6b0e4909e51bd8e11cb16776a96dd90c770c2efb5f313da77935d3ee",
+    "armeabi-v7a": "75a494d032b08fe39fbc272432724fb528c1b2161b9138a399d7227bd0a23b70",
+    "x86_64": "ed07cf628966320ead2c27748516d77a2998b00985ea3f7aed836cd1e14e5457"
+  },
+  "raw_log_sha256": "36731c38fce9664542f53aa09c0dd6950056ad377f4c26d8c1679323ecf98273"
+}

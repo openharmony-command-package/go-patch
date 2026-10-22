@@ -2,8 +2,8 @@
   "accepted": true,
   "scope": "ArkTS caller compilation and embedded library checks",
   "runtime_accepted": false,
-  "mobile_patch_sha256": "ad21eedc994b950fdb8e075bf83c8aaf52f646ead4428367ca50af685d2ff9de",
-  "har_sha256": "86a9a0018007ff9ec73620d45baa4023ba9f4547c1a8ed2e9326658bc214e692",
+  "mobile_patch_sha256": "5a8ce153a45eb0abf4a8e9bc553ab70908335e4dce4de98377903d904b988923",
+  "har_sha256": "2350bf2901c27e6f7ac454961ce7510fa032ef9ef030db317681f4310de56237",
   "example_sources_sha256": {
     ".gitignore": "fcad43b934c0d7d003dc1587dd8c83bc2dbec8ee2e329066ddd2e5ae8d5337ce",
     "AppScope/app.json5": "bf63c593628f64151562e4a3e77b70a2024108e5a3fa1615d72f3085740c96a4",
@@ -25,11 +25,11 @@
     "hvigorfile.ts": "2378c5e0c5246005ada73a67e8c9834fa08adb9ffd6fb6c219051456753bed5a",
     "oh-package.json5": "72961e01916b513f092d1c45b63b1babc294f5f9a807f230f6802689edce81c1"
   },
-  "hap_sha256": "075b523e5277364b0381ac1df62afb2f04bfe2bf381386d4c167354513e47174",
+  "hap_sha256": "a153339af4ee6cf2b5607ef379a207b6a5299adf3de5fc981450a624e49cda91",
   "native_libraries_sha256": {
-    "arm64-v8a": "16399c2a6b0e4909e51bd8e11cb16776a96dd90c770c2efb5f313da77935d3ee",
-    "armeabi-v7a": "75a494d032b08fe39fbc272432724fb528c1b2161b9138a399d7227bd0a23b70",
-    "x86_64": "ed07cf628966320ead2c27748516d77a2998b00985ea3f7aed836cd1e14e5457"
+    "arm64-v8a": "46dd24c8c6a7af0c5015c78c4b565449cecd4635fb299d319122e23aa6617987",
+    "armeabi-v7a": "b541d0665cd546b8abb6c3dc073afbd6b9f6f1a3aa601435c33c491e8264f7e2",
+    "x86_64": "d3f587123bb82b849e5e0d347c7a49857373346707f4785274a34c79e6429b8f"
   },
-  "raw_log_sha256": "36731c38fce9664542f53aa09c0dd6950056ad377f4c26d8c1679323ecf98273"
+  "raw_log_sha256": "64a644e80f5a6bda1192c0ac96a69ae6086e57581989536ca74f9b1ca60e6a94"
 }

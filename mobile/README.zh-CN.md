@@ -45,7 +45,7 @@ const message = await hello.Hello('OpenHarmony');
 调用方 HAP 由应用的 SDK 工具构建和签名。实际验证及限制见
 [验证说明](docs/VALIDATION.zh-CN.md)，HAR 构建成功不能替代 OHOS 应用执行证据。
 
-返回的 Go 接口对象通过 `dispose(value)` 释放。Go `int`/`uint` 使用 JavaScript 安全整数范围，完整大整数范围使用 `int64`/`uint64`。浮点 NaN/Infinity 可往返传递；map、channel、可变参数和泛型 API 会在生成时明确报错。
+返回的 Go 接口对象通过 `dispose(value)` 释放。Go `int`/`uint` 使用 JavaScript 安全整数范围，完整大整数范围使用 `int64`/`uint64`。浮点 NaN/Infinity 和负零可往返传递；map、channel、可变参数和泛型 API 会在生成时明确报错。
 
 
 OHOS 原生工具包包含 `scripts/sign-installed.sh`，供首次安装时为命令签名。
