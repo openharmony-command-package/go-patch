@@ -62,7 +62,8 @@ if a.require_validation or a.require_tested_toolchains:
         tested_hosts[target['name']]=proof['go_binary_sha256']
 source=a.source.resolve()
 port_sources=[p for p in (ROOT/'patch/source-paths.txt').read_text().splitlines() if p and not p.startswith('#')]
-bundle_files=[ROOT/name for name in ['README.md','LICENSE','THIRD-PARTY-NOTICES.md','manifest.json']]
+bundle_files=[ROOT/name for name in ['README.md','README.zh-CN.md','CONTRIBUTING.md',
+                                   'CONTRIBUTING.zh-CN.md','LICENSE','THIRD-PARTY-NOTICES.md','manifest.json']]
 for directory in ['docs','patch','scripts','tests']:
     bundle_files.extend(path for path in (ROOT/directory).rglob('*')
                         if path.is_file() and '__pycache__' not in path.parts and path.suffix!='.pyc')

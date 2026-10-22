@@ -178,7 +178,8 @@ def build(a):
         # A toolchain archive can then reproduce the port without this checkout.
         port = prefix / 'ohos-port'
         port.mkdir()
-        for name in ['README.md', 'LICENSE', 'THIRD-PARTY-NOTICES.md', 'manifest.json']:
+        for name in ['README.md', 'README.zh-CN.md', 'CONTRIBUTING.md',
+                     'CONTRIBUTING.zh-CN.md', 'LICENSE', 'THIRD-PARTY-NOTICES.md', 'manifest.json']:
             shutil.copy2(ROOT / name, port / name)
         for name in ['docs', 'patch', 'scripts', 'tests']:
             shutil.copytree(ROOT / name, port / name,
