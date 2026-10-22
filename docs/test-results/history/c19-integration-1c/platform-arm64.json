@@ -1,0 +1,142 @@
+{
+  "go_version": "go1.27.3",
+  "patch_sha256": "1c499c950e255dfb26942112396c0ab334eeefda7315af9a30da77e78fbe4277",
+  "arch": "arm64",
+  "accepted": true,
+  "cases": [
+    {
+      "test": "pure-system",
+      "result": "pass",
+      "log_sha256": "9ab30a145d6bea47f204a0aa35230c5a465dd8a936613fe321618368360a8c19"
+    },
+    {
+      "test": "pure-context",
+      "result": "pass",
+      "log_sha256": "e7e4f973240ff2432b467c5857d24d06886dd91bc61828976fbe6216ac11aeb0"
+    },
+    {
+      "test": "pure-network",
+      "result": "pass",
+      "log_sha256": "ca5c2ff8ab75ed592a79e6cea4555d7a2cbfa971f1532706fb694467bf6ce91a"
+    },
+    {
+      "test": "cgo-system",
+      "result": "pass",
+      "log_sha256": "974123d065227093663caad8650fecd69a25cb714b706ad0ce3ab036041beed9"
+    },
+    {
+      "test": "cgo-context",
+      "result": "pass",
+      "log_sha256": "e7e4f973240ff2432b467c5857d24d06886dd91bc61828976fbe6216ac11aeb0"
+    },
+    {
+      "test": "cgo-network",
+      "result": "pass",
+      "log_sha256": "ca5c2ff8ab75ed592a79e6cea4555d7a2cbfa971f1532706fb694467bf6ce91a"
+    },
+    {
+      "test": "netgo-system",
+      "result": "pass",
+      "log_sha256": "6605686d501c787c028f1ea4f1a1f1d1a5a9e30fcf4c3343e15039826c4e03c3"
+    },
+    {
+      "test": "netgo-context",
+      "result": "pass",
+      "log_sha256": "e7e4f973240ff2432b467c5857d24d06886dd91bc61828976fbe6216ac11aeb0"
+    },
+    {
+      "test": "netgo-network",
+      "result": "pass",
+      "log_sha256": "ca5c2ff8ab75ed592a79e6cea4555d7a2cbfa971f1532706fb694467bf6ce91a"
+    },
+    {
+      "test": "pie-system",
+      "result": "pass",
+      "log_sha256": "010c17d3814bc2b166274bc4674e6a538a194177c6f6471291381766a7c479fb"
+    },
+    {
+      "test": "pie-context",
+      "result": "pass",
+      "log_sha256": "e7e4f973240ff2432b467c5857d24d06886dd91bc61828976fbe6216ac11aeb0"
+    },
+    {
+      "test": "pie-network",
+      "result": "pass",
+      "log_sha256": "ca5c2ff8ab75ed592a79e6cea4555d7a2cbfa971f1532706fb694467bf6ce91a"
+    },
+    {
+      "test": "cgo-hook",
+      "result": "pass",
+      "log_sha256": "da4aac276e7843ebf1da1d2cedcb84343499d1e4205aef1bf76d075822845dab"
+    },
+    {
+      "test": "netgo-hook",
+      "result": "pass",
+      "log_sha256": "da4aac276e7843ebf1da1d2cedcb84343499d1e4205aef1bf76d075822845dab"
+    },
+    {
+      "test": "pie-hook",
+      "result": "pass",
+      "log_sha256": "da4aac276e7843ebf1da1d2cedcb84343499d1e4205aef1bf76d075822845dab"
+    },
+    {
+      "test": "timezone-override",
+      "result": "pass",
+      "log_sha256": "d82086c9bfe6dce2f063c5d6bbd592664043c876f50580f912f182989dc89ca7"
+    },
+    {
+      "test": "pure-panic",
+      "result": "pass",
+      "log_sha256": "bda43916432d8c0a2aff97bd221e59273e81caf41b4ebc2161419689d6561556"
+    },
+    {
+      "test": "pure-copy",
+      "result": "pass",
+      "log_sha256": "79f214cf86cd0c0048a088fc4692387f6d3cb1eb34b040430f8b6e025b7be70d"
+    },
+    {
+      "test": "cgo-panic",
+      "result": "pass",
+      "log_sha256": "bda43916432d8c0a2aff97bd221e59273e81caf41b4ebc2161419689d6561556"
+    },
+    {
+      "test": "cgo-copy",
+      "result": "pass",
+      "log_sha256": "79f214cf86cd0c0048a088fc4692387f6d3cb1eb34b040430f8b6e025b7be70d"
+    },
+    {
+      "test": "cgo-fatal",
+      "result": "pass",
+      "log_sha256": "dd98cebfd175afd58af38855efc3264e6ff0b971fd5e8807ff5c2c8cc4d695b7"
+    },
+    {
+      "test": "long",
+      "result": "pass",
+      "log_sha256": "af6ddb8e3ff52dd888e26e55e0596f5ea20fad2b953e0c1e58de0e997866340c"
+    },
+    {
+      "test": "disabled",
+      "result": "pass",
+      "log_sha256": "a7e27e56bccc8a720c7781ec6d4e88a36116254a275c8c922ac551d0032aa144"
+    }
+  ],
+  "source_digest": "0c93c82bd6d3454b9d0ed4475b16617d85749d3d7c9d3d20ab2df3ea8cea2ee8",
+  "go_binary_sha256": "89fb418c0944dc7c2e367a6b6c079ee75fe66329cc8bdc6a1d592711c25b709b",
+  "system_timezone": "Asia/Shanghai",
+  "fixtures_sha256": {
+    "tests/platform/cgo-fatal.c": "a8112db8e5ff9c9b176177072a98418f3decf4239a971cc8b67c6a52b7d550d6",
+    "tests/platform/socket-hook.c": "9904a090581d84fb61d60b71af752b0d6791a85505b09c425ef85cd7bb999d4a",
+    "tests/platform/main.go": "8e2b6875c47afe359fbf54f1131443fdf57986e5d36224fa5386ba9f23bbb33a"
+  },
+  "binaries_sha256": {
+    "pure": "04e48aee583b9d63da98cde1ed75d949c315ef8cfb0812452cbde4a31b212c75",
+    "cgo": "2b4885d7f1bfee9989a1a3c6157c1cfebbd1e14c5576565dd97dd4f0127a40b8",
+    "netgo": "8da5e0fe74666f4df40081ffa05fc9379727c0efb11989560478bc9218dc81f9",
+    "pie": "8f4f0d3bef31d03278b23c8df95d13fc498d62bf675c86a400e942f052178202",
+    "socket-hook.so": "928e51f7e3d62647b96e7cd6a93d97c7acce89ae23e37603c11db13bc97ae7f3",
+    "cgo-fatal": "bb448605f75863e3b4c7816b69d36d25cb63aa9371542f295490b5c1b7c771a0"
+  },
+  "hilog_sha256": "c3f0811bde6f8e8e92bc11707d3fb71ed27c1184bb5849cad9156776ccf4b6c4",
+  "script_sha256": "89f9efcdd220e3b66317da50ef57372fe8e2eb8cc8cf7d7cebf4c4cdfef48a9e",
+  "scope": "full-system QEMU shell; native app sandbox and physical network policies require application tests"
+}

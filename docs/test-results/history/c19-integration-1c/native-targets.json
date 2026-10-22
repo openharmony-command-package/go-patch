@@ -1,0 +1,104 @@
+{
+  "go_version": "go1.27.3",
+  "patch_sha256": "1c499c950e255dfb26942112396c0ab334eeefda7315af9a30da77e78fbe4277",
+  "accepted": true,
+  "deployment_resigned": false,
+  "hosts": [
+    {
+      "host": "arm64",
+      "go_version": "go1.27.3",
+      "patch_sha256": "1c499c950e255dfb26942112396c0ab334eeefda7315af9a30da77e78fbe4277",
+      "native_go_sha256": "63ac0be5fe09bdf31745251cd169ddcc6591d66a4e0c40c68c9a60e6570689a3",
+      "script_sha256": "b3ae95f4ddd928e4373ceabaf6a6208a64c0d0a7c4e1602dfc5c0f4e80e0ce68",
+      "deployment_resigned": false,
+      "accepted": true,
+      "cases": [
+        {
+          "host": "arm64",
+          "target": "arm64",
+          "program_sha256": "cbd036c53632694740ccaa8858b92e08a3e951d4eadb714a98ea79fa439ecfb5",
+          "output": "NATIVE_TARGET_OK arm64",
+          "exit_status": 0
+        },
+        {
+          "host": "arm64",
+          "target": "arm",
+          "program_sha256": "55889110835573910228ee0970644f207f6f2fd87380c784578e8ced51de8d29",
+          "output": "NATIVE_TARGET_OK arm",
+          "exit_status": 0
+        },
+        {
+          "host": "arm64",
+          "target": "amd64",
+          "program_sha256": "98476ea4eca8de9a5867848d961293154de5b50e62019e92d4172be14487dc4b",
+          "output": "NATIVE_TARGET_OK amd64",
+          "exit_status": 0
+        }
+      ]
+    },
+    {
+      "host": "arm",
+      "go_version": "go1.27.3",
+      "patch_sha256": "1c499c950e255dfb26942112396c0ab334eeefda7315af9a30da77e78fbe4277",
+      "native_go_sha256": "3cd0944c8c412281a197efb7593484690e6f8ba96b371d41277d22f4b0371126",
+      "script_sha256": "b3ae95f4ddd928e4373ceabaf6a6208a64c0d0a7c4e1602dfc5c0f4e80e0ce68",
+      "deployment_resigned": false,
+      "accepted": true,
+      "cases": [
+        {
+          "host": "arm",
+          "target": "arm64",
+          "program_sha256": "dc64ed52bc23c27dfb41831d1435f6e226538daffef213a3482810a55b973d13",
+          "output": "NATIVE_TARGET_OK arm64",
+          "exit_status": 0
+        },
+        {
+          "host": "arm",
+          "target": "arm",
+          "program_sha256": "0c3e578960536df3d7e81af318d4f1b08f0dd20d5e7917a2dc95d1d23b7ebd5c",
+          "output": "NATIVE_TARGET_OK arm",
+          "exit_status": 0
+        },
+        {
+          "host": "arm",
+          "target": "amd64",
+          "program_sha256": "786010692dab8482f69fe5c2a53d01eff932c8b80a02c05668accccc6c8f47d8",
+          "output": "NATIVE_TARGET_OK amd64",
+          "exit_status": 0
+        }
+      ]
+    },
+    {
+      "host": "amd64",
+      "go_version": "go1.27.3",
+      "patch_sha256": "1c499c950e255dfb26942112396c0ab334eeefda7315af9a30da77e78fbe4277",
+      "native_go_sha256": "72d64bafc708e41d524fc2c821c26802052cf57f2e9e18e8f6f5d7813e165e71",
+      "script_sha256": "b3ae95f4ddd928e4373ceabaf6a6208a64c0d0a7c4e1602dfc5c0f4e80e0ce68",
+      "deployment_resigned": false,
+      "accepted": true,
+      "cases": [
+        {
+          "host": "amd64",
+          "target": "arm64",
+          "program_sha256": "84531451183673cbd69c0893adc1b840759701c28b73867a8e9c8a6474eed19c",
+          "output": "NATIVE_TARGET_OK arm64",
+          "exit_status": 0
+        },
+        {
+          "host": "amd64",
+          "target": "arm",
+          "program_sha256": "ae202e501bf9db038749d90ec9faebd1381aaf36a26ef6d730c83c9834fa1e35",
+          "output": "NATIVE_TARGET_OK arm",
+          "exit_status": 0
+        },
+        {
+          "host": "amd64",
+          "target": "amd64",
+          "program_sha256": "b483c75d90c090b78d62bf88fe77bd2d8b702cf5af572b16362fcdeef53850fc",
+          "output": "NATIVE_TARGET_OK amd64",
+          "exit_status": 0
+        }
+      ]
+    }
+  ]
+}

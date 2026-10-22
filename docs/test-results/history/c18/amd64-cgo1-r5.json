@@ -1,0 +1,53 @@
+{
+  "arch": "amd64",
+  "run_id": "amd64-cgo1-r5",
+  "exit_status": 0,
+  "packages": {
+    "pass": 441,
+    "skip": 246
+  },
+  "failures": {},
+  "build_failures": [],
+  "log_sha256": "c2f39e646cef08bdb5dd2c218aecf9bc8382733890cb071bfd331edcbe1acc7b",
+  "qemu": {
+    "pid": 90142,
+    "port": 5571,
+    "server": 18769,
+    "hdc": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/hdc",
+    "archive_sha256": "a1173c39b4bd9ae3e46de176867b501af51eff605466811b86d8370caeccd7ca",
+    "profile": "stock",
+    "qmp": "/Users/ranger/Documents/ChatGPT/go-patch/.work/qemu/x86_64/qmp.sock",
+    "memory_mib": 8192,
+    "power_policy": "powermgr stopped during headless Go tests",
+    "server_pid": 1345
+  },
+  "inputs": {
+    "run_id": "amd64-cgo1-r5",
+    "scope": "stdlib-tools",
+    "cgo": "1",
+    "go_build_info": {
+      "target": {
+        "name": "openharmony-amd64",
+        "goos": "openharmony",
+        "goarch": "amd64",
+        "qemu_arch": "x86_64"
+      },
+      "upstream": "go1.27.3",
+      "patch_sha256": "58bc568264a43a993ba6a9156a2916259fb599b91a0869f937a62702338a5bb3"
+    },
+    "fixtures_sha256": {
+      "/data/local/tmp/go-patch/bin/cc": "68c1685f19377a895c7e74bab31d9239ffcfc6273210845d74fca9ddf2edc2e2",
+      "/data/local/tmp/go-patch/bin/binary-sign-tool": "0f69c8bf60d08dd6c7b66d80b0b8d1df3f0513f092cd01119fd6d71b3764d711",
+      "/data/local/tmp/go-patch/bin/native-runner": "b15dc2a80bb8885cb8573398106c5510103288dc5ce4c21eb17872898130a4a5",
+      "/data/local/tmp/go-patch/native-zig/zig": "f5b9efabe40911b49a43c8a5e93a4b0e047b9caf9e8abdbe5bd818cc62f321b1",
+      "/data/local/tmp/go-patch/run-native.sh": "37784c0f87645e804315d9de556a4b7770345621a6c708f87da95f3525813d1b",
+      "/data/local/tmp/go-patch/go/bin/go": "542c45d47c4e78e05dfec41b2c47edbbfac8b5447176c97053d1529f9079e8a1",
+      "/data/local/tmp/go-patch/go.tar.gz": "7de8b76a529a3e0238945396b67aa87903eeda844ed19faaebfa9e11fd6ff6f1"
+    }
+  },
+  "scope": "stdlib-tools",
+  "language_cases": 0,
+  "language_tests": {},
+  "expected_language_cases": 2733,
+  "accepted": true
+}

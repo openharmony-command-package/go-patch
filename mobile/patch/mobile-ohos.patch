@@ -1,0 +1,2497 @@
+diff --git a/bind/genopenharmony.go b/bind/genopenharmony.go
+new file mode 100644
+index 0000000..0c0cd8b
+--- /dev/null
++++ b/bind/genopenharmony.go
+@@ -0,0 +1,435 @@
++// Copyright 2026 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style license.
++package bind
++
++import (
++	"bytes"
++	"embed"
++	"encoding/json"
++	"fmt"
++	"go/format"
++	"go/types"
++	"os"
++	"path/filepath"
++	"sort"
++	"strconv"
++	"strings"
++)
++
++//go:embed openharmony/*.support
++var ohSupport embed.FS
++
++type ohGen struct {
++	pkgs            []*types.Package
++	names           map[*types.Package]string
++	bound           map[*types.Named]string
++	goSrc, ts, decl bytes.Buffer
++	callbacks       map[string]any
++}
++
++func (g *ohGen) typeName(t types.Type) string {
++	return types.TypeString(t, func(p *types.Package) string {
++		if name := g.names[p]; name != "" {
++			return name
++		}
++		name := fmt.Sprintf("pkg%d", len(g.names))
++		g.names[p] = name
++		return name
++	})
++}
++func (g *ohGen) spec(t types.Type) (string, error) {
++	if isErrorType(t) {
++		return "error", nil
++	}
++	switch t := types.Unalias(t).(type) {
++	case *types.Basic:
++		switch t.Kind() {
++		case types.Bool, types.UntypedBool:
++			return "bool", nil
++		case types.String, types.UntypedString:
++			return "string", nil
++		case types.Int64, types.Uint64:
++			return "bigint", nil
++		case types.Int, types.Int8, types.Int16, types.Int32, types.Uint, types.Uint8, types.Uint16, types.Uint32, types.UntypedInt, types.UntypedRune:
++			return "int", nil
++		case types.Float32, types.Float64, types.UntypedFloat:
++			return "number", nil
++		}
++	case *types.Slice:
++		if b, ok := t.Elem().Underlying().(*types.Basic); ok && b.Kind() == types.Uint8 {
++			return "bytes", nil
++		}
++	case *types.Pointer:
++		if n, ok := t.Elem().(*types.Named); ok {
++			if key := g.bound[n]; key != "" {
++				if _, ok := n.Underlying().(*types.Struct); ok {
++					return "#" + key, nil
++				}
++			}
++		}
++	case *types.Named:
++		if _, ok := t.Underlying().(*types.Basic); ok {
++			return g.spec(t.Underlying())
++		}
++		if _, ok := t.Underlying().(*types.Interface); ok {
++			if key := g.bound[t]; key != "" {
++				return "@" + key, nil
++			}
++		}
++	}
++	return "", fmt.Errorf("OHOS binding does not support %s", t)
++}
++func (g *ohGen) tsType(t types.Type) (string, error) {
++	s, e := g.spec(t)
++	if e != nil {
++		return "", e
++	}
++	switch s {
++	case "bool":
++		return "boolean", nil
++	case "string":
++		return "string", nil
++	case "error":
++		return "string | null", nil
++	case "int", "number":
++		return "number", nil
++	case "bigint":
++		return "bigint", nil
++	case "bytes":
++		return "Uint8Array | null", nil
++	}
++	if s[0] == '#' || s[0] == '@' {
++		return strings.ReplaceAll(s[1:], ".", "_") + " | null", nil
++	}
++	panic(s)
++}
++func (g *ohGen) signature(sig *types.Signature) (params, values, specs, result string, err error) {
++	if sig.Variadic() || sig.TypeParams() != nil && sig.TypeParams().Len() > 0 {
++		return "", "", "", "", fmt.Errorf("generic and variadic functions are unsupported")
++	}
++	var pp, vv, ss []string
++	for i := 0; i < sig.Params().Len(); i++ {
++		t := sig.Params().At(i).Type()
++		tt, e := g.tsType(t)
++		if e != nil {
++			err = e
++			return
++		}
++		s, e := g.spec(t)
++		if e != nil {
++			err = e
++			return
++		}
++		pp = append(pp, fmt.Sprintf("p%d: %s", i, tt))
++		vv = append(vv, fmt.Sprintf("p%d", i))
++		ss = append(ss, strconv.Quote(s))
++	}
++	out := sig.Results()
++	n := out.Len()
++	if n > 0 && isErrorType(out.At(n-1).Type()) {
++		n--
++	}
++	if n > 1 || out.Len() > 2 {
++		err = fmt.Errorf("functions must return at most one value and an optional error")
++		return
++	}
++	result = "void"
++	if n == 1 {
++		result, err = g.tsType(out.At(0).Type())
++	}
++	params, values, specs = strings.Join(pp, ", "), strings.Join(vv, ", "), strings.Join(ss, ", ")
++	return
++}
++func (g *ohGen) emitMethod(name, key string, sig *types.Signature, receiver bool) error {
++	params, values, specs, out, e := g.signature(sig)
++	if e != nil {
++		return fmt.Errorf("%s: %w", key, e)
++	}
++	args := "[" + values + "]"
++	if receiver {
++		args = "[this"
++		if values != "" {
++			args += ", " + values
++		}
++		args += "]"
++		specs = strconv.Quote("#"+strings.Join(strings.Split(key, ".")[:2], ".")) + func() string {
++			if specs != "" {
++				return ", " + specs
++			}
++			return ""
++		}()
++	}
++	fmt.Fprintf(&g.ts, "%s(%s): Promise<%s> { return _invoke(%q, %s, [%s]); },\n", name, params, out, key, args, specs)
++	fmt.Fprintf(&g.decl, "%s(%s): Promise<%s>;\n", name, params, out)
++	return nil
++}
++
++// GenOpenharmony writes an independent N-API binding. It does not include JNI
++// or Objective-C support and can therefore be cross-built from every Go host.
++func GenOpenharmony(dir string, pkgs []*types.Package) error {
++	g := &ohGen{pkgs: pkgs, names: map[*types.Package]string{}, bound: map[*types.Named]string{}, callbacks: map[string]any{}}
++	seen := map[string]bool{}
++	for i, p := range pkgs {
++		if p == nil || p.Name() == "main" {
++			return fmt.Errorf("cannot bind main or invalid package")
++		}
++		if seen[p.Name()] {
++			return fmt.Errorf("OHOS binding packages must have distinct names: %s", p.Name())
++		}
++		if strings.Contains(" class function let var const export import new delete typeof instanceof extends super this with yield await implements interface package private protected public static default enum null true false native initialize collect dispose _classes _interfaces _GoRef _alphabet _base64 _unbase64 _decode _interfaceRef _encode _invoke ", " "+p.Name()+" ") {
++			return fmt.Errorf("package name %s is a reserved TypeScript identifier; rename the Go package", p.Name())
++		}
++		seen[p.Name()] = true
++		g.names[p] = fmt.Sprintf("pkg%d", i)
++		for _, n := range p.Scope().Names() {
++			if !tokenExported(n) {
++				continue
++			}
++			if o, ok := p.Scope().Lookup(n).(*types.TypeName); ok {
++				if t, ok := o.Type().(*types.Named); ok {
++					switch t.Underlying().(type) {
++					case *types.Struct, *types.Interface:
++						if t.TypeParams() != nil && t.TypeParams().Len() > 0 {
++							return fmt.Errorf("generic type %s is unsupported", t)
++						}
++						g.bound[t] = p.Name() + "." + n
++					}
++				}
++			}
++		}
++	}
++	fmt.Fprintln(&g.goSrc, "// Code generated by gobind. DO NOT EDIT.\npackage main\nimport (\"reflect\"; \"encoding/json\"; \"fmt\"")
++	for _, p := range pkgs {
++		fmt.Fprintf(&g.goSrc, "%s %q\n", g.names[p], p.Path())
++	}
++	fmt.Fprintln(&g.goSrc, ")\nvar _ = json.RawMessage{}\nvar _ = fmt.Errorf")
++	runtimeTS, _ := ohSupport.ReadFile("openharmony/runtime.ts.support")
++	g.ts.Write(runtimeTS)
++	fmt.Fprintln(&g.decl, "export interface ApplicationContext { filesDir: string; cacheDir: string; tempDir: string; }\nexport interface InitializeOptions { timezone?: string; trustedCertDirs?: string[]; }\nexport function initialize(context: ApplicationContext, options?: InitializeOptions): Promise<void>;\nexport function collect(): void;\nexport function dispose(value: object | null): void;")
++	var registrations bytes.Buffer
++	for _, p := range pkgs {
++		for _, name := range p.Scope().Names() {
++			obj := p.Scope().Lookup(name)
++			if !obj.Exported() {
++				continue
++			}
++			key := p.Name() + "." + name
++			ref := g.names[p] + "." + name
++			named, ok := obj.Type().(*types.Named)
++			if _, isType := obj.(*types.TypeName); !isType || !ok {
++				continue
++			}
++			kind := named.Underlying()
++			class := strings.ReplaceAll(key, ".", "_")
++			switch t := kind.(type) {
++			case *types.Struct:
++				fmt.Fprintf(&registrations, "ohRegisterType(%q, reflect.TypeOf((*%s)(nil)), true)\n", key, ref)
++				fmt.Fprintf(&g.ts, "export class %s extends _GoRef { private constructor(token: object) { super(token); } static _wrap(id: number): %s { return new %s(native.own(id)); } static create(): Promise<%s> { return _invoke(%q, [], []); }\n", class, class, class, class, key+".new")
++				fmt.Fprintf(&g.decl, "export class %s { private constructor(); dispose(): void; static create(): Promise<%s>;\n", class, class)
++				memberNames := map[string]bool{}
++				set := types.NewMethodSet(types.NewPointer(named))
++				for i := 0; i < set.Len(); i++ {
++					m := set.At(i).Obj().(*types.Func)
++					if !m.Exported() {
++						continue
++					}
++					memberNames[m.Name()] = true
++					if e := g.emitMethod(m.Name(), key+"."+m.Name(), m.Type().(*types.Signature), true); e != nil {
++						return e
++					}
++					b := g.ts.Bytes()
++					if b[g.ts.Len()-2] == ',' {
++						g.ts.Truncate(g.ts.Len() - 2)
++						g.ts.WriteString("\n")
++					}
++				}
++				for i := 0; i < t.NumFields(); i++ {
++					f := t.Field(i)
++					if !f.Exported() || f.Anonymous() {
++						continue
++					}
++					tt, e := g.tsType(f.Type())
++					if e != nil {
++						return fmt.Errorf("%s.%s: %w", key, f.Name(), e)
++					}
++					spec, _ := g.spec(f.Type())
++					if memberNames["Get"+f.Name()] || memberNames["Set"+f.Name()] {
++						return fmt.Errorf("field accessor conflicts with method: %s.%s", key, f.Name())
++					}
++					fmt.Fprintf(&g.ts, "Get%s(): Promise<%s> { return _invoke(%q, [this], [%q]); }\nSet%s(value: %s): Promise<void> { return _invoke(%q, [this,value], [%q,%q]); }\n", f.Name(), tt, key+"."+f.Name()+".get", "#"+key, f.Name(), tt, key+"."+f.Name()+".set", "#"+key, spec)
++					fmt.Fprintf(&g.decl, "Get%s(): Promise<%s>; Set%s(value: %s): Promise<void>;\n", f.Name(), tt, f.Name(), tt)
++				}
++				fmt.Fprintf(&g.ts, "}\n_classes[%q]=%s._wrap;\n", key, class)
++				fmt.Fprintln(&g.decl, "}")
++			case *types.Interface:
++				t.Complete()
++				if !t.IsMethodSet() {
++					return fmt.Errorf("constraint interface %s is unsupported", named)
++				}
++				fmt.Fprintf(&g.ts, "export interface %s {\n", class)
++				fmt.Fprintf(&g.decl, "export interface %s {\n", class)
++				methods := map[string]any{}
++				for i := 0; i < t.NumMethods(); i++ {
++					m := t.Method(i)
++					if !m.Exported() {
++						return fmt.Errorf("interface contains unexported method: %s", named)
++					}
++					sig := m.Type().(*types.Signature)
++					params, _, _, out, e := g.signature(sig)
++					if e != nil {
++						return e
++					}
++					fmt.Fprintf(&g.ts, "%s(%s): %s | Promise<%s>;\n", m.Name(), params, out, out)
++					fmt.Fprintf(&g.decl, "%s(%s): %s | Promise<%s>;\n", m.Name(), params, out, out)
++					specs := []string{}
++					for j := 0; j < sig.Params().Len(); j++ {
++						s, _ := g.spec(sig.Params().At(j).Type())
++						specs = append(specs, s)
++					}
++					result := "void"
++					n := sig.Results().Len()
++					if n > 0 && isErrorType(sig.Results().At(n-1).Type()) {
++						n--
++					}
++					if n == 1 {
++						result, _ = g.spec(sig.Results().At(0).Type())
++
++					}
++					methods[m.Name()] = map[string]any{"args": specs, "result": result}
++				}
++				fmt.Fprintln(&g.ts, "}")
++				fmt.Fprintln(&g.decl, "}")
++				fmt.Fprintf(&g.ts, "_classes[%q]=(id: number) => _interfaceRef(id, %q);\n", key, key)
++				g.callbacks[key] = methods
++				fmt.Fprintf(&registrations, "ohRegisterType(%q, reflect.TypeOf((*%s)(nil)).Elem(), false)\nohInterfaces[reflect.TypeOf((*%s)(nil)).Elem()] = func(owner,id uint64)(reflect.Value,error){p,e:=ohNewForeign(owner,id);if e!=nil{return reflect.Value{},e};return reflect.ValueOf(&ohProxy_%s{p}),nil}\n", key, ref, ref, class)
++				fmt.Fprintf(&g.goSrc, "type ohProxy_%s struct {*ohForeign}\n", class)
++				for i := 0; i < t.NumMethods(); i++ {
++					m := t.Method(i)
++					sig := m.Type().(*types.Signature)
++					var pp, rv, values []string
++					for j := 0; j < sig.Params().Len(); j++ {
++						pp = append(pp, fmt.Sprintf("p%d %s", j, g.typeName(sig.Params().At(j).Type())))
++						values = append(values, fmt.Sprintf("reflect.ValueOf(&p%d).Elem()", j))
++					}
++					for j := 0; j < sig.Results().Len(); j++ {
++						rv = append(rv, fmt.Sprintf("r%d %s", j, g.typeName(sig.Results().At(j).Type())))
++					}
++					fmt.Fprintf(&g.goSrc, "func(p *ohProxy_%s) %s(%s)(%s){raw,cleanup,e:=p.call(%q", class, m.Name(), strings.Join(pp, ","), strings.Join(rv, ","), m.Name())
++					if len(values) > 0 {
++						fmt.Fprintf(&g.goSrc, ",%s", strings.Join(values, ","))
++					}
++					fmt.Fprintln(&g.goSrc, "); defer cleanup()")
++					n := sig.Results().Len()
++					hasErr := n > 0 && isErrorType(sig.Results().At(n-1).Type())
++					if hasErr {
++						n--
++					}
++					if n == 1 {
++						ty := g.typeName(sig.Results().At(0).Type())
++						fmt.Fprintf(&g.goSrc, "if e==nil{var v reflect.Value;v,e=ohDecode(p.owner,raw,reflect.TypeOf((*%s)(nil)).Elem());if e==nil{r0=v.Interface().(%s)}}\n", ty, ty)
++					} else {
++						fmt.Fprintln(&g.goSrc, "_ = raw")
++					}
++					if hasErr {
++						fmt.Fprintf(&g.goSrc, "r%d=e\nreturn\n}\n", sig.Results().Len()-1)
++					} else {
++						fmt.Fprintln(&g.goSrc, "if e!=nil{panic(e)};return\n}")
++					}
++				}
++			}
++		}
++		fmt.Fprintf(&g.ts, "export const %s = {\n", p.Name())
++		fmt.Fprintf(&g.decl, "export const %s: {\n", p.Name())
++		publicNames := map[string]bool{}
++		for _, name := range p.Scope().Names() {
++			obj := p.Scope().Lookup(name)
++			if !obj.Exported() {
++				continue
++			}
++			if _, ok := obj.(*types.Func); ok {
++				publicNames[name] = true
++			}
++		}
++		for _, name := range p.Scope().Names() {
++			obj := p.Scope().Lookup(name)
++			if !obj.Exported() {
++				continue
++			}
++			key := p.Name() + "." + name
++			ref := g.names[p] + "." + name
++			switch o := obj.(type) {
++			case *types.Func:
++				if e := g.emitMethod(name, key, o.Type().(*types.Signature), false); e != nil {
++					return e
++				}
++				fmt.Fprintf(&registrations, "ohRegisterFunc(%q,reflect.ValueOf(%s))\n", key, ref)
++			case *types.Var, *types.Const:
++				if publicNames["Get"+name] || publicNames["Set"+name] {
++					return fmt.Errorf("package accessor conflict: %s", key)
++				}
++				tt, e := g.tsType(types.Default(obj.Type()))
++				if e != nil {
++					return fmt.Errorf("%s: %w", key, e)
++				}
++				spec, _ := g.spec(types.Default(obj.Type()))
++				fmt.Fprintf(&g.ts, "Get%s(): Promise<%s> { return _invoke(%q,[],[]); },\n", name, tt, key+".get")
++				fmt.Fprintf(&g.decl, "Get%s(): Promise<%s>;\n", name, tt)
++				if _, ok := o.(*types.Var); ok {
++					fmt.Fprintf(&g.ts, "Set%s(value: %s): Promise<void> {return _invoke(%q,[value],[%q]);},\n", name, tt, key+".set", spec)
++					fmt.Fprintf(&g.decl, "Set%s(value: %s): Promise<void>;\n", name, tt)
++					fmt.Fprintf(&registrations, "ohRegisterVar(%q,reflect.ValueOf(&%s).Elem())\n", key, ref)
++				} else {
++					fmt.Fprintf(&registrations, "ohRegisterFunc(%q,reflect.ValueOf(func() %s{return %s}))\n", key+".get", g.typeName(types.Default(obj.Type())), ref)
++				}
++			}
++		}
++		fmt.Fprintln(&g.ts, "};")
++		fmt.Fprintln(&g.decl, "};")
++	}
++	fmt.Fprintf(&g.goSrc, "func init(){\n%s}\n", registrations.Bytes())
++	source := g.goSrc.String()
++	extra := []string{}
++	for p, name := range g.names {
++		found := false
++		for _, bound := range pkgs {
++			if p == bound {
++				found = true
++			}
++		}
++		if !found {
++			extra = append(extra, fmt.Sprintf("%s %q", name, p.Path()))
++		}
++	}
++	sort.Strings(extra)
++	if len(extra) > 0 {
++		source = strings.Replace(source, "\n)\n", "\n"+strings.Join(extra, "\n")+"\n)\n", 1)
++	}
++	formatted, e := format.Source([]byte(source))
++	if e != nil {
++		return fmt.Errorf("generated Go: %w\n%s", e, g.goSrc.Bytes())
++	}
++	callbackJSON, _ := json.Marshal(g.callbacks)
++	fmt.Fprintf(&g.ts, "Object.assign(_interfaces, %s);\n", callbackJSON)
++	if e = os.MkdirAll(filepath.Join(dir, "src", "gobind"), 0755); e != nil {
++		return e
++	}
++	for _, name := range []string{"runtime.go", "paths_openharmony.go", "paths_host.go", "bridge.c", "bridge.h"} {
++		data, e := ohSupport.ReadFile("openharmony/" + name + ".support")
++		if e != nil {
++			return e
++		}
++		if e = os.WriteFile(filepath.Join(dir, "src", "gobind", name), data, 0644); e != nil {
++			return e
++		}
++	}
++	nativeTypes, _ := ohSupport.ReadFile("openharmony/native.d.ts.support")
++	for name, data := range map[string][]byte{"native.d.ts": nativeTypes, "src/gobind/bindings.go": formatted, "Index.ts": g.ts.Bytes(), "Index.d.ts": g.decl.Bytes()} {
++		if e = os.WriteFile(filepath.Join(dir, filepath.FromSlash(name)), data, 0644); e != nil {
++			return e
++		}
++	}
++	return nil
++}
++func tokenExported(name string) bool {
++	return len(name) > 0 && types.NewVar(0, nil, name, nil).Exported()
++}
+diff --git a/bind/genopenharmony_test.go b/bind/genopenharmony_test.go
+new file mode 100644
+index 0000000..b55f685
+--- /dev/null
++++ b/bind/genopenharmony_test.go
+@@ -0,0 +1,72 @@
++package bind
++
++import (
++	"go/ast"
++	"go/parser"
++	"go/token"
++	"go/types"
++	"os"
++	"path/filepath"
++	"strings"
++	"testing"
++)
++
++func TestOpenharmonyGenerator(t *testing.T) {
++	for _, test := range []struct{ name, source, want string }{
++		{"typed", "package sample; type Item struct { Count int64 }; func NewItem() *Item {return nil}; type Listener interface { OnValue(v string)(string,error) };func Call(l Listener){}", ""},
++		{"map", "package sample;func Bad(m map[string]string){}", "does not support"},
++		{"channel", "package sample;func Bad(c chan int){}", "does not support"},
++		{"variadic", "package sample;func Bad(v ...string){}", "variadic"},
++		{"generic", "package sample;type Item[T any] struct{Value T}", "generic"},
++		{"unexported-interface", "package sample;type Listener interface{ hidden() };func Call(l Listener){}", "unexported method"},
++		{"reserved-name", "package native;func Call(){}", "reserved"},
++	} {
++		t.Run(test.name, func(t *testing.T) {
++			fs := token.NewFileSet()
++			f, e := parser.ParseFile(fs, "sample.go", test.source, 0)
++			if e != nil {
++				t.Fatal(e)
++			}
++			p, e := new(types.Config).Check("example.org/sample", fs, []*ast.File{f}, nil)
++			if e != nil {
++				t.Fatal(e)
++			}
++			dir := t.TempDir()
++			e = GenOpenharmony(dir, []*types.Package{p})
++			if test.want != "" {
++				if e == nil || !strings.Contains(e.Error(), test.want) {
++					t.Fatalf("got %v, want %q", e, test.want)
++				}
++				return
++			}
++			if e != nil {
++				t.Fatal(e)
++			}
++			for _, name := range []string{"bindings.go", "runtime.go", "paths_host.go", "paths_openharmony.go"} {
++				if _, e = parser.ParseFile(token.NewFileSet(), filepath.Join(dir, "src/gobind", name), nil, parser.AllErrors); e != nil {
++					t.Fatal(e)
++				}
++			}
++			declaration, e := os.ReadFile(filepath.Join(dir, "Index.d.ts"))
++			if e != nil {
++				t.Fatal(e)
++			}
++			for _, text := range []string{"Count(): Promise<bigint>", "NewItem(): Promise<sample_Item | null>", "OnValue(p0: string): string | Promise<string>"} {
++				if !strings.Contains(string(declaration), text) {
++					t.Errorf("missing declaration %q", text)
++				}
++			}
++			second := t.TempDir()
++			if e = GenOpenharmony(second, []*types.Package{p}); e != nil {
++				t.Fatal(e)
++			}
++			for _, name := range []string{"Index.ts", "Index.d.ts", "src/gobind/bindings.go"} {
++				a, _ := os.ReadFile(filepath.Join(dir, name))
++				b, _ := os.ReadFile(filepath.Join(second, name))
++				if string(a) != string(b) {
++					t.Errorf("nondeterministic %s", name)
++				}
++			}
++		})
++	}
++}
+diff --git a/bind/openharmony/bridge.c.support b/bind/openharmony/bridge.c.support
+new file mode 100644
+index 0000000..d6933c4
+--- /dev/null
++++ b/bind/openharmony/bridge.c.support
+@@ -0,0 +1,644 @@
++// Code generated by gobind -lang=openharmony. DO NOT EDIT.
++#ifdef GOMOBILE_NODE_TEST
++#include <node_api.h>
++#else
++#include <napi/native_api.h>
++#endif
++#include "_cgo_export.h"
++#include <math.h>
++#include <pthread.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++
++typedef struct OHState OHState;
++typedef struct OHRequest OHRequest;
++typedef struct OHWork OHWork;
++static void finish_work(napi_env, OHWork *);
++typedef struct OHCallback {
++  uint64_t id;
++  unsigned refs;
++  napi_ref fn;
++  struct OHCallback *next;
++} OHCallback;
++struct OHState {
++  uint64_t owner, next;
++  int closed, refs;
++  napi_threadsafe_function tsfn;
++  OHCallback *callbacks;
++  OHRequest *pending;
++  OHWork *work;
++  uint64_t nextWork;
++  OHState *nextState;
++};
++struct OHRequest {
++  int kind;
++  OHState *s;
++  uint64_t callback;
++  int refs, done;
++  char *method, *args, *response;
++  pthread_cond_t cond;
++  OHRequest *next;
++};
++static pthread_mutex_t oh_lock = PTHREAD_MUTEX_INITIALIZER;
++static OHState *oh_states;
++static uint64_t oh_nextOwner;
++static void state_free(OHState *s) {
++  if (--s->refs == 0)
++    free(s);
++}
++static void req_free(OHRequest *r) {
++  if (--r->refs == 0) {
++    free(r->method);
++    free(r->args);
++    free(r->response);
++    pthread_cond_destroy(&r->cond);
++    state_free(r->s);
++    free(r);
++  }
++}
++static OHState *state_find(uint64_t owner) {
++  OHState *s;
++  for (s = oh_states; s; s = s->nextState)
++    if (s->owner == owner && !s->closed)
++      return s;
++  return NULL;
++}
++static OHCallback *callback_find(OHState *s, uint64_t id) {
++  OHCallback *c;
++  for (c = s->callbacks; c; c = c->next)
++    if (c->id == id)
++      return c;
++  return NULL;
++}
++static napi_value undefined(napi_env env) {
++  napi_value v;
++  napi_get_undefined(env, &v);
++  return v;
++}
++static napi_value fail(napi_env env, const char *msg) {
++  bool pending = false;
++  napi_is_exception_pending(env, &pending);
++  if (!pending)
++    napi_throw_error(env, NULL, msg);
++  return NULL;
++}
++#define OH_CHECK(expr)                                                         \
++  do {                                                                         \
++    if ((expr) != napi_ok)                                                     \
++      return fail(env, #expr);                                                 \
++  } while (0)
++static char *string_value(napi_env env, napi_value v, size_t limit) {
++  size_t len = 0;
++  if (napi_get_value_string_utf8(env, v, NULL, 0, &len) != napi_ok ||
++      len > limit)
++    return NULL;
++  char *p = malloc(len + 1);
++  if (!p)
++    return NULL;
++  if (napi_get_value_string_utf8(env, v, p, len + 1, &len) != napi_ok) {
++    free(p);
++    return NULL;
++  }
++  return p;
++}
++static char *exception_reply(napi_env env, napi_value error) {
++  napi_value message, obj, json, stringify, out, key;
++  bool has = false;
++  napi_valuetype type;
++  napi_typeof(env, error, &type);
++  message = error;
++  if (type == napi_object) {
++    napi_has_named_property(env, error, "message", &has);
++    if (has)
++      napi_get_named_property(env, error, "message", &message);
++  }
++  napi_coerce_to_string(env, message, &message);
++  napi_create_object(env, &obj);
++  napi_set_named_property(env, obj, "error", message);
++  napi_get_global(env, &key);
++  napi_get_named_property(env, key, "JSON", &json);
++  napi_get_named_property(env, json, "stringify", &stringify);
++  if (napi_call_function(env, json, stringify, 1, &obj, &out) != napi_ok)
++    return strdup("{\"error\":\"callback exception\"}");
++  char *r = string_value(env, out, 16u << 20);
++  return r ? r : strdup("{\"error\":\"invalid callback result\"}");
++}
++static void finish_request(OHRequest *r, char *response) {
++  pthread_mutex_lock(&oh_lock);
++  if (!r->done) {
++    r->response = response;
++    r->done = 1;
++    pthread_cond_signal(&r->cond);
++  } else
++    free(response);
++  pthread_mutex_unlock(&oh_lock);
++}
++static void handler_finalizer(napi_env env, void *data, void *hint) {
++  (void)env;
++  (void)hint;
++  pthread_mutex_lock(&oh_lock);
++  req_free(data);
++  pthread_mutex_unlock(&oh_lock);
++}
++static napi_value callback_settled(napi_env env, napi_callback_info info) {
++  size_t argc = 1;
++  napi_value arg;
++  void *data = NULL;
++  napi_get_cb_info(env, info, &argc, &arg, NULL, &data);
++  OHRequest *r = data;
++  char *response = argc ? string_value(env, arg, 16u << 20) : NULL;
++  if (!response)
++    response = strdup("{\"error\":\"callback must return a JSON string\"}");
++  finish_request(r, response);
++  return undefined(env);
++}
++static napi_value callback_rejected(napi_env env, napi_callback_info info) {
++  size_t argc = 1;
++  napi_value arg;
++  void *data = NULL;
++  napi_get_cb_info(env, info, &argc, &arg, NULL, &data);
++  finish_request(data, argc ? exception_reply(env, arg)
++                            : strdup("{\"error\":\"callback rejected\"}"));
++  return undefined(env);
++}
++static void dispatch(napi_env env, napi_value ignored, void *context,
++                     void *data) {
++  (void)ignored;
++  if (*(int *)data == 2) {
++    finish_work(env, data);
++    return;
++  }
++  OHState *s = context;
++  OHRequest *r = data;
++  napi_value fn, recv, args[2], result;
++  pthread_mutex_lock(&oh_lock);
++  int closed = s->closed;
++  OHCallback *c = closed ? NULL : callback_find(s, r->callback);
++  napi_ref ref = c ? c->fn : NULL;
++  if (r->kind == 1) {
++    if (env && c && c->refs == 0) {
++      OHCallback **p = &s->callbacks;
++      while (*p != c)
++        p = &(*p)->next;
++      *p = c->next;
++      napi_ref released = c->fn;
++      free(c);
++      req_free(r);
++      pthread_mutex_unlock(&oh_lock);
++      // Releasing a JS reference may trigger finalizers that acquire oh_lock.
++      napi_delete_reference(env, released);
++      return;
++    }
++    req_free(r);
++    pthread_mutex_unlock(&oh_lock);
++    return;
++  }
++  pthread_mutex_unlock(&oh_lock);
++  if (!env || closed || !ref) {
++    finish_request(r, strdup("{\"error\":\"callback environment closed\"}"));
++    goto done;
++  }
++  if (napi_get_reference_value(env, ref, &fn) != napi_ok)
++    goto invalid;
++  napi_get_undefined(env, &recv);
++  napi_create_string_utf8(env, r->method, NAPI_AUTO_LENGTH, &args[0]);
++  napi_create_string_utf8(env, r->args, NAPI_AUTO_LENGTH, &args[1]);
++  if (napi_call_function(env, recv, fn, 2, args, &result) != napi_ok) {
++    napi_value error;
++    if (napi_get_and_clear_last_exception(env, &error) == napi_ok)
++      finish_request(r, exception_reply(env, error));
++    else
++      goto invalid;
++    goto done;
++  }
++  bool promise = false;
++  napi_is_promise(env, result, &promise);
++  if (promise) {
++    napi_value then, handlers[2], unused;
++    napi_get_named_property(env, result, "then", &then);
++    pthread_mutex_lock(&oh_lock);
++    r->refs += 2;
++    pthread_mutex_unlock(&oh_lock);
++    if (napi_create_function(env, "resolve", NAPI_AUTO_LENGTH, callback_settled,
++                             r, &handlers[0]) != napi_ok ||
++        napi_create_function(env, "reject", NAPI_AUTO_LENGTH, callback_rejected,
++                             r, &handlers[1]) != napi_ok) {
++      pthread_mutex_lock(&oh_lock);
++      req_free(r);
++      req_free(r);
++      pthread_mutex_unlock(&oh_lock);
++      goto invalid;
++    }
++    napi_add_finalizer(env, handlers[0], r, handler_finalizer, NULL, NULL);
++    napi_add_finalizer(env, handlers[1], r, handler_finalizer, NULL, NULL);
++    if (napi_call_function(env, result, then, 2, handlers, &unused) !=
++        napi_ok) {
++      bool pending = false;
++      napi_is_exception_pending(env, &pending);
++      if (pending)
++        napi_get_and_clear_last_exception(env, &unused);
++      goto invalid;
++    }
++  } else {
++    char *response = string_value(env, result, 16u << 20);
++    if (!response)
++      goto invalid;
++    finish_request(r, response);
++  }
++  goto done;
++invalid:
++  finish_request(r, strdup("{\"error\":\"invalid callback result\"}"));
++done:
++  pthread_mutex_lock(&oh_lock);
++  req_free(r);
++  pthread_mutex_unlock(&oh_lock);
++}
++static void tsfn_finalizer(napi_env env, void *data, void *hint) {
++  (void)env;
++  (void)hint;
++  pthread_mutex_lock(&oh_lock);
++  state_free(data);
++  pthread_mutex_unlock(&oh_lock);
++}
++int oh_callback_acquire(uint64_t owner, uint64_t id) {
++  pthread_mutex_lock(&oh_lock);
++  OHState *s = state_find(owner);
++  OHCallback *c = s ? callback_find(s, id) : NULL;
++  int ok = c && c->refs;
++  if (ok)
++    c->refs++;
++  pthread_mutex_unlock(&oh_lock);
++  return ok;
++}
++void oh_callback_release(uint64_t owner, uint64_t id) {
++  pthread_mutex_lock(&oh_lock);
++  OHState *s = state_find(owner);
++  OHCallback *c = s ? callback_find(s, id) : NULL;
++  if (c && c->refs && --c->refs == 0) {
++    OHRequest *r = calloc(1, sizeof(*r));
++    if (r) {
++      r->s = s;
++      s->refs++;
++      r->callback = id;
++      r->kind = 1;
++      r->refs = 1;
++      pthread_cond_init(&r->cond, NULL);
++      if (napi_call_threadsafe_function(s->tsfn, r, napi_tsfn_nonblocking) !=
++          napi_ok)
++        req_free(r);
++    }
++  }
++  pthread_mutex_unlock(&oh_lock);
++}
++char *oh_callback_request(uint64_t owner, uint64_t id, const char *method,
++                          const char *args) {
++  pthread_mutex_lock(&oh_lock);
++  OHState *s = state_find(owner);
++  OHCallback *c = s ? callback_find(s, id) : NULL;
++  if (!c || !c->refs) {
++    pthread_mutex_unlock(&oh_lock);
++    return NULL;
++  }
++  OHRequest *r = calloc(1, sizeof(*r));
++  if (!r) {
++    pthread_mutex_unlock(&oh_lock);
++    return NULL;
++  }
++  r->s = s;
++  s->refs++;
++  r->refs = 2;
++  r->callback = id;
++  r->method = strdup(method);
++  r->args = strdup(args);
++  pthread_cond_init(&r->cond, NULL);
++  r->next = s->pending;
++  s->pending = r;
++  if (napi_call_threadsafe_function(s->tsfn, r, napi_tsfn_nonblocking) !=
++      napi_ok) {
++    req_free(r);
++    r->done = 1;
++  }
++  while (!r->done && !s->closed)
++    pthread_cond_wait(&r->cond, &oh_lock);
++  OHRequest **p = &s->pending;
++  while (*p && *p != r)
++    p = &(*p)->next;
++  if (*p)
++    *p = r->next;
++  char *response = r->response;
++  r->response = NULL;
++  req_free(r);
++  pthread_mutex_unlock(&oh_lock);
++  return response;
++}
++
++typedef struct {
++  OHState *s;
++  uint64_t id;
++  int disposed;
++} OHToken;
++static const napi_type_tag tokenTag = {0x73b85f301c88a3b1ULL,
++                                       0x67bf31d0452ef991ULL};
++static void token_finalizer(napi_env env, void *data, void *hint) {
++  (void)env;
++  (void)hint;
++  OHToken *t = data;
++  if (!t->disposed)
++    gomobileOHOSRelease(t->s->owner, t->id);
++  pthread_mutex_lock(&oh_lock);
++  state_free(t->s);
++  pthread_mutex_unlock(&oh_lock);
++  free(t);
++}
++static napi_value own(napi_env env, napi_callback_info info) {
++  size_t argc = 1;
++  napi_value arg, obj;
++  void *data;
++  OH_CHECK(napi_get_cb_info(env, info, &argc, &arg, NULL, &data));
++  double id;
++  if (argc != 1 || napi_get_value_double(env, arg, &id) != napi_ok || id <= 0 ||
++      id > 9007199254740991.0 || floor(id) != id)
++    return fail(env, "invalid Go reference");
++  OHState *s = data;
++  OHToken *t = calloc(1, sizeof(*t));
++  if (!t)
++    return fail(env, "out of memory");
++  t->s = s;
++  t->id = (uint64_t)id;
++  pthread_mutex_lock(&oh_lock);
++  s->refs++;
++  pthread_mutex_unlock(&oh_lock);
++  if (napi_create_object(env, &obj) != napi_ok ||
++      napi_type_tag_object(env, obj, &tokenTag) != napi_ok) {
++    token_finalizer(env, t, NULL);
++    return fail(env, "cannot create Go reference token");
++  }
++  if (napi_wrap(env, obj, t, token_finalizer, NULL, NULL) != napi_ok) {
++    token_finalizer(env, t, NULL);
++    return fail(env, "cannot own Go reference");
++  }
++  return obj;
++}
++static OHToken *get_token(napi_env env, napi_value arg, OHState *s) {
++  bool valid = false;
++  OHToken *t = NULL;
++  if (napi_check_object_type_tag(env, arg, &tokenTag, &valid) != napi_ok ||
++      !valid || napi_unwrap(env, arg, (void **)&t) != napi_ok || !t ||
++      t->s != s || t->disposed)
++    return NULL;
++  return t;
++}
++static napi_value unwrap(napi_env env, napi_callback_info info) {
++  size_t argc = 1;
++  napi_value arg, out;
++  void *data;
++  OH_CHECK(napi_get_cb_info(env, info, &argc, &arg, NULL, &data));
++  OHToken *t = argc == 1 ? get_token(env, arg, data) : NULL;
++  if (!t)
++    return fail(env, "invalid or disposed Go reference");
++  OH_CHECK(napi_create_double(env, (double)t->id, &out));
++  return out;
++}
++static napi_value dispose(napi_env env, napi_callback_info info) {
++  size_t argc = 1;
++  napi_value arg;
++  void *data;
++  OH_CHECK(napi_get_cb_info(env, info, &argc, &arg, NULL, &data));
++  OHToken *t = argc == 1 ? get_token(env, arg, data) : NULL;
++  if (!t)
++    return fail(env, "invalid or disposed Go reference");
++  t->disposed = 1;
++  gomobileOHOSRelease(t->s->owner, t->id);
++  return undefined(env);
++}
++static napi_value register_callback(napi_env env, napi_callback_info info) {
++  size_t argc = 1;
++  napi_value arg, out;
++  void *data;
++  OH_CHECK(napi_get_cb_info(env, info, &argc, &arg, NULL, &data));
++  napi_valuetype type;
++  if (argc != 1 || napi_typeof(env, arg, &type) != napi_ok ||
++      type != napi_function)
++    return fail(env, "expected callback function");
++  OHState *s = data;
++  OHCallback *c = calloc(1, sizeof(*c));
++  if (!c)
++    return fail(env, "out of memory");
++  if (napi_create_reference(env, arg, 1, &c->fn) != napi_ok) {
++    free(c);
++    return fail(env, "cannot retain callback");
++  }
++  pthread_mutex_lock(&oh_lock);
++  c->id = ++s->next;
++  c->refs = 1;
++  c->next = s->callbacks;
++  s->callbacks = c;
++  pthread_mutex_unlock(&oh_lock);
++  OH_CHECK(napi_create_double(env, (double)c->id, &out));
++  return out;
++}
++static napi_value drop_callback(napi_env env, napi_callback_info info) {
++  size_t argc = 1;
++  napi_value arg;
++  void *data;
++  OH_CHECK(napi_get_cb_info(env, info, &argc, &arg, NULL, &data));
++  double id;
++  if (argc != 1 || napi_get_value_double(env, arg, &id) != napi_ok || id <= 0 ||
++      id > 9007199254740991.0 || floor(id) != id)
++    return fail(env, "invalid callback id");
++  oh_callback_release(((OHState *)data)->owner, (uint64_t)id);
++  return undefined(env);
++}
++
++// Go calls execute as Go goroutines. In particular, they do not occupy libuv
++// workers while waiting for ArkTS interface callbacks, which may call Go again.
++struct OHWork {
++  int kind, refs, pending;
++  OHState *s;
++  uint64_t id;
++  napi_deferred deferred;
++  char *response;
++  OHWork *next;
++};
++static void work_free(OHWork *w) {
++  if (--w->refs == 0) {
++    free(w->response);
++    state_free(w->s);
++    free(w);
++  }
++}
++static void work_unlink(OHWork *w) {
++  if (w->pending) {
++    OHWork **p = &w->s->work;
++    while (*p && *p != w)
++      p = &(*p)->next;
++    if (*p)
++      *p = w->next;
++    w->pending = 0;
++    work_free(w);
++  }
++}
++static void finish_work(napi_env env, OHWork *w) {
++  OHState *s = w->s;
++  if (env && !s->closed) {
++    napi_value result;
++    napi_create_string_utf8(env, w->response, NAPI_AUTO_LENGTH, &result);
++    napi_resolve_deferred(env, w->deferred, result);
++  }
++  pthread_mutex_lock(&oh_lock);
++  work_unlink(w);
++  int empty = !s->work;
++  work_free(w);
++  pthread_mutex_unlock(&oh_lock);
++  if (env && !s->closed && empty)
++    napi_unref_threadsafe_function(env, s->tsfn);
++}
++void oh_complete(uint64_t owner, uint64_t request, char *response) {
++  pthread_mutex_lock(&oh_lock);
++  OHState *s = state_find(owner);
++  OHWork *w = s ? s->work : NULL;
++  while (w && w->id != request)
++    w = w->next;
++  if (!w) {
++    pthread_mutex_unlock(&oh_lock);
++    free(response);
++    return;
++  }
++  w->response = response;
++  w->refs++;
++  if (napi_call_threadsafe_function(s->tsfn, w, napi_tsfn_nonblocking) !=
++      napi_ok)
++    work_free(w);
++  pthread_mutex_unlock(&oh_lock);
++}
++static napi_value call(napi_env env, napi_callback_info info) {
++  size_t argc = 2;
++  napi_value args[2], promise;
++  void *data;
++  OH_CHECK(napi_get_cb_info(env, info, &argc, args, NULL, &data));
++  if (argc != 2)
++    return fail(env, "expected operation and JSON arguments");
++  char *op = string_value(env, args[0], 4096),
++       *input = string_value(env, args[1], 16u << 20);
++  if (!op || !input) {
++    free(op);
++    free(input);
++    return fail(env, "invalid or oversized binding request");
++  }
++  OHState *s = data;
++  OHWork *w = calloc(1, sizeof(*w));
++  if (!w) {
++    free(op);
++    free(input);
++    return fail(env, "out of memory");
++  }
++  w->kind = 2;
++  w->refs = 1;
++  w->pending = 1;
++  w->s = s;
++  if (napi_create_promise(env, &w->deferred, &promise) != napi_ok) {
++    free(op);
++    free(input);
++    free(w);
++    return fail(env, "cannot create Go promise");
++  }
++  pthread_mutex_lock(&oh_lock);
++  int first = !s->work;
++  w->id = ++s->nextWork;
++  w->next = s->work;
++  s->work = w;
++  s->refs++;
++  pthread_mutex_unlock(&oh_lock);
++  if (first)
++    napi_ref_threadsafe_function(env, s->tsfn);
++  gomobileOHOSQueue(s->owner, w->id, op, input);
++  free(op);
++  free(input);
++  return promise;
++}
++static napi_value collect(napi_env env, napi_callback_info info) {
++  (void)info;
++  gomobileOHOSCollect();
++  return undefined(env);
++}
++static void cleanup(void *data) {
++  OHState *s = data;
++  pthread_mutex_lock(&oh_lock);
++  s->closed = 1;
++  OHState **p = &oh_states;
++  while (*p != s)
++    p = &(*p)->nextState;
++  *p = s->nextState;
++  for (OHRequest *r = s->pending; r; r = r->next) {
++    r->done = 1;
++    pthread_cond_signal(&r->cond);
++  }
++  OHCallback *c = s->callbacks;
++  while (c) {
++    OHCallback *n = c->next;
++    free(c);
++    c = n;
++  }
++  s->callbacks = NULL;
++  while (s->work)
++    work_unlink(s->work);
++  pthread_mutex_unlock(&oh_lock);
++  gomobileOHOSClose(s->owner);
++  napi_release_threadsafe_function(s->tsfn, napi_tsfn_abort);
++  pthread_mutex_lock(&oh_lock);
++  state_free(s);
++  pthread_mutex_unlock(&oh_lock);
++}
++__attribute__((visibility("default"))) napi_value
++gomobileOHOSInit(napi_env env, napi_value exports) {
++  OHState *s = calloc(1, sizeof(*s));
++  if (!s)
++    return fail(env, "out of memory");
++  s->refs = 2;
++  pthread_mutex_lock(&oh_lock);
++  s->owner = ++oh_nextOwner;
++  s->nextState = oh_states;
++  oh_states = s;
++  pthread_mutex_unlock(&oh_lock);
++  gomobileOHOSOpen(s->owner);
++  napi_value name;
++  napi_create_string_utf8(env, "gomobile callbacks", NAPI_AUTO_LENGTH, &name);
++  if (napi_create_threadsafe_function(env, NULL, NULL, name, 0, 1, s,
++                                      tsfn_finalizer, s, dispatch,
++                                      &s->tsfn) != napi_ok) {
++    pthread_mutex_lock(&oh_lock);
++    OHState **link = &oh_states;
++    while (*link != s)
++      link = &(*link)->nextState;
++    *link = s->nextState;
++    pthread_mutex_unlock(&oh_lock);
++    gomobileOHOSClose(s->owner);
++    free(s);
++    return fail(env, "cannot create callback dispatcher");
++  }
++  napi_unref_threadsafe_function(env, s->tsfn);
++  napi_add_env_cleanup_hook(env, cleanup, s);
++  const char *names[] = {
++      "call",         "own",    "unwrap", "dispose", "registerCallback",
++      "dropCallback", "collect"};
++  napi_callback funcs[] = {
++      call, own, unwrap, dispose, register_callback, drop_callback, collect};
++  for (unsigned i = 0; i < sizeof(funcs) / sizeof(funcs[0]); i++) {
++    napi_value fn;
++    OH_CHECK(napi_create_function(env, names[i], NAPI_AUTO_LENGTH, funcs[i], s,
++                                  &fn));
++    OH_CHECK(napi_set_named_property(env, exports, names[i], fn));
++  }
++  return exports;
++}
++#ifdef GOMOBILE_NODE_TEST
++NAPI_MODULE(gomobile, gomobileOHOSInit)
++#else
++static napi_module oh_module = {.nm_version = 1,
++                                .nm_register_func = gomobileOHOSInit,
++                                .nm_modname = "gomobile"};
++__attribute__((constructor)) static void oh_register(void) {
++  napi_module_register(&oh_module);
++}
++#endif
+diff --git a/bind/openharmony/bridge.h.support b/bind/openharmony/bridge.h.support
+new file mode 100644
+index 0000000..4082d03
+--- /dev/null
++++ b/bind/openharmony/bridge.h.support
+@@ -0,0 +1,9 @@
++#ifndef GOMOBILE_OHOS_BRIDGE_H
++#define GOMOBILE_OHOS_BRIDGE_H
++#include <stdint.h>
++void oh_complete(uint64_t owner, uint64_t request, char *response);
++int oh_callback_acquire(uint64_t owner, uint64_t id);
++void oh_callback_release(uint64_t owner, uint64_t id);
++char *oh_callback_request(uint64_t owner, uint64_t id, const char *method,
++                          const char *args);
++#endif
+diff --git a/bind/openharmony/native.d.ts.support b/bind/openharmony/native.d.ts.support
+new file mode 100644
+index 0000000..2dd5758
+--- /dev/null
++++ b/bind/openharmony/native.d.ts.support
+@@ -0,0 +1,12 @@
++// Internal N-API transport. Applications import the generated HAR API.
++export interface NativeBridge {
++ call(operation: string,args: string): Promise<string>;
++ own(id: number): object;
++ unwrap(token: object): number;
++ dispose(token: object): void;
++ registerCallback(callback: (method: string,args: string)=>Promise<string>): number;
++ dropCallback(id: number): void;
++ collect(): void;
++}
++declare const bridge: NativeBridge;
++export default bridge;
+diff --git a/bind/openharmony/paths_host.go.support b/bind/openharmony/paths_host.go.support
+new file mode 100644
+index 0000000..31c79cc
+--- /dev/null
++++ b/bind/openharmony/paths_host.go.support
+@@ -0,0 +1,7 @@
++//go:build !openharmony && gomobile_ohos_test
++
++package main
++
++import "encoding/json"
++
++func ohConfigure(args []json.RawMessage) error { return nil }
+diff --git a/bind/openharmony/paths_openharmony.go.support b/bind/openharmony/paths_openharmony.go.support
+new file mode 100644
+index 0000000..36eb905
+--- /dev/null
++++ b/bind/openharmony/paths_openharmony.go.support
+@@ -0,0 +1,23 @@
++//go:build openharmony
++
++package main
++
++import (
++	"encoding/json"
++	"errors"
++	"os/openharmony"
++)
++
++func ohConfigure(args []json.RawMessage) error {
++	if len(args) != 1 {
++		return errors.New("expected Context configuration")
++	}
++	var c struct {
++		FilesDir, CacheDir, TempDir, Timezone string
++		TrustedCertDirs                       []string
++	}
++	if e := json.Unmarshal(args[0], &c); e != nil {
++		return e
++	}
++	return openharmony.Configure(openharmony.Config{FilesDir: c.FilesDir, CacheDir: c.CacheDir, TempDir: c.TempDir, Timezone: c.Timezone, TrustedCertDirs: c.TrustedCertDirs})
++}
+diff --git a/bind/openharmony/runtime.go.support b/bind/openharmony/runtime.go.support
+new file mode 100644
+index 0000000..8bcd664
+--- /dev/null
++++ b/bind/openharmony/runtime.go.support
+@@ -0,0 +1,503 @@
++// Code generated by gobind -lang=openharmony. DO NOT EDIT.
++package main
++
++/*
++#include <stdint.h>
++#include <stdlib.h>
++#include "bridge.h"
++*/
++import "C"
++import (
++	"bytes"
++	"encoding/base64"
++	"encoding/json"
++	"errors"
++	"fmt"
++	"math"
++	"reflect"
++	"runtime"
++	"strconv"
++	"sync"
++	"unsafe"
++)
++
++type ohEndpoint func(uint64, []json.RawMessage) (reflect.Value, error)
++
++var ohEndpoints = map[string]ohEndpoint{}
++var ohTypes = map[reflect.Type]string{}
++var ohInterfaces = map[reflect.Type]func(uint64, uint64) (reflect.Value, error){}
++var ohErrorType = reflect.TypeOf((*error)(nil)).Elem()
++var ohMu sync.Mutex
++var ohNext uint64
++var ohObjects = map[uint64]struct {
++	owner uint64
++	value reflect.Value
++}{}
++var ohOwners = map[uint64]bool{}
++
++func ohRegisterFunc(name string, f reflect.Value) {
++	ohEndpoints[name] = func(owner uint64, args []json.RawMessage) (reflect.Value, error) { return ohInvoke(owner, f, args) }
++}
++func ohRegisterVar(name string, v reflect.Value) {
++	ohEndpoints[name+".get"] = func(_ uint64, args []json.RawMessage) (reflect.Value, error) {
++		if len(args) != 0 {
++			return reflect.Value{}, errors.New("unexpected arguments")
++		}
++		return v, nil
++	}
++	ohEndpoints[name+".set"] = func(owner uint64, args []json.RawMessage) (reflect.Value, error) {
++		if len(args) != 1 {
++			return reflect.Value{}, errors.New("expected one value")
++		}
++		x, e := ohDecode(owner, args[0], v.Type())
++		if e != nil {
++			return reflect.Value{}, e
++		}
++		v.Set(x)
++		return reflect.Value{}, nil
++	}
++}
++func ohRegisterType(name string, t reflect.Type, construct bool) {
++	ohTypes[t] = name
++	if construct {
++		ohEndpoints[name+".new"] = func(_ uint64, args []json.RawMessage) (reflect.Value, error) {
++			if len(args) != 0 {
++				return reflect.Value{}, errors.New("unexpected arguments")
++			}
++			return reflect.New(t.Elem()), nil
++		}
++	}
++	for i := 0; i < t.NumMethod(); i++ {
++		m := t.Method(i)
++		if m.PkgPath != "" {
++			continue
++		}
++		method := m.Name
++		ohEndpoints[name+"."+method] = func(owner uint64, args []json.RawMessage) (reflect.Value, error) {
++			if len(args) < 1 {
++				return reflect.Value{}, errors.New("missing receiver")
++			}
++			v, e := ohDecode(owner, args[0], t)
++			if e != nil {
++				return reflect.Value{}, e
++			}
++			if v.IsNil() {
++				return reflect.Value{}, errors.New("nil receiver")
++			}
++			return ohInvoke(owner, v.MethodByName(method), args[1:])
++		}
++	}
++	if t.Kind() == reflect.Pointer && t.Elem().Kind() == reflect.Struct {
++		s := t.Elem()
++		for i := 0; i < s.NumField(); i++ {
++			f := s.Field(i)
++			if f.PkgPath != "" || f.Anonymous {
++				continue
++			}
++			field := f.Name
++			ohEndpoints[name+"."+field+".get"] = func(owner uint64, args []json.RawMessage) (reflect.Value, error) {
++				if len(args) != 1 {
++					return reflect.Value{}, errors.New("expected receiver")
++				}
++				v, e := ohDecode(owner, args[0], t)
++				if e != nil {
++					return reflect.Value{}, e
++				}
++				if v.IsNil() {
++					return reflect.Value{}, errors.New("nil receiver")
++				}
++				return v.Elem().FieldByName(field), nil
++			}
++			ohEndpoints[name+"."+field+".set"] = func(owner uint64, args []json.RawMessage) (reflect.Value, error) {
++				if len(args) != 2 {
++					return reflect.Value{}, errors.New("expected receiver and value")
++				}
++				v, e := ohDecode(owner, args[0], t)
++				if e != nil {
++					return reflect.Value{}, e
++				}
++				if v.IsNil() {
++					return reflect.Value{}, errors.New("nil receiver")
++				}
++				dst := v.Elem().FieldByName(field)
++				x, e := ohDecode(owner, args[1], dst.Type())
++				if e != nil {
++					return reflect.Value{}, e
++				}
++				dst.Set(x)
++				return reflect.Value{}, nil
++			}
++		}
++	}
++}
++func ohInvoke(owner uint64, f reflect.Value, args []json.RawMessage) (reflect.Value, error) {
++	if len(args) != f.Type().NumIn() {
++		return reflect.Value{}, fmt.Errorf("expected %d arguments, got %d", f.Type().NumIn(), len(args))
++	}
++	in := make([]reflect.Value, len(args))
++	for i := range args {
++		v, e := ohDecode(owner, args[i], f.Type().In(i))
++		if e != nil {
++			return reflect.Value{}, fmt.Errorf("argument %d: %w", i, e)
++		}
++		in[i] = v
++	}
++	out := f.Call(in)
++	if len(out) > 0 && out[len(out)-1].Type() == ohErrorType {
++		last := out[len(out)-1]
++		if !last.IsNil() {
++			return reflect.Value{}, last.Interface().(error)
++		}
++		out = out[:len(out)-1]
++	}
++	if len(out) == 0 {
++		return reflect.Value{}, nil
++	}
++	if len(out) != 1 {
++		return reflect.Value{}, errors.New("unsupported result count")
++	}
++	return out[0], nil
++}
++func ohDecode(owner uint64, raw json.RawMessage, t reflect.Type) (reflect.Value, error) {
++	v := reflect.New(t).Elem()
++	if bytes.Equal(raw, []byte("null")) {
++		if t.Kind() == reflect.Pointer || t.Kind() == reflect.Interface || t.Kind() == reflect.Slice {
++			return v, nil
++		}
++		return v, errors.New("null for a scalar")
++	}
++	if t == ohErrorType {
++		var text string
++		if e := json.Unmarshal(raw, &text); e != nil {
++			return v, e
++		}
++		v.Set(reflect.ValueOf(errors.New(text)))
++		return v, nil
++	}
++	switch t.Kind() {
++	case reflect.Bool:
++		var b bool
++		if e := json.Unmarshal(raw, &b); e != nil {
++			return v, e
++		}
++		v.SetBool(b)
++	case reflect.String:
++		var s string
++		if e := json.Unmarshal(raw, &s); e != nil {
++			return v, e
++		}
++		v.SetString(s)
++	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64, reflect.Uint8, reflect.Uint, reflect.Uint16, reflect.Uint32, reflect.Uint64:
++		var n json.Number
++		if len(raw) > 0 && raw[0] == '{' {
++			var x struct {
++				Int string `json:"$int64"`
++			}
++			if e := json.Unmarshal(raw, &x); e != nil {
++				return v, e
++			}
++			n = json.Number(x.Int)
++		} else if e := json.Unmarshal(raw, &n); e != nil {
++			return v, e
++		}
++		if t.Kind() >= reflect.Uint && t.Kind() <= reflect.Uint64 {
++			x, e := strconv.ParseUint(string(n), 10, t.Bits())
++			if e != nil {
++				return v, e
++			}
++			v.SetUint(x)
++		} else {
++			x, e := strconv.ParseInt(string(n), 10, t.Bits())
++			if e != nil {
++				return v, e
++			}
++			v.SetInt(x)
++		}
++	case reflect.Float32, reflect.Float64:
++		var n float64
++		if len(raw) > 0 && raw[0] == '{' {
++			var special struct {
++				Float string `json:"$float"`
++			}
++			if e := json.Unmarshal(raw, &special); e != nil {
++				return v, e
++			}
++			switch special.Float {
++			case "NaN":
++				n = math.NaN()
++			case "+Inf":
++				n = math.Inf(1)
++			case "-Inf":
++				n = math.Inf(-1)
++			default:
++				return v, errors.New("invalid floating point tag")
++			}
++		} else {
++			if e := json.Unmarshal(raw, &n); e != nil {
++				return v, e
++			}
++			if v.OverflowFloat(n) {
++				return v, errors.New("floating point overflow")
++			}
++		}
++		v.SetFloat(n)
++	case reflect.Slice:
++		if t.Elem().Kind() != reflect.Uint8 {
++			return v, errors.New("only byte slices are supported")
++		}
++		var x struct {
++			Bytes string `json:"$bytes"`
++		}
++		if e := json.Unmarshal(raw, &x); e != nil {
++			return v, e
++		}
++		b, e := base64.StdEncoding.DecodeString(x.Bytes)
++		if e != nil {
++			return v, e
++		}
++		v.SetBytes(b)
++	case reflect.Pointer, reflect.Interface:
++		var ref struct {
++			Ref      uint64 `json:"$ref"`
++			Callback uint64 `json:"$callback"`
++		}
++		if e := json.Unmarshal(raw, &ref); e != nil {
++			return v, e
++		}
++		if ref.Callback != 0 {
++			factory := ohInterfaces[t]
++			if factory == nil {
++				return v, errors.New("type does not support callbacks")
++			}
++			return factory(owner, ref.Callback)
++		}
++		ohMu.Lock()
++		obj, ok := ohObjects[ref.Ref]
++		ohMu.Unlock()
++		if !ok || obj.owner != owner {
++			return v, errors.New("reference is disposed or belongs to another environment")
++		}
++		x := obj.value
++		if x.Kind() == reflect.Interface && !x.IsNil() {
++			x = x.Elem()
++		}
++		if !x.Type().AssignableTo(t) {
++			return v, errors.New("reference has incompatible Go type")
++		}
++		v.Set(x)
++	default:
++		return v, fmt.Errorf("unsupported type %s", t)
++	}
++	return v, nil
++}
++func ohEncode(owner uint64, v reflect.Value) (any, error) {
++	if !v.IsValid() {
++		return nil, nil
++	}
++	if v.Type() == ohErrorType {
++		if v.IsNil() {
++			return nil, nil
++		}
++		return v.Interface().(error).Error(), nil
++	}
++	switch v.Kind() {
++	case reflect.Bool:
++		return v.Bool(), nil
++	case reflect.String:
++		return v.String(), nil
++	case reflect.Int64:
++		return map[string]string{"$int64": strconv.FormatInt(v.Int(), 10)}, nil
++	case reflect.Uint64:
++		return map[string]string{"$int64": strconv.FormatUint(v.Uint(), 10)}, nil
++	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32:
++		if v.Int() > 9007199254740991 || v.Int() < -9007199254740991 {
++			return nil, errors.New("Go int exceeds the JavaScript safe integer range; use int64 for bigint")
++		}
++		return v.Int(), nil
++	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32:
++		if v.Uint() > 9007199254740991 {
++			return nil, errors.New("Go uint exceeds the JavaScript safe integer range; use uint64 for bigint")
++		}
++		return v.Uint(), nil
++	case reflect.Float32, reflect.Float64:
++		if math.IsNaN(v.Float()) {
++			return map[string]string{"$float": "NaN"}, nil
++		}
++		if math.IsInf(v.Float(), 1) {
++			return map[string]string{"$float": "+Inf"}, nil
++		}
++		if math.IsInf(v.Float(), -1) {
++			return map[string]string{"$float": "-Inf"}, nil
++		}
++		return v.Float(), nil
++	case reflect.Slice:
++		if v.IsNil() {
++			return nil, nil
++		}
++		return map[string]string{"$bytes": base64.StdEncoding.EncodeToString(v.Bytes())}, nil
++	case reflect.Pointer, reflect.Interface:
++		if v.IsNil() {
++			return nil, nil
++		}
++		key := ohTypes[v.Type()]
++		if key == "" {
++			return nil, fmt.Errorf("unbound result type %s", v.Type())
++		}
++		ohMu.Lock()
++		defer ohMu.Unlock()
++		if _, ok := ohOwners[owner]; !ok {
++			return nil, errors.New("environment closed")
++		}
++		ohNext++
++		id := ohNext
++		ohObjects[id] = struct {
++			owner uint64
++			value reflect.Value
++		}{owner, v}
++		return map[string]any{"$ref": id, "$type": key}, nil
++	}
++	return nil, fmt.Errorf("unsupported result type %s", v.Type())
++}
++func ohReply(value any, err error) string {
++	var b []byte
++	if err != nil {
++		b, _ = json.Marshal(map[string]any{"error": err.Error()})
++	} else {
++		b, _ = json.Marshal(map[string]any{"value": value})
++	}
++	return string(b)
++}
++func ohCall(owner uint64, op, raw string) (result string) {
++	defer func() {
++		if r := recover(); r != nil {
++			result = ohReply(nil, fmt.Errorf("Go panic: %v", r))
++		}
++	}()
++	if len(raw) > 16<<20 {
++		return ohReply(nil, errors.New("request exceeds 16 MiB"))
++	}
++	var args []json.RawMessage
++	if e := json.Unmarshal([]byte(raw), &args); e != nil {
++		return ohReply(nil, e)
++	}
++	ohMu.Lock()
++	_, alive := ohOwners[owner]
++	ohMu.Unlock()
++	if !alive {
++		return ohReply(nil, errors.New("environment closed"))
++	}
++	if op == "$initialize" {
++		e := ohConfigure(args)
++		if e == nil {
++			ohMu.Lock()
++			if _, alive := ohOwners[owner]; alive {
++				ohOwners[owner] = true
++			} else {
++				e = errors.New("environment closed")
++			}
++			ohMu.Unlock()
++		}
++		return ohReply(nil, e)
++	}
++	ohMu.Lock()
++	ready := ohOwners[uint64(owner)]
++	ohMu.Unlock()
++	if !ready {
++		return ohReply(nil, errors.New("call initialize(context) before Go functions"))
++	}
++	f := ohEndpoints[op]
++	if f == nil {
++		return ohReply(nil, errors.New("unknown binding operation"))
++	}
++	v, e := f(uint64(owner), args)
++	var value any
++	if e == nil {
++		value, e = ohEncode(uint64(owner), v)
++	}
++	return ohReply(value, e)
++}
++
++//export gomobileOHOSQueue
++func gomobileOHOSQueue(owner C.uint64_t, request C.uint64_t, operation *C.char, input *C.char) {
++	op, raw := C.GoString(operation), C.GoString(input)
++	go func() { reply := C.CString(ohCall(uint64(owner), op, raw)); C.oh_complete(owner, request, reply) }()
++}
++
++//export gomobileOHOSOpen
++func gomobileOHOSOpen(owner C.uint64_t) { ohMu.Lock(); ohOwners[uint64(owner)] = false; ohMu.Unlock() }
++
++//export gomobileOHOSRelease
++func gomobileOHOSRelease(owner C.uint64_t, id C.uint64_t) {
++	ohMu.Lock()
++	if v, ok := ohObjects[uint64(id)]; ok && v.owner == uint64(owner) {
++		delete(ohObjects, uint64(id))
++	}
++	ohMu.Unlock()
++}
++
++//export gomobileOHOSClose
++func gomobileOHOSClose(owner C.uint64_t) {
++	ohMu.Lock()
++	delete(ohOwners, uint64(owner))
++	for id, v := range ohObjects {
++		if v.owner == uint64(owner) {
++			delete(ohObjects, id)
++		}
++	}
++	ohMu.Unlock()
++}
++
++//export gomobileOHOSCollect
++func gomobileOHOSCollect() { runtime.GC() }
++
++type ohForeign struct{ owner, id uint64 }
++
++func ohNewForeign(owner, id uint64) (*ohForeign, error) {
++	if C.oh_callback_acquire(C.uint64_t(owner), C.uint64_t(id)) == 0 {
++		return nil, errors.New("callback environment closed")
++	}
++	p := &ohForeign{owner, id}
++	runtime.SetFinalizer(p, func(p *ohForeign) { C.oh_callback_release(C.uint64_t(p.owner), C.uint64_t(p.id)) })
++	return p, nil
++}
++func (p *ohForeign) call(name string, args ...reflect.Value) (json.RawMessage, func(), error) {
++	values := make([]any, len(args))
++	for i, v := range args {
++		x, e := ohEncode(p.owner, v)
++		if e != nil {
++			return nil, func() {}, e
++		}
++		values[i] = x
++	}
++	data, e := json.Marshal(values)
++	if e != nil {
++		return nil, func() {}, e
++	}
++	cn, ca := C.CString(name), C.CString(string(data))
++	defer C.free(unsafe.Pointer(cn))
++	defer C.free(unsafe.Pointer(ca))
++	r := C.oh_callback_request(C.uint64_t(p.owner), C.uint64_t(p.id), cn, ca)
++	runtime.KeepAlive(p)
++	if r == nil {
++		return nil, func() {}, errors.New("callback environment closed")
++	}
++	defer C.free(unsafe.Pointer(r))
++	var reply struct {
++		Value     json.RawMessage `json:"value"`
++		Error     string          `json:"error"`
++		Callbacks []uint64        `json:"callbacks"`
++	}
++	if e = json.Unmarshal([]byte(C.GoString(r)), &reply); e != nil {
++		return nil, func() {}, e
++	}
++	cleanup := func() {
++		for _, id := range reply.Callbacks {
++			C.oh_callback_release(C.uint64_t(p.owner), C.uint64_t(id))
++		}
++	}
++	if reply.Error != "" {
++		return nil, cleanup, errors.New(reply.Error)
++	}
++	return reply.Value, cleanup, nil
++}
++func main() {}
+diff --git a/bind/openharmony/runtime.ts.support b/bind/openharmony/runtime.ts.support
+new file mode 100644
+index 0000000..1eed9d9
+--- /dev/null
++++ b/bind/openharmony/runtime.ts.support
+@@ -0,0 +1,31 @@
++// Code generated by gobind -lang=openharmony. DO NOT EDIT.
++import native from 'libgomobile.so';
++export interface ApplicationContext { filesDir: string; cacheDir: string; tempDir: string; }
++export interface InitializeOptions { timezone?: string; trustedCertDirs?: string[]; }
++const _classes: Record<string,(id: number)=>any> = {};
++const _interfaces: Record<string,Record<string,{args: string[];result: string}>> = {};
++class _GoRef {
++  constructor(private readonly token: object) {}
++  _ref(): number { return native.unwrap(this.token); }
++  dispose(): void { native.dispose(this.token); }
++}
++const _alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
++function _base64(bytes: Uint8Array): string {let s='';for(let i=0;i<bytes.length;i+=3){const n=(bytes[i]<<16)|((bytes[i+1]||0)<<8)|(bytes[i+2]||0);s+=_alphabet[(n>>>18)&63]+_alphabet[(n>>>12)&63]+(i+1<bytes.length?_alphabet[(n>>>6)&63]:'=')+(i+2<bytes.length?_alphabet[n&63]:'=');}return s;}
++function _unbase64(s: string): Uint8Array {const out: number[]=[];for(let i=0;i<s.length;i+=4){const n=(_alphabet.indexOf(s[i])<<18)|(_alphabet.indexOf(s[i+1])<<12)|((_alphabet.indexOf(s[i+2])&63)<<6)|(_alphabet.indexOf(s[i+3])&63);out.push((n>>>16)&255);if(s[i+2]!='=')out.push((n>>>8)&255);if(s[i+3]!='=')out.push(n&255);}return new Uint8Array(out);}
++function _decode(value: any): any {if(value===null||typeof value!=='object')return value;if('$float' in value)return value.$float==='NaN'?NaN:(value.$float==='+Inf'?Infinity:-Infinity);if('$int64' in value)return BigInt(value.$int64);if('$bytes' in value)return _unbase64(value.$bytes);if('$ref' in value){const ctor=_classes[value.$type];if(!ctor)throw new Error('Unknown Go reference type '+value.$type);return ctor(value.$ref);}throw new Error('Invalid binding response');}
++function _interfaceRef(id: number,key: string): any {const value: any=new _GoRef(native.own(id));const methods=_interfaces[key];for(const method of Object.keys(methods)){value[method]=(...args: any[])=>_invoke(key+'.'+method,[value,...args],['@'+key,...methods[method].args]);}return value;}
++function _encode(value: any,spec: string,keep: number[]): any {
++ if(value===null){if(spec==='bytes'||spec==='error'||spec[0]==='#'||spec[0]==='@')return null;throw new TypeError('null scalar');}
++ switch(spec){case 'void':return null;case 'string':case 'error':if(typeof value!=='string')throw new TypeError('expected string');return value;case 'bool':if(typeof value!=='boolean')throw new TypeError('expected boolean');return value;case 'bigint':if(typeof value!=='bigint')throw new TypeError('expected bigint');return {$int64:value.toString()};case 'int':if(typeof value!=='number'||!Number.isSafeInteger(value))throw new TypeError('expected safe integer');return value;case 'number':if(typeof value!=='number')throw new TypeError('expected number');if(!Number.isFinite(value))return {$float:Number.isNaN(value)?'NaN':(value>0?'+Inf':'-Inf')};return value;case 'bytes':if(!(value instanceof Uint8Array))throw new TypeError('expected Uint8Array');return {$bytes:_base64(value)};}
++ if(value instanceof _GoRef)return {$ref:value._ref()};
++ if(spec[0]==='@'){
++  const methods=_interfaces[spec.slice(1)];for(const name of Object.keys(methods))if(typeof value[name]!=='function')throw new TypeError('missing interface method '+name);
++  const id=native.registerCallback(async(method: string,raw: string): Promise<string>=>{const owned: number[]=[];try{const m=methods[method];if(!m)throw new Error('unknown callback method');const args=JSON.parse(raw).map(_decode);const result=await value[method](...args);return JSON.stringify({value:_encode(result,m.result,owned),callbacks:owned});}catch(error){for(const id of owned)native.dropCallback(id);return JSON.stringify({error:String(error instanceof Error?error.message:error)});}});keep.push(id);return {$callback:id};
++ }
++ throw new TypeError('expected a Go reference');
++}
++async function _invoke(op: string,args: any[],specs: string[]): Promise<any> {const keep: number[]=[];try{const encoded=args.map((v,i)=>_encode(v,specs[i],keep));const reply=JSON.parse(await native.call(op,JSON.stringify(encoded)));if('error' in reply)throw new Error(reply.error);return _decode(reply.value);}finally{for(const id of keep)native.dropCallback(id);}}
++export async function initialize(context: ApplicationContext,options: InitializeOptions={}): Promise<void> {const config={FilesDir:context.filesDir,CacheDir:context.cacheDir,TempDir:context.tempDir,Timezone:options.timezone||'',TrustedCertDirs:options.trustedCertDirs||[]};const reply=JSON.parse(await native.call('$initialize',JSON.stringify([config])));if('error' in reply)throw new Error(reply.error);}
++export function collect(): void {native.collect();}
++
++export function dispose(value: object | null): void { if(value===null)return;if(!(value instanceof _GoRef))throw new TypeError('expected a Go reference');value.dispose(); }
+diff --git a/cmd/gobind/main.go b/cmd/gobind/main.go
+index 00cf423..5279bbd 100644
+--- a/cmd/gobind/main.go
++++ b/cmd/gobind/main.go
+@@ -17,6 +17,7 @@ import (
+ 	"path/filepath"
+ 	"strings"
+ 
++	"golang.org/x/mobile/bind"
+ 	"golang.org/x/mobile/internal/importers"
+ 	"golang.org/x/mobile/internal/importers/java"
+ 	"golang.org/x/mobile/internal/importers/objc"
+@@ -24,7 +25,7 @@ import (
+ )
+ 
+ var (
+-	lang          = flag.String("lang", "", "target languages for bindings, either java, go, or objc. If empty, all languages are generated.")
++	lang          = flag.String("lang", "", "target languages for bindings, either java, go, objc, or openharmony (alias ohos). If empty, all languages are generated.")
+ 	outdir        = flag.String("outdir", "", "result will be written to the directory instead of stdout.")
+ 	javaPkg       = flag.String("javapkg", "", "custom Java package path prefix. Valid only with -lang=java.")
+ 	prefix        = flag.String("prefix", "", "custom Objective-C name prefix. Valid only with -lang=objc.")
+@@ -39,7 +40,12 @@ var usage = `The Gobind tool generates Java language bindings for Go.
+ For usage details, see doc.go.`
+ 
+ func main() {
++	version := flag.Bool("version", false, "print the OHOS binding revision")
+ 	flag.Parse()
++	if *version {
++		fmt.Println("gobind ohos " + ohosRevision)
++		return
++	}
+ 
+ 	run()
+ 	os.Exit(exitStatus)
+@@ -78,6 +84,33 @@ func run() {
+ 	if err != nil {
+ 		log.Fatal(err)
+ 	}
++	hasOHOS := false
++	for _, l := range langs {
++		if l == "openharmony" || l == "ohos" {
++			hasOHOS = true
++		}
++	}
++	if hasOHOS {
++		for _, l := range langs {
++			if l != "go" && l != "openharmony" && l != "ohos" {
++				log.Fatal("OHOS bindings cannot be mixed with Java or Objective-C")
++			}
++		}
++		if *outdir == "" {
++			log.Fatal("OHOS bindings require -outdir")
++		}
++		if packages.PrintErrors(allPkg) != 0 {
++			log.Fatal("cannot load OHOS binding packages")
++		}
++		pkgs := make([]*types.Package, len(allPkg))
++		for i, p := range allPkg {
++			pkgs[i] = p.Types
++		}
++		if err := bind.GenOpenharmony(*outdir, pkgs); err != nil {
++			log.Fatal(err)
++		}
++		return
++	}
+ 
+ 	jrefs, err := importers.AnalyzePackages(allPkg, "Java/")
+ 	if err != nil {
+diff --git a/cmd/gobind/ohos_version.go b/cmd/gobind/ohos_version.go
+new file mode 100644
+index 0000000..e144e9d
+--- /dev/null
++++ b/cmd/gobind/ohos_version.go
+@@ -0,0 +1,3 @@
++package main
++
++var ohosRevision = "development"
+diff --git a/cmd/gomobile/bind.go b/cmd/gomobile/bind.go
+index f942246..2a9e58d 100644
+--- a/cmd/gomobile/bind.go
++++ b/cmd/gomobile/bind.go
+@@ -25,8 +25,14 @@ var cmdBind = &command{
+ 	run:   runBind,
+ 	Name:  "bind",
+ 	Usage: "[-target android|" + strings.Join(applePlatforms, "|") + "] [-bootclasspath <path>] [-classpath <path>] [-o output] [build flags] [package]",
+-	Short: "build a library for Android and iOS",
++	Short: "build a library for Android, Apple platforms, and OpenHarmony",
+ 	Long: `
++For -target=openharmony (alias ohos), bind produces a HAR with ArkTS/N-API
++bindings for arm64, arm and amd64. Set OHOS_NDK_HOME and use the patched Go
++toolchain. Use openharmony/arm64 to select an architecture. Application HAP
++signing is performed by the application build. Await initialize(context)
++before invoking Go functions. See the generated HAR README.
++
+ Bind generates language bindings for the package named by the import
+ path, and compiles a library for the named target system.
+ 
+@@ -71,6 +77,9 @@ see 'go help build'.
+ }
+ 
+ func runBind(cmd *command) error {
++	if isOHOSTarget(buildTarget) {
++		return runOHOSBind(cmd)
++	}
+ 	cleanup, err := buildEnvInit()
+ 	if err != nil {
+ 		return err
+diff --git a/cmd/gomobile/bind_ohos.go b/cmd/gomobile/bind_ohos.go
+new file mode 100644
+index 0000000..f93eed2
+--- /dev/null
++++ b/cmd/gomobile/bind_ohos.go
+@@ -0,0 +1,471 @@
++// Copyright 2026 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style license.
++package main
++
++import (
++	"archive/tar"
++	"bytes"
++	"compress/gzip"
++	"crypto/sha256"
++	"debug/elf"
++	"encoding/json"
++	"fmt"
++	"io"
++	"os"
++	"os/exec"
++	"path/filepath"
++	"runtime"
++	"strings"
++	"time"
++
++	"golang.org/x/mod/modfile"
++	"golang.org/x/mod/module"
++)
++
++func isOHOSTarget(target string) bool {
++	first := strings.Split(strings.Split(target, ",")[0], "/")[0]
++	return first == "openharmony" || first == "ohos"
++}
++func ohosTargets(target string) ([]string, error) {
++	seen := map[string]bool{}
++	var out []string
++	for _, entry := range strings.Split(target, ",") {
++		parts := strings.Split(entry, "/")
++		if len(parts) > 2 || !isOHOSTarget(entry) {
++			return nil, fmt.Errorf("OHOS targets cannot be mixed with other platforms")
++		}
++		arches := []string{"arm64", "arm", "amd64"}
++		if len(parts) == 2 {
++			switch parts[1] {
++			case "arm64", "aarch64", "arm64-v8a":
++				arches = []string{"arm64"}
++			case "arm", "armv7a", "armeabi-v7a":
++				arches = []string{"arm"}
++			case "amd64", "x86_64":
++				arches = []string{"amd64"}
++			default:
++				return nil, fmt.Errorf("unsupported OHOS architecture %q", parts[1])
++			}
++		}
++		for _, arch := range arches {
++			if seen[arch] {
++				return nil, fmt.Errorf("duplicate OHOS architecture %s", arch)
++			}
++			seen[arch] = true
++			out = append(out, arch)
++		}
++	}
++	return out, nil
++}
++func ohosRun(at string, env []string, name string, args ...string) error {
++	if buildV || buildX || buildN {
++		fmt.Fprintln(os.Stderr, name, strings.Join(args, " "))
++	}
++	if buildN {
++		return nil
++	}
++	c := exec.Command(name, args...)
++	c.Dir = at
++	c.Env = env
++	c.Stdout = os.Stdout
++	c.Stderr = os.Stderr
++	return c.Run()
++}
++func ohosEnv(values map[string]string) []string {
++	out := []string{}
++	for _, line := range os.Environ() {
++		key, _, _ := strings.Cut(line, "=")
++		if _, ok := values[key]; !ok {
++			out = append(out, line)
++		}
++	}
++	for k, v := range values {
++		out = append(out, k+"="+v)
++	}
++	return out
++}
++func ohosQuote(s string) (string, error) {
++	if !strings.Contains(s, "'") {
++		return "'" + s + "'", nil
++	}
++	if !strings.Contains(s, "\"") {
++		return "\"" + s + "\"", nil
++	}
++	return "", fmt.Errorf("compiler path contains both kinds of quote")
++}
++func runOHOSBind(cmd *command) error {
++	targets, err := ohosTargets(buildTarget)
++	if err != nil {
++		return err
++	}
++	if bindJavaPkg != "" || bindPrefix != "" || bindClasspath != "" || bindBootClasspath != "" {
++		return fmt.Errorf("Java and Objective-C binding options do not apply to OHOS")
++	}
++	sdk := os.Getenv("OHOS_NDK_HOME")
++	if sdk == "" {
++		return fmt.Errorf("set OHOS_NDK_HOME to the OpenHarmony native SDK")
++	}
++	sdk, err = filepath.Abs(sdk)
++	if err != nil {
++		return err
++	}
++	if _, err = os.Stat(filepath.Join(sdk, "sysroot", "usr", "include", "napi", "native_api.h")); err != nil {
++		return fmt.Errorf("invalid OHOS native SDK: %w", err)
++	}
++	args := cmd.flag.Args()
++	if len(args) == 0 {
++		args = []string{"."}
++	}
++	exe, err := os.Executable()
++	if err != nil {
++		return err
++	}
++	gobind := filepath.Join(filepath.Dir(exe), "gobind")
++	if runtime.GOOS == "windows" {
++		gobind += ".exe"
++	}
++	if _, err = os.Stat(gobind); err != nil {
++		gobind, err = exec.LookPath("gobind")
++		if err != nil {
++			return fmt.Errorf("install the matching OHOS gobind next to gomobile")
++		}
++	}
++	if err := checkOHOSGobind(gobind); err != nil {
++		return err
++	}
++	goexe, err := exec.LookPath("go")
++	if err != nil {
++		return err
++	}
++	check := exec.Command(goexe, "tool", "dist", "list")
++	data, err := check.Output()
++	if err != nil {
++		return err
++	}
++	if !bytes.Contains(data, []byte("openharmony/arm64\n")) {
++		return fmt.Errorf("OHOS bind requires the patched Go toolchain")
++	}
++	info := exec.Command(goexe, "env", "GOROOT", "GOMOD")
++	data, err = info.Output()
++	if err != nil {
++		return err
++	}
++	lines := strings.Split(strings.TrimSpace(string(data)), "\n")
++	if len(lines) != 2 || lines[1] == "" || lines[1] == os.DevNull {
++		return fmt.Errorf("OHOS bind must run inside a Go module")
++	}
++	goroot, gomod := strings.TrimSpace(lines[0]), strings.TrimSpace(lines[1])
++	original, err := os.ReadFile(gomod)
++	if err != nil {
++		return err
++	}
++	mf, err := modfile.Parse(gomod, original, nil)
++	if err != nil {
++		return err
++	}
++	caller := mf.Module.Mod.Path
++	if err = mf.AddModuleStmt("gomobile.local/ohosbindings"); err != nil {
++		return err
++	}
++	_, major, _ := module.SplitPathVersion(caller)
++	version := "v0.0.0"
++	if major != "" {
++		version = strings.TrimPrefix(strings.TrimPrefix(major, "/"), ".") + ".0.0"
++	}
++	if err = mf.AddRequire(caller, version); err != nil {
++		return err
++	}
++	if err = mf.AddReplace(caller, "", filepath.Dir(gomod), ""); err != nil {
++		return err
++	}
++	for _, r := range mf.Replace {
++		if r.New.Version == "" && !filepath.IsAbs(r.New.Path) {
++			abs := filepath.Join(filepath.Dir(gomod), r.New.Path)
++			if err = mf.AddReplace(r.Old.Path, r.Old.Version, abs, ""); err != nil {
++				return err
++			}
++		}
++	}
++	moddata, err := mf.Format()
++	if err != nil {
++		return err
++	}
++	work, err := os.MkdirTemp("", "gomobile-ohos-")
++	if err != nil {
++		return err
++	}
++	defer func() {
++		if buildWork {
++			fmt.Fprintln(os.Stderr, "WORK="+work)
++		} else {
++			os.RemoveAll(work)
++		}
++	}()
++	output := buildO
++	if output == "" {
++		output = "gomobile.har"
++	}
++	if filepath.Ext(output) != ".har" {
++		return fmt.Errorf("OHOS bind output must end in .har")
++	}
++	output, err = filepath.Abs(output)
++	if err != nil {
++		return err
++	}
++	if buildN {
++		fmt.Fprintln(os.Stderr, "OHOS HAR:", output, "architectures:", strings.Join(targets, ","))
++		return nil
++	}
++	packageDir := filepath.Join(work, "package")
++	if err = os.MkdirAll(packageDir, 0755); err != nil {
++		return err
++	}
++	var declarations, api []byte
++	nativeHashes := map[string]string{}
++	evidence := map[string]any{"format": "gomobile-ohos-har-v1", "go_version": "", "architectures": targets, "signing": "HAP application signing at final application packaging", "module": caller, "mobile_patch_revision": ohosRevision, "minimum_api": 12}
++	versionCmd := exec.Command(goexe, "version")
++	versionBytes, err := versionCmd.Output()
++	if err != nil {
++		return err
++	}
++	evidence["go_version"] = strings.TrimSpace(string(versionBytes))
++	goBinary, err := os.ReadFile(goexe)
++	if err != nil {
++		return err
++	}
++	evidence["go_executable_sha256"] = fmt.Sprintf("%x", sha256.Sum256(goBinary))
++	evidence["go_patch_sha256"] = "unrecorded"
++	if buildInfo, readErr := os.ReadFile(filepath.Join(goroot, "BUILD-INFO.json")); readErr == nil {
++		var info struct {
++			PatchSHA256 string `json:"patch_sha256"`
++		}
++		if err := json.Unmarshal(buildInfo, &info); err != nil {
++			return fmt.Errorf("invalid Go BUILD-INFO: %w", err)
++		}
++		if len(info.PatchSHA256) != 64 {
++			return fmt.Errorf("invalid Go patch SHA256 in BUILD-INFO")
++		}
++		evidence["go_patch_sha256"] = info.PatchSHA256
++	}
++	for _, arch := range targets {
++		suffix := ""
++		if runtime.GOOS == "windows" {
++			suffix = ".exe"
++		}
++		cc := filepath.Join(goroot, "ohos-scripts", "cc-"+arch+suffix)
++		cxx := filepath.Join(goroot, "ohos-scripts", "cxx-"+arch+suffix)
++		if supplied := os.Getenv("CC"); supplied != "" {
++			cc = supplied
++		} else if _, err = os.Stat(cc); err != nil {
++			return fmt.Errorf("compiler wrapper missing: %s", cc)
++		}
++		ccq, err := ohosQuote(cc)
++		if err != nil {
++			return err
++		}
++		cxxq, err := ohosQuote(cxx)
++		if err != nil {
++			return err
++		}
++		if supplied := os.Getenv("CC"); supplied != "" {
++			ccq = supplied
++		}
++		if supplied := os.Getenv("CXX"); supplied != "" {
++			cxxq = supplied
++		}
++		ar := filepath.Join(sdk, "llvm", "bin", "llvm-ar"+suffix)
++		if supplied := os.Getenv("AR"); supplied != "" {
++			ar = supplied
++		}
++		env := ohosEnv(map[string]string{"GOOS": "openharmony", "GOARCH": arch, "GOARM": "7", "CGO_ENABLED": "1", "GOTOOLCHAIN": "local", "GOENV": "off", "OHOS_NDK_HOME": sdk, "CC": ccq, "CXX": cxxq, "AR": ar, "CGO_LDFLAGS": "-lace_napi.z", "GOWORK": "off"})
++		generated := filepath.Join(work, arch)
++		if err = os.MkdirAll(generated, 0755); err != nil {
++			return err
++		}
++		bindArgs := []string{"-lang=openharmony", "-outdir=" + generated}
++		if len(buildTags) > 0 {
++			bindArgs = append(bindArgs, "-tags="+strings.Join(buildTags, ","))
++		}
++		if buildOverlay != "" {
++			bindArgs = append(bindArgs, "-overlay="+buildOverlay)
++		}
++		bindArgs = append(bindArgs, args...)
++		if err = ohosRun("", env, gobind, bindArgs...); err != nil {
++			return err
++		}
++		ts, e := os.ReadFile(filepath.Join(generated, "Index.ts"))
++		if e != nil {
++			return e
++		}
++		decl, e := os.ReadFile(filepath.Join(generated, "Index.d.ts"))
++		if e != nil {
++			return e
++		}
++		if api != nil && (!bytes.Equal(api, ts) || !bytes.Equal(declarations, decl)) {
++			return fmt.Errorf("public API differs across OHOS architectures")
++		}
++		api, declarations = ts, decl
++		if err = os.WriteFile(filepath.Join(generated, "go.mod"), moddata, 0644); err != nil {
++			return err
++		}
++		if sum, e := os.ReadFile(filepath.Join(filepath.Dir(gomod), "go.sum")); e == nil {
++			if err = os.WriteFile(filepath.Join(generated, "go.sum"), sum, 0644); err != nil {
++				return err
++			}
++		}
++		abi := map[string]string{"arm64": "arm64-v8a", "arm": "armeabi-v7a", "amd64": "x86_64"}[arch]
++		lib := filepath.Join(packageDir, "libs", abi, "libgomobile.so")
++		if err = os.MkdirAll(filepath.Dir(lib), 0755); err != nil {
++			return err
++		}
++		buildArgs := []string{"build", "-mod=mod", "-buildmode=c-shared", "-o", lib}
++		if buildA {
++			buildArgs = append(buildArgs, "-a")
++		}
++		if buildGcflags != "" {
++			buildArgs = append(buildArgs, "-gcflags", buildGcflags)
++		}
++		if buildLdflags != "" {
++			buildArgs = append(buildArgs, "-ldflags", buildLdflags)
++		}
++		if buildTrimpath {
++			buildArgs = append(buildArgs, "-trimpath")
++		}
++		if len(buildTags) > 0 {
++			buildArgs = append(buildArgs, "-tags", strings.Join(buildTags, ","))
++		}
++		buildArgs = append(buildArgs, "./src/gobind")
++		if err = ohosRun(generated, env, goexe, buildArgs...); err != nil {
++			return err
++		}
++		binary, readErr := os.ReadFile(lib)
++		if readErr != nil {
++			return readErr
++		}
++		ef, readErr := elf.NewFile(bytes.NewReader(binary))
++		if readErr != nil {
++			return readErr
++		}
++		machine := map[string]elf.Machine{"arm64": elf.EM_AARCH64, "arm": elf.EM_ARM, "amd64": elf.EM_X86_64}[arch]
++		if ef.Type != elf.ET_DYN || ef.Machine != machine {
++			return fmt.Errorf("incorrect OHOS library format for %s", arch)
++		}
++		ef.Close()
++		nativeHashes[abi] = fmt.Sprintf("%x", sha256.Sum256(binary))
++		if err = os.Remove(strings.TrimSuffix(lib, ".so") + ".h"); err != nil {
++			return err
++		}
++	}
++	moduleInfo := map[string]any{"app": map[string]any{"minAPIVersion": 12, "targetAPIVersion": 12, "apiReleaseType": "Release", "compileSdkType": "OpenHarmony", "compileSdkVersion": "12", "bundleType": "app", "debug": false}, "module": map[string]any{"name": "gomobile", "type": "har", "packageName": "@gomobile/bindings", "deviceTypes": []string{"default", "phone", "tablet", "2in1"}, "compileMode": "esmodule", "dependencies": []string{}, "installationFree": false}}
++	moduleBytes, _ := json.MarshalIndent(moduleInfo, "", "  ")
++	if err = os.MkdirAll(filepath.Join(packageDir, "src", "main"), 0755); err != nil {
++		return err
++	}
++	if err = os.WriteFile(filepath.Join(packageDir, "src", "main", "module.json"), moduleBytes, 0644); err != nil {
++		return err
++	}
++	if err = os.WriteFile(filepath.Join(packageDir, "build-profile.json5"), []byte(`{"apiType":"stageMode","targets":[{"name":"default"}]}`), 0644); err != nil {
++		return err
++	}
++	licenseName := "UNLICENSED"
++	if license, readErr := os.ReadFile(filepath.Join(filepath.Dir(gomod), "LICENSE")); readErr == nil {
++		if err = os.WriteFile(filepath.Join(packageDir, "LICENSE"), license, 0644); err != nil {
++			return err
++		}
++		licenseName = "SEE LICENSE IN LICENSE"
++	}
++	metadata := map[string]any{"name": "@gomobile/bindings", "version": "0.1.0", "description": "Generated Go bindings for OpenHarmony", "main": "Index.ts", "types": "Index.d.ts", "license": licenseName, "metadata": map[string]any{"sourceRoots": []string{"./src/main"}, "debug": false, "nativeDebugSymbol": false, "fullCompatibleSdkVersion": "12"}, "compatibleSdkVersion": 12, "compatibleSdkType": "OpenHarmony", "obfuscated": false}
++	b, _ := json.MarshalIndent(metadata, "", "  ")
++	if err = os.WriteFile(filepath.Join(packageDir, "oh-package.json5"), b, 0644); err != nil {
++		return err
++	}
++	if err = os.WriteFile(filepath.Join(packageDir, "Index.ts"), api, 0644); err != nil {
++		return err
++	}
++	if err = os.WriteFile(filepath.Join(packageDir, "Index.d.ts"), declarations, 0644); err != nil {
++		return err
++	}
++	nativeTypes := []byte("export interface NativeBridge {call(op:string,args:string):Promise<string>;own(id:number):object;unwrap(token:object):number;dispose(token:object):void;registerCallback(fn:(method:string,args:string)=>Promise<string>):number;dropCallback(id:number):void;collect():void;}\ndeclare const bridge:NativeBridge;export default bridge;\n")
++	typeDir := filepath.Join(packageDir, "src", "main", "cpp", "types", "libgomobile")
++	if err = os.MkdirAll(typeDir, 0755); err != nil {
++		return err
++	}
++	if err = os.WriteFile(filepath.Join(typeDir, "index.d.ts"), nativeTypes, 0644); err != nil {
++		return err
++	}
++	if err = os.WriteFile(filepath.Join(typeDir, "oh-package.json5"), []byte(`{"name":"libgomobile.so","version":"0.1.0","types":"./index.d.ts"}`), 0644); err != nil {
++		return err
++	}
++	metadata["dependencies"] = map[string]string{"libgomobile.so": "file:./src/main/cpp/types/libgomobile"}
++	b, _ = json.MarshalIndent(metadata, "", "  ")
++	if err = os.WriteFile(filepath.Join(packageDir, "oh-package.json5"), b, 0644); err != nil {
++		return err
++	}
++	evidence["native_libraries_sha256"] = nativeHashes
++	b, _ = json.MarshalIndent(evidence, "", "  ")
++	if err = os.WriteFile(filepath.Join(packageDir, "BUILD-INFO.json"), b, 0644); err != nil {
++		return err
++	}
++	readme := "# Generated Go OHOS bindings\n\nImport this HAR into an ArkTS application. Await initialize(context) before Go calls. All Go calls return Promises. int64/uint64 use bigint; []byte uses Uint8Array. Call dispose() on returned Go objects when done. Interface callbacks may return a value or Promise. Go package init executes before initialize; avoid Context-dependent work in init. This HAR requires application HAP signing. Combine all Go packages in one bind invocation; use one Go runtime library per process.\n"
++	if err = os.WriteFile(filepath.Join(packageDir, "README.md"), []byte(readme), 0644); err != nil {
++		return err
++	}
++	if err = packOHOSHar(work, output); err != nil {
++		return err
++	}
++	fmt.Fprintln(os.Stderr, "OHOS HAR:", output)
++	return nil
++}
++func packOHOSHar(work, output string) (err error) {
++	f, err := os.CreateTemp(filepath.Dir(output), ".gomobile-har-*")
++	if err != nil {
++		return err
++	}
++	name := f.Name()
++	defer func() { f.Close(); os.Remove(name) }()
++	gz := gzip.NewWriter(f)
++	gz.Header.ModTime = time.Unix(0, 0)
++	tw := tar.NewWriter(gz)
++	err = filepath.Walk(filepath.Join(work, "package"), func(path string, info os.FileInfo, e error) error {
++		if e != nil {
++			return e
++		}
++		if info.IsDir() {
++			return nil
++		}
++		if !info.Mode().IsRegular() {
++			return fmt.Errorf("unexpected archive member: %s", path)
++		}
++		rel, e := filepath.Rel(work, path)
++		if e != nil {
++			return e
++		}
++		h := &tar.Header{Name: filepath.ToSlash(rel), Mode: 0644, Size: info.Size(), ModTime: time.Unix(0, 0)}
++		if e = tw.WriteHeader(h); e != nil {
++			return e
++		}
++		in, e := os.Open(path)
++		if e != nil {
++			return e
++		}
++		_, e = io.Copy(tw, in)
++		ce := in.Close()
++		if e != nil {
++			return e
++		}
++		return ce
++	})
++	if err != nil {
++		return err
++	}
++	if err = tw.Close(); err != nil {
++		return err
++	}
++	if err = gz.Close(); err != nil {
++		return err
++	}
++	if err = f.Close(); err != nil {
++		return err
++	}
++	return os.Rename(name, output)
++}
+diff --git a/cmd/gomobile/bind_ohos_test.go b/cmd/gomobile/bind_ohos_test.go
+new file mode 100644
+index 0000000..bd032c6
+--- /dev/null
++++ b/cmd/gomobile/bind_ohos_test.go
+@@ -0,0 +1,29 @@
++package main
++
++import (
++	"reflect"
++	"testing"
++)
++
++func TestOHOSTargets(t *testing.T) {
++	for _, x := range []struct {
++		target string
++		arches []string
++	}{
++		{"openharmony", []string{"arm64", "arm", "amd64"}},
++		{"ohos/arm64,openharmony/x86_64", []string{"arm64", "amd64"}},
++		{"ohos/armeabi-v7a", []string{"arm"}},
++		{"ohos/386", nil}, {"ohos,ohos/arm64", nil}, {"ohos/arm,android/arm", nil}, {"ohos/arm/extra", nil},
++	} {
++		got, e := ohosTargets(x.target)
++		if x.arches == nil {
++			if e == nil {
++				t.Errorf("accepted %s", x.target)
++			}
++			continue
++		}
++		if e != nil || !reflect.DeepEqual(got, x.arches) {
++			t.Errorf("%s: %v %v", x.target, got, e)
++		}
++	}
++}
+diff --git a/cmd/gomobile/init.go b/cmd/gomobile/init.go
+index 32f156f..d1d957a 100644
+--- a/cmd/gomobile/init.go
++++ b/cmd/gomobile/init.go
+@@ -43,6 +43,9 @@ func init() {
+ }
+ 
+ func runInit(cmd *command) error {
++	if isOHOSTarget(ohosInitTarget) {
++		return runOHOSInit()
++	}
+ 	gopaths := filepath.SplitList(goEnv("GOPATH"))
+ 	if len(gopaths) == 0 {
+ 		return fmt.Errorf("GOPATH is not set")
+diff --git a/cmd/gomobile/ohos_version.go b/cmd/gomobile/ohos_version.go
+new file mode 100644
+index 0000000..40fdb90
+--- /dev/null
++++ b/cmd/gomobile/ohos_version.go
+@@ -0,0 +1,53 @@
++package main
++
++import (
++	"fmt"
++	"os"
++	"os/exec"
++	"path/filepath"
++	"runtime"
++	"strings"
++)
++
++// Set by the reproducible package builder for both gomobile and gobind.
++var ohosRevision = "development"
++var ohosInitTarget string
++
++func runOHOSInit() error {
++	if _, err := ohosTargets(ohosInitTarget); err != nil {
++		return err
++	}
++	sdk := os.Getenv("OHOS_NDK_HOME")
++	if _, err := os.Stat(filepath.Join(sdk, "sysroot", "usr", "include", "napi", "native_api.h")); sdk == "" || err != nil {
++		return fmt.Errorf("set OHOS_NDK_HOME to the OpenHarmony native SDK")
++	}
++	out, err := exec.Command("go", "tool", "dist", "list").Output()
++	if err != nil {
++		return err
++	}
++	if !strings.Contains(string(out), "openharmony/arm64\n") {
++		return fmt.Errorf("OHOS requires the patched Go toolchain")
++	}
++	exe, err := os.Executable()
++	if err != nil {
++		return err
++	}
++	bind := filepath.Join(filepath.Dir(exe), "gobind")
++	if runtime.GOOS == "windows" {
++		bind += ".exe"
++	}
++	return checkOHOSGobind(bind)
++}
++func checkOHOSGobind(path string) error {
++	out, err := exec.Command(path, "-version").Output()
++	if err != nil {
++		return fmt.Errorf("OHOS requires the matching patched gobind next to gomobile: %w", err)
++	}
++	if strings.TrimSpace(string(out)) != "gobind ohos "+ohosRevision {
++		return fmt.Errorf("gomobile/gobind OHOS revisions differ: %s", strings.TrimSpace(string(out)))
++	}
++	return nil
++}
++func init() {
++	cmdInit.flag.StringVar(&ohosInitTarget, "target", "", "target platform; openharmony checks the bundled tools without replacing gobind")
++}
+diff --git a/cmd/gomobile/version.go b/cmd/gomobile/version.go
+index faf0724..e62ab91 100644
+--- a/cmd/gomobile/version.go
++++ b/cmd/gomobile/version.go
+@@ -26,6 +26,10 @@ Version prints versions of the gomobile binary and tools
+ }
+ 
+ func runVersion(cmd *command) (err error) {
++	fmt.Printf("gomobile OHOS %s (openharmony/arm64,openharmony/arm,openharmony/amd64)\n", ohosRevision)
++	if ohosRevision != "development" {
++		return nil
++	}
+ 	// Check this binary matches the version in golang.org/x/mobile/cmd/gomobile
+ 	// source code in GOPATH. If they don't match, currently there is no
+ 	// way to reliably identify the revision number this binary was built

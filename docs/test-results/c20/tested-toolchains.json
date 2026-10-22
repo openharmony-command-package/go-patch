@@ -1,0 +1,114 @@
+{
+  "go_version": "go1.27.3",
+  "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
+  "native": [
+    {
+      "arch": "arm64",
+      "archive_sha256": "44a9fbfd6d7661602d946e35955189fbffe4803ce12f279c694e6149d17ddc17",
+      "files_sha256": {
+        "go/bin/go": "e47f4da02c3ffadf551e9cfed4a7a952b240a990d22094a136790e707f0d4cc5",
+        "go/bin/gofmt": "1fd6f9226ab1dedae276cfcd90e35d4b73ee717d142eb92e386d3dbac752288a",
+        "go/ohos-scripts/cc-amd64": "f58eec863034b3d07c37473a97f787aa966a0bcfd54e0c8b6e9478ea578d1243",
+        "go/ohos-scripts/cc.py": "f3da649286f274c03f164192c78b45261a0a4fa6f0e793cf2fb2e2b38d508093",
+        "go/ohos-scripts/sign-installed.sh": "97f7b88a45f9fe8121f9687128d5a5a18e137fd191a501136e0424a4440883d4",
+        "go/pkg/tool/openharmony_arm64/addr2line": "97961be3476d0d2c83337946455b469697796fdcca119f0270df33a522c5535a",
+        "go/pkg/tool/openharmony_arm64/asm": "43f2a2a627ea673ebad2497aaed210887d6887a2055d9c635d89693f937785fb",
+        "go/pkg/tool/openharmony_arm64/buildid": "2474ac8a10b29bd4a44a4f06de84bc74013ec12a650fb5bde566015301e1d340",
+        "go/pkg/tool/openharmony_arm64/cgo": "0f0da39912ce3ea360aa673014b2fc70798f3ae5868658ebdfcb7455636c6c6a",
+        "go/pkg/tool/openharmony_arm64/compile": "276b332ce5d8ac762a21c939b4a8d51ec4c9a1e1724ffe90ae3631d558c9cd82",
+        "go/pkg/tool/openharmony_arm64/covdata": "67c425a09e2d36bc0d48801834edfb19e31a325020d7a4fdb8fa70abd69fd49f",
+        "go/pkg/tool/openharmony_arm64/cover": "c57d082cb9579f67cc7d1560bb67547dfb2bf0988781bf499608ad25195cb465",
+        "go/pkg/tool/openharmony_arm64/dist": "ead0c1f8463b38b9692fa3e74fad1ac5b2d288e2c64a1d27275272412125cc2f",
+        "go/pkg/tool/openharmony_arm64/distpack": "87aca284b826b01cf03c7d987f7ed434f12f68666aed8a233bbcfac5ca7a148f",
+        "go/pkg/tool/openharmony_arm64/fix": "636b56bee5314daf630a0ce9a08c365d9596fef16464a1f2bb794c7714efa1ee",
+        "go/pkg/tool/openharmony_arm64/link": "4e132f5fde71e15773c963c5d5d5cfe5669fa7c5ae96d54f253d96e3f2fe804d",
+        "go/pkg/tool/openharmony_arm64/nm": "2356014e9548efeb5c2ff2760a035db82b7df8f0e50356f3ed342dd26fd3353e",
+        "go/pkg/tool/openharmony_arm64/objdump": "380ff4893246ff4291b05a26aaa9653b8f6aabbfa7808351c5fcda42491ba8da",
+        "go/pkg/tool/openharmony_arm64/pack": "b2e1fab03dfbc526e5e4cb1d79a9cbaf20a794bf313aea05385006e5cbc858e0",
+        "go/pkg/tool/openharmony_arm64/pprof": "6e2c4e27713cfb485031bab2168799ce360fde442ab9e3c9cd6f3eb92595959a",
+        "go/pkg/tool/openharmony_arm64/preprofile": "e95539d782685a77e58d3b4c75b1c18f5f50210eee1c34efdc7a13ef39a87e98",
+        "go/pkg/tool/openharmony_arm64/test2json": "b49724fa8a4d06d21975df1613f6cab5e55f3f8a14fc75fd4489aaea805c66a8",
+        "go/pkg/tool/openharmony_arm64/trace": "fd9205a696e346593b66a4557b1a46dcac117f379b3cf7a601217eb790e517b5",
+        "go/pkg/tool/openharmony_arm64/vet": "b29e50e0066bce7dc80272067f2bb70648997861cfdeb98b319327dfb7dbba6e"
+      }
+    },
+    {
+      "arch": "arm",
+      "archive_sha256": "4177129150aa05e66e9a18b52419cdb85e32ca877771e526438f75929791283c",
+      "files_sha256": {
+        "go/bin/go": "410d745d4c35666445eacb512c87e88c9b83568e1e7edac7bde6b4b6f2f07568",
+        "go/bin/gofmt": "deebe0feb331922fe96253846173958c052ce29ca75e104aab287af4c421c265",
+        "go/ohos-scripts/cc-amd64": "95f4eaf5d26602c8bae4505f7ff89c823d1d4012536a8d53fe454f4367abb1aa",
+        "go/ohos-scripts/cc.py": "f3da649286f274c03f164192c78b45261a0a4fa6f0e793cf2fb2e2b38d508093",
+        "go/ohos-scripts/sign-installed.sh": "97f7b88a45f9fe8121f9687128d5a5a18e137fd191a501136e0424a4440883d4",
+        "go/pkg/tool/openharmony_arm/addr2line": "98678112e21d8fed7683abe4884090fa5542dc42ed67cb3eb0ff812b2beb6615",
+        "go/pkg/tool/openharmony_arm/asm": "ab65c140fa587ee9314bd6126e87d4c88a8d0335311ecdb09a5c09bc48c95519",
+        "go/pkg/tool/openharmony_arm/buildid": "2680d3cf26ef93a493f8ec2043f31ac21f175ee0bbf087865e565447e68368d9",
+        "go/pkg/tool/openharmony_arm/cgo": "6b767d9555a6a7b13042e409d57a74ac11ef76b4b0eba848f7ec9ee5e61c7d91",
+        "go/pkg/tool/openharmony_arm/compile": "f705362d3366aca8cb42be1e2acaf8d98c19468d7aeba6625a8f8508857bbfec",
+        "go/pkg/tool/openharmony_arm/covdata": "a855ecd272864534a83909740a56c09b47dfabf0b89368cedaada53ab0ff6977",
+        "go/pkg/tool/openharmony_arm/cover": "68e4a62cac264dc48e8584149f0469ae6374571bd7d9a84fff0817784fb18d8d",
+        "go/pkg/tool/openharmony_arm/dist": "5818ec10fec1d7e4a05f9b3a53e1b137d0ccc28545c00144c5ed56313db76b20",
+        "go/pkg/tool/openharmony_arm/distpack": "42a7b962919ba57919d8a5c59fca6f6285736f56107c57f82bc880dececc7b4f",
+        "go/pkg/tool/openharmony_arm/fix": "47a80cf753fc8f52312e03e01e664f5ffb72433f0682c33ccb60f8b5a1e6a0a4",
+        "go/pkg/tool/openharmony_arm/link": "6ca4e367586cea98ad2801a9d0c7d0f3fd0d9310bd5c9b1cc48d40141cdc5332",
+        "go/pkg/tool/openharmony_arm/nm": "ba2ff209a2b78697e6baabbe6607c8cb4e1cda65c81d6aba705896826d40c01a",
+        "go/pkg/tool/openharmony_arm/objdump": "fee7ff3469c6a0d345e7076445bb74f8986b0a42ba9818dc41646949612bffe3",
+        "go/pkg/tool/openharmony_arm/pack": "7cd3f04ff069839d96c0bb57ca06ab7b2829c339b148a1430de8ab9196759a58",
+        "go/pkg/tool/openharmony_arm/pprof": "2a885f824d16e5a4d8602c403f5d5d9c74bbd4d570ca8419fdfd37bd29751a86",
+        "go/pkg/tool/openharmony_arm/preprofile": "fa48fca4a55706d0f1986a4fcee8e97467a2567a0f4bdbf6f1f75defc97e2227",
+        "go/pkg/tool/openharmony_arm/test2json": "8606d4b0e063ec0049cd440c26752e3e4fb7ff0bdf3c1a009c4de449fde4ea25",
+        "go/pkg/tool/openharmony_arm/trace": "62252ae7b0d9e7aff69ccaeeaa0948971e87add650a7cca5273c3b8ebdd2e9c5",
+        "go/pkg/tool/openharmony_arm/vet": "0d810af66812d569fed80f2a846063c53652bc16cad549b67859d3af88f28a14"
+      }
+    },
+    {
+      "arch": "amd64",
+      "archive_sha256": "0efd50c0e81205938bb3bf6650b6d6cf8d13de6560525cacc647e91cf8c0e213",
+      "files_sha256": {
+        "go/bin/go": "7bc3be20c202d17ed3bf5468a060f1f72302a39507b1503ec9a2cfa70fd816c4",
+        "go/bin/gofmt": "59d41efeb596c5ed4972b2f3e6d4e598804cd26d36286029dd545e9800328af5",
+        "go/ohos-scripts/cc-amd64": "37b71f7e86aa0cb0ba5db5878c0f80bf3942a8f0e0d903a0e1d6ce6ba04827dc",
+        "go/ohos-scripts/cc.py": "f3da649286f274c03f164192c78b45261a0a4fa6f0e793cf2fb2e2b38d508093",
+        "go/ohos-scripts/sign-installed.sh": "97f7b88a45f9fe8121f9687128d5a5a18e137fd191a501136e0424a4440883d4",
+        "go/pkg/tool/openharmony_amd64/addr2line": "52fd21fcd63f5b168e8f1c85dc0420c976dbb4c84aca10a3fe409a71a546fa35",
+        "go/pkg/tool/openharmony_amd64/asm": "43562649e7f42f95d1299e39a8a7f91b622f2d57a5dcc2ba09ada8d68f19356d",
+        "go/pkg/tool/openharmony_amd64/buildid": "3f48d1f48b07725ebac0b8c96a9c12f5424bd0b901c69e5d01e0a240c8f07091",
+        "go/pkg/tool/openharmony_amd64/cgo": "cf3b9782a27f7a8a89d5cf549e8eba5f35accd5a290205b57d060f25505671c7",
+        "go/pkg/tool/openharmony_amd64/compile": "a39f30652e89096ac290247105c763b5ab90ccdd6ac39adde6d6fda78ea88d29",
+        "go/pkg/tool/openharmony_amd64/covdata": "f0f159d7fabdf49bc65361b77493b19c45097e34c8a6eb9d007d7808550ed9b1",
+        "go/pkg/tool/openharmony_amd64/cover": "3008056a05d5ce7892a4961865d4e48b3c291e833449607bf8969bf0301ab005",
+        "go/pkg/tool/openharmony_amd64/dist": "e400c6e3d32a0ef3fa5822537a61b8a4329906a22bec7918c66c860ba960552a",
+        "go/pkg/tool/openharmony_amd64/distpack": "7a625fa887bc079e0ed72bfb4a80991c34a3d18acf887f13e1d91184604a68bb",
+        "go/pkg/tool/openharmony_amd64/fix": "ec1becdeb55400c949bf86463aba7ce65cf0447cf32480c465e440a1e340c25a",
+        "go/pkg/tool/openharmony_amd64/link": "7e81f378a23711947db90bb2e76205be043239ab0f8c3c8270e7c15dd61a3e0e",
+        "go/pkg/tool/openharmony_amd64/nm": "fa661614e8d93b613fdf03d602525683838cb135e241fb1f1f29a309b8d2cf7f",
+        "go/pkg/tool/openharmony_amd64/objdump": "51649053df82a401409b353ed0b76a2eebd01953c243279359170984b7614cb0",
+        "go/pkg/tool/openharmony_amd64/pack": "2ca6292e66ec9582e28704391a6ad461d1793f4fc97650f96de68d446cb7e6a2",
+        "go/pkg/tool/openharmony_amd64/pprof": "4fd600235f129d529d97560fd51ea7cda4195af649c5e931bdf6391c37379e47",
+        "go/pkg/tool/openharmony_amd64/preprofile": "80ad540f3b74a6693d06b51d2cc6309b6d5d5c6664d8538f4b5d8d661518c68e",
+        "go/pkg/tool/openharmony_amd64/test2json": "dd077c8a1fac3697dde8b6b70266bbf48c938fd6b85cb4d3512be18289070206",
+        "go/pkg/tool/openharmony_amd64/trace": "ce11e18ac9c2ef773f039ee7456d1af4d642c09036797cfa73a34b08bc718e4d",
+        "go/pkg/tool/openharmony_amd64/vet": "f38cc6c441853de68c653cc416efa521d3bb49893bbdd767809dc75eab4eaaa9"
+      }
+    }
+  ],
+  "host": [
+    {
+      "host": "darwin/amd64",
+      "go_binary_sha256": "cf9ad898700ad9542fb358cdbd9785b557126bb4861e6720ce61e71c763ef6e6"
+    },
+    {
+      "host": "darwin/arm64",
+      "go_binary_sha256": "723b4531ad6a3eb0df5c54cd57f6cc60d25bd5acae35764edd7bb3a43398b90c"
+    },
+    {
+      "host": "linux/amd64",
+      "go_binary_sha256": "26226148ab2c6c9deaa1943ebb9edf337ef6e351455e211bb0cc21f24567e977"
+    },
+    {
+      "host": "linux/arm64",
+      "go_binary_sha256": "9b4e91743dfa7f80da9cc808a2215f5f663e87329459fe622587e4fbf3d64134"
+    }
+  ]
+}

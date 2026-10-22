@@ -1,0 +1,15 @@
+{
+  "go_version": "go1.27.3",
+  "patch_sha256": "1c499c950e255dfb26942112396c0ab334eeefda7315af9a30da77e78fbe4277",
+  "accepted": false,
+  "status": "pending fresh ABI revision 2 validation, including stream-copy paths",
+  "stage": "C19 ARM64 full suite finished with four failures; ARM/x64 full native and language suites running",
+  "failures": {
+    "arm64": [
+      "time.TestEnvTZUsage",
+      "cmd/cgo/internal/testplugin.TestIssue75102",
+      "cmd/link.TestDWARFLocationList",
+      "cmd/internal/testdir.Test/fixedbugs/issue68525.go"
+    ]
+  }
+}

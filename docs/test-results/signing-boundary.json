@@ -1,36 +1,6 @@
 {
   "go_version": "go1.27.3",
-  "patch_sha256": "58bc568264a43a993ba6a9156a2916259fb599b91a0869f937a62702338a5bb3",
-  "script_sha256": "0286e0694da4e1f1e879257ec623ae6656d6d2d114845c63df01f17be082248c",
+  "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
   "accepted": false,
-  "targets": [
-    {
-      "arch": "arm64",
-      "patch_sha256": "58bc568264a43a993ba6a9156a2916259fb599b91a0869f937a62702338a5bb3",
-      "go_version": "go1.27.3",
-      "script_sha256": "0286e0694da4e1f1e879257ec623ae6656d6d2d114845c63df01f17be082248c",
-      "accepted": true,
-      "linux_build_without_signer": true,
-      "ohos_build_without_signer_rejected": true,
-      "ohos_signed_build_direct_execution": true,
-      "go_binary_sha256": "5b9c640b270138fe1a7cfce583059b21767f1c0b4d986b7fa448326b57c52be0",
-      "log_sha256": "ae2fe3833ed431bb3b7b60fd2c38c98a9a60e4e4766a52a8a7e5231dd6e9cc12"
-    },
-    {
-      "arch": "amd64",
-      "patch_sha256": "58bc568264a43a993ba6a9156a2916259fb599b91a0869f937a62702338a5bb3",
-      "go_version": "go1.27.3",
-      "script_sha256": "0286e0694da4e1f1e879257ec623ae6656d6d2d114845c63df01f17be082248c",
-      "accepted": true,
-      "linux_build_without_signer": true,
-      "ohos_build_without_signer_rejected": true,
-      "ohos_signed_build_direct_execution": true,
-      "go_binary_sha256": "542c45d47c4e78e05dfec41b2c47edbbfac8b5447176c97053d1529f9079e8a1",
-      "log_sha256": "ae2fe3833ed431bb3b7b60fd2c38c98a9a60e4e4766a52a8a7e5231dd6e9cc12"
-    }
-  ],
-  "missing_targets": [
-    "arm"
-  ],
-  "note": "ARM signing-boundary attempt was interrupted to release resources for the full suite. No additional guest validation was started after the requested VM shutdown; historical C17 success is retained separately."
+  "status": "ARM64 passed; ARM/x64 current C20 matrix pending"
 }

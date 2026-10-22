@@ -1,0 +1,125 @@
+{
+  "arch": "arm64",
+  "run_id": "arm64-cgo1-r10",
+  "exit_status": 1,
+  "packages": {
+    "pass": 442,
+    "skip": 232,
+    "fail": 21
+  },
+  "failures": {
+    "cmd/compile/internal/amd64": [
+      "<package>"
+    ],
+    "cmd/compile/internal/arm": [
+      "<package>"
+    ],
+    "cmd/compile/internal/arm64": [
+      "<package>"
+    ],
+    "cmd/compile/internal/dwarfgen": [
+      "<package>"
+    ],
+    "cmd/compile/internal/gc": [
+      "<package>"
+    ],
+    "cmd/compile/internal/liveness": [
+      "<package>"
+    ],
+    "cmd/compile/internal/loong64": [
+      "<package>"
+    ],
+    "cmd/compile/internal/mips": [
+      "<package>"
+    ],
+    "cmd/compile/internal/mips64": [
+      "<package>"
+    ],
+    "cmd/compile/internal/noder": [
+      "<package>"
+    ],
+    "cmd/compile/internal/pkginit": [
+      "<package>"
+    ],
+    "cmd/compile/internal/ppc64": [
+      "<package>"
+    ],
+    "cmd/compile/internal/riscv64": [
+      "<package>"
+    ],
+    "cmd/compile/internal/s390x": [
+      "<package>"
+    ],
+    "cmd/compile/internal/ssa": [
+      "<package>"
+    ],
+    "cmd/compile/internal/ssagen": [
+      "<package>"
+    ],
+    "cmd/compile/internal/test": [
+      "<package>"
+    ],
+    "cmd/compile/internal/walk": [
+      "<package>"
+    ],
+    "cmd/compile/internal/wasm": [
+      "<package>"
+    ],
+    "cmd/compile/internal/x86": [
+      "<package>"
+    ],
+    "cmd/internal/testdir:6_10": [
+      "Test/rangegen.go",
+      "Test",
+      "<package>"
+    ]
+  },
+  "build_failures": [
+    "cmd/compile/internal/ssa"
+  ],
+  "log_sha256": "664994da74278e7ab1ac1ac37e14d7332bd92156b60feae7f17338a50c44cf91",
+  "qemu": {
+    "pid": 3166,
+    "port": 5569,
+    "server": 18769,
+    "hdc": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/hdc",
+    "archive_sha256": "86c1d6ce17ea42b8732d2aa64a3081da7e704e084ba0c70923b72cc8a4cdfbd9",
+    "profile": "stock",
+    "qmp": "/Users/ranger/Documents/ChatGPT/go-patch/.work/qemu/arm64/qmp.sock",
+    "memory_mib": 4096,
+    "power_policy": "powermgr stopped during headless Go tests"
+  },
+  "inputs": {
+    "run_id": "arm64-cgo1-r10",
+    "scope": "full",
+    "cgo": "1",
+    "go_build_info": {
+      "target": {
+        "name": "openharmony-arm64",
+        "goos": "openharmony",
+        "goarch": "arm64",
+        "qemu_arch": "arm64"
+      },
+      "upstream": "go1.27.3",
+      "patch_sha256": "58bc568264a43a993ba6a9156a2916259fb599b91a0869f937a62702338a5bb3"
+    },
+    "fixtures_sha256": {
+      "/data/local/tmp/go-patch/bin/cc": "5eda92ee8b39190108139a1e9d020f95a093188979a4a38b8f85a1264ebc3f7a",
+      "/data/local/tmp/go-patch/bin/binary-sign-tool": "8b21a15093f5d83785cf9edec477107062a11fe54d21f3cf1c71c158b9576fe0",
+      "/data/local/tmp/go-patch/bin/native-runner": "0fb9163bba005a82a5a013482bc8b77dbdd2fda81aedf8504555342087c2dd64",
+      "/data/local/tmp/go-patch/native-zig/zig": "04a2ef0c1890786621d455367e0b6a30650894d2cd9e9773793af6699ed4d192",
+      "/data/local/tmp/go-patch/run-native.sh": "37784c0f87645e804315d9de556a4b7770345621a6c708f87da95f3525813d1b",
+      "/data/local/tmp/go-patch/go/bin/go": "5b9c640b270138fe1a7cfce583059b21767f1c0b4d986b7fa448326b57c52be0",
+      "/data/local/tmp/go-patch/go.tar.gz": "6e90a1abbb8522d4dbe48a9ea124232eaa395ba86cac3d5f7d3286dbd72ba053"
+    }
+  },
+  "scope": "full",
+  "language_cases": 2733,
+  "language_tests": {
+    "pass": 2672,
+    "skip": 60,
+    "fail": 1
+  },
+  "expected_language_cases": 2733,
+  "accepted": false
+}

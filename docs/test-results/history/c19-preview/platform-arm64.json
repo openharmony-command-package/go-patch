@@ -1,0 +1,119 @@
+{
+  "go_version": "go1.27.3",
+  "patch_sha256": "2b50f05cfe0c027ec9e75de60be66b32137e93dec93fc56404d24a016e9a48c0",
+  "arch": "arm64",
+  "accepted": true,
+  "cases": [
+    {
+      "test": "pure-system",
+      "result": "pass",
+      "log_sha256": "254095765ac92d855bdf0647e13d2f7822835441c12c2f3384b2b0503bf6eaea"
+    },
+    {
+      "test": "pure-context",
+      "result": "pass",
+      "log_sha256": "e7e4f973240ff2432b467c5857d24d06886dd91bc61828976fbe6216ac11aeb0"
+    },
+    {
+      "test": "pure-network",
+      "result": "pass",
+      "log_sha256": "ca5c2ff8ab75ed592a79e6cea4555d7a2cbfa971f1532706fb694467bf6ce91a"
+    },
+    {
+      "test": "cgo-system",
+      "result": "pass",
+      "log_sha256": "93ffe4f5351438be4c593a1f68a89b88adb905172a207b12265039251ea4cd37"
+    },
+    {
+      "test": "cgo-context",
+      "result": "pass",
+      "log_sha256": "e7e4f973240ff2432b467c5857d24d06886dd91bc61828976fbe6216ac11aeb0"
+    },
+    {
+      "test": "cgo-network",
+      "result": "pass",
+      "log_sha256": "ca5c2ff8ab75ed592a79e6cea4555d7a2cbfa971f1532706fb694467bf6ce91a"
+    },
+    {
+      "test": "netgo-system",
+      "result": "pass",
+      "log_sha256": "3e7660ab278b08b5c4f6360f9bf2554ec827f17b77dd803fcde6c59b2493a5ed"
+    },
+    {
+      "test": "netgo-context",
+      "result": "pass",
+      "log_sha256": "e7e4f973240ff2432b467c5857d24d06886dd91bc61828976fbe6216ac11aeb0"
+    },
+    {
+      "test": "netgo-network",
+      "result": "pass",
+      "log_sha256": "ca5c2ff8ab75ed592a79e6cea4555d7a2cbfa971f1532706fb694467bf6ce91a"
+    },
+    {
+      "test": "pie-system",
+      "result": "pass",
+      "log_sha256": "77bb57923b52502a4062197fc5f73f762b55ceb29ad6d84e01a96f1aa51b331d"
+    },
+    {
+      "test": "pie-context",
+      "result": "pass",
+      "log_sha256": "e7e4f973240ff2432b467c5857d24d06886dd91bc61828976fbe6216ac11aeb0"
+    },
+    {
+      "test": "pie-network",
+      "result": "pass",
+      "log_sha256": "ca5c2ff8ab75ed592a79e6cea4555d7a2cbfa971f1532706fb694467bf6ce91a"
+    },
+    {
+      "test": "cgo-hook",
+      "result": "pass",
+      "log_sha256": "da4aac276e7843ebf1da1d2cedcb84343499d1e4205aef1bf76d075822845dab"
+    },
+    {
+      "test": "netgo-hook",
+      "result": "pass",
+      "log_sha256": "da4aac276e7843ebf1da1d2cedcb84343499d1e4205aef1bf76d075822845dab"
+    },
+    {
+      "test": "pie-hook",
+      "result": "pass",
+      "log_sha256": "da4aac276e7843ebf1da1d2cedcb84343499d1e4205aef1bf76d075822845dab"
+    },
+    {
+      "test": "pure-panic",
+      "result": "pass",
+      "log_sha256": "a9cfeedefd42c10aeb8b682731941ad1ea23c4e05c6bda7b2bafcb76129156ed"
+    },
+    {
+      "test": "cgo-panic",
+      "result": "pass",
+      "log_sha256": "a9cfeedefd42c10aeb8b682731941ad1ea23c4e05c6bda7b2bafcb76129156ed"
+    },
+    {
+      "test": "cgo-fatal",
+      "result": "pass",
+      "log_sha256": "cd4b154a43eb7223a3d281168edb2fe1858ea35364fd68e171c9e4f666240716"
+    },
+    {
+      "test": "long",
+      "result": "pass",
+      "log_sha256": "af6ddb8e3ff52dd888e26e55e0596f5ea20fad2b953e0c1e58de0e997866340c"
+    },
+    {
+      "test": "disabled",
+      "result": "pass",
+      "log_sha256": "5e5b798fd456cef7f8eab83379b6697ccce538d9174deef5c763cd796febea18"
+    }
+  ],
+  "binaries_sha256": {
+    "pure": "1a11301e6be2930fe85be45e954e9e032ff7b8726e5733653717de81d320b49e",
+    "cgo": "f5ade667494dccea0e1f3e4cd5c5e6cb0303640d0e42f43577e01ec8b78147a1",
+    "netgo": "53c2730eeaf472895761ccdb1a0b801fa0f4bf786e826004d717e6b387cc91ad",
+    "pie": "57d67bea98326d9c64a3a920fbf31d14a6847f0b2cb30e25c104959488ba8bce",
+    "socket-hook.so": "928e51f7e3d62647b96e7cd6a93d97c7acce89ae23e37603c11db13bc97ae7f3",
+    "cgo-fatal": "bb448605f75863e3b4c7816b69d36d25cb63aa9371542f295490b5c1b7c771a0"
+  },
+  "hilog_sha256": "0196b886fd937a24306f7b9452519856b2866096f10d6332dada76af43b65779",
+  "script_sha256": "204bfd97fe27b2d972192070d17c63265ac845de07c7aaa6073ccdc27f45f185",
+  "scope": "full-system QEMU shell; native app sandbox and physical network policies require application tests"
+}

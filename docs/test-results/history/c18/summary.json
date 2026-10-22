@@ -1,0 +1,68 @@
+{
+  "go_version": "go1.27.3",
+  "patch_sha256": "58bc568264a43a993ba6a9156a2916259fb599b91a0869f937a62702338a5bb3",
+  "verified_at": "2026-10-21T19:22:09.691486+00:00",
+  "accepted": true,
+  "targets": [
+    {
+      "arch": "arm64",
+      "native_run": "arm64-cgo1-r11",
+      "packages": {
+        "pass": 450,
+        "skip": 245
+      },
+      "native_log_sha256": "009f2f69ca538ec966e3317200cee00b5dcb7b95efa9597182be1b3adf1ce313",
+      "qemu_profile": "stock",
+      "tested_archive_sha256": "6e90a1abbb8522d4dbe48a9ea124232eaa395ba86cac3d5f7d3286dbd72ba053",
+      "signed_native_go_sha256": "5b9c640b270138fe1a7cfce583059b21767f1c0b4d986b7fa448326b57c52be0",
+      "language_cases": 2733,
+      "language_tests": {
+        "pass": 2673,
+        "skip": 60
+      },
+      "method": "native full dist"
+    },
+    {
+      "arch": "arm",
+      "native_run": "arm-cgo1-r5",
+      "packages": {
+        "pass": 439,
+        "skip": 243
+      },
+      "native_log_sha256": "e0995cd9ee1ba76ef281dfcd34fe39a9ce53b5f84e0434e626998461005c8fa4",
+      "qemu_profile": "posix",
+      "tested_archive_sha256": "f2c191ebf0e4764b7f541faf5da39259ce38d195928adb5957e031b84de7b291",
+      "signed_native_go_sha256": "a0f3b654da42f7763b750cdecef9c25f224ffea172bbfab1e6590aef8bafa640",
+      "language_run": "full-c18",
+      "language_cases": 2733,
+      "language_tests": {
+        "skip": 77,
+        "pass": 2656
+      },
+      "target_executions": 1240,
+      "language_log_sha256": "6c70dd69ad869e09aa94716cea5aabe0183e60b19d44c0b0d3e23a328e24f25b",
+      "method": "native stdlib-tools plus official cross-language driver in full-system QEMU"
+    },
+    {
+      "arch": "amd64",
+      "native_run": "amd64-cgo1-r5",
+      "packages": {
+        "pass": 441,
+        "skip": 246
+      },
+      "native_log_sha256": "c2f39e646cef08bdb5dd2c218aecf9bc8382733890cb071bfd331edcbe1acc7b",
+      "qemu_profile": "stock",
+      "tested_archive_sha256": "7de8b76a529a3e0238945396b67aa87903eeda844ed19faaebfa9e11fd6ff6f1",
+      "signed_native_go_sha256": "542c45d47c4e78e05dfec41b2c47edbbfac8b5447176c97053d1529f9079e8a1",
+      "language_run": "full-c18",
+      "language_cases": 2733,
+      "language_tests": {
+        "pass": 2686,
+        "skip": 47
+      },
+      "target_executions": 1250,
+      "language_log_sha256": "391febd56ec74fbb8bb74cea17ac7a68b22d868c8e8352b76cf53e9d086637b4",
+      "method": "native stdlib-tools plus official cross-language driver in full-system QEMU"
+    }
+  ]
+}

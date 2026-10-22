@@ -2,7 +2,7 @@
 # Native OHOS integration: cross-OS output must not invoke the signing helper.
 set -eu
 task_root="${GO_OHOS_TEST_ROOT:-/data/local/tmp/go-patch}"
-task_dir="$task_root/signing-boundary"
+task_dir="$task_root/signing-boundary/${GO_OHOS_SIGNING_RUN_ID:-default}"
 mkdir -p "$task_dir"
 export GOROOT="$task_root/go" GOTOOLCHAIN=local GOENV=off CGO_ENABLED=0 GOARM=7
 export GOCACHE="$task_dir/cache" TMPDIR="$task_root/tmp"

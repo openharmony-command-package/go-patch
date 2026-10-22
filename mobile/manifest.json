@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "upstream": {
+    "repository": "https://github.com/golang/mobile",
+    "commit": "19777044486779222400e9ca16c4306f9c6dbfa9",
+    "version": "v0.0.0-20261011034528-197770444867"
+  },
+  "patch": "mobile-ohos.patch",
+  "go_version": "go1.27.3",
+  "targets": ["linux-arm64", "linux-amd64", "windows-arm64", "windows-amd64", "darwin-arm64", "darwin-amd64", "openharmony-arm64", "openharmony-arm", "openharmony-amd64"],
+  "features": ["OHOS HAR", "ArkTS typed API", "N-API async Go calls", "bidirectional interface callbacks", "Context directories", "Go object lifetime", "three OHOS ABIs"]
+}

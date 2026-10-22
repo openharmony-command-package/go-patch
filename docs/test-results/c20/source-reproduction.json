@@ -1,0 +1,7 @@
+{
+  "accepted": true,
+  "go_version": "go1.27.3",
+  "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
+  "adapted_source_files": 190,
+  "scope": "fresh archive baseline plus patch equals all adapted source files; no extra build"
+}

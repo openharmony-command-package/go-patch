@@ -1,0 +1,6 @@
+{
+  "checked_at": "2026-10-22T19:43:23.676946+00:00",
+  "source": "https://go.dev/dl/?mode=json",
+  "latest_stable": "go1.27.3",
+  "source_archive_sha256": "6e7749035cf360f06b2575d162ea79df9fda8ef671889e5c375f8e50777f26bb"
+}

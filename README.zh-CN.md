@@ -10,6 +10,7 @@
 - 动态 TLS 与 musl 适配，支持 cgo 可执行文件、Go 共享库、C 静态库及 C 线程回调。
 - Linux、macOS、Windows 和 OHOS 的 SDK C/C++ 包装程序；Windows 使用原生 `.exe`。
 - 在 OHOS 上运行的 Go 自动为生成的可执行文件和共享库自签名。
+- HiLog 镜像与 log/slog 接口、OHOS CA/时区发现、libc socket 钩子和应用 Context 配置。
 - 可复用补丁、构建脚本、全系统 QEMU 验证及与受测补丁对应的报告。
 
 | 工具链宿主 | 架构 |
@@ -115,13 +116,32 @@ CGO_ENABLED=0 go build -o hello /path/to/hello.go
 
 `go env GOOS GOHOSTOS` 和工具目录使用 `openharmony`。为兼容已有第三方代码，`runtime.GOOS` 保持 `linux`；使用新增的 `runtime.IsOpenharmony` 常量判断 OHOS。引用该常量的代码需要使用本适配工具链编译。
 
+### 系统服务与应用 Context
+
+Go 标准输出和 runtime 诊断会额外进入 HiLog。`log/hilog` 可指定日志元数据，
+`os/openharmony.Configure` 用于在业务启动前传入应用私有目录。系统 CA、时区、
+网络、HDC 测试及 cgo/沙箱边界见 [系统与应用集成](docs/INTEGRATION.zh-CN.md)。
+
+## gomobile 绑定
+
+[gomobile 配套适配](mobile/README.zh-CN.md) 支持三架构 HAR、带类型的 ArkTS
+调用、N-API 双向回调及 Context 目录初始化。gomobile/gobind 工具包与 Go 保持
+相同九种宿主组合，并提供可复用补丁与脚本。构建方式、独立 ArkTS 调用工程和
+实际通过范围分别见 [构建说明](mobile/docs/BUILD.zh-CN.md)、
+[应用示例](mobile/examples/arkts/README.zh-CN.md) 和
+[验证记录](mobile/docs/VALIDATION.zh-CN.md)。
+
 ## 验证状态
 
-三架构均已在完整 OHOS QEMU 中通过标准库、工具链及官方语言完整测试，每架构覆盖 2,733 个语言用例。当前压缩包为**候选包**：ARM 签名边界及另外六种原生主机/目标组合未完成；Windows 仅做静态核验，ARMv7 使用文档记录的 POSIX 镜像配置。具体覆盖范围和限制见 [验证记录](docs/VALIDATION.md) 与 [机器可读总报告](docs/test-results/summary.json)。
+ABI revision 2 新增系统与应用集成，正在进行新一轮验证，报告必须匹配新补丁。
+上一版 C18 三架构完整测试结果保留在 [历史记录](docs/test-results/history/c18/summary.json)。
+当前归档在各自验收门槛通过前保持候选状态，见 [验证记录](docs/VALIDATION.md)
+和 [当前总报告](docs/test-results/summary.json)。
 
 ## 文档与参考
 
 - [构建、补丁与验证说明](docs/BUILD.zh-CN.md) / [English build guide](docs/BUILD.md)
+- [系统与应用集成](docs/INTEGRATION.zh-CN.md) / [System/application integration](docs/INTEGRATION.md)
 - [仓库维护](CONTRIBUTING.zh-CN.md) / [Contributing](CONTRIBUTING.md)
 - [完整 QEMU 配置](docs/QEMU.md) 与 [issue 审计](docs/ISSUES.md)
 - 参考 [golang/go PR 75048](https://github.com/golang/go/pull/75048) 和 [OpenHarmony Go 仓库](https://gitcode.com/openharmony-sig/ohos_golang_go)。固定版本与来源说明见 [manifest.json](manifest.json) 及 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)。

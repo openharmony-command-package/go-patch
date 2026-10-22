@@ -1,5 +1,8 @@
 # Build and validate the OHOS Go toolchains
 
+ABI revision 2 is undergoing fresh validation. C18 results are historical. System integration and device verification are described in [INTEGRATION.md](INTEGRATION.md).
+
+
 English | [简体中文](BUILD.zh-CN.md) | [Usage](../README.md)
 
 This guide covers building the patched Go distribution, maintaining the patch, and verifying local archives. For application development with an extracted toolchain, see [README](../README.md).
@@ -137,9 +140,11 @@ These certify signing boundaries and the nine native host/target combinations. T
 After the docs and reports are finalized, repackage from the same tested source. Preserve the bytes of the tested tools:
 
 ```sh
-python3 scripts/manage.py build --skip-host
+python3 scripts/manage.py build --skip-host --skip-tools
 python3 scripts/verify-release.py --require-tested-toolchains
 ```
+
+`--skip-tools` requires `--skip-host`, checks the existing patch/source identity, and repacks without recompiling or replacing executable tools. `--skip-host` alone still rebuilds target tools.
 
 This checks archive structure, versions, patch, source, bilingual port bundle, executable formats, complete QEMU evidence, 72 native tool/wrapper files, and the four tested Linux/macOS Go binaries. It writes `dist/release-manifest.json` and `dist/SHA256SUMS`. Files must match their recorded binary fingerprints; repackaging documentation does not authorize changing the tested tools.
 

@@ -127,62 +127,76 @@ def build(a):
         if t['name'] not in names:
             continue
         prefix = WORK / 'products' / t['name'] / 'go'
-        if prefix.exists():
-            shutil.rmtree(prefix)
-        prefix.mkdir(parents=True)
-        for name in ['src', 'lib', 'api', 'doc', 'misc', 'test']:
-            if (source / name).exists():
-                shutil.copytree(source / name, prefix / name)
-        for name in ['LICENSE', 'PATENTS', 'README.md', 'VERSION', 'go.env', 'SECURITY.md']:
-            if (source / name).exists():
-                shutil.copy2(source / name, prefix / name)
-        tools = prefix / 'pkg/tool'
-        tools.mkdir(parents=True)
-        shutil.copytree(source / 'pkg/include', prefix / 'pkg/include')
-        # The host compiler builds the target tools from this exact source tree.
-        same_host = t['goos'] + '_' + t['goarch'] == hostpair
-        if same_host:
-            shutil.copytree(source / 'pkg/tool' / hostpair, tools / hostpair)
-            shutil.copytree(source / 'bin', prefix / 'bin',
-                            ignore=shutil.ignore_patterns('*_*'))
+        if getattr(a,'skip_tools',False):
+            info=json.loads((prefix/'BUILD-INFO.json').read_text())
+            assert info['target']==t and info['upstream']==LOCK['go']['tag'], 'existing toolchain target/version differs'
+            assert info['patch_sha256']==digest(ROOT/'patch'/LOCK['patch']['filename']), 'cannot repack binaries from another patch'
+            for name in (ROOT/'patch/source-paths.txt').read_text().splitlines():
+                if name and not name.startswith('#'):
+                    assert (prefix/name).read_bytes()==(source/name).read_bytes(), 'existing toolchain source differs: '+name
+            shutil.copy2(ROOT/'manifest.json',prefix/'OHOS-MANIFEST.json')
         else:
-            (tools / hostpair).symlink_to(source / 'pkg/tool' / hostpair, target_is_directory=True)
-        tenv = dict(env, GOROOT=str(prefix), GOOS=t['goos'], GOARCH=t['goarch'],
-                    CGO_ENABLED='0', GOARM='7')
-        if not same_host:
-            run([host, 'install', 'std', 'cmd'], cwd=prefix / 'src', env=tenv,
-                log=WORK / 'logs' / ('build-' + t['name'] + '.log'))
-            (tools / hostpair).unlink()
-            crossbin = prefix / 'bin' / (t['goos'] + '_' + t['goarch'])
-            for exe in crossbin.iterdir():
-                exe.rename(prefix / 'bin' / exe.name)
-            crossbin.rmdir()
-        shutil.copy2(ROOT / 'manifest.json', prefix / 'OHOS-MANIFEST.json')
-        (prefix / 'ohos-scripts').mkdir()
-        for script in ['cc.py', 'cc-arm64', 'cc-arm', 'cc-amd64', 'cxx-arm64', 'cxx-arm', 'cxx-amd64']:
-            shutil.copy2(ROOT / 'scripts' / script, prefix / 'ohos-scripts' / script)
-        # Native wrappers also work on Windows without Bash or Python, and
-        # retain target flags when cmd/link probes CC as a single executable.
-        suffix = '.exe' if t['goos'] == 'windows' else ''
-        driver = prefix / 'ohos-scripts' / ('sdk-cc' + suffix)
-        run([host, 'build', '-o', driver, ROOT / 'scripts/sdk-cc/main.go'],
-            env=dict(tenv, GOROOT=str(source)), log=WORK / 'logs' / ('sdk-cc-' + t['name'] + '.log'))
-        for kind in ['cc', 'cxx']:
-            for arch in ['arm64', 'arm', 'amd64']:
-                wrapper = prefix / 'ohos-scripts' / (kind + '-' + arch + suffix)
-                if wrapper.exists():
-                    wrapper.unlink()
-                os.link(driver, wrapper)
-        driver.unlink()
+            if prefix.exists():
+                shutil.rmtree(prefix)
+            prefix.mkdir(parents=True)
+            for name in ['src', 'lib', 'api', 'doc', 'misc', 'test']:
+                if (source / name).exists():
+                    shutil.copytree(source / name, prefix / name)
+            for name in ['LICENSE', 'PATENTS', 'README.md', 'VERSION', 'go.env', 'SECURITY.md']:
+                if (source / name).exists():
+                    shutil.copy2(source / name, prefix / name)
+            tools = prefix / 'pkg/tool'
+            tools.mkdir(parents=True)
+            shutil.copytree(source / 'pkg/include', prefix / 'pkg/include')
+            # The host compiler builds the target tools from this exact source tree.
+            same_host = t['goos'] + '_' + t['goarch'] == hostpair
+            if same_host:
+                shutil.copytree(source / 'pkg/tool' / hostpair, tools / hostpair)
+                shutil.copytree(source / 'bin', prefix / 'bin',
+                                ignore=shutil.ignore_patterns('*_*'))
+            else:
+                (tools / hostpair).symlink_to(source / 'pkg/tool' / hostpair, target_is_directory=True)
+            tenv = dict(env, GOROOT=str(prefix), GOOS=t['goos'], GOARCH=t['goarch'],
+                        CGO_ENABLED='0', GOARM='7')
+            if not same_host:
+                run([host, 'install', 'std', 'cmd'], cwd=prefix / 'src', env=tenv,
+                    log=WORK / 'logs' / ('build-' + t['name'] + '.log'))
+                (tools / hostpair).unlink()
+                crossbin = prefix / 'bin' / (t['goos'] + '_' + t['goarch'])
+                for exe in crossbin.iterdir():
+                    exe.rename(prefix / 'bin' / exe.name)
+                crossbin.rmdir()
+            shutil.copy2(ROOT / 'manifest.json', prefix / 'OHOS-MANIFEST.json')
+            (prefix / 'ohos-scripts').mkdir()
+            for script in ['cc.py', 'cc-arm64', 'cc-arm', 'cc-amd64', 'cxx-arm64', 'cxx-arm', 'cxx-amd64']:
+                shutil.copy2(ROOT / 'scripts' / script, prefix / 'ohos-scripts' / script)
+            # Native wrappers also work on Windows without Bash or Python, and
+            # retain target flags when cmd/link probes CC as a single executable.
+            suffix = '.exe' if t['goos'] == 'windows' else ''
+            driver = prefix / 'ohos-scripts' / ('sdk-cc' + suffix)
+            run([host, 'build', '-o', driver, ROOT / 'scripts/sdk-cc/main.go'],
+                env=dict(tenv, GOROOT=str(source)), log=WORK / 'logs' / ('sdk-cc-' + t['name'] + '.log'))
+            for kind in ['cc', 'cxx']:
+                for arch in ['arm64', 'arm', 'amd64']:
+                    wrapper = prefix / 'ohos-scripts' / (kind + '-' + arch + suffix)
+                    if wrapper.exists():
+                        wrapper.unlink()
+                    os.link(driver, wrapper)
+            driver.unlink()
         # Keep the reusable port and its relative documentation links together.
         # A toolchain archive can then reproduce the port without this checkout.
         port = prefix / 'ohos-port'
+        if port.exists():
+            shutil.rmtree(port)
         port.mkdir()
         for name in ['README.md', 'README.zh-CN.md', 'CONTRIBUTING.md',
                      'CONTRIBUTING.zh-CN.md', 'LICENSE', 'THIRD-PARTY-NOTICES.md', 'manifest.json']:
             shutil.copy2(ROOT / name, port / name)
         for name in ['docs', 'patch', 'scripts', 'tests']:
             shutil.copytree(ROOT / name, port / name,
+                            ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
+        if (ROOT / 'mobile').is_dir():
+            shutil.copytree(ROOT / 'mobile', port / 'mobile',
                             ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
         (prefix / 'OHOS-README.md').write_text(
             '# Go OHOS toolchain\n\n'
@@ -265,8 +279,11 @@ def main():
     b = sub.add_parser('build')
     b.add_argument('--targets', default='all')
     b.add_argument('--skip-host', action='store_true')
+    b.add_argument('--skip-tools',action='store_true',help='repack matching existing toolchains without rebuilding tested executables')
     b.add_argument('--output', type=Path, default=ROOT / 'dist')
     a = p.parse_args()
+    if getattr(a,'skip_tools',False) and not a.skip_host:
+        p.error('--skip-tools requires --skip-host')
     {'prepare': prepare, 'apply': lambda a: apply(a.source),
      'refresh': refresh, 'build': build}[a.command](a)
 

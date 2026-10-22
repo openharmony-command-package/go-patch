@@ -28,6 +28,23 @@ if a.require_validation:
         proof=json.loads((reports/filename).read_text())
         assert proof['accepted'] is True and proof['patch_sha256']==patchsha,filename+' incomplete or stale validation'
         assert proof['go_version']==lock['go']['version'],filename+' version mismatch'
+    if lock['patch'].get('abi_revision',1)>=2:
+        platform_script_sha=hashlib.sha256((ROOT/'scripts/test-platform.py').read_bytes()).hexdigest()
+        paths=(ROOT/'patch/source-paths.txt').read_text().splitlines()
+        source_inputs={name:hashlib.sha256((a.source/name).read_bytes()).hexdigest() for name in paths
+            if name and not name.startswith('#') and (a.source/name).is_file()}
+        source_digest=hashlib.sha256(json.dumps(source_inputs,sort_keys=True).encode()).hexdigest()
+        for arch in ['arm64','arm','amd64']:
+            proof=json.loads((reports/('platform-'+arch+'.json')).read_text())
+            assert proof['accepted'] and proof['patch_sha256']==patchsha,'incomplete platform integration: '+arch
+            assert proof['script_sha256']==platform_script_sha,'stale platform integration driver: '+arch
+            assert proof['source_digest']==source_digest,'platform integration source mismatch: '+arch
+            fixtures={str(path.relative_to(ROOT)):hashlib.sha256(path.read_bytes()).hexdigest() for path in (ROOT/'tests/platform').iterdir() if path.is_file()}
+            assert proof['fixtures_sha256']==fixtures,'platform test fixture mismatch: '+arch
+            expected={binary+'-'+case for binary in ['pure','cgo','netgo','pie','debug'] for case in ['system','context','network']}
+            expected.update(binary+'-hook' for binary in ['cgo','netgo','pie'])
+            expected.update(['pure-panic','cgo-panic','pure-copy','cgo-copy','cgo-fatal','long','disabled','timezone-override','timezone-empty','stdio-closed'])
+            assert {row['test'] for row in proof['cases'] if row['result']=='pass'}==expected,'incomplete platform cases: '+arch
 if a.require_validation or a.require_tested_toolchains:
     reports=ROOT/'docs/test-results'
     proof=json.loads((reports/'tested-toolchains.json').read_text())

@@ -1,0 +1,16 @@
+{
+  "accepted": false,
+  "mobile_patch_sha256": "ad21eedc994b950fdb8e075bf83c8aaf52f646ead4428367ca50af685d2ff9de",
+  "har_sha256": "86a9a0018007ff9ec73620d45baa4023ba9f4547c1a8ed2e9326658bc214e692",
+  "unsigned_hap_sha256": "075b523e5277364b0381ac1df62afb2f04bfe2bf381386d4c167354513e47174",
+  "signed_hap_sha256": "8af60600477bbcbf27c812cb74f679840ddff494c88b6bb18ded8f8d45b1b3ec",
+  "normal_signing": true,
+  "normal_installation": true,
+  "install_error": 9568404,
+  "missing_devices": [
+    "/dev/code_sign",
+    "/dev/xpm"
+  ],
+  "application_uid_execution": false,
+  "raw_log_sha256": "7d79528734a3f60743db63aa1098c5a8decd362303d47d1ce4347693b888f38b"
+}

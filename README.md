@@ -10,6 +10,8 @@ Reusable patches and scripts for adding OpenHarmony support to **Go 1.27.3**. Th
 - Dynamic TLS and musl integration for cgo executables, Go shared libraries, C archives, and callbacks from C threads.
 - SDK C/C++ wrappers for Linux, macOS, Windows, and OHOS; Windows wrappers are native `.exe` programs.
 - Automatic self-signing of executables and shared libraries built by Go running on OHOS.
+- HiLog mirroring and explicit log/slog adapters, OHOS CA/timezone discovery,
+  libc socket hooks, and application Context configuration.
 - Reusable patch files, build scripts, full-system QEMU validation, and reports that identify the exact tested patch.
 
 | Toolchain host | Architectures |
@@ -115,13 +117,35 @@ Pure Go native builds can use `CGO_ENABLED=0`. Native cgo also needs a C/C++ com
 
 The toolchain uses `openharmony` for `go env GOOS GOHOSTOS` and tool directories. For compatibility with existing packages, `runtime.GOOS` remains `linux`; use the added `runtime.IsOpenharmony` constant to identify OHOS. Code referencing that constant requires this patched Go toolchain.
 
+### System services and application Context
+
+Go stdout/stderr and runtime diagnostics additionally appear in HiLog. Use
+`log/hilog` for explicit metadata and `os/openharmony.Configure` to pass an
+application's private directories before starting business goroutines. See
+[system/application integration](docs/INTEGRATION.md) for examples, system CA,
+timezone, network behavior, HDC testing and exact cgo/sandbox boundaries.
+
+## gomobile bindings
+
+The [gomobile companion port](mobile/README.md) adds three-ABI HAR generation,
+typed ArkTS calls, N-API callbacks and Context directory initialization. It
+provides gomobile/gobind for the same nine tool hosts, plus reusable patch and
+build scripts. See its independent [build guide](mobile/docs/BUILD.md),
+[ArkTS caller example](mobile/examples/arkts/README.md) and
+[validation record](mobile/docs/VALIDATION.md).
+
 ## Validation status
 
-All three targets passed the complete standard-library/toolchain and official language suites in full-system OHOS QEMU, with 2,733 language cases per target. The current archives remain **candidates**: the ARM signing-boundary check and six additional native host/target combinations were not completed. Windows archives received static validation; ARMv7 used the documented POSIX image profile. See the [validation record](docs/VALIDATION.md) (Chinese) and [machine-readable summary](docs/test-results/summary.json) for exact coverage and limitations.
+ABI revision 2 adds system/application integration and is undergoing fresh
+validation. Its results must match the new patch. Previous C18 three-architecture
+full-suite results are retained as [history](docs/test-results/history/c18/summary.json).
+Current archives remain candidates until their own gates pass. See the
+[validation record](docs/VALIDATION.md) and [current summary](docs/test-results/summary.json).
 
 ## Documentation and references
 
 - [Build, patch, and validate](docs/BUILD.md) / [中文构建说明](docs/BUILD.zh-CN.md)
+- [System/application integration](docs/INTEGRATION.md) / [系统与应用集成](docs/INTEGRATION.zh-CN.md)
 - [Contributing](CONTRIBUTING.md) / [仓库维护](CONTRIBUTING.zh-CN.md)
 - [Detailed QEMU setup](docs/QEMU.md) and [issue audit](docs/ISSUES.md) (Chinese)
 - References: [golang/go PR 75048](https://github.com/golang/go/pull/75048) and [OpenHarmony Go](https://gitcode.com/openharmony-sig/ohos_golang_go). Exact revisions and attribution are in [manifest.json](manifest.json) and [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).

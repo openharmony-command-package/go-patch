@@ -75,7 +75,8 @@ for host in hosts:
     print(json.dumps(report, indent=2), flush=True)
 
 reports = [output / (host + '.json') for host in ARCHES]
-if all(path.exists() for path in reports):
+if all(path.exists() and json.loads(path.read_text()).get('patch_sha256') == patch_sha
+       and json.loads(path.read_text()).get('script_sha256') == sha(script) for path in reports):
     matrix = [json.loads(path.read_text()) for path in reports]
     assert all(r['accepted'] and r['patch_sha256'] == patch_sha and r['script_sha256'] == sha(script) for r in matrix)
     cases = [c for report in matrix for c in report['cases']]

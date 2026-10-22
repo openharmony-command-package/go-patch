@@ -1,6 +1,6 @@
 diff --git a/doc/design/cshared-musl-tls.md b/doc/design/cshared-musl-tls.md
 new file mode 100644
-index 0000000000000000000000000000000000000000..f5e2436bb49b156c242b611ff871058f1b2acb40
+index 00000000..f5e2436b
 --- /dev/null
 +++ b/doc/design/cshared-musl-tls.md
 @@ -0,0 +1,255 @@
@@ -260,7 +260,7 @@ index 0000000000000000000000000000000000000000..f5e2436bb49b156c242b611ff871058f
 +3. **TLS model verification**: `readelf -r` confirms TLSDESC/GD relocations
 +   in the output .so instead of IE relocations.
 diff --git a/src/cmd/asm/internal/flags/flags.go b/src/cmd/asm/internal/flags/flags.go
-index a02dcae2c6f0ed147b2bb5cc3ad41f79ad2c83ab..3d1f8164208c0ae39b52348c703137c08b4b6c51 100644
+index a02dcae2..3d1f8164 100644
 --- a/src/cmd/asm/internal/flags/flags.go
 +++ b/src/cmd/asm/internal/flags/flags.go
 @@ -22,6 +22,7 @@ var (
@@ -272,7 +272,7 @@ index a02dcae2c6f0ed147b2bb5cc3ad41f79ad2c83ab..3d1f8164208c0ae39b52348c703137c0
  	SymABIs    = flag.Bool("gensymabis", false, "write symbol ABI information to output file, don't assemble")
  	Importpath = flag.String("p", obj.UnlinkablePkg, "set expected package import to path")
 diff --git a/src/cmd/asm/main.go b/src/cmd/asm/main.go
-index d553fc8c32c0c22861f92165000629ab3acc7b3a..61f556ee540e16d10dc36eef42028fe72ceef8fe 100644
+index d553fc8c..61f556ee 100644
 --- a/src/cmd/asm/main.go
 +++ b/src/cmd/asm/main.go
 @@ -46,6 +46,27 @@ func main() {
@@ -305,7 +305,7 @@ index d553fc8c32c0c22861f92165000629ab3acc7b3a..61f556ee540e16d10dc36eef42028fe7
  	ctxt.IsAsm = true
 diff --git a/src/cmd/cgo/internal/test/cgo_stubs_openharmony_test.go b/src/cmd/cgo/internal/test/cgo_stubs_openharmony_test.go
 new file mode 100644
-index 0000000000000000000000000000000000000000..66018d26bb6245fb13100992866d63ab9cfa2ae7
+index 00000000..66018d26
 --- /dev/null
 +++ b/src/cmd/cgo/internal/test/cgo_stubs_openharmony_test.go
 @@ -0,0 +1,11 @@
@@ -321,7 +321,7 @@ index 0000000000000000000000000000000000000000..66018d26bb6245fb13100992866d63ab
 +	t.Skip("OpenHarmony libc does not implement pthread_cancel")
 +}
 diff --git a/src/cmd/cgo/internal/test/issue6997_linux.c b/src/cmd/cgo/internal/test/issue6997_linux.c
-index c6d251bbe503fcbb3a88d2652fd05a079e006082..c87898c12cc2aca34fe2d06e59236877ca32cb66 100644
+index c6d251bb..c87898c1 100644
 --- a/src/cmd/cgo/internal/test/issue6997_linux.c
 +++ b/src/cmd/cgo/internal/test/issue6997_linux.c
 @@ -2,7 +2,7 @@
@@ -334,7 +334,7 @@ index c6d251bbe503fcbb3a88d2652fd05a079e006082..c87898c12cc2aca34fe2d06e59236877
  #include <pthread.h>
  #include <stdio.h>
 diff --git a/src/cmd/cgo/internal/test/issue6997_linux.go b/src/cmd/cgo/internal/test/issue6997_linux.go
-index 1de5edda045d6b131ff14d37ffa7783c0fa65de1..da32804ede1e866cae4b7cb2df5863a36ecc6045 100644
+index 1de5edda..da32804e 100644
 --- a/src/cmd/cgo/internal/test/issue6997_linux.go
 +++ b/src/cmd/cgo/internal/test/issue6997_linux.go
 @@ -2,7 +2,7 @@
@@ -347,7 +347,7 @@ index 1de5edda045d6b131ff14d37ffa7783c0fa65de1..da32804ede1e866cae4b7cb2df5863a3
  // Test that pthread_cancel works as expected
  // (NPTL uses SIGRTMIN to implement thread cancellation)
 diff --git a/src/cmd/cgo/internal/testcarchive/carchive_test.go b/src/cmd/cgo/internal/testcarchive/carchive_test.go
-index a04959e85979fc5813da3ab739467b35430fd239..bf4770e92da1e11316eeb89adfdb56096ffa4bc9 100644
+index a04959e8..bf4770e9 100644
 --- a/src/cmd/cgo/internal/testcarchive/carchive_test.go
 +++ b/src/cmd/cgo/internal/testcarchive/carchive_test.go
 @@ -62,13 +62,6 @@ func testMain(m *testing.M) int {
@@ -374,7 +374,7 @@ index a04959e85979fc5813da3ab739467b35430fd239..bf4770e92da1e11316eeb89adfdb5609
  		}
  	}
 diff --git a/src/cmd/cgo/internal/testcshared/cshared_test.go b/src/cmd/cgo/internal/testcshared/cshared_test.go
-index abaa75587eb3a171ed4bb3038f83596059e60426..7fea816f7cc5de57720bb53c7858ee48d7b84685 100644
+index abaa7558..7fea816f 100644
 --- a/src/cmd/cgo/internal/testcshared/cshared_test.go
 +++ b/src/cmd/cgo/internal/testcshared/cshared_test.go
 @@ -19,7 +19,6 @@ import (
@@ -417,7 +417,7 @@ index abaa75587eb3a171ed4bb3038f83596059e60426..7fea816f7cc5de57720bb53c7858ee48
  	default:
  		t.Skipf("Skipping on %s", GOOS)
 diff --git a/src/cmd/cgo/internal/testsanitizers/cc_test.go b/src/cmd/cgo/internal/testsanitizers/cc_test.go
-index cfd670585637b2b8c573bd6b6f25c0f973f7a583..8a73d7cbce807f3d6e891610b5662cc5ab52cd5a 100644
+index cfd67058..8a73d7cb 100644
 --- a/src/cmd/cgo/internal/testsanitizers/cc_test.go
 +++ b/src/cmd/cgo/internal/testsanitizers/cc_test.go
 @@ -317,6 +317,10 @@ func inLUCIBuild() bool {
@@ -432,7 +432,7 @@ index cfd670585637b2b8c573bd6b6f25c0f973f7a583..8a73d7cbce807f3d6e891610b5662cc5
  	if err != nil {
  		return false
 diff --git a/src/cmd/compile/internal/base/flag.go b/src/cmd/compile/internal/base/flag.go
-index c8f1b2db30db6d761f90bf58500e4dd6b7302de4..77fac28921b432081e6aa332787d33b8d9c7a02d 100644
+index c8f1b2db..77fac289 100644
 --- a/src/cmd/compile/internal/base/flag.go
 +++ b/src/cmd/compile/internal/base/flag.go
 @@ -119,7 +119,8 @@ type CmdFlags struct {
@@ -463,7 +463,7 @@ index c8f1b2db30db6d761f90bf58500e4dd6b7302de4..77fac28921b432081e6aa332787d33b8
  	Ctxt.Debugasm = int(Flag.S)
  	Ctxt.Flag_maymorestack = Debug.MayMoreStack
 diff --git a/src/cmd/compile/internal/loopvar/loopvar_test.go b/src/cmd/compile/internal/loopvar/loopvar_test.go
-index c4ff8f620dc5e63f4f0f2be75d4978ca7e95fbb7..a8ca12c892f06cae8f547038cea57a8f9e04849b 100644
+index c4ff8f62..a8ca12c8 100644
 --- a/src/cmd/compile/internal/loopvar/loopvar_test.go
 +++ b/src/cmd/compile/internal/loopvar/loopvar_test.go
 @@ -73,7 +73,7 @@ func TestLoopVarGo1_21(t *testing.T) {
@@ -494,7 +494,7 @@ index c4ff8f620dc5e63f4f0f2be75d4978ca7e95fbb7..a8ca12c892f06cae8f547038cea57a8f
  
  		b, _ := cmd.CombinedOutput()
 diff --git a/src/cmd/compile/internal/test/fixedbugs_test.go b/src/cmd/compile/internal/test/fixedbugs_test.go
-index 49d4fbb4157d8cebd3592d1614e66fb4f61fb574..4bb57455e29c83bec0722358f9829f4c8a27a98e 100644
+index 49d4fbb4..4bb57455 100644
 --- a/src/cmd/compile/internal/test/fixedbugs_test.go
 +++ b/src/cmd/compile/internal/test/fixedbugs_test.go
 @@ -6,6 +6,7 @@ package test
@@ -515,7 +515,7 @@ index 49d4fbb4157d8cebd3592d1614e66fb4f61fb574..4bb57455e29c83bec0722358f9829f4c
  	}
  	testenv.MustHaveGoBuild(t)
 diff --git a/src/cmd/compile/internal/test/issue_81478_test.go b/src/cmd/compile/internal/test/issue_81478_test.go
-index e3af6eb40bd5e096c7ffc86b3bfa005e1ef98376..1c98453bdc640585eabf0bfc451c92d12dd8388a 100644
+index e3af6eb4..1c98453b 100644
 --- a/src/cmd/compile/internal/test/issue_81478_test.go
 +++ b/src/cmd/compile/internal/test/issue_81478_test.go
 @@ -5,6 +5,7 @@
@@ -536,7 +536,7 @@ index e3af6eb40bd5e096c7ffc86b3bfa005e1ef98376..1c98453bdc640585eabf0bfc451c92d1
  	}
  	testenv.MustHaveGoBuild(t)
 diff --git a/src/cmd/compile/testdata/script/README b/src/cmd/compile/testdata/script/README
-index 9ec997a138f0f27be42882b819a1531f63600394..761f7c79ca5616953a084ce3d58c949afb4708c3 100644
+index 9ec997a1..761f7c79 100644
 --- a/src/cmd/compile/testdata/script/README
 +++ b/src/cmd/compile/testdata/script/README
 @@ -244,7 +244,7 @@ The available conditions are:
@@ -549,7 +549,7 @@ index 9ec997a138f0f27be42882b819a1531f63600394..761f7c79ca5616953a084ce3d58c949a
  	GOOS/GOARCH supports -asan
  [buildmode:*]
 diff --git a/src/cmd/dist/build.go b/src/cmd/dist/build.go
-index 78d55bec559987a6b38c6828de433b7fbee5173d..e065f33e01b34216dea9cf97ba6478a6f3f4b02b 100644
+index 78d55bec..e065f33e 100644
 --- a/src/cmd/dist/build.go
 +++ b/src/cmd/dist/build.go
 @@ -100,6 +100,7 @@ var okgoos = []string{
@@ -731,7 +731,7 @@ index 78d55bec559987a6b38c6828de433b7fbee5173d..e065f33e01b34216dea9cf97ba6478a6
  
  // List of platforms that are marked as broken ports.
 diff --git a/src/cmd/dist/buildruntime.go b/src/cmd/dist/buildruntime.go
-index 87e88671763996604cfe5cbca1399ce1a323dc31..5b8c68b8a8ebb8dbc9999865b37d0255f23b622f 100644
+index 87e88671..5b8c68b8 100644
 --- a/src/cmd/dist/buildruntime.go
 +++ b/src/cmd/dist/buildruntime.go
 @@ -50,7 +50,7 @@ func mkbuildcfg(file string) {
@@ -753,7 +753,7 @@ index 87e88671763996604cfe5cbca1399ce1a323dc31..5b8c68b8a8ebb8dbc9999865b37d0255
  	fmt.Fprintf(&buf, "const DefaultGOFIPS140 = `%s`\n", gofips140)
  	fmt.Fprintf(&buf, "const DefaultCGO_ENABLED = %s\n", quote(os.Getenv("CGO_ENABLED")))
 diff --git a/src/cmd/dist/buildtool.go b/src/cmd/dist/buildtool.go
-index 2da9a17636aae64987bd30ff0909fe32d8a09a9f..beaa4cf39606e779101a07f66f5525880ed75a9d 100644
+index 2da9a176..beaa4cf3 100644
 --- a/src/cmd/dist/buildtool.go
 +++ b/src/cmd/dist/buildtool.go
 @@ -49,6 +49,7 @@ var bootstrapDirs = []string{
@@ -773,7 +773,7 @@ index 2da9a17636aae64987bd30ff0909fe32d8a09a9f..beaa4cf39606e779101a07f66f552588
  	// be imported by other packages in this list, but is not provided
  	// by the Go 1.17 version of gccgo. It's on this list only to
 diff --git a/src/cmd/dist/main.go b/src/cmd/dist/main.go
-index 8d316e1d1cdd15a61d2992c6bde95758497030eb..b957e6fa38245be9d8360ffc7ba0f12603618053 100644
+index 8d316e1d..b957e6fa 100644
 --- a/src/cmd/dist/main.go
 +++ b/src/cmd/dist/main.go
 @@ -55,6 +55,9 @@ func main() {
@@ -787,7 +787,7 @@ index 8d316e1d1cdd15a61d2992c6bde95758497030eb..b957e6fa38245be9d8360ffc7ba0f126
  	case "aix":
  		// uname -m doesn't work under AIX
 diff --git a/src/cmd/dist/test.go b/src/cmd/dist/test.go
-index 43ac003c7907c7d006ebd57a17cc34a2342e9d59..5e60ca629b18ff214443519cd69f4768820412ee 100644
+index 43ac003c..5e60ca62 100644
 --- a/src/cmd/dist/test.go
 +++ b/src/cmd/dist/test.go
 @@ -46,8 +46,12 @@ func cmdtest() {
@@ -845,7 +845,7 @@ index 43ac003c7907c7d006ebd57a17cc34a2342e9d59..5e60ca629b18ff214443519cd69f4768
  		return true
  	}
 diff --git a/src/cmd/go/go_test.go b/src/cmd/go/go_test.go
-index 47839e0229b951fcd85455a01569c4c7df221aff..ff85bc17ac859698b2c86615664261b5df635bdc 100644
+index 47839e02..ff85bc17 100644
 --- a/src/cmd/go/go_test.go
 +++ b/src/cmd/go/go_test.go
 @@ -13,6 +13,7 @@ import (
@@ -894,7 +894,7 @@ index 47839e0229b951fcd85455a01569c4c7df221aff..ff85bc17ac859698b2c86615664261b5
  	}
  	// Skip on alpine until https://go.dev/issues/54354 resolved.
 diff --git a/src/cmd/go/internal/cfg/cfg.go b/src/cmd/go/internal/cfg/cfg.go
-index 78cbbb949e7c275a4ac4956722b9cd42d48a1383..16c052af8b91caf95b928dc26011d6c720d38264 100644
+index 78cbbb94..16c052af 100644
 --- a/src/cmd/go/internal/cfg/cfg.go
 +++ b/src/cmd/go/internal/cfg/cfg.go
 @@ -13,6 +13,7 @@ import (
@@ -946,7 +946,7 @@ index 78cbbb949e7c275a4ac4956722b9cd42d48a1383..16c052af8b91caf95b928dc26011d6c7
  		if goroot == "" {
  			build.ToolDir = ""
 diff --git a/src/cmd/go/internal/envcmd/env.go b/src/cmd/go/internal/envcmd/env.go
-index 3d72c368b088a210461a85bb76f2e0dedb6cee8c..c2d83641a01700fed4c55b676f1e064580d0e735 100644
+index 3d72c368..c2d83641 100644
 --- a/src/cmd/go/internal/envcmd/env.go
 +++ b/src/cmd/go/internal/envcmd/env.go
 @@ -78,6 +78,10 @@ var (
@@ -976,7 +976,7 @@ index 3d72c368b088a210461a85bb76f2e0dedb6cee8c..c2d83641a01700fed4c55b676f1e0645
  		// GOPACKAGESDRIVER isn't read or used by cmd/go, so it can only
  		// be sourced from environment variables.
 diff --git a/src/cmd/go/internal/generate/generate_test.go b/src/cmd/go/internal/generate/generate_test.go
-index b11ed505450ba8a30adeccc4c92bf7ab086851ce..8f08b420b8d635e9ffd0c125e0a7b2127d156f2d 100644
+index b11ed505..8f08b420 100644
 --- a/src/cmd/go/internal/generate/generate_test.go
 +++ b/src/cmd/go/internal/generate/generate_test.go
 @@ -5,6 +5,7 @@
@@ -997,7 +997,7 @@ index b11ed505450ba8a30adeccc4c92bf7ab086851ce..8f08b420b8d635e9ffd0c125e0a7b212
  	{"$GOPACKAGE", []string{"sys"}},
  	{"a $XXNOTDEFINEDXX b", []string{"a", "", "b"}},
 diff --git a/src/cmd/go/internal/imports/build.go b/src/cmd/go/internal/imports/build.go
-index 6a8b7a84cd41531d11a61febc6ee74f54c872625..4946c4018b5adfbe223cdea4b03e40401631db69 100644
+index 6a8b7a84..4946c401 100644
 --- a/src/cmd/go/internal/imports/build.go
 +++ b/src/cmd/go/internal/imports/build.go
 @@ -208,7 +208,7 @@ func matchTag(name string, tags map[string]bool, prefer bool) bool {
@@ -1010,7 +1010,7 @@ index 6a8b7a84cd41531d11a61febc6ee74f54c872625..4946c4018b5adfbe223cdea4b03e4040
  		return tags["illumos"]
  	case "darwin":
 diff --git a/src/cmd/go/internal/load/pkg.go b/src/cmd/go/internal/load/pkg.go
-index 2985cff67cec0bde02e247f2e28cf1a72b60ad87..d1517ec2a45eb088dec31f3683619bb3471fe098 100644
+index 2985cff6..d1517ec2 100644
 --- a/src/cmd/go/internal/load/pkg.go
 +++ b/src/cmd/go/internal/load/pkg.go
 @@ -1868,7 +1868,11 @@ func (p *Package) load(ld *modload.Loader, ctx context.Context, opts PackageOpts
@@ -1027,7 +1027,7 @@ index 2985cff67cec0bde02e247f2e28cf1a72b60ad87..d1517ec2a45eb088dec31f3683619bb3
  			elem = full
  		}
 diff --git a/src/cmd/go/internal/modindex/build.go b/src/cmd/go/internal/modindex/build.go
-index c0acb8ff587d7f534250026142780329d3c4d17f..2046ac2933199097a3774ab0cb2a93f796f60a0e 100644
+index c0acb8ff..2046ac29 100644
 --- a/src/cmd/go/internal/modindex/build.go
 +++ b/src/cmd/go/internal/modindex/build.go
 @@ -689,6 +689,9 @@ func (ctxt *Context) matchTag(name string, allTags map[string]bool) bool {
@@ -1041,7 +1041,7 @@ index c0acb8ff587d7f534250026142780329d3c4d17f..2046ac2933199097a3774ab0cb2a93f7
  		return true
  	}
 diff --git a/src/cmd/go/internal/toolchain/select.go b/src/cmd/go/internal/toolchain/select.go
-index bd2ae4ee2ed030c131a8756c17ea8a9ee7fa6d29..8c945ea33b1065cb17382e179e9eda484a70353b 100644
+index bd2ae4ee..8c945ea3 100644
 --- a/src/cmd/go/internal/toolchain/select.go
 +++ b/src/cmd/go/internal/toolchain/select.go
 @@ -13,6 +13,7 @@ import (
@@ -1071,7 +1071,7 @@ index bd2ae4ee2ed030c131a8756c17ea8a9ee7fa6d29..8c945ea33b1065cb17382e179e9eda48
  		base.Fatalf("download %s: %v", gotoolchain, err)
  	}
 diff --git a/src/cmd/go/internal/version/version.go b/src/cmd/go/internal/version/version.go
-index 781bc080e89fe4f412d0baae8278d4d63d97bb7e..b23fa68f129b012151d73681cced683d68c6fcc3 100644
+index 781bc080..b23fa68f 100644
 --- a/src/cmd/go/internal/version/version.go
 +++ b/src/cmd/go/internal/version/version.go
 @@ -11,6 +11,7 @@ import (
@@ -1092,7 +1092,7 @@ index 781bc080e89fe4f412d0baae8278d4d63d97bb7e..b23fa68f129b012151d73681cced683d
  	}
  
 diff --git a/src/cmd/go/internal/work/build.go b/src/cmd/go/internal/work/build.go
-index 969e0029c3e294c4507d83bdbd225fbb317c3355..7dd30d61d9ee1ee0b1f3ce58d5a1e49138155427 100644
+index 969e0029..7dd30d61 100644
 --- a/src/cmd/go/internal/work/build.go
 +++ b/src/cmd/go/internal/work/build.go
 @@ -10,6 +10,7 @@ import (
@@ -1113,7 +1113,7 @@ index 969e0029c3e294c4507d83bdbd225fbb317c3355..7dd30d61d9ee1ee0b1f3ce58d5a1e491
  	}
  	path, err := pathcache.LookPath(fmt.Sprintf("go_%s_%s_exec", cfg.Goos, cfg.Goarch))
 diff --git a/src/cmd/go/internal/work/buildid.go b/src/cmd/go/internal/work/buildid.go
-index 584c1ac6f41d237d2191af5a66888970a80dd78b..95758c941817aec89d3b9486befa02ef5e1dc61f 100644
+index 584c1ac6..95758c94 100644
 --- a/src/cmd/go/internal/work/buildid.go
 +++ b/src/cmd/go/internal/work/buildid.go
 @@ -6,6 +6,7 @@ package work
@@ -1159,7 +1159,7 @@ index 584c1ac6f41d237d2191af5a66888970a80dd78b..95758c941817aec89d3b9486befa02ef
  	// executable caching was requested. Executables are not
  	// cached by default because they are not reused
 diff --git a/src/cmd/go/internal/work/exec.go b/src/cmd/go/internal/work/exec.go
-index 3ed01c0fbd49b8b106e1a084e463e8cc601f84c7..5f44d154461f5d79ddb9a90daaf9eaab207624d1 100644
+index 3ed01c0f..5f44d154 100644
 --- a/src/cmd/go/internal/work/exec.go
 +++ b/src/cmd/go/internal/work/exec.go
 @@ -9,6 +9,7 @@ package work
@@ -1204,7 +1204,7 @@ index 3ed01c0fbd49b8b106e1a084e463e8cc601f84c7..5f44d154461f5d79ddb9a90daaf9eaab
  	}
  	return ldflags
 diff --git a/src/cmd/go/internal/work/gccgo.go b/src/cmd/go/internal/work/gccgo.go
-index 276e082b71ba55c209a386dfbe8a3704ab471452..799e828a23f6216825a4d18eff486913da78504a 100644
+index 276e082b..799e828a 100644
 --- a/src/cmd/go/internal/work/gccgo.go
 +++ b/src/cmd/go/internal/work/gccgo.go
 @@ -426,7 +426,7 @@ func (tools gccgoToolchain) link(b *Builder, root *Action, out, importcfg string
@@ -1226,7 +1226,7 @@ index 276e082b71ba55c209a386dfbe8a3704ab471452..799e828a23f6216825a4d18eff486913
  		}
  
 diff --git a/src/cmd/go/internal/work/init.go b/src/cmd/go/internal/work/init.go
-index 9226dd3fd631f03e484cb3b329f14721b11bcf42..894dd5940dbc0e7377f0d345bd7be1324b49fdaf 100644
+index 9226dd3f..894dd594 100644
 --- a/src/cmd/go/internal/work/init.go
 +++ b/src/cmd/go/internal/work/init.go
 @@ -235,11 +235,16 @@ func buildModeInit() {
@@ -1263,7 +1263,7 @@ index 9226dd3fd631f03e484cb3b329f14721b11bcf42..894dd5940dbc0e7377f0d345bd7be132
  				// Do not add usual .exe suffix to the .dll file.
  				cfg.ExeSuffix = ""
 diff --git a/src/cmd/go/internal/work/shell.go b/src/cmd/go/internal/work/shell.go
-index ffb8f27271d4633d5bcca76923fd0da904cd6ff8..17cbb144454bc6bfba50276fc6125c8f2f3411b7 100644
+index ffb8f272..17cbb144 100644
 --- a/src/cmd/go/internal/work/shell.go
 +++ b/src/cmd/go/internal/work/shell.go
 @@ -646,6 +646,8 @@ func (sh *Shell) runOut(dir string, env []string, cmdargs ...any) ([]byte, error
@@ -1276,7 +1276,7 @@ index ffb8f27271d4633d5bcca76923fd0da904cd6ff8..17cbb144454bc6bfba50276fc6125c8f
  	err = cmd.Run()
  	if a != nil && a.json != nil {
 diff --git a/src/cmd/go/script_test.go b/src/cmd/go/script_test.go
-index 6033ec420b845284cb462d45264d8ee26d764a2e..37b8a9c81964ffa40185fc873cc332808979378a 100644
+index 6033ec42..37b8a9c8 100644
 --- a/src/cmd/go/script_test.go
 +++ b/src/cmd/go/script_test.go
 @@ -15,6 +15,7 @@ import (
@@ -1307,7 +1307,7 @@ index 6033ec420b845284cb462d45264d8ee26d764a2e..37b8a9c81964ffa40185fc873cc33280
  		// cover the default behaviors.
 diff --git a/src/cmd/go/testdata/mod/golang.org_toolchain_v0.0.1-go1.998testohos.openharmony-amd64.txt b/src/cmd/go/testdata/mod/golang.org_toolchain_v0.0.1-go1.998testohos.openharmony-amd64.txt
 new file mode 100644
-index 0000000000000000000000000000000000000000..778928be4360d7396fef34a7989aa6d0ba277d1d
+index 00000000..778928be
 --- /dev/null
 +++ b/src/cmd/go/testdata/mod/golang.org_toolchain_v0.0.1-go1.998testohos.openharmony-amd64.txt
 @@ -0,0 +1,15 @@
@@ -1328,7 +1328,7 @@ index 0000000000000000000000000000000000000000..778928be4360d7396fef34a7989aa6d0
 +-- lib/wasm/go_js_wasm_exec --
 diff --git a/src/cmd/go/testdata/mod/golang.org_toolchain_v0.0.1-go1.998testohos.openharmony-arm.txt b/src/cmd/go/testdata/mod/golang.org_toolchain_v0.0.1-go1.998testohos.openharmony-arm.txt
 new file mode 100644
-index 0000000000000000000000000000000000000000..713a316a741adb08a8f933df0751ddd35f16e3ce
+index 00000000..713a316a
 --- /dev/null
 +++ b/src/cmd/go/testdata/mod/golang.org_toolchain_v0.0.1-go1.998testohos.openharmony-arm.txt
 @@ -0,0 +1,15 @@
@@ -1349,7 +1349,7 @@ index 0000000000000000000000000000000000000000..713a316a741adb08a8f933df0751ddd3
 +-- lib/wasm/go_js_wasm_exec --
 diff --git a/src/cmd/go/testdata/mod/golang.org_toolchain_v0.0.1-go1.998testohos.openharmony-arm64.txt b/src/cmd/go/testdata/mod/golang.org_toolchain_v0.0.1-go1.998testohos.openharmony-arm64.txt
 new file mode 100644
-index 0000000000000000000000000000000000000000..e9f30d7f646f95086b697a5f8dd6a8dec28f0b80
+index 00000000..e9f30d7f
 --- /dev/null
 +++ b/src/cmd/go/testdata/mod/golang.org_toolchain_v0.0.1-go1.998testohos.openharmony-arm64.txt
 @@ -0,0 +1,15 @@
@@ -1370,7 +1370,7 @@ index 0000000000000000000000000000000000000000..e9f30d7f646f95086b697a5f8dd6a8de
 +-- lib/wasm/go_js_wasm_exec --
 diff --git a/src/cmd/go/testdata/mod/golang.org_toolchain_v0.0.1-go1.999testmod.openharmony-amd64.txt b/src/cmd/go/testdata/mod/golang.org_toolchain_v0.0.1-go1.999testmod.openharmony-amd64.txt
 new file mode 100644
-index 0000000000000000000000000000000000000000..b7a8a30a65414cda3cbc3cc8b92c0d047c347aaf
+index 00000000..b7a8a30a
 --- /dev/null
 +++ b/src/cmd/go/testdata/mod/golang.org_toolchain_v0.0.1-go1.999testmod.openharmony-amd64.txt
 @@ -0,0 +1,15 @@
@@ -1391,7 +1391,7 @@ index 0000000000000000000000000000000000000000..b7a8a30a65414cda3cbc3cc8b92c0d04
 +-- lib/wasm/go_js_wasm_exec --
 diff --git a/src/cmd/go/testdata/mod/golang.org_toolchain_v0.0.1-go1.999testmod.openharmony-arm.txt b/src/cmd/go/testdata/mod/golang.org_toolchain_v0.0.1-go1.999testmod.openharmony-arm.txt
 new file mode 100644
-index 0000000000000000000000000000000000000000..3c0c8c0ddbff4830aa2770418e9fdb53679cf695
+index 00000000..3c0c8c0d
 --- /dev/null
 +++ b/src/cmd/go/testdata/mod/golang.org_toolchain_v0.0.1-go1.999testmod.openharmony-arm.txt
 @@ -0,0 +1,15 @@
@@ -1412,7 +1412,7 @@ index 0000000000000000000000000000000000000000..3c0c8c0ddbff4830aa2770418e9fdb53
 +-- lib/wasm/go_js_wasm_exec --
 diff --git a/src/cmd/go/testdata/mod/golang.org_toolchain_v0.0.1-go1.999testmod.openharmony-arm64.txt b/src/cmd/go/testdata/mod/golang.org_toolchain_v0.0.1-go1.999testmod.openharmony-arm64.txt
 new file mode 100644
-index 0000000000000000000000000000000000000000..a48399eec1c4cf30def002127518fea443126199
+index 00000000..a48399ee
 --- /dev/null
 +++ b/src/cmd/go/testdata/mod/golang.org_toolchain_v0.0.1-go1.999testmod.openharmony-arm64.txt
 @@ -0,0 +1,15 @@
@@ -1432,7 +1432,7 @@ index 0000000000000000000000000000000000000000..a48399eec1c4cf30def002127518fea4
 +-- pkg/tool/fake --
 +-- lib/wasm/go_js_wasm_exec --
 diff --git a/src/cmd/go/testdata/script/README b/src/cmd/go/testdata/script/README
-index 71052159b6e4f53d2f1dfbc4fca1a4bfa3f9e0f1..bcad152ebbf58312f289db8fbe512b6754ed6d76 100644
+index 71052159..bcad152e 100644
 --- a/src/cmd/go/testdata/script/README
 +++ b/src/cmd/go/testdata/script/README
 @@ -370,7 +370,7 @@ The available conditions are:
@@ -1446,7 +1446,7 @@ index 71052159b6e4f53d2f1dfbc4fca1a4bfa3f9e0f1..bcad152ebbf58312f289db8fbe512b67
  [asan]
 diff --git a/src/cmd/go/testdata/script/gotoolchain_host_openharmony.txt b/src/cmd/go/testdata/script/gotoolchain_host_openharmony.txt
 new file mode 100644
-index 0000000000000000000000000000000000000000..636eb54bc239c5e2f58d8add78c3dfa9deb09c3a
+index 00000000..636eb54b
 --- /dev/null
 +++ b/src/cmd/go/testdata/script/gotoolchain_host_openharmony.txt
 @@ -0,0 +1,8 @@
@@ -1459,7 +1459,7 @@ index 0000000000000000000000000000000000000000..636eb54bc239c5e2f58d8add78c3dfa9
 +go version
 +stdout '^go1.998testohos here!$'
 diff --git a/src/cmd/internal/fuzztest/testdata/script/README b/src/cmd/internal/fuzztest/testdata/script/README
-index 9ec997a138f0f27be42882b819a1531f63600394..761f7c79ca5616953a084ce3d58c949afb4708c3 100644
+index 9ec997a1..761f7c79 100644
 --- a/src/cmd/internal/fuzztest/testdata/script/README
 +++ b/src/cmd/internal/fuzztest/testdata/script/README
 @@ -244,7 +244,7 @@ The available conditions are:
@@ -1472,7 +1472,7 @@ index 9ec997a138f0f27be42882b819a1531f63600394..761f7c79ca5616953a084ce3d58c949a
  	GOOS/GOARCH supports -asan
  [buildmode:*]
 diff --git a/src/cmd/internal/obj/arm/a.out.go b/src/cmd/internal/obj/arm/a.out.go
-index d33b75120d2fc5abfd81a5c9365c42bec31eb1f8..8fcad697ea970c5b995b2342a05fd9337e67e455 100644
+index d33b7512..8fcad697 100644
 --- a/src/cmd/internal/obj/arm/a.out.go
 +++ b/src/cmd/internal/obj/arm/a.out.go
 @@ -198,6 +198,9 @@ const (
@@ -1486,7 +1486,7 @@ index d33b75120d2fc5abfd81a5c9365c42bec31eb1f8..8fcad697ea970c5b995b2342a05fd933
  
  	C_GOK
 diff --git a/src/cmd/internal/obj/arm/asm5.go b/src/cmd/internal/obj/arm/asm5.go
-index 9f59e0a287e25d52d35e719390aa64c15ba7c8bd..3a626f8fae4a74200cce76c36a403792fc1eadeb 100644
+index 9f59e0a2..3a626f8f 100644
 --- a/src/cmd/internal/obj/arm/asm5.go
 +++ b/src/cmd/internal/obj/arm/asm5.go
 @@ -134,6 +134,7 @@ var optab = []Optab{
@@ -1566,7 +1566,7 @@ index 9f59e0a287e25d52d35e719390aa64c15ba7c8bd..3a626f8fae4a74200cce76c36a403792
  		o1 = c.omvl(p, &p.To, REGTMP)
  
 diff --git a/src/cmd/internal/obj/arm64/a.out.go b/src/cmd/internal/obj/arm64/a.out.go
-index 1426c72ee050eb5063227adc6bc08de16855fc78..4290cc288e235c880be582306e063f3bb0f7d1d5 100644
+index 1426c72e..4290cc28 100644
 --- a/src/cmd/internal/obj/arm64/a.out.go
 +++ b/src/cmd/internal/obj/arm64/a.out.go
 @@ -607,6 +607,12 @@ const (
@@ -1583,7 +1583,7 @@ index 1426c72ee050eb5063227adc6bc08de16855fc78..4290cc288e235c880be582306e063f3b
  
  	C_GOK
 diff --git a/src/cmd/internal/obj/arm64/asm7.go b/src/cmd/internal/obj/arm64/asm7.go
-index 5bd3c4a8f306d958b7b8ab9856814c05323eb4fb..9bb40f9f3a26dc6d494a4e3b3c9cb13b3361996d 100644
+index 5bd3c4a8..9bb40f9f 100644
 --- a/src/cmd/internal/obj/arm64/asm7.go
 +++ b/src/cmd/internal/obj/arm64/asm7.go
 @@ -511,6 +511,7 @@ var optab = []Optab{
@@ -1637,7 +1637,7 @@ index 5bd3c4a8f306d958b7b8ab9856814c05323eb4fb..9bb40f9f3a26dc6d494a4e3b3c9cb13b
  		o1 = ADR(1, 0, REGTMP)
  		o2 = c.olsr12u(p, c.opldr(p, AMOVD), 0, REGTMP, p.To.Reg)
 diff --git a/src/cmd/internal/obj/fips140.go b/src/cmd/internal/obj/fips140.go
-index 0e4f2a47a3812638c3ea953e606741d9cebc585d..dbefd06b1ecb276a673cfae85186f1b584cd72a1 100644
+index 0e4f2a47..dbefd06b 100644
 --- a/src/cmd/internal/obj/fips140.go
 +++ b/src/cmd/internal/obj/fips140.go
 @@ -364,6 +364,8 @@ func (s *LSym) checkFIPSReloc(ctxt *Link, rel Reloc) {
@@ -1668,7 +1668,7 @@ index 0e4f2a47a3812638c3ea953e606741d9cebc585d..dbefd06b1ecb276a673cfae85186f1b5
  		// ok
  		return
 diff --git a/src/cmd/internal/obj/link.go b/src/cmd/internal/obj/link.go
-index d35c4154c7387a3d7c24e9c74cf880a7f72be316..f0b1d8149af787d45be95820fcdb94b028a24211 100644
+index d35c4154..f0b1d814 100644
 --- a/src/cmd/internal/obj/link.go
 +++ b/src/cmd/internal/obj/link.go
 @@ -1167,6 +1167,7 @@ type Link struct {
@@ -1680,7 +1680,7 @@ index d35c4154c7387a3d7c24e9c74cf880a7f72be316..f0b1d8149af787d45be95820fcdb94b0
  	Flag_optimize        bool
  	Flag_locationlists   bool
 diff --git a/src/cmd/internal/obj/loong64/asm.go b/src/cmd/internal/obj/loong64/asm.go
-index 2ed2f23d11090a9f404571600b2cb1440b220fa6..31217741df98cc83d7e38ff6816d85efec6bf25b 100644
+index 2ed2f23d..31217741 100644
 --- a/src/cmd/internal/obj/loong64/asm.go
 +++ b/src/cmd/internal/obj/loong64/asm.go
 @@ -705,7 +705,7 @@ func (c *ctxt0) aclass(a *obj.Addr) int {
@@ -1693,7 +1693,7 @@ index 2ed2f23d11090a9f404571600b2cb1440b220fa6..31217741df98cc83d7e38ff6816d85ef
  				} else {
  					return C_TLS_LE
 diff --git a/src/cmd/internal/obj/ppc64/asm9.go b/src/cmd/internal/obj/ppc64/asm9.go
-index 06ad72eed8358428ac520173be4146521b1f3041..90d60141a895e4dbe0ce9acb3b138a34b75c8fe0 100644
+index 06ad72ee..90d60141 100644
 --- a/src/cmd/internal/obj/ppc64/asm9.go
 +++ b/src/cmd/internal/obj/ppc64/asm9.go
 @@ -907,6 +907,9 @@ func (c *ctxt9) aclass(a *obj.Addr) int {
@@ -1707,7 +1707,7 @@ index 06ad72eed8358428ac520173be4146521b1f3041..90d60141a895e4dbe0ce9acb3b138a34
  				if c.ctxt.Flag_shared {
  					return C_TLS_IE
 diff --git a/src/cmd/internal/obj/riscv/obj.go b/src/cmd/internal/obj/riscv/obj.go
-index 629a49a91b4b9c00d00c981f7aece0581973fcb8..719f651492bd327f567a3ef0a577ee3e3879406d 100644
+index 629a49a9..719f6514 100644
 --- a/src/cmd/internal/obj/riscv/obj.go
 +++ b/src/cmd/internal/obj/riscv/obj.go
 @@ -3890,7 +3890,22 @@ func instructionsForTLS(p *obj.Prog, ins *instruction) []*instruction {
@@ -1746,7 +1746,7 @@ index 629a49a91b4b9c00d00c981f7aece0581973fcb8..719f651492bd327f567a3ef0a577ee3e
  				} else {
  					rt = objabi.R_RISCV_TLS_LE
 diff --git a/src/cmd/internal/obj/s390x/asmz.go b/src/cmd/internal/obj/s390x/asmz.go
-index ba8cff4e6d725c7983b2f31bee3bf8b5c291c6f5..e94ac652cd8921ace84d9b0fa6f624526bc4556d 100644
+index ba8cff4e..e94ac652 100644
 --- a/src/cmd/internal/obj/s390x/asmz.go
 +++ b/src/cmd/internal/obj/s390x/asmz.go
 @@ -585,6 +585,9 @@ func (c *ctxtz) aclass(a *obj.Addr) int {
@@ -1760,7 +1760,7 @@ index ba8cff4e6d725c7983b2f31bee3bf8b5c291c6f5..e94ac652cd8921ace84d9b0fa6f62452
  					return C_TLS_IE // initial exec model
  				}
 diff --git a/src/cmd/internal/obj/x86/asm6.go b/src/cmd/internal/obj/x86/asm6.go
-index 89b64f4eedd8eac6142fd584bde5ad9b0b9f5369..0726537220ff05e9d67d0cd886528633f7146a58 100644
+index 89b64f4e..07265372 100644
 --- a/src/cmd/internal/obj/x86/asm6.go
 +++ b/src/cmd/internal/obj/x86/asm6.go
 @@ -5151,25 +5151,64 @@ func (ab *AsmBuf) doasm(ctxt *obj.Link, cursym *obj.LSym, p *obj.Prog) {
@@ -1848,7 +1848,7 @@ index 89b64f4eedd8eac6142fd584bde5ad9b0b9f5369..0726537220ff05e9d67d0cd886528633
  					case objabi.Hplan9:
  						pp.From = obj.Addr{}
 diff --git a/src/cmd/internal/objabi/flag.go b/src/cmd/internal/objabi/flag.go
-index ae56e2b0b08b05278319e30b0b2c1a4a7667d0b3..69a4715a3471cad9aa38f9a172e442c31db88a35 100644
+index ae56e2b0..69a4715a 100644
 --- a/src/cmd/internal/objabi/flag.go
 +++ b/src/cmd/internal/objabi/flag.go
 @@ -229,9 +229,8 @@ func (versionFlag) Set(s string) error {
@@ -1864,7 +1864,7 @@ index ae56e2b0b08b05278319e30b0b2c1a4a7667d0b3..69a4715a3471cad9aa38f9a172e442c3
  
  	fmt.Printf("%s version %s%s\n", name, buildcfg.Version, p)
 diff --git a/src/cmd/internal/objabi/head.go b/src/cmd/internal/objabi/head.go
-index 3109b5cb23f12ae3e7a89edd9c37cfe3c036df7b..e50648ec77742f7f35a565b04ec36cffd65fdf49 100644
+index 3109b5cb..e50648ec 100644
 --- a/src/cmd/internal/objabi/head.go
 +++ b/src/cmd/internal/objabi/head.go
 @@ -63,7 +63,7 @@ func (h *HeadType) Set(s string) error {
@@ -1877,7 +1877,7 @@ index 3109b5cb23f12ae3e7a89edd9c37cfe3c036df7b..e50648ec77742f7f35a565b04ec36cff
  	case "netbsd":
  		*h = Hnetbsd
 diff --git a/src/cmd/internal/objabi/reloctype.go b/src/cmd/internal/objabi/reloctype.go
-index 0fafbd4baa6306761a4c02caf15853a41711e166..a90ffa6a891c94c24735c524496bec64cd1b45ea 100644
+index 0fafbd4b..a90ffa6a 100644
 --- a/src/cmd/internal/objabi/reloctype.go
 +++ b/src/cmd/internal/objabi/reloctype.go
 @@ -72,6 +72,11 @@ const (
@@ -1943,7 +1943,7 @@ index 0fafbd4baa6306761a4c02caf15853a41711e166..a90ffa6a891c94c24735c524496bec64
  	// GOT entry, by encoding it into pcalau12i instruction
  	// R_LOONG64_GOT_LO resolves [11...0]bits of 32/64-bit PC-relative offset of
 diff --git a/src/cmd/internal/objabi/reloctype_string.go b/src/cmd/internal/objabi/reloctype_string.go
-index c7a5e6c07af72daf339a63b859b62c1c730eaada..e091e3feb9992699aa96ca89833349501a52a6ff 100644
+index c7a5e6c0..e091e3fe 100644
 --- a/src/cmd/internal/objabi/reloctype_string.go
 +++ b/src/cmd/internal/objabi/reloctype_string.go
 @@ -24,101 +24,107 @@ func _() {
@@ -2148,7 +2148,7 @@ index c7a5e6c07af72daf339a63b859b62c1c730eaada..e091e3feb9992699aa96ca8983334950
  	idx := int(i) - 1
 diff --git a/src/cmd/internal/ohossign/sign.go b/src/cmd/internal/ohossign/sign.go
 new file mode 100644
-index 0000000000000000000000000000000000000000..058a4c8e393e77071645f5d1fa7470b52b6032bf
+index 00000000..058a4c8e
 --- /dev/null
 +++ b/src/cmd/internal/ohossign/sign.go
 @@ -0,0 +1,52 @@
@@ -2206,7 +2206,7 @@ index 0000000000000000000000000000000000000000..058a4c8e393e77071645f5d1fa7470b5
 +}
 diff --git a/src/cmd/internal/ohossign/sign_openharmony.go b/src/cmd/internal/ohossign/sign_openharmony.go
 new file mode 100644
-index 0000000000000000000000000000000000000000..1aa60021f9c5950109c6ad0e55da73e8ce872309
+index 00000000..1aa60021
 --- /dev/null
 +++ b/src/cmd/internal/ohossign/sign_openharmony.go
 @@ -0,0 +1,10 @@
@@ -2222,7 +2222,7 @@ index 0000000000000000000000000000000000000000..1aa60021f9c5950109c6ad0e55da73e8
 +func Sign(path string) error { return sign(path, "binary-sign-tool") }
 diff --git a/src/cmd/internal/ohossign/sign_other.go b/src/cmd/internal/ohossign/sign_other.go
 new file mode 100644
-index 0000000000000000000000000000000000000000..77101e0b7c4219861d9ab190ed5935d917e68284
+index 00000000..77101e0b
 --- /dev/null
 +++ b/src/cmd/internal/ohossign/sign_other.go
 @@ -0,0 +1,10 @@
@@ -2238,7 +2238,7 @@ index 0000000000000000000000000000000000000000..77101e0b7c4219861d9ab190ed5935d9
 +func Sign(path string) error { return nil }
 diff --git a/src/cmd/internal/ohossign/sign_test.go b/src/cmd/internal/ohossign/sign_test.go
 new file mode 100644
-index 0000000000000000000000000000000000000000..708533fe535ed8d850bfafcd95f1fa9a80e866b8
+index 00000000..708533fe
 --- /dev/null
 +++ b/src/cmd/internal/ohossign/sign_test.go
 @@ -0,0 +1,87 @@
@@ -2330,7 +2330,7 @@ index 0000000000000000000000000000000000000000..708533fe535ed8d850bfafcd95f1fa9a
 +	}
 +}
 diff --git a/src/cmd/internal/script/conds.go b/src/cmd/internal/script/conds.go
-index c9783dd1631fd42b65df0ddd32b42e5a1badfdcc..01a4fbc0feb667b7fa212b014a1bf797502b576b 100644
+index c9783dd1..01a4fbc0 100644
 --- a/src/cmd/internal/script/conds.go
 +++ b/src/cmd/internal/script/conds.go
 @@ -6,6 +6,7 @@ package script
@@ -2354,7 +2354,7 @@ index c9783dd1631fd42b65df0ddd32b42e5a1badfdcc..01a4fbc0feb667b7fa212b014a1bf797
  			}
  			if _, ok := syslist.KnownOS[suffix]; !ok {
 diff --git a/src/cmd/internal/script/scripttest/conditions.go b/src/cmd/internal/script/scripttest/conditions.go
-index 6702e9279b106b5fb99d6b2e7361799aff806aef..4e4cd106dc7741d124d3c55305a17a8ef818b960 100644
+index 6702e927..4e4cd106 100644
 --- a/src/cmd/internal/script/scripttest/conditions.go
 +++ b/src/cmd/internal/script/scripttest/conditions.go
 @@ -37,7 +37,7 @@ func AddToolChainScriptConditions(t *testing.T, conds map[string]script.Cond, go
@@ -2367,7 +2367,7 @@ index 6702e9279b106b5fb99d6b2e7361799aff806aef..4e4cd106dc7741d124d3c55305a17a8e
  	add("fuzz-instrumented", sysCondition("-fuzz with instrumentation", platform.FuzzInstrumented, false, goHostOS, goHostArch))
  	add("GODEBUG", script.PrefixCondition("GODEBUG contains <suffix>", hasGodebug))
 diff --git a/src/cmd/internal/script/scripttest/run.go b/src/cmd/internal/script/scripttest/run.go
-index ecd91b84be2ad7d1b5f31478fae31b5a0dc55def..82f2b5dc8b31062115496cd75fe5fdd066d35543 100644
+index ecd91b84..82f2b5dc 100644
 --- a/src/cmd/internal/script/scripttest/run.go
 +++ b/src/cmd/internal/script/scripttest/run.go
 @@ -143,7 +143,7 @@ func NewEngine(t *testing.T, repls []ToolReplacement) (*script.Engine, []string)
@@ -2380,7 +2380,7 @@ index ecd91b84be2ad7d1b5f31478fae31b5a0dc55def..82f2b5dc8b31062115496cd75fe5fdd0
  	for _, repl := range repls {
  		// consistency check
 diff --git a/src/cmd/internal/script/scripttest/setup.go b/src/cmd/internal/script/scripttest/setup.go
-index 07cf8ea2f914af5018191a9c71112aaf2fef3341..09e397f0f4cdd0ee79340c7ef64c2e801498b779 100644
+index 07cf8ea2..09e397f0 100644
 --- a/src/cmd/internal/script/scripttest/setup.go
 +++ b/src/cmd/internal/script/scripttest/setup.go
 @@ -7,6 +7,7 @@ package scripttest
@@ -2401,7 +2401,7 @@ index 07cf8ea2f914af5018191a9c71112aaf2fef3341..09e397f0f4cdd0ee79340c7ef64c2e80
  
  // linkOrCopy creates a link to src at dst, or if the symlink fails
 diff --git a/src/cmd/internal/testdir/testdir_test.go b/src/cmd/internal/testdir/testdir_test.go
-index 56842845a1d05efb6233a840804ee855fd2091c0..c737dcbe7a8d10acf60433440c08cddbe6154791 100644
+index 56842845..c737dcbe 100644
 --- a/src/cmd/internal/testdir/testdir_test.go
 +++ b/src/cmd/internal/testdir/testdir_test.go
 @@ -7,6 +7,7 @@ package testdir_test
@@ -2529,7 +2529,7 @@ index 56842845a1d05efb6233a840804ee855fd2091c0..c737dcbe7a8d10acf60433440c08cddb
  
  // overlayDir makes a minimal-overhead copy of srcRoot in which new files may be added.
 diff --git a/src/cmd/link/internal/amd64/asm.go b/src/cmd/link/internal/amd64/asm.go
-index 918c6c12a523d8ad7dc25f612c3f1a7aaa964694..6e8d7490a9890d703ba6318aee67f9bd52fc2a96 100644
+index 918c6c12..6e8d7490 100644
 --- a/src/cmd/link/internal/amd64/asm.go
 +++ b/src/cmd/link/internal/amd64/asm.go
 @@ -472,6 +472,23 @@ func elfreloc1(ctxt *ld.Link, out *ld.OutBuf, ldr *loader.Loader, s loader.Sym,
@@ -2557,7 +2557,7 @@ index 918c6c12a523d8ad7dc25f612c3f1a7aaa964694..6e8d7490a9890d703ba6318aee67f9bd
  		if siz == 4 {
  			if ldr.SymType(r.Xsym) == sym.SDYNIMPORT {
 diff --git a/src/cmd/link/internal/arm/asm.go b/src/cmd/link/internal/arm/asm.go
-index 248ec648bcc81f46f1fa0180b7806c1ee0b49fdc..1fced4979af989f63a1753439b8d3d177ea7f887 100644
+index 248ec648..1fced497 100644
 --- a/src/cmd/link/internal/arm/asm.go
 +++ b/src/cmd/link/internal/arm/asm.go
 @@ -293,6 +293,8 @@ func elfreloc1(ctxt *ld.Link, out *ld.OutBuf, ldr *loader.Loader, s loader.Sym,
@@ -2570,7 +2570,7 @@ index 248ec648bcc81f46f1fa0180b7806c1ee0b49fdc..1fced4979af989f63a1753439b8d3d17
  		if siz == 4 {
  			out.Write32(uint32(elf.R_ARM_GOT_PREL) | uint32(elfsym)<<8)
 diff --git a/src/cmd/link/internal/arm64/asm.go b/src/cmd/link/internal/arm64/asm.go
-index 9864788e1b61255de7d3bf9993b5c993dc5f11d9..ecc84cac8bf226613066c0f285db392a28bbfaa0 100644
+index 9864788e..ecc84cac 100644
 --- a/src/cmd/link/internal/arm64/asm.go
 +++ b/src/cmd/link/internal/arm64/asm.go
 @@ -567,6 +567,19 @@ func elfreloc1(ctxt *ld.Link, out *ld.OutBuf, ldr *loader.Loader, s loader.Sym,
@@ -2625,7 +2625,7 @@ index 9864788e1b61255de7d3bf9993b5c993dc5f11d9..ecc84cac8bf226613066c0f285db392a
  	}
  	return loader.ExtReloc{}, false
 diff --git a/src/cmd/link/internal/ld/data.go b/src/cmd/link/internal/ld/data.go
-index 4a27db5a42ef881a3197fddbbf452c635d869580..33ea1eeecce833a66f08c562afd982a493f71a50 100644
+index 4a27db5a..33ea1eee 100644
 --- a/src/cmd/link/internal/ld/data.go
 +++ b/src/cmd/link/internal/ld/data.go
 @@ -327,6 +327,32 @@ func (st *relocSymState) relocsym(s loader.Sym, P []byte) {
@@ -2671,7 +2671,7 @@ index 4a27db5a42ef881a3197fddbbf452c635d869580..33ea1eeecce833a66f08c562afd982a4
  			rs := r.Sym()
  			rr.Xsym = rs
 diff --git a/src/cmd/link/internal/ld/decodesym.go b/src/cmd/link/internal/ld/decodesym.go
-index 79d985e3b24bddbfba43a4560167410f86a3df28..0346373228fa4660d20d453e923d751e1da8dbd4 100644
+index 79d985e3..03463732 100644
 --- a/src/cmd/link/internal/ld/decodesym.go
 +++ b/src/cmd/link/internal/ld/decodesym.go
 @@ -215,10 +215,55 @@ func decodetypeStr(ldr *loader.Loader, arch *sys.Arch, symIdx loader.Sym) string
@@ -2732,7 +2732,7 @@ index 79d985e3b24bddbfba43a4560167410f86a3df28..0346373228fa4660d20d453e923d751e
  		sect := findShlibSection(ctxt, ctxt.loader.SymPkg(s), addr)
  		if sect != nil {
 diff --git a/src/cmd/link/internal/ld/elf.go b/src/cmd/link/internal/ld/elf.go
-index 949ca6a3f698aee4b25132550b6e043f2ebcfc33..824e68fd3c81acb9c6ef2afdd628236c0d3cbedd 100644
+index 949ca6a3..824e68fd 100644
 --- a/src/cmd/link/internal/ld/elf.go
 +++ b/src/cmd/link/internal/ld/elf.go
 @@ -1832,6 +1832,9 @@ func asmbElf(ctxt *Link) {
@@ -2746,7 +2746,7 @@ index 949ca6a3f698aee4b25132550b6e043f2ebcfc33..824e68fd3c81acb9c6ef2afdd628236c
  					// This lets the same cmd/link binary work on
  					// both glibc-based and musl-based systems.
 diff --git a/src/cmd/link/internal/ld/lib.go b/src/cmd/link/internal/ld/lib.go
-index b9848b232ce4ec9603f6d7d91e59a277eca9db52..8534df60806c98b1f7e177625e65f70a9aab4b38 100644
+index b9848b23..8534df60 100644
 --- a/src/cmd/link/internal/ld/lib.go
 +++ b/src/cmd/link/internal/ld/lib.go
 @@ -488,7 +488,7 @@ func (ctxt *Link) extld() []string {
@@ -2852,7 +2852,7 @@ index b9848b232ce4ec9603f6d7d91e59a277eca9db52..8534df60806c98b1f7e177625e65f70a
  
  func addsection(ldr *loader.Loader, arch *sys.Arch, seg *sym.Segment, name string, rwx int) *sym.Section {
 diff --git a/src/cmd/link/internal/ld/link.go b/src/cmd/link/internal/ld/link.go
-index c0d20680a709b9c6c0d2306a327ba54ab7945608..53ed40fb7cbbfc08ce83728f418340eb594251f9 100644
+index c0d20680..53ed40fb 100644
 --- a/src/cmd/link/internal/ld/link.go
 +++ b/src/cmd/link/internal/ld/link.go
 @@ -54,6 +54,9 @@ type Shlib struct {
@@ -2866,7 +2866,7 @@ index c0d20680a709b9c6c0d2306a327ba54ab7945608..53ed40fb7cbbfc08ce83728f418340eb
  
  // A relocation that applies to part of the shared library.
 diff --git a/src/cmd/link/internal/ld/main.go b/src/cmd/link/internal/ld/main.go
-index 19ed197a20b57ebf2d90437313c5accd46ff835d..195f04ef7c2e85fe188ea06076fad89955dcc2f4 100644
+index 19ed197a..195f04ef 100644
 --- a/src/cmd/link/internal/ld/main.go
 +++ b/src/cmd/link/internal/ld/main.go
 @@ -34,6 +34,7 @@ import (
@@ -2890,7 +2890,7 @@ index 19ed197a20b57ebf2d90437313c5accd46ff835d..195f04ef7c2e85fe188ea06076fad899
  
  	errorexit()
 diff --git a/src/cmd/link/internal/ld/outbuf_mmap.go b/src/cmd/link/internal/ld/outbuf_mmap.go
-index e92a06dcb25f802960f2cf7dd41b5451bbe4e769..7a67dcffbb5c7277fdc741a93e4d0c49e5506235 100644
+index e92a06dc..7a67dcff 100644
 --- a/src/cmd/link/internal/ld/outbuf_mmap.go
 +++ b/src/cmd/link/internal/ld/outbuf_mmap.go
 @@ -28,7 +28,7 @@ func (out *OutBuf) Mmap(filesize uint64) (err error) {
@@ -2903,7 +2903,7 @@ index e92a06dcb25f802960f2cf7dd41b5451bbe4e769..7a67dcffbb5c7277fdc741a93e4d0c49
  		}
  	}
 diff --git a/src/cmd/link/internal/loader/loader.go b/src/cmd/link/internal/loader/loader.go
-index 04601b32a00af6a1ccf415a817830877e8868d69..489f688d7cb02d059202010eb68d2dc353544d41 100644
+index 04601b32..489f688d 100644
 --- a/src/cmd/link/internal/loader/loader.go
 +++ b/src/cmd/link/internal/loader/loader.go
 @@ -202,6 +202,8 @@ type Loader struct {
@@ -2950,7 +2950,7 @@ index 04601b32a00af6a1ccf415a817830877e8868d69..489f688d7cb02d059202010eb68d2dc3
  }
  
 diff --git a/src/cmd/link/internal/riscv64/asm.go b/src/cmd/link/internal/riscv64/asm.go
-index 9d69152af0ec359cdb7c58c524a172be6493c731..fccc959d2e09805ff2ac3d1bc49c3ae0633fff11 100644
+index 9d69152a..fccc959d 100644
 --- a/src/cmd/link/internal/riscv64/asm.go
 +++ b/src/cmd/link/internal/riscv64/asm.go
 @@ -218,6 +218,7 @@ func genSymsLate(ctxt *ld.Link, ldr *loader.Loader) {
@@ -3027,7 +3027,7 @@ index 9d69152af0ec359cdb7c58c524a172be6493c731..fccc959d2e09805ff2ac3d1bc49c3ae0
  	return loader.ExtReloc{}, false
  }
 diff --git a/src/cmd/link/link_test.go b/src/cmd/link/link_test.go
-index e7c406c4ad1eb87b01ca258e2b46fc2cf2bbc683..285ea1854ea8127f3f8bab53264ca29f9391ebd4 100644
+index e7c406c4..285ea185 100644
 --- a/src/cmd/link/link_test.go
 +++ b/src/cmd/link/link_test.go
 @@ -13,6 +13,7 @@ import (
@@ -3048,7 +3048,7 @@ index e7c406c4ad1eb87b01ca258e2b46fc2cf2bbc683..285ea1854ea8127f3f8bab53264ca29f
  	}
  
 diff --git a/src/cmd/link/testdata/script/README b/src/cmd/link/testdata/script/README
-index 9ec997a138f0f27be42882b819a1531f63600394..761f7c79ca5616953a084ce3d58c949afb4708c3 100644
+index 9ec997a1..761f7c79 100644
 --- a/src/cmd/link/testdata/script/README
 +++ b/src/cmd/link/testdata/script/README
 @@ -244,7 +244,7 @@ The available conditions are:
@@ -3061,7 +3061,7 @@ index 9ec997a138f0f27be42882b819a1531f63600394..761f7c79ca5616953a084ce3d58c949a
  	GOOS/GOARCH supports -asan
  [buildmode:*]
 diff --git a/src/cmd/nm/testdata/script/README b/src/cmd/nm/testdata/script/README
-index 9ec997a138f0f27be42882b819a1531f63600394..761f7c79ca5616953a084ce3d58c949afb4708c3 100644
+index 9ec997a1..761f7c79 100644
 --- a/src/cmd/nm/testdata/script/README
 +++ b/src/cmd/nm/testdata/script/README
 @@ -244,7 +244,7 @@ The available conditions are:
@@ -3073,9 +3073,26 @@ index 9ec997a138f0f27be42882b819a1531f63600394..761f7c79ca5616953a084ce3d58c949a
  [asan]
  	GOOS/GOARCH supports -asan
  [buildmode:*]
+diff --git a/src/crypto/x509/root_linux.go b/src/crypto/x509/root_linux.go
+index 8e79ccb5..f9bbc662 100644
+--- a/src/crypto/x509/root_linux.go
++++ b/src/crypto/x509/root_linux.go
+@@ -23,6 +23,12 @@ var certDirectories = []string{
+ }
+ 
+ func init() {
++	if goos.IsOpenharmony == 1 {
++		certDirectories = append(certDirectories,
++			"/etc/security/certificates",
++			"/system/etc/security/certificates",
++		)
++	}
+ 	if goos.IsAndroid == 1 {
+ 		certDirectories = append(certDirectories,
+ 			"/system/etc/security/cacerts",    // Android system roots
 diff --git a/src/debug/dwarf/base_offsets_test.go b/src/debug/dwarf/base_offsets_test.go
 new file mode 100644
-index 0000000000000000000000000000000000000000..86469bdd7a5f438154f522ea2d17c7f1e0cb9126
+index 00000000..86469bdd
 --- /dev/null
 +++ b/src/debug/dwarf/base_offsets_test.go
 @@ -0,0 +1,59 @@
@@ -3139,7 +3156,7 @@ index 0000000000000000000000000000000000000000..86469bdd7a5f438154f522ea2d17c7f1
 +	}
 +}
 diff --git a/src/debug/dwarf/entry.go b/src/debug/dwarf/entry.go
-index 30fad93e7937d2e308575d67cb74e4e64ed0d443..54b2c7483934e1f5d6666ee774abbb39c6d73ff1 100644
+index 30fad93e..54b2c748 100644
 --- a/src/debug/dwarf/entry.go
 +++ b/src/debug/dwarf/entry.go
 @@ -408,6 +408,12 @@ type Offset uint32
@@ -3189,7 +3206,7 @@ index 30fad93e7937d2e308575d67cb74e4e64ed0d443..54b2c7483934e1f5d6666ee774abbb39
  			val = resolveRnglistx(uint64(rnglistsBase), off)
  		}
 diff --git a/src/debug/dwarf/unit.go b/src/debug/dwarf/unit.go
-index 7a384f32c3f3a3e83223c3888df925217b8f143e..6dd92ffcb7f5b867e385d7e68cc9210c26c05560 100644
+index 7a384f32..6dd92ffc 100644
 --- a/src/debug/dwarf/unit.go
 +++ b/src/debug/dwarf/unit.go
 @@ -177,7 +177,7 @@ func (d *Data) collectDwarf5BaseOffsets(u *unit) error {
@@ -3202,7 +3219,7 @@ index 7a384f32c3f3a3e83223c3888df925217b8f143e..6dd92ffcb7f5b867e385d7e68cc9210c
  		// Unknown abbreviation table entry or some other fatal
  		// problem; bail early on the assumption that this will be
 diff --git a/src/go/build/build.go b/src/go/build/build.go
-index 4c6be413abd2374b027e0d3feaa19a2fe10ef874..927cd3a8a3ac4c31cad1d72cfeeb3e4d47210474 100644
+index 4c6be413..927cd3a8 100644
 --- a/src/go/build/build.go
 +++ b/src/go/build/build.go
 @@ -14,6 +14,7 @@ import (
@@ -3232,8 +3249,44 @@ index 4c6be413abd2374b027e0d3feaa19a2fe10ef874..927cd3a8a3ac4c31cad1d72cfeeb3e4d
  	if name == "unix" && syslist.UnixOS[ctxt.GOOS] {
  		return true
  	}
+diff --git a/src/go/build/deps_test.go b/src/go/build/deps_test.go
+index 4959a421..1155a237 100644
+--- a/src/go/build/deps_test.go
++++ b/src/go/build/deps_test.go
+@@ -100,6 +100,7 @@ var depsRules = `
+ 	< internal/runtime/syscall/linux
+ 	< internal/runtime/syscall/windows
+ 	< internal/runtime/atomic
++	< internal/runtime/hilog
+ 	< internal/runtime/exithook
+ 	< internal/runtime/gc
+ 	< internal/runtime/math
+@@ -155,6 +156,7 @@ var depsRules = `
+ 
+ 	# TIME is SYSCALL plus the core packages about time, including context.
+ 	SYSCALL
++	< internal/ohos
+ 	< time/tzdata
+ 	< time
+ 	< context
+@@ -217,6 +219,7 @@ var depsRules = `
+ 	< OS;
+ 
+ 	reflect !< OS;
++	OS < os/openharmony;
+ 
+ 	OS
+ 	< golang.org/x/sys/cpu;
+@@ -467,6 +470,7 @@ var depsRules = `
+ 	log/slog/internal, log/slog/internal/buffer,
+ 	slices
+ 	< log/slog
++	< log/hilog
+ 	< log/slog/internal/slogtest, log/slog/internal/benchmarks;
+ 
+ 	NET, log
 diff --git a/src/go/build/gc.go b/src/go/build/gc.go
-index 434991f66ef80163b2a467a59939ab2f9dbed88a..348d878213a05fb8488f96a72ec844b1bcb42f19 100644
+index 434991f6..348d8782 100644
 --- a/src/go/build/gc.go
 +++ b/src/go/build/gc.go
 @@ -13,5 +13,8 @@ import (
@@ -3245,8 +3298,53 @@ index 434991f66ef80163b2a467a59939ab2f9dbed88a..348d878213a05fb8488f96a72ec844b1
 +	}
  	return filepath.Join(runtime.GOROOT(), "pkg/tool/"+runtime.GOOS+"_"+runtime.GOARCH)
  }
+diff --git a/src/internal/bytealg/indexbyte_arm64.s b/src/internal/bytealg/indexbyte_arm64.s
+index 458479e5..b95cc75c 100644
+--- a/src/internal/bytealg/indexbyte_arm64.s
++++ b/src/internal/bytealg/indexbyte_arm64.s
+@@ -4,6 +4,13 @@
+ 
+ #include "textflag.h"
+ 
++#ifdef GOOS_android
++#define MTE_SAFE 1
++#endif
++#ifdef GOOS_openharmony
++#define MTE_SAFE 1
++#endif
++
+ // func IndexByte(b []byte, c byte) int
+ // input:
+ //   R0: b ptr
+@@ -34,7 +41,7 @@ TEXT ·IndexByteString<ABIInternal>(SB),NOSPLIT,$0-32
+ 	// identify exactly which byte has matched.
+ 
+ 	CBZ	R1, fail
+-#ifdef GOOS_android
++#ifdef MTE_SAFE
+ 	ADD	R0, R1, R20   // R20 = end of data
+ 	BIC	$0xf, R0, R21 // R21 = earliest we can read
+ #endif
+@@ -55,7 +62,7 @@ TEXT ·IndexByteString<ABIInternal>(SB),NOSPLIT,$0-32
+ 	// Input string is not 32-byte aligned. We calculate the
+ 	// syndrome value for the aligned 32 bytes block containing
+ 	// the first bytes and mask off the irrelevant part.
+-#ifdef GOOS_android
++#ifdef MTE_SAFE
+ 	// Android requires us to not read outside an aligned 16-byte
+ 	// region because MTE might be enforced.
+ 	CMP	R21, R3
+@@ -88,7 +95,7 @@ TEXT ·IndexByteString<ABIInternal>(SB),NOSPLIT,$0-32
+ 	CBNZ	R6, tail
+ 
+ loop:
+-#ifdef GOOS_android
++#ifdef MTE_SAFE
+ 	CMP	R21, R3
+ 	BLO	2(PC)
+ 	VLD1	(R3), [V1.B16]
 diff --git a/src/internal/goos/gengoos.go b/src/internal/goos/gengoos.go
-index e0d4d38e898e890c7b0c20a41d5562b0301f9f21..01da4d0a7a07772ea10b982828cc75c36f1e63ee 100644
+index e0d4d38e..01da4d0a 100644
 --- a/src/internal/goos/gengoos.go
 +++ b/src/internal/goos/gengoos.go
 @@ -42,7 +42,7 @@ func main() {
@@ -3273,7 +3371,7 @@ index e0d4d38e898e890c7b0c20a41d5562b0301f9f21..01da4d0a7a07772ea10b982828cc75c3
  			value := 0
  			if goos == target {
 diff --git a/src/internal/goos/zgoos_aix.go b/src/internal/goos/zgoos_aix.go
-index 24e05c933e5e752cadea93db410ef012ee137562..8c9cafdcf7f7f0d0428841ad72068b8ec49717ad 100644
+index 24e05c93..8c9cafdc 100644
 --- a/src/internal/goos/zgoos_aix.go
 +++ b/src/internal/goos/zgoos_aix.go
 @@ -6,6 +6,8 @@ package goos
@@ -3294,7 +3392,7 @@ index 24e05c933e5e752cadea93db410ef012ee137562..8c9cafdcf7f7f0d0428841ad72068b8e
  const IsPlan9 = 0
  const IsSolaris = 0
 diff --git a/src/internal/goos/zgoos_android.go b/src/internal/goos/zgoos_android.go
-index 3c4a318590a8bb903588994922bf5f772c774562..b6e229a9be97295f70d06b9cf9f044c028917926 100644
+index 3c4a3185..b6e229a9 100644
 --- a/src/internal/goos/zgoos_android.go
 +++ b/src/internal/goos/zgoos_android.go
 @@ -6,6 +6,8 @@ package goos
@@ -3315,7 +3413,7 @@ index 3c4a318590a8bb903588994922bf5f772c774562..b6e229a9be97295f70d06b9cf9f044c0
  const IsPlan9 = 0
  const IsSolaris = 0
 diff --git a/src/internal/goos/zgoos_darwin.go b/src/internal/goos/zgoos_darwin.go
-index 10b14998955126a439dca5a1d223fb6356df22c7..72f6b40d16dbc30143f6d6d512715dce11577e49 100644
+index 10b14998..72f6b40d 100644
 --- a/src/internal/goos/zgoos_darwin.go
 +++ b/src/internal/goos/zgoos_darwin.go
 @@ -6,6 +6,8 @@ package goos
@@ -3336,7 +3434,7 @@ index 10b14998955126a439dca5a1d223fb6356df22c7..72f6b40d16dbc30143f6d6d512715dce
  const IsPlan9 = 0
  const IsSolaris = 0
 diff --git a/src/internal/goos/zgoos_dragonfly.go b/src/internal/goos/zgoos_dragonfly.go
-index b92d1269f1f2864a80f41620d237711e54fc325f..2439ea495e375e45933bab03e76cbbf43139775b 100644
+index b92d1269..2439ea49 100644
 --- a/src/internal/goos/zgoos_dragonfly.go
 +++ b/src/internal/goos/zgoos_dragonfly.go
 @@ -6,6 +6,8 @@ package goos
@@ -3357,7 +3455,7 @@ index b92d1269f1f2864a80f41620d237711e54fc325f..2439ea495e375e45933bab03e76cbbf4
  const IsPlan9 = 0
  const IsSolaris = 0
 diff --git a/src/internal/goos/zgoos_freebsd.go b/src/internal/goos/zgoos_freebsd.go
-index f547591ab1e521268fce6897cfd80f8f8a8ff3cd..56c70209cb76da06e9e222f332c4c7dccd27d4ad 100644
+index f547591a..56c70209 100644
 --- a/src/internal/goos/zgoos_freebsd.go
 +++ b/src/internal/goos/zgoos_freebsd.go
 @@ -6,6 +6,8 @@ package goos
@@ -3378,7 +3476,7 @@ index f547591ab1e521268fce6897cfd80f8f8a8ff3cd..56c70209cb76da06e9e222f332c4c7dc
  const IsPlan9 = 0
  const IsSolaris = 0
 diff --git a/src/internal/goos/zgoos_hurd.go b/src/internal/goos/zgoos_hurd.go
-index 1189d65d74599e7eb03d3b10196d72e53693905b..3ad722bde7889c991da9d5da4a32f322467bdcdb 100644
+index 1189d65d..3ad722bd 100644
 --- a/src/internal/goos/zgoos_hurd.go
 +++ b/src/internal/goos/zgoos_hurd.go
 @@ -6,6 +6,8 @@ package goos
@@ -3399,7 +3497,7 @@ index 1189d65d74599e7eb03d3b10196d72e53693905b..3ad722bde7889c991da9d5da4a32f322
  const IsPlan9 = 0
  const IsSolaris = 0
 diff --git a/src/internal/goos/zgoos_illumos.go b/src/internal/goos/zgoos_illumos.go
-index 4f0254081c31f1ccd572d99b760813b86c4b51e6..fc8f5b76c3a2952acc9ee468c6e22b541d5f88c5 100644
+index 4f025408..fc8f5b76 100644
 --- a/src/internal/goos/zgoos_illumos.go
 +++ b/src/internal/goos/zgoos_illumos.go
 @@ -6,6 +6,8 @@ package goos
@@ -3420,7 +3518,7 @@ index 4f0254081c31f1ccd572d99b760813b86c4b51e6..fc8f5b76c3a2952acc9ee468c6e22b54
  const IsPlan9 = 0
  const IsSolaris = 0
 diff --git a/src/internal/goos/zgoos_ios.go b/src/internal/goos/zgoos_ios.go
-index 02f3586fa4017755f8e74cbe1a7be5182e9c22d8..188709bc97f31c0b102db7c1f008d41d6d55390d 100644
+index 02f3586f..188709bc 100644
 --- a/src/internal/goos/zgoos_ios.go
 +++ b/src/internal/goos/zgoos_ios.go
 @@ -6,6 +6,8 @@ package goos
@@ -3441,7 +3539,7 @@ index 02f3586fa4017755f8e74cbe1a7be5182e9c22d8..188709bc97f31c0b102db7c1f008d41d
  const IsPlan9 = 0
  const IsSolaris = 0
 diff --git a/src/internal/goos/zgoos_js.go b/src/internal/goos/zgoos_js.go
-index 481874189199116e973c1ae562648ff6ef060c8a..683a5738a633f10d9d1968fea723bcf43b297c2e 100644
+index 48187418..683a5738 100644
 --- a/src/internal/goos/zgoos_js.go
 +++ b/src/internal/goos/zgoos_js.go
 @@ -6,6 +6,8 @@ package goos
@@ -3462,7 +3560,7 @@ index 481874189199116e973c1ae562648ff6ef060c8a..683a5738a633f10d9d1968fea723bcf4
  const IsPlan9 = 0
  const IsSolaris = 0
 diff --git a/src/internal/goos/zgoos_linux.go b/src/internal/goos/zgoos_linux.go
-index 6f4d4e07530a92a6d9ef8eeb62e65cb5ed145e14..18c1e74617f2d3fbf254597dcd65e484b6919372 100644
+index 6f4d4e07..18c1e746 100644
 --- a/src/internal/goos/zgoos_linux.go
 +++ b/src/internal/goos/zgoos_linux.go
 @@ -1,11 +1,13 @@
@@ -3489,7 +3587,7 @@ index 6f4d4e07530a92a6d9ef8eeb62e65cb5ed145e14..18c1e74617f2d3fbf254597dcd65e484
  const IsPlan9 = 0
  const IsSolaris = 0
 diff --git a/src/internal/goos/zgoos_netbsd.go b/src/internal/goos/zgoos_netbsd.go
-index 948603df0df73bcc7c6243e0e30495cc59418bd3..400983610b08a80eea496992141ee5082642fd4b 100644
+index 948603df..40098361 100644
 --- a/src/internal/goos/zgoos_netbsd.go
 +++ b/src/internal/goos/zgoos_netbsd.go
 @@ -6,6 +6,8 @@ package goos
@@ -3510,7 +3608,7 @@ index 948603df0df73bcc7c6243e0e30495cc59418bd3..400983610b08a80eea496992141ee508
  const IsPlan9 = 0
  const IsSolaris = 0
 diff --git a/src/internal/goos/zgoos_openbsd.go b/src/internal/goos/zgoos_openbsd.go
-index f4b201457b59a41315657a98bb6409057836b941..ff285e95bb895e404d31ce53f926b226c5cfe968 100644
+index f4b20145..ff285e95 100644
 --- a/src/internal/goos/zgoos_openbsd.go
 +++ b/src/internal/goos/zgoos_openbsd.go
 @@ -6,6 +6,8 @@ package goos
@@ -3532,7 +3630,7 @@ index f4b201457b59a41315657a98bb6409057836b941..ff285e95bb895e404d31ce53f926b226
  const IsSolaris = 0
 diff --git a/src/internal/goos/zgoos_openharmony.go b/src/internal/goos/zgoos_openharmony.go
 new file mode 100644
-index 0000000000000000000000000000000000000000..3708fd84db98dc6cba1f4bac60dcfd9d40206eb1
+index 00000000..3708fd84
 --- /dev/null
 +++ b/src/internal/goos/zgoos_openharmony.go
 @@ -0,0 +1,29 @@
@@ -3566,7 +3664,7 @@ index 0000000000000000000000000000000000000000..3708fd84db98dc6cba1f4bac60dcfd9d
 +const IsWindows = 0
 +const IsZos = 0
 diff --git a/src/internal/goos/zgoos_plan9.go b/src/internal/goos/zgoos_plan9.go
-index 95572dff37067da0cdbd00df59ec34de9f997e57..96068494b96655d3ad679aca75fbd1bd9ef0dc51 100644
+index 95572dff..96068494 100644
 --- a/src/internal/goos/zgoos_plan9.go
 +++ b/src/internal/goos/zgoos_plan9.go
 @@ -6,6 +6,8 @@ package goos
@@ -3587,7 +3685,7 @@ index 95572dff37067da0cdbd00df59ec34de9f997e57..96068494b96655d3ad679aca75fbd1bd
  const IsPlan9 = 1
  const IsSolaris = 0
 diff --git a/src/internal/goos/zgoos_solaris.go b/src/internal/goos/zgoos_solaris.go
-index c7058260f8e0d166817ed8a7daa20696bfbe3ded..0593777bc7840b48876520ce7c421c9dd52fa259 100644
+index c7058260..0593777b 100644
 --- a/src/internal/goos/zgoos_solaris.go
 +++ b/src/internal/goos/zgoos_solaris.go
 @@ -6,6 +6,8 @@ package goos
@@ -3608,7 +3706,7 @@ index c7058260f8e0d166817ed8a7daa20696bfbe3ded..0593777bc7840b48876520ce7c421c9d
  const IsPlan9 = 0
  const IsSolaris = 1
 diff --git a/src/internal/goos/zgoos_wasip1.go b/src/internal/goos/zgoos_wasip1.go
-index ae35eebac6142b817ff4bb80333c3caa7286376a..b726344ee6d6514efdc57b8ad87cabe8ad320480 100644
+index ae35eeba..b726344e 100644
 --- a/src/internal/goos/zgoos_wasip1.go
 +++ b/src/internal/goos/zgoos_wasip1.go
 @@ -6,6 +6,8 @@ package goos
@@ -3629,7 +3727,7 @@ index ae35eebac6142b817ff4bb80333c3caa7286376a..b726344ee6d6514efdc57b8ad87cabe8
  const IsPlan9 = 0
  const IsSolaris = 0
 diff --git a/src/internal/goos/zgoos_windows.go b/src/internal/goos/zgoos_windows.go
-index f89f4cf82946594325e8b4221a27ce68c2faf806..4c6a056538d544bdef1d62773c2556b985c18cee 100644
+index f89f4cf8..4c6a0565 100644
 --- a/src/internal/goos/zgoos_windows.go
 +++ b/src/internal/goos/zgoos_windows.go
 @@ -6,6 +6,8 @@ package goos
@@ -3650,7 +3748,7 @@ index f89f4cf82946594325e8b4221a27ce68c2faf806..4c6a056538d544bdef1d62773c2556b9
  const IsPlan9 = 0
  const IsSolaris = 0
 diff --git a/src/internal/goos/zgoos_zos.go b/src/internal/goos/zgoos_zos.go
-index 29fb0f8babbbd0110366839ce261b98016b4c9e6..54610c554b20744f901de534c72c4db09fcb0605 100644
+index 29fb0f8b..54610c55 100644
 --- a/src/internal/goos/zgoos_zos.go
 +++ b/src/internal/goos/zgoos_zos.go
 @@ -6,6 +6,8 @@ package goos
@@ -3670,8 +3768,125 @@ index 29fb0f8babbbd0110366839ce261b98016b4c9e6..54610c554b20744f901de534c72c4db0
  const IsOpenbsd = 0
  const IsPlan9 = 0
  const IsSolaris = 0
+diff --git a/src/internal/ohos/timezone_openharmony.go b/src/internal/ohos/timezone_openharmony.go
+new file mode 100644
+index 00000000..05107188
+--- /dev/null
++++ b/src/internal/ohos/timezone_openharmony.go
+@@ -0,0 +1,12 @@
++// Copyright 2026 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++//go:build openharmony
++
++// Package ohos contains optional OpenHarmony system-service bridges.
++package ohos
++
++// Timezone returns the system timezone identifier, or an empty string when the
++// service cannot be accessed. Callers must preserve an explicit TZ override.
++func Timezone() string { return systemTimezone() }
+diff --git a/src/internal/ohos/timezone_openharmony_nocgo.go b/src/internal/ohos/timezone_openharmony_nocgo.go
+new file mode 100644
+index 00000000..530cc040
+--- /dev/null
++++ b/src/internal/ohos/timezone_openharmony_nocgo.go
+@@ -0,0 +1,93 @@
++// Copyright 2026 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++//go:build openharmony
++
++package ohos
++
++import (
++	"syscall"
++	_ "unsafe" // go:linkname
++)
++
++//go:linkname runtimeTimezone runtime.openharmonyTimezone
++func runtimeTimezone(buf *byte, size int) int32
++
++// The system utility is a fallback for shell binaries without libc. Never run a
++// shell or accept an executable from PATH. App sandboxes can supply TZ through
++// their application context when process creation is unavailable.
++func systemTimezone() string {
++	var value [128]byte
++	if n := runtimeTimezone(&value[0], len(value)); n > 0 && int(n) < len(value) {
++		return string(value[:n])
++	}
++	var pipe [2]int
++	if syscall.Pipe2(pipe[:], syscall.O_CLOEXEC|syscall.O_NONBLOCK) != nil {
++		return ""
++	}
++	defer syscall.Close(pipe[0])
++	pid, err := syscall.ForkExec("/bin/param", []string{"param", "get", "persist.time.timezone"},
++		&syscall.ProcAttr{Env: syscall.Environ(), Files: []uintptr{^uintptr(0), uintptr(pipe[1]), ^uintptr(0)}})
++	syscall.Close(pipe[1])
++	if err != nil {
++		return ""
++	}
++	ep, err := syscall.EpollCreate1(syscall.EPOLL_CLOEXEC)
++	if err != nil {
++		syscall.Kill(pid, syscall.SIGKILL)
++		syscall.Wait4(pid, nil, 0, nil)
++		return ""
++	}
++	defer syscall.Close(ep)
++	if syscall.EpollCtl(ep, syscall.EPOLL_CTL_ADD, pipe[0], &syscall.EpollEvent{Events: syscall.EPOLLIN | syscall.EPOLLHUP, Fd: int32(pipe[0])}) != nil {
++		syscall.Kill(pid, syscall.SIGKILL)
++		syscall.Wait4(pid, nil, 0, nil)
++		return ""
++	}
++	var b [128]byte
++	n := 0
++	var status syscall.WaitStatus
++	done := false
++	eof := false
++	for tries := 0; tries < 20; tries++ {
++		var events [1]syscall.EpollEvent
++		if _, e := syscall.EpollWait(ep, events[:], 50); e != nil && e != syscall.EINTR {
++			break
++		}
++		m, e := -1, error(nil)
++		if !eof {
++			m, e = syscall.Read(pipe[0], b[n:])
++		}
++		if m > 0 {
++			n += m
++		}
++		if n == len(b) {
++			break
++		}
++		if m == 0 && e == nil {
++			eof = true
++			syscall.EpollCtl(ep, syscall.EPOLL_CTL_DEL, pipe[0], nil)
++		}
++		w, _ := syscall.Wait4(pid, &status, syscall.WNOHANG, nil)
++		if w == pid {
++			done = true
++			break
++		}
++	}
++	if !done {
++		syscall.Kill(pid, syscall.SIGKILL)
++		syscall.Wait4(pid, &status, 0, nil)
++	}
++	if !done || !status.Exited() || status.ExitStatus() != 0 {
++		return ""
++	}
++	start := 0
++	for start < n && (b[start] == ' ' || b[start] == '\n' || b[start] == '\r' || b[start] == '\t') {
++		start++
++	}
++	for n > start && (b[n-1] == ' ' || b[n-1] == '\n' || b[n-1] == '\r' || b[n-1] == '\t') {
++		n--
++	}
++	return string(b[start:n])
++}
 diff --git a/src/internal/platform/supported.go b/src/internal/platform/supported.go
-index 6f37e3685964980ecadd7802878ffe246bbc79d4..6767ebd431c812a52f2ada0fafde8237ad1a15ac 100644
+index 6f37e368..6767ebd4 100644
 --- a/src/internal/platform/supported.go
 +++ b/src/internal/platform/supported.go
 @@ -61,7 +61,7 @@ func ASanSupported(goos, goarch string) bool {
@@ -3713,7 +3928,7 @@ index 6f37e3685964980ecadd7802878ffe246bbc79d4..6767ebd431c812a52f2ada0fafde8237
  	case "android/arm64",
  		"darwin/amd64", "darwin/arm64",
 diff --git a/src/internal/platform/zosarch.go b/src/internal/platform/zosarch.go
-index ec6368e8b0531701c758b8a81f91a4cb3d172b96..84335aca966c30b1c5ba05473229f58652132b6d 100644
+index ec6368e8..84335aca 100644
 --- a/src/internal/platform/zosarch.go
 +++ b/src/internal/platform/zosarch.go
 @@ -49,6 +49,9 @@ var List = []OSArch{
@@ -3832,8 +4047,522 @@ index ec6368e8b0531701c758b8a81f91a4cb3d172b96..84335aca966c30b1c5ba05473229f586
 +	{"windows", "amd64"}:     {CgoSupported: true, FirstClass: true},
 +	{"windows", "arm64"}:     {CgoSupported: true},
  }
+diff --git a/src/internal/runtime/hilog/hilog_openharmony.go b/src/internal/runtime/hilog/hilog_openharmony.go
+new file mode 100644
+index 00000000..5f1249fb
+--- /dev/null
++++ b/src/internal/runtime/hilog/hilog_openharmony.go
+@@ -0,0 +1,247 @@
++// Copyright 2026 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++//go:build openharmony
++
++// Package hilog implements the bounded, nonblocking OHOS hilogd wire transport.
++// It is usable from runtime crash paths without cgo, allocation, or Go locks.
++package hilog
++
++import (
++	"internal/runtime/atomic"
++	"unsafe"
++)
++
++var gate atomic.Uint32
++var disabled atomic.Bool
++var fd int32 = -1
++var packetWords [1024]uint32
++var packet = (*[4096]byte)(unsafe.Pointer(&packetWords[0]))
++var streams [3]struct {
++	data [4000]byte
++	n    int
++}
++var address = struct {
++	family uint16
++	path   [108]byte
++}{family: 1, path: [108]byte{'/', 'd', 'e', 'v', '/', 'u', 'n', 'i', 'x', '/', 's', 'o', 'c', 'k', 'e', 't', '/', 'h', 'i', 'l', 'o', 'g', 'I', 'n', 'p', 'u', 't'}}
++
++// SetEnabled controls automatic stdout/stderr mirroring. Explicit Write calls
++// remain available. Missing or congested hilogd never changes stdio semantics.
++func SetEnabled(enabled bool) { disabled.Store(!enabled) }
++
++// The packet, socket address and clock scratch are protected by gate. Keep
++// each crash-path frame small even under -gcflags=all="-N -l".
++var clockScratch [2]uintptr
++var vector = struct {
++	base   unsafe.Pointer
++	length uintptr
++}{base: unsafe.Pointer(&packetWords[0])}
++var message = struct {
++	name       unsafe.Pointer
++	nameLen    uint32
++	iov        unsafe.Pointer
++	iovLen     uintptr
++	control    unsafe.Pointer
++	controlLen uintptr
++	flags      int32
++}{iov: unsafe.Pointer(&vector), iovLen: 1}
++
++// raw3 is an allocation-free, NOSPLIT syscall leaf. The narrower ABI keeps
++// signal-handler stack use bounded even when the compiler disables optimization.
++func raw3(trap, a1, a2, a3 uintptr) (result, errno uintptr)
++func raw0(trap uintptr) uintptr
++func socketFD() int32
++
++//go:nosplit
++func put8(i int, v byte) { *(*byte)(unsafe.Add(unsafe.Pointer(&packet[0]), i)) = v }
++
++// All supported OHOS ABIs are little endian. Header stores are aligned by
++// packetWords and the protocol's fixed 16/32-bit offsets.
++//
++//go:nosplit
++func put16(i int, v uint16) { *(*uint16)(unsafe.Add(unsafe.Pointer(&packetWords[0]), i)) = v }
++
++//go:nosplit
++func put32(i int, v uint32) { *(*uint32)(unsafe.Add(unsafe.Pointer(&packetWords[0]), i)) = v }
++
++//go:nosplit
++func connectSocket() bool {
++	if fd >= 0 {
++		return true
++	}
++	fd = socketFD()
++	if fd < 0 {
++		return false
++	}
++	r := uintptr(fd)
++	var e uintptr
++	_, e = raw3(sysConnect, r, uintptr(unsafe.Pointer(&address)), 30)
++	if e != 0 {
++		raw3(sysClose, uintptr(fd), 0, 0)
++		fd = -1
++		return false
++	}
++	return true
++}
++
++//go:nosplit
++func processID(trap uintptr) uint32 {
++	return uint32(raw0(trap))
++}
++
++//go:nosplit
++func header(level uint8, domain uint32, tagLen int) {
++	raw3(sysClockGettime, 0, uintptr(unsafe.Pointer(&clockScratch)), 0)
++	put32(4, uint32(clockScratch[0]))
++	put32(8, uint32(clockScratch[1]))
++	raw3(sysClockGettime, 1, uintptr(unsafe.Pointer(&clockScratch)), 0)
++	put32(12, uint32(clockScratch[0]))
++	put32(16, processID(sysGetpid))
++	put32(20, processID(sysGettid))
++	put32(24, domain)
++	put16(2, uint16(level)<<7|uint16(tagLen+1)<<10)
++}
++
++//go:nosplit
++func transmit(n int) bool {
++	vector.length = uintptr(n)
++	r, e := raw3(sysSendmsg, uintptr(fd), uintptr(unsafe.Pointer(&message)), 0x40|0x4000)
++	if e != 0 && e != 11 && e != 4 {
++		raw3(sysClose, uintptr(fd), 0, 0)
++		fd = -1
++	}
++	return e == 0 && r == uintptr(n)
++}
++
++type logRecord struct {
++	level  uint8
++	domain uint32
++	tag    string
++	text   []byte
++}
++
++// send is called with gate held. HilogMsg is a packed 28-byte header shared by
++// all three ABIs. LOG_APP/version 0 are used; preformatted stdio text is public.
++// The caller bounds tag to 31 bytes and text to 4000 bytes. With terminators,
++// the largest packet is 4061 bytes, below packet's fixed 4096-byte capacity.
++//
++//go:nosplit
++func send(record *logRecord) bool {
++	if len(record.tag) > 31 || len(record.text) > 4000 || !connectSocket() {
++		return false
++	}
++	header(record.level, record.domain, len(record.tag))
++	n := 28
++	for i := 0; i < len(record.tag); i++ {
++		put8(n, *(*byte)(unsafe.Add(unsafe.Pointer(unsafe.StringData(record.tag)), i)))
++		n++
++	}
++	put8(n, 0)
++	n++
++	for _, c := range record.text {
++		if c == 0 {
++			c = ' '
++		}
++		put8(n, c)
++		n++
++	}
++	put8(n, 0)
++	n++
++	put16(0, uint16(n))
++	return transmit(n)
++}
++
++// Write emits preformatted text, splitting long records without truncation.
++// It deliberately fails rather than waiting behind a reentrant crash logger.
++func Write(level uint8, domain uint32, tag string, text []byte) bool {
++	if level < 3 || level > 7 || domain > 0xffff || len(tag) == 0 || len(tag) > 31 {
++		return false
++	}
++	for i := range tag {
++		if tag[i] == 0 {
++			return false
++		}
++	}
++	if !gate.CompareAndSwap(0, 1) {
++		return false
++	}
++	ok := true
++	for len(text) > 0 {
++		n := len(text)
++		if n > 4000 {
++			n = 4000
++		}
++		record := logRecord{level, domain, tag, text[:n]}
++		if !send(&record) {
++			ok = false
++			break
++		}
++		text = text[n:]
++	}
++	gate.Store(0)
++	return ok
++}
++
++// WriteStream mirrors ordinary Go stdout/stderr. Runtime signal and crash
++// paths use the shallower WriteRuntime entry below.
++func WriteStream(stream int, data []byte) {
++	if stream < 1 || stream > 2 || disabled.Load() || !gate.CompareAndSwap(0, 1) {
++		return
++	}
++	b := &streams[stream]
++	level := uint8(4)
++	if stream == 2 {
++		level = 6
++	}
++	for _, c := range data {
++		if c != '\n' {
++			if c == 0 {
++				c = ' '
++			}
++			b.data[b.n] = c
++			b.n++
++		}
++		if c == '\n' || b.n == len(b.data) {
++			record := logRecord{level, 0, "Go", b.data[:b.n]}
++			send(&record)
++			b.n = 0
++		}
++	}
++	gate.Store(0)
++}
++
++// WriteRuntime shares stderr buffering, but avoids the general record encoder
++// call chain. This path must fit the runtime's NOSPLIT budget with -N -l too.
++//
++//go:nosplit
++func WriteRuntime(data []byte) {
++	if disabled.Load() || !gate.CompareAndSwap(0, 1) {
++		return
++	}
++	b := &streams[2]
++	for _, c := range data {
++		if c != '\n' {
++			if c == 0 {
++				c = ' '
++			}
++			b.data[b.n] = c
++			b.n++
++		}
++		if c == '\n' || b.n == len(b.data) {
++			if connectSocket() {
++				header(6, 0, 2)
++				packet[28] = 'G'
++				packet[29] = 'o'
++				packet[30] = 0
++				copy(packet[31:], b.data[:b.n])
++				packet[31+b.n] = 0
++				put16(0, uint16(32+b.n))
++				transmit(32 + b.n)
++			}
++			b.n = 0
++		}
++	}
++	gate.Store(0)
++}
+diff --git a/src/internal/runtime/hilog/hilog_other.go b/src/internal/runtime/hilog/hilog_other.go
+new file mode 100644
+index 00000000..99422992
+--- /dev/null
++++ b/src/internal/runtime/hilog/hilog_other.go
+@@ -0,0 +1,16 @@
++// Copyright 2026 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++//go:build !openharmony
++
++package hilog
++
++func SetEnabled(bool)                          {}
++func Write(uint8, uint32, string, []byte) bool { return false }
++
++//go:nosplit
++func WriteStream(int, []byte) {}
++
++//go:nosplit
++func WriteRuntime([]byte) {}
+diff --git a/src/internal/runtime/hilog/raw_openharmony_amd64.s b/src/internal/runtime/hilog/raw_openharmony_amd64.s
+new file mode 100644
+index 00000000..517c6025
+--- /dev/null
++++ b/src/internal/runtime/hilog/raw_openharmony_amd64.s
+@@ -0,0 +1,50 @@
++// Copyright 2026 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style license.
++#include "textflag.h"
++#include "go_asm.h"
++TEXT ·raw3(SB),NOSPLIT,$0-48
++ MOVQ trap+0(FP),AX
++ MOVQ a1+8(FP),DI
++ MOVQ a2+16(FP),SI
++ MOVQ a3+24(FP),DX
++ SYSCALL
++ CMPQ AX,$0xfffffffffffff001
++ JLS ok
++ NEGQ AX
++ MOVQ AX,errno+40(FP)
++ MOVQ $-1,result+32(FP)
++ RET
++ok:
++ MOVQ AX,result+32(FP)
++ MOVQ $0,errno+40(FP)
++ RET
++
++TEXT ·raw0(SB),NOSPLIT,$0-16
++ MOVQ trap+0(FP),AX
++ SYSCALL
++ MOVQ AX,ret+8(FP)
++ RET
++
++// Internal logger descriptors must never replace closed stdin/stdout/stderr.
++TEXT ·socketFD(SB),NOSPLIT,$0-4
++ MOVQ $const_sysSocket,AX
++ MOVQ $1,DI
++ MOVQ $0x80802,SI
++ XORQ DX,DX
++ SYSCALL
++ CMPQ AX,$3
++ JAE socketdone
++ MOVQ AX,R8
++ MOVQ AX,DI
++ MOVQ $const_sysFcntl,AX
++ MOVQ $1030,SI
++ MOVQ $3,DX
++ SYSCALL
++ MOVQ AX,R9
++ MOVQ $const_sysClose,AX
++ MOVQ R8,DI
++ SYSCALL
++ MOVQ R9,AX
++socketdone:
++ MOVL AX,ret+0(FP)
++ RET
+diff --git a/src/internal/runtime/hilog/raw_openharmony_arm.s b/src/internal/runtime/hilog/raw_openharmony_arm.s
+new file mode 100644
+index 00000000..4b60bd31
+--- /dev/null
++++ b/src/internal/runtime/hilog/raw_openharmony_arm.s
+@@ -0,0 +1,52 @@
++// Copyright 2026 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style license.
++#include "textflag.h"
++#include "go_asm.h"
++TEXT ·raw3(SB),NOSPLIT,$0-24
++ MOVW trap+0(FP),R7
++ MOVW a1+4(FP),R0
++ MOVW a2+8(FP),R1
++ MOVW a3+12(FP),R2
++ SWI $0
++ MOVW $0xfffff001,R3
++ CMP R3,R0
++ BLS ok
++ RSB $0,R0,R0
++ MOVW R0,errno+20(FP)
++ MOVW $-1,R0
++ MOVW R0,result+16(FP)
++ RET
++ok:
++ MOVW R0,result+16(FP)
++ MOVW $0,R0
++ MOVW R0,errno+20(FP)
++ RET
++
++TEXT ·raw0(SB),NOSPLIT,$0-8
++ MOVW trap+0(FP),R7
++ SWI $0
++ MOVW R0,ret+4(FP)
++ RET
++
++// Internal logger descriptors must never replace closed stdin/stdout/stderr.
++TEXT ·socketFD(SB),NOSPLIT,$0-4
++ MOVW $const_sysSocket,R7
++ MOVW $1,R0
++ MOVW $0x80802,R1
++ MOVW $0,R2
++ SWI $0
++ CMP $3,R0
++ BHS socketdone
++ MOVW R0,R4
++ MOVW $const_sysFcntl,R7
++ MOVW $1030,R1
++ MOVW $3,R2
++ SWI $0
++ MOVW R0,R5
++ MOVW $const_sysClose,R7
++ MOVW R4,R0
++ SWI $0
++ MOVW R5,R0
++socketdone:
++ MOVW R0,ret+0(FP)
++ RET
+diff --git a/src/internal/runtime/hilog/raw_openharmony_arm64.s b/src/internal/runtime/hilog/raw_openharmony_arm64.s
+new file mode 100644
+index 00000000..26bb689a
+--- /dev/null
++++ b/src/internal/runtime/hilog/raw_openharmony_arm64.s
+@@ -0,0 +1,50 @@
++// Copyright 2026 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style license.
++#include "textflag.h"
++#include "go_asm.h"
++TEXT ·raw3(SB),NOSPLIT,$0-48
++ MOVD trap+0(FP),R8
++ MOVD a1+8(FP),R0
++ MOVD a2+16(FP),R1
++ MOVD a3+24(FP),R2
++ SVC
++ CMN $4095,R0
++ BCC ok
++ NEG R0,R0
++ MOVD R0,errno+40(FP)
++ MOVD $-1,R0
++ MOVD R0,result+32(FP)
++ RET
++ok:
++ MOVD R0,result+32(FP)
++ MOVD ZR,errno+40(FP)
++ RET
++
++TEXT ·raw0(SB),NOSPLIT,$0-16
++ MOVD trap+0(FP),R8
++ SVC
++ MOVD R0,ret+8(FP)
++ RET
++
++// Internal logger descriptors must never replace closed stdin/stdout/stderr.
++TEXT ·socketFD(SB),NOSPLIT,$0-4
++ MOVD $const_sysSocket,R8
++ MOVD $1,R0
++ MOVD $0x80802,R1
++ MOVD ZR,R2
++ SVC
++ CMP $3,R0
++ BHS socketdone
++ MOVD R0,R6
++ MOVD $const_sysFcntl,R8
++ MOVD $1030,R1
++ MOVD $3,R2
++ SVC
++ MOVD R0,R7
++ MOVD $const_sysClose,R8
++ MOVD R6,R0
++ SVC
++ MOVD R7,R0
++socketdone:
++ MOVW R0,ret+0(FP)
++ RET
+diff --git a/src/internal/runtime/hilog/sys_openharmony_amd64.go b/src/internal/runtime/hilog/sys_openharmony_amd64.go
+new file mode 100644
+index 00000000..183ebfe5
+--- /dev/null
++++ b/src/internal/runtime/hilog/sys_openharmony_amd64.go
+@@ -0,0 +1,17 @@
++// Copyright 2026 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++package hilog
++
++const (
++	sysFcntl        = 72
++	sysSendmsg      = 46
++	sysClose        = 3
++	sysSocket       = 41
++	sysConnect      = 42
++	sysSendto       = 44
++	sysClockGettime = 228
++	sysGetpid       = 39
++	sysGettid       = 186
++)
+diff --git a/src/internal/runtime/hilog/sys_openharmony_arm.go b/src/internal/runtime/hilog/sys_openharmony_arm.go
+new file mode 100644
+index 00000000..2c874c5a
+--- /dev/null
++++ b/src/internal/runtime/hilog/sys_openharmony_arm.go
+@@ -0,0 +1,17 @@
++// Copyright 2026 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++package hilog
++
++const (
++	sysFcntl        = 55
++	sysSendmsg      = 296
++	sysClose        = 6
++	sysSocket       = 281
++	sysConnect      = 283
++	sysSendto       = 290
++	sysClockGettime = 263
++	sysGetpid       = 20
++	sysGettid       = 224
++)
+diff --git a/src/internal/runtime/hilog/sys_openharmony_arm64.go b/src/internal/runtime/hilog/sys_openharmony_arm64.go
+new file mode 100644
+index 00000000..c7863462
+--- /dev/null
++++ b/src/internal/runtime/hilog/sys_openharmony_arm64.go
+@@ -0,0 +1,17 @@
++// Copyright 2026 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++package hilog
++
++const (
++	sysFcntl        = 25
++	sysSendmsg      = 211
++	sysClose        = 57
++	sysSocket       = 198
++	sysConnect      = 203
++	sysSendto       = 206
++	sysClockGettime = 113
++	sysGetpid       = 172
++	sysGettid       = 178
++)
 diff --git a/src/internal/syslist/syslist.go b/src/internal/syslist/syslist.go
-index 2349b6ea64a6d3ae1cc8b8a92820c4a78d38ba1e..6f0c7b88f12ba2ba6b02e7ddf0df373029fd24ec 100644
+index 2349b6ea..6f0c7b88 100644
 --- a/src/internal/syslist/syslist.go
 +++ b/src/internal/syslist/syslist.go
 @@ -15,42 +15,44 @@ package syslist
@@ -3912,7 +4641,7 @@ index 2349b6ea64a6d3ae1cc8b8a92820c4a78d38ba1e..6f0c7b88f12ba2ba6b02e7ddf0df3730
  
  // KnownArch is the list of past, present, and future known GOARCH values.
 diff --git a/src/internal/testenv/testenv.go b/src/internal/testenv/testenv.go
-index 5aeb5815ad951b6ba5dc77e108a105f4c9148a5e..fc361639d552db5f301d2f79e68b404f5540a153 100644
+index 5aeb5815..fc361639 100644
 --- a/src/internal/testenv/testenv.go
 +++ b/src/internal/testenv/testenv.go
 @@ -17,6 +17,7 @@ import (
@@ -3959,9 +4688,101 @@ index 5aeb5815ad951b6ba5dc77e108a105f4c9148a5e..fc361639d552db5f301d2f79e68b404f
  		t.Helper()
  		t.Skipf("skipping test: build mode %s on %s/%s is not supported by the %s compiler", buildmode, runtime.GOOS, runtime.GOARCH, runtime.Compiler)
  	}
+diff --git a/src/log/hilog/hilog.go b/src/log/hilog/hilog.go
+new file mode 100644
+index 00000000..d8721243
+--- /dev/null
++++ b/src/log/hilog/hilog.go
+@@ -0,0 +1,86 @@
++// Copyright 2026 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++// Package hilog sends preformatted application logs to OpenHarmony HiLog.
++// Standard stdout/stderr and runtime diagnostics are mirrored automatically on
++// OHOS; this package provides explicit domain, tag and level selection.
++package hilog
++
++import (
++	"context"
++	"errors"
++	transport "internal/runtime/hilog"
++	"log/slog"
++)
++
++type Level uint8
++
++const (
++	Debug Level = 3
++	Info  Level = 4
++	Warn  Level = 5
++	Error Level = 6
++	Fatal Level = 7
++)
++
++// Writer sends each Write as one or more bounded LOG_APP records. Text has
++// already been formatted and is public, including any slog attributes.
++type Writer struct {
++	Domain uint32
++	Tag    string
++	Level  Level
++}
++
++func (w Writer) Write(p []byte) (int, error) {
++	if len(p) == 0 {
++		return 0, nil
++	}
++	if !transport.Write(uint8(w.Level), w.Domain, w.Tag, p) {
++		return 0, errors.New("hilog: invalid metadata, busy transport, or hilogd unavailable")
++	}
++	return len(p), nil
++}
++
++// SetStdioMirroring enables or disables the additional HiLog copy of Go stdio
++// and runtime diagnostics. The default is enabled; GO_OHOS_HILOG=0 disables it
++// at startup. Explicit Writer and Handler output is unaffected.
++func SetStdioMirroring(enabled bool) { transport.SetEnabled(enabled) }
++
++type handler struct{ levels [4]slog.Handler }
++
++// NewHandler returns a text slog handler preserving attributes, groups and
++// HandlerOptions while mapping each record's severity to the HiLog level.
++func NewHandler(domain uint32, tag string, opts *slog.HandlerOptions) slog.Handler {
++	h := &handler{}
++	for i, level := range []Level{Debug, Info, Warn, Error} {
++		h.levels[i] = slog.NewTextHandler(Writer{domain, tag, level}, opts)
++	}
++	return h
++}
++func (h *handler) Enabled(ctx context.Context, l slog.Level) bool { return h.levels[0].Enabled(ctx, l) }
++func (h *handler) Handle(ctx context.Context, r slog.Record) error {
++	i := 0
++	if r.Level >= slog.LevelError {
++		i = 3
++	} else if r.Level >= slog.LevelWarn {
++		i = 2
++	} else if r.Level >= slog.LevelInfo {
++		i = 1
++	}
++	return h.levels[i].Handle(ctx, r)
++}
++func (h *handler) WithAttrs(attrs []slog.Attr) slog.Handler {
++	n := &handler{}
++	for i := range n.levels {
++		n.levels[i] = h.levels[i].WithAttrs(attrs)
++	}
++	return n
++}
++func (h *handler) WithGroup(name string) slog.Handler {
++	n := &handler{}
++	for i := range n.levels {
++		n.levels[i] = h.levels[i].WithGroup(name)
++	}
++	return n
++}
 diff --git a/src/mime/type_openharmony.go b/src/mime/type_openharmony.go
 new file mode 100644
-index 0000000000000000000000000000000000000000..9a904853ffa86c4a40d6ec4cf6ca29fc24cc6be0
+index 00000000..9a904853
 --- /dev/null
 +++ b/src/mime/type_openharmony.go
 @@ -0,0 +1,9 @@
@@ -3975,7 +4796,7 @@ index 0000000000000000000000000000000000000000..9a904853ffa86c4a40d6ec4cf6ca29fc
 +	typeFiles = append(typeFiles, "/system/etc/cups/share/mime/mime.types")
 +}
 diff --git a/src/net/conf.go b/src/net/conf.go
-index 92c5618d1ec2217ff50bdffe38a63d5b19773ed6..b6ae62048e21530c5f8cdc719ce4148599a0d704 100644
+index 92c5618d..b6ae6204 100644
 --- a/src/net/conf.go
 +++ b/src/net/conf.go
 @@ -185,6 +185,12 @@ func goosPrefersCgo() bool {
@@ -3992,7 +4813,7 @@ index 92c5618d1ec2217ff50bdffe38a63d5b19773ed6..b6ae62048e21530c5f8cdc719ce41485
  		return false
  	}
 diff --git a/src/net/interface_linux.go b/src/net/interface_linux.go
-index 7856dae8fc878b72a5444a069b53580498418d63..b09ef3eae3c08d225d8c382f0aff144b22c40ae2 100644
+index 7856dae8..b09ef3ea 100644
 --- a/src/net/interface_linux.go
 +++ b/src/net/interface_linux.go
 @@ -13,7 +13,7 @@ import (
@@ -4015,7 +4836,7 @@ index 7856dae8fc878b72a5444a069b53580498418d63..b09ef3eae3c08d225d8c382f0aff144b
  		return nil, os.NewSyscallError("netlinkrib", err)
 diff --git a/src/net/interface_openharmony.go b/src/net/interface_openharmony.go
 new file mode 100644
-index 0000000000000000000000000000000000000000..4e962d70e15ea12eba71aba5ba683dc256cb12cf
+index 00000000..581aecf5
 --- /dev/null
 +++ b/src/net/interface_openharmony.go
 @@ -0,0 +1,103 @@
@@ -4023,7 +4844,7 @@ index 0000000000000000000000000000000000000000..4e962d70e15ea12eba71aba5ba683dc2
 +// Use of this source code is governed by a BSD-style
 +// license that can be found in the LICENSE file.
 +
-+//go:build openharmony && cgo && !netgo
++//go:build openharmony && cgo
 +
 +package net
 +
@@ -4124,7 +4945,7 @@ index 0000000000000000000000000000000000000000..4e962d70e15ea12eba71aba5ba683dc2
 +}
 diff --git a/src/net/interface_table_linux.go b/src/net/interface_table_linux.go
 new file mode 100644
-index 0000000000000000000000000000000000000000..446f2d3b020116ae9afb85c4ff5a62f428fc0b9e
+index 00000000..87aa64c4
 --- /dev/null
 +++ b/src/net/interface_table_linux.go
 @@ -0,0 +1,10 @@
@@ -4132,14 +4953,94 @@ index 0000000000000000000000000000000000000000..446f2d3b020116ae9afb85c4ff5a62f4
 +// Use of this source code is governed by a BSD-style
 +// license that can be found in the LICENSE file.
 +
-+//go:build linux && (!openharmony || !cgo || netgo)
++//go:build linux && (!openharmony || !cgo)
 +
 +package net
 +
 +func interfaceTable(index int) ([]Interface, error)     { return interfaceTableLinux(index) }
 +func interfaceAddrTable(ifi *Interface) ([]Addr, error) { return interfaceAddrTableLinux(ifi) }
+diff --git a/src/net/socket_openharmony.go b/src/net/socket_openharmony.go
+new file mode 100644
+index 00000000..61aa99f6
+--- /dev/null
++++ b/src/net/socket_openharmony.go
+@@ -0,0 +1,24 @@
++// Copyright 2026 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++//go:build openharmony && cgo
++
++package net
++
++/*
++#include <sys/socket.h>
++*/
++import "C"
++
++func init() {
++	// OHOS libc applies application network selection and VPN protection hooks
++	// at socket creation. A raw syscall would skip that system policy.
++	socketFunc = func(family, typ, protocol int) (int, error) {
++		fd, err := C.socket(C.int(family), C.int(typ), C.int(protocol))
++		if fd < 0 {
++			return -1, err
++		}
++		return int(fd), nil
++	}
++}
+diff --git a/src/os/file.go b/src/os/file.go
+index 764ce12c..350e0854 100644
+--- a/src/os/file.go
++++ b/src/os/file.go
+@@ -47,6 +47,7 @@ import (
+ 	"errors"
+ 	"internal/filepathlite"
+ 	"internal/poll"
++	"internal/runtime/hilog"
+ 	"internal/testlog"
+ 	"io"
+ 	"io/fs"
+@@ -176,6 +177,10 @@ func (f *File) ReadFrom(r io.Reader) (n int64, err error) {
+ 	if err := f.checkValid("write"); err != nil {
+ 		return 0, err
+ 	}
++	if runtime.IsOpenharmony && (f == Stdout || f == Stderr) {
++		// Kernel copy paths bypass Write and would lose the HiLog copy.
++		return genericReadFrom(f, r)
++	}
+ 	n, handled, e := f.readFrom(r)
+ 	if !handled {
+ 		return genericReadFrom(f, r) // without wrapping
+@@ -213,6 +218,14 @@ func (f *File) Write(b []byte) (n int, err error) {
+ 		return 0, err
+ 	}
+ 	n, e := f.write(b)
++	if runtime.IsOpenharmony {
++		if f == Stdout {
++			hilog.WriteStream(1, b)
++		}
++		if f == Stderr {
++			hilog.WriteStream(2, b)
++		}
++	}
+ 	if n < 0 {
+ 		n = 0
+ 	}
+@@ -266,6 +279,11 @@ func (f *File) WriteTo(w io.Writer) (n int64, err error) {
+ 	if err := f.checkValid("read"); err != nil {
+ 		return 0, err
+ 	}
++	if runtime.IsOpenharmony {
++		if dst, ok := w.(*File); ok && (dst == Stdout || dst == Stderr) {
++			return genericWriteTo(f, w)
++		}
++	}
+ 	n, handled, e := f.writeTo(w)
+ 	if handled {
+ 		return n, f.wrapErr("read", e)
 diff --git a/src/os/file_unix.go b/src/os/file_unix.go
-index 6f9cab788b556005ff4ced5e62b9dd6ac5c5ce14..5261711835d1edf0e1e7539d32c82129aefd5697 100644
+index 6f9cab78..52617118 100644
 --- a/src/os/file_unix.go
 +++ b/src/os/file_unix.go
 @@ -390,7 +390,7 @@ func Remove(name string) error {
@@ -4151,8 +5052,99 @@ index 6f9cab788b556005ff4ced5e62b9dd6ac5c5ce14..5261711835d1edf0e1e7539d32c82129
  			dir = "/data/local/tmp"
  		} else {
  			dir = "/tmp"
+diff --git a/src/os/openharmony/openharmony.go b/src/os/openharmony/openharmony.go
+new file mode 100644
+index 00000000..de9a0c8f
+--- /dev/null
++++ b/src/os/openharmony/openharmony.go
+@@ -0,0 +1,85 @@
++// Copyright 2026 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++// Package openharmony configures Go libraries from an OHOS application Context.
++// Call Configure before starting application goroutines. Paths come from the
++// embedding application; no package name or private directory is guessed.
++package openharmony
++
++import (
++	"errors"
++	"os"
++	"path/filepath"
++	"runtime"
++	"strings"
++)
++
++// Config contains directories obtained from the current application's Context.
++// Timezone is optional; when empty, time.Local uses system timezone discovery.
++// Set it before the first use of time.Local, whose initialization is cached.
++type Config struct {
++	FilesDir string
++	CacheDir string
++	TempDir  string
++	Timezone string
++	// TrustedCertDirs are additional CA directories explicitly approved by the
++	// application (for example a directory returned by Certificate Manager).
++	// User certificate stores are never recursively imported without consent.
++	TrustedCertDirs []string
++}
++
++// Configure validates all directories before setting HOME, XDG_CONFIG_HOME,
++// XDG_CACHE_HOME and TMPDIR. It never creates or broadens access to directories.
++// A process embedding several Go clients should configure one shared Context.
++func Configure(c Config) error {
++	if !runtime.IsOpenharmony {
++		return errors.New("openharmony: unsupported operating system")
++	}
++	for _, path := range []string{c.FilesDir, c.CacheDir, c.TempDir} {
++		if path == "" || !filepath.IsAbs(path) || strings.IndexByte(path, 0) >= 0 {
++			return errors.New("openharmony: Context directories must be absolute paths")
++		}
++		info, err := os.Stat(path)
++		if err != nil {
++			return err
++		}
++		if !info.IsDir() {
++			return errors.New("openharmony: Context path is not a directory: " + path)
++		}
++	}
++	if strings.IndexByte(c.Timezone, 0) >= 0 {
++		return errors.New("openharmony: invalid timezone")
++	}
++	for _, path := range c.TrustedCertDirs {
++		if !filepath.IsAbs(path) || strings.ContainsAny(path, "\x00:") {
++			return errors.New("openharmony: invalid CA directory")
++		}
++		info, err := os.Stat(path)
++		if err != nil {
++			return err
++		}
++		if !info.IsDir() {
++			return errors.New("openharmony: CA path is not a directory")
++		}
++	}
++	vars := [][2]string{
++		{"HOME", filepath.Clean(c.FilesDir)},
++		{"XDG_CONFIG_HOME", filepath.Join(c.FilesDir, ".config")},
++		{"XDG_CACHE_HOME", filepath.Clean(c.CacheDir)},
++		{"TMPDIR", filepath.Clean(c.TempDir)},
++	}
++	if c.Timezone != "" {
++		vars = append(vars, [2]string{"TZ", c.Timezone})
++	}
++	if len(c.TrustedCertDirs) != 0 {
++		dirs := append([]string{"/etc/security/certificates", "/system/etc/security/certificates"}, c.TrustedCertDirs...)
++		vars = append(vars, [2]string{"SSL_CERT_DIR", strings.Join(dirs, ":")})
++	}
++	for _, v := range vars {
++		if err := os.Setenv(v[0], v[1]); err != nil {
++			return err
++		}
++	}
++	return nil
++}
 diff --git a/src/os/os_test.go b/src/os/os_test.go
-index 62c8544333a8131fd72309674f15d447762aa024..697b121b2ac7382cc2e087b965f9cfe2006e6d92 100644
+index 62c85443..697b121b 100644
 --- a/src/os/os_test.go
 +++ b/src/os/os_test.go
 @@ -57,6 +57,10 @@ type sysDir struct {
@@ -4186,8 +5178,83 @@ index 62c8544333a8131fd72309674f15d447762aa024..697b121b2ac7382cc2e087b965f9cfe2
  	// /usr/bin does not usually exist on Plan 9 or Android.
  	switch runtime.GOOS {
  	case "android":
+diff --git a/src/os/user/cgo_lookup_unix.go b/src/os/user/cgo_lookup_unix.go
+index 1c9a2896..1b3255d3 100644
+--- a/src/os/user/cgo_lookup_unix.go
++++ b/src/os/user/cgo_lookup_unix.go
+@@ -16,7 +16,13 @@ import (
+ )
+ 
+ func current() (*User, error) {
+-	return lookupUnixUid(syscall.Getuid())
++	u, err := lookupUnixUid(syscall.Getuid())
++	if runtime.IsOpenharmony && err != nil {
++		if _, unknown := err.(UnknownUserIdError); unknown {
++			return currentOpenharmony(), nil
++		}
++	}
++	return u, err
+ }
+ 
+ func lookupUser(username string) (*User, error) {
+diff --git a/src/os/user/current_openharmony.go b/src/os/user/current_openharmony.go
+new file mode 100644
+index 00000000..6a8a5da3
+--- /dev/null
++++ b/src/os/user/current_openharmony.go
+@@ -0,0 +1,21 @@
++// Copyright 2026 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++package user
++
++import (
++	"os"
++	"strconv"
++)
++
++// Application UIDs need not be present in the system passwd database.
++func currentOpenharmony() *User {
++	uid := strconv.Itoa(os.Getuid())
++	name := os.Getenv("USER")
++	if name == "" {
++		name = "uid_" + uid
++	}
++	home, _ := os.UserHomeDir()
++	return &User{Uid: uid, Gid: strconv.Itoa(os.Getgid()), Username: name, HomeDir: home}
++}
+diff --git a/src/os/user/current_other.go b/src/os/user/current_other.go
+new file mode 100644
+index 00000000..2ef04730
+--- /dev/null
++++ b/src/os/user/current_other.go
+@@ -0,0 +1,9 @@
++// Copyright 2026 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++//go:build !openharmony
++
++package user
++
++func currentOpenharmony() *User { return nil }
+diff --git a/src/os/user/lookup_stubs.go b/src/os/user/lookup_stubs.go
+index 89dfe455..5be07ca7 100644
+--- a/src/os/user/lookup_stubs.go
++++ b/src/os/user/lookup_stubs.go
+@@ -28,6 +28,9 @@ func current() (*User, error) {
+ 	if err == nil {
+ 		return u, nil
+ 	}
++	if runtime.IsOpenharmony {
++		return currentOpenharmony(), nil
++	}
+ 
+ 	homeDir, _ := os.UserHomeDir()
+ 	u = &User{
 diff --git a/src/os/user/user_test.go b/src/os/user/user_test.go
-index 0e06369bf5a5da98ce74cb603379ace738cdf54d..f4b8fcd5c2a917b41f058e19e04b756ec52173d0 100644
+index 0e06369b..f4b8fcd5 100644
 --- a/src/os/user/user_test.go
 +++ b/src/os/user/user_test.go
 @@ -6,6 +6,7 @@ package user
@@ -4210,7 +5277,7 @@ index 0e06369bf5a5da98ce74cb603379ace738cdf54d..f4b8fcd5c2a917b41f058e19e04b756e
  	if u.Username == "" {
 diff --git a/src/runtime/args_other.go b/src/runtime/args_other.go
 new file mode 100644
-index 0000000000000000000000000000000000000000..a792b0014f119e6e60ea0b2464e521a95ae01bbc
+index 00000000..a792b001
 --- /dev/null
 +++ b/src/runtime/args_other.go
 @@ -0,0 +1,9 @@
@@ -4224,7 +5291,7 @@ index 0000000000000000000000000000000000000000..a792b0014f119e6e60ea0b2464e521a9
 +
 +func goargsFromProc() []string { return nil }
 diff --git a/src/runtime/cgo.go b/src/runtime/cgo.go
-index 60f2403d739f348703951c03f043fecf0acfc8ab..86700424e4ec1ba005dcb768db433d05b5cba74f 100644
+index 60f2403d..86700424 100644
 --- a/src/runtime/cgo.go
 +++ b/src/runtime/cgo.go
 @@ -22,6 +22,10 @@ import "unsafe"
@@ -4248,7 +5315,7 @@ index 60f2403d739f348703951c03f043fecf0acfc8ab..86700424e4ec1ba005dcb768db433d05
  // iscgo is set to true by the runtime/cgo package
 diff --git a/src/runtime/cgo/callbacks_musl_linux.go b/src/runtime/cgo/callbacks_musl_linux.go
 new file mode 100644
-index 0000000000000000000000000000000000000000..b3bcc6edf1674f402ed0800f18f18c80a30a0436
+index 00000000..b3bcc6ed
 --- /dev/null
 +++ b/src/runtime/cgo/callbacks_musl_linux.go
 @@ -0,0 +1,19 @@
@@ -4271,8 +5338,86 @@ index 0000000000000000000000000000000000000000..b3bcc6edf1674f402ed0800f18f18c80
 +//go:linkname _cgo_environ _cgo_environ
 +var x_cgo_environ byte
 +var _cgo_environ = &x_cgo_environ
+diff --git a/src/runtime/cgo/gcc_fatalf.c b/src/runtime/cgo/gcc_fatalf.c
+index 2754414f..742aa4c2 100644
+--- a/src/runtime/cgo/gcc_fatalf.c
++++ b/src/runtime/cgo/gcc_fatalf.c
+@@ -5,6 +5,10 @@
+ //go:build unix
+ 
+ #include <stdarg.h>
++#ifdef __OHOS__
++#include <dlfcn.h>
++#include <string.h>
++#endif
+ #ifdef __ANDROID__
+ #include <android/log.h>
+ #endif
+@@ -14,6 +18,13 @@ void
+ fatalf(const char* format, ...)
+ {
+ 	va_list ap;
++#ifdef __OHOS__
++	typedef int (*log_print)(int, int, unsigned int, const char *, const char *, ...);
++	void *hilog;
++	log_print print;
++	char message[1024];
++	const char *mirror;
++#endif
+ 
+ 	fprintf(stderr, "runtime/cgo: ");
+ 	va_start(ap, format);
+@@ -21,6 +32,23 @@ fatalf(const char* format, ...)
+ 	va_end(ap);
+ 	fprintf(stderr, "\n");
+ 
++#ifdef __OHOS__
++	// This path runs before the Go runtime may be available. Use the optional
++	// native logger, retaining stderr if its library is unavailable.
++	mirror = getenv("GO_OHOS_HILOG");
++	hilog = (mirror && strcmp(mirror, "0") == 0) ? NULL : dlopen("libhilog_ndk.z.so", RTLD_LAZY | RTLD_LOCAL);
++	if (hilog) {
++		print = (log_print)dlsym(hilog, "OH_LOG_Print");
++		if (print) {
++			va_start(ap, format);
++			vsnprintf(message, sizeof(message), format, ap);
++			va_end(ap);
++			print(0, 7, 0, "Go", "%{public}s", message);
++		}
++		dlclose(hilog);
++	}
++#endif
++
+ #ifdef __ANDROID__
+ 	// When running from an Android .apk, /dev/stderr and /dev/stdout
+ 	// redirect to /dev/null. And when running a test binary
+diff --git a/src/runtime/cgo/gcc_openharmony.c b/src/runtime/cgo/gcc_openharmony.c
+new file mode 100644
+index 00000000..e017cee7
+--- /dev/null
++++ b/src/runtime/cgo/gcc_openharmony.c
+@@ -0,0 +1,19 @@
++// Copyright 2026 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++#include <dlfcn.h>
++#include <stdint.h>
++#include <string.h>
++
++void x_cgo_ohos_timezone(void *opaque) {
++    struct args { char *buf; uintptr_t size; int32_t result; } *a = opaque;
++    typedef int (*get_parameter)(const char *, const char *, char *, unsigned int);
++    void *h = dlopen("libbegetutil.z.so", RTLD_LAZY | RTLD_LOCAL);
++    get_parameter get;
++    a->result = 0;
++    if (!h) return;
++    get = (get_parameter)dlsym(h, "GetParameter");
++    if (get) a->result = get("persist.time.timezone", "", a->buf, (unsigned int)a->size);
++    dlclose(h);
++}
 diff --git a/src/runtime/cgo/gcc_sigaction.c b/src/runtime/cgo/gcc_sigaction.c
-index f7a10df0f7244905b9315ff6de539d6ca1db0489..15ecbe61bac91d96ad7ad0e3dbfc78833220c433 100644
+index f7a10df0..15ecbe61 100644
 --- a/src/runtime/cgo/gcc_sigaction.c
 +++ b/src/runtime/cgo/gcc_sigaction.c
 @@ -2,7 +2,7 @@
@@ -4299,7 +5444,7 @@ index f7a10df0f7244905b9315ff6de539d6ca1db0489..15ecbe61bac91d96ad7ad0e3dbfc7883
  // SA_RESTORER is part of the kernel interface.
  // This is Linux i386/amd64 specific.
 diff --git a/src/runtime/cgo/gcc_unix.c b/src/runtime/cgo/gcc_unix.c
-index f606675339911cd129f527be0015fa0ca2b10aff..e4d8db24170680366b3f9717dfad3fdb6b98548f 100644
+index f6066753..e4d8db24 100644
 --- a/src/runtime/cgo/gcc_unix.c
 +++ b/src/runtime/cgo/gcc_unix.c
 @@ -11,6 +11,13 @@
@@ -4327,8 +5472,27 @@ index f606675339911cd129f527be0015fa0ca2b10aff..e4d8db24170680366b3f9717dfad3fdb
  	_cgo_set_stacklo(g);
  
  	if (x_cgo_inittls) {
+diff --git a/src/runtime/cgo/platform_openharmony.go b/src/runtime/cgo/platform_openharmony.go
+new file mode 100644
+index 00000000..f70acc4e
+--- /dev/null
++++ b/src/runtime/cgo/platform_openharmony.go
+@@ -0,0 +1,13 @@
++// Copyright 2026 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++package cgo
++
++import "unsafe"
++
++//go:cgo_import_static x_cgo_ohos_timezone
++//go:linkname x_cgo_ohos_timezone x_cgo_ohos_timezone
++//go:linkname _cgo_ohos_timezone _cgo_ohos_timezone
++var x_cgo_ohos_timezone byte
++var _cgo_ohos_timezone = unsafe.Pointer(&x_cgo_ohos_timezone)
 diff --git a/src/runtime/cgo/sigaction.go b/src/runtime/cgo/sigaction.go
-index 62b144dbd45110f22b6f8dceebb4f26bdd4a374f..f10d6f47dfabc2ef707264f65ee94c344c27c148 100644
+index 62b144db..f10d6f47 100644
 --- a/src/runtime/cgo/sigaction.go
 +++ b/src/runtime/cgo/sigaction.go
 @@ -2,7 +2,7 @@
@@ -4341,7 +5505,7 @@ index 62b144dbd45110f22b6f8dceebb4f26bdd4a374f..f10d6f47dfabc2ef707264f65ee94c34
  package cgo
  
 diff --git a/src/runtime/cgo_sigaction.go b/src/runtime/cgo_sigaction.go
-index b78a336a214755e681e9ed9e9ebd4f8c8513875b..36b37111da103839d24ba9baf4baa0e34fe18273 100644
+index b78a336a..36b37111 100644
 --- a/src/runtime/cgo_sigaction.go
 +++ b/src/runtime/cgo_sigaction.go
 @@ -6,7 +6,7 @@
@@ -4364,7 +5528,7 @@ index b78a336a214755e681e9ed9e9ebd4f8c8513875b..36b37111da103839d24ba9baf4baa0e3
  	} else {
  		// We need to call _cgo_sigaction, which means we need a big enough stack
 diff --git a/src/runtime/crash_cgo_test.go b/src/runtime/crash_cgo_test.go
-index d4b7421ac09a6576daedf5fbd628f01bdd30df42..bcda34a3e41f20e91230c33bec150621cfddc5e2 100644
+index d4b7421a..bcda34a3 100644
 --- a/src/runtime/crash_cgo_test.go
 +++ b/src/runtime/crash_cgo_test.go
 @@ -1034,3 +1034,14 @@ func TestCgoToGoCallGoexit(t *testing.T) {
@@ -4383,7 +5547,7 @@ index d4b7421ac09a6576daedf5fbd628f01bdd30df42..bcda34a3e41f20e91230c33bec150621
 +	}
 +}
 diff --git a/src/runtime/extern.go b/src/runtime/extern.go
-index a69f4aaede794d9186c2bdda54c04c5941ce6992..ec26d719b9429a37f59fa68a26b5621d57a50ffa 100644
+index a69f4aae..ec26d719 100644
 --- a/src/runtime/extern.go
 +++ b/src/runtime/extern.go
 @@ -381,6 +381,8 @@ func Version() string {
@@ -4396,7 +5560,7 @@ index a69f4aaede794d9186c2bdda54c04c5941ce6992..ec26d719b9429a37f59fa68a26b5621d
  // one of 386, amd64, arm, s390x, and so on.
  const GOARCH string = goarch.GOARCH
 diff --git a/src/runtime/os_linux.go b/src/runtime/os_linux.go
-index 0474e6c90696cbe42a762407dea7cc1b2320c1b3..af9769039cca99ed353457ad4ed84015de9d954e 100644
+index 0474e6c9..af976903 100644
 --- a/src/runtime/os_linux.go
 +++ b/src/runtime/os_linux.go
 @@ -234,7 +234,30 @@ func mincore(addr unsafe.Pointer, n uintptr, dst *byte) int32
@@ -4525,8 +5689,41 @@ index 0474e6c90696cbe42a762407dea7cc1b2320c1b3..af9769039cca99ed353457ad4ed84015
  			// Use system stack to avoid split stack overflow on ppc64/ppc64le.
  			systemstack(func() {
  				throw("sigaction failed")
+diff --git a/src/runtime/platform_openharmony.go b/src/runtime/platform_openharmony.go
+new file mode 100644
+index 00000000..3119cddf
+--- /dev/null
++++ b/src/runtime/platform_openharmony.go
+@@ -0,0 +1,27 @@
++// Copyright 2026 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++package runtime
++
++import "unsafe"
++
++//go:linkname _cgo_ohos_timezone _cgo_ohos_timezone
++var _cgo_ohos_timezone unsafe.Pointer
++
++// openharmonyTimezone is an optional bridge supplied by runtime/cgo. Keeping it
++// here lets time remain independent of cgo and of the application framework.
++//
++//go:linkname openharmonyTimezone
++func openharmonyTimezone(buf *byte, size int) int32 {
++	if _cgo_ohos_timezone == nil {
++		return 0
++	}
++	args := struct {
++		buf    *byte
++		size   uintptr
++		result int32
++	}{buf: buf, size: uintptr(size)}
++	asmcgocall(_cgo_ohos_timezone, unsafe.Pointer(&args))
++	return args.result
++}
 diff --git a/src/runtime/proc.go b/src/runtime/proc.go
-index b8d4d15041a54e7f60df460c58ce87582b831227..1994b7926ab3ac13b9cebbeafdb00fadf51875d9 100644
+index b8d4d150..3352334c 100644
 --- a/src/runtime/proc.go
 +++ b/src/runtime/proc.go
 @@ -811,6 +811,13 @@ func getGodebugEarly() (string, bool) {
@@ -4543,7 +5740,17 @@ index b8d4d15041a54e7f60df460c58ce87582b831227..1994b7926ab3ac13b9cebbeafdb00fad
  		n := int32(0)
  		for argv_index(argv, argc+1+n) != nil {
  			n++
-@@ -5241,10 +5248,6 @@ func syscall_runtime_AfterFork() {
+@@ -901,6 +908,9 @@ func schedinit() {
+ 
+ 	goargs()
+ 	goenvs()
++	if IsOpenharmony {
++		initOpenharmonyLog()
++	}
+ 	secure()
+ 	checkfds()
+ 	if !parsedGodebug {
+@@ -5241,10 +5251,6 @@ func syscall_runtime_AfterFork() {
  	gp.m.locks--
  }
  
@@ -4554,7 +5761,7 @@ index b8d4d15041a54e7f60df460c58ce87582b831227..1994b7926ab3ac13b9cebbeafdb00fad
  // Called from syscall package after fork in child.
  // It resets non-sigignored signals to the default handler, and
  // restores the signal mask in preparation for the exec.
-@@ -5265,11 +5268,12 @@ var inForkedChild bool
+@@ -5265,11 +5271,12 @@ var inForkedChild bool
  //go:nosplit
  //go:nowritebarrierrec
  func syscall_runtime_AfterForkInChild() {
@@ -4572,7 +5779,7 @@ index b8d4d15041a54e7f60df460c58ce87582b831227..1994b7926ab3ac13b9cebbeafdb00fad
  
  	clearSignalHandlers()
  
-@@ -5277,7 +5281,7 @@ func syscall_runtime_AfterForkInChild() {
+@@ -5277,7 +5284,7 @@ func syscall_runtime_AfterForkInChild() {
  	// so we know that nothing else has changed gp.m.sigmask.
  	msigrestore(getg().m.sigmask)
  
@@ -4583,7 +5790,7 @@ index b8d4d15041a54e7f60df460c58ce87582b831227..1994b7926ab3ac13b9cebbeafdb00fad
  // pendingPreemptSignals is the number of preemption signals
 diff --git a/src/runtime/rt0_openharmony_amd64.s b/src/runtime/rt0_openharmony_amd64.s
 new file mode 100644
-index 0000000000000000000000000000000000000000..dd02477675315b488d71aa540356c5c0645b511c
+index 00000000..dd024776
 --- /dev/null
 +++ b/src/runtime/rt0_openharmony_amd64.s
 @@ -0,0 +1,11 @@
@@ -4600,7 +5807,7 @@ index 0000000000000000000000000000000000000000..dd02477675315b488d71aa540356c5c0
 +	JMP _rt0_amd64_linux_lib(SB)
 diff --git a/src/runtime/rt0_openharmony_arm.s b/src/runtime/rt0_openharmony_arm.s
 new file mode 100644
-index 0000000000000000000000000000000000000000..dabfcfb027bcf7f2c8b98aac7b7c90e5886d5736
+index 00000000..dabfcfb0
 --- /dev/null
 +++ b/src/runtime/rt0_openharmony_arm.s
 @@ -0,0 +1,11 @@
@@ -4617,7 +5824,7 @@ index 0000000000000000000000000000000000000000..dabfcfb027bcf7f2c8b98aac7b7c90e5
 +	B _rt0_arm_linux_lib(SB)
 diff --git a/src/runtime/rt0_openharmony_arm64.s b/src/runtime/rt0_openharmony_arm64.s
 new file mode 100644
-index 0000000000000000000000000000000000000000..d968982e685177fd8e9566f666dad8b748736f60
+index 00000000..d968982e
 --- /dev/null
 +++ b/src/runtime/rt0_openharmony_arm64.s
 @@ -0,0 +1,11 @@
@@ -4632,11 +5839,44 @@ index 0000000000000000000000000000000000000000..d968982e685177fd8e9566f666dad8b7
 +
 +TEXT _rt0_arm64_openharmony_lib(SB),NOSPLIT|NOFRAME,$0
 +	B _rt0_arm64_linux_lib(SB)
+diff --git a/src/runtime/runtime.go b/src/runtime/runtime.go
+index 016cbdae..113a94f8 100644
+--- a/src/runtime/runtime.go
++++ b/src/runtime/runtime.go
+@@ -7,6 +7,7 @@ package runtime
+ import (
+ 	"internal/abi"
+ 	"internal/runtime/atomic"
++	"internal/runtime/hilog"
+ 	"unsafe"
+ )
+ 
+@@ -231,6 +232,12 @@ func writeErrStr(s string) {
+ //go:nosplit
+ func writeErrData(data *byte, n int32) {
+ 	write(2, unsafe.Pointer(data), n)
++	if IsOpenharmony && n > 0 {
++		gp := getg()
++		if gp == nil || !gp.m.inForkedChild {
++			hilog.WriteRuntime(unsafe.Slice(data, n))
++		}
++	}
+ 
+ 	// If crashing, print a copy to the SetCrashOutput fd.
+ 	gp := getg()
 diff --git a/src/runtime/runtime1.go b/src/runtime/runtime1.go
-index fc26e9b3f8226fa0be78ff36dac50002945a0325..908b7a8ad7fd046fb0a555dee9123a5a6ff6b177 100644
+index fc26e9b3..527a3c42 100644
 --- a/src/runtime/runtime1.go
 +++ b/src/runtime/runtime1.go
-@@ -76,6 +76,10 @@ func goargs() {
+@@ -10,6 +10,7 @@ import (
+ 	"internal/goarch"
+ 	"internal/godebugs"
+ 	"internal/runtime/atomic"
++	"internal/runtime/hilog"
+ 	"internal/strconv"
+ 	"unsafe"
+ )
+@@ -76,6 +77,10 @@ func goargs() {
  	if GOOS == "windows" {
  		return
  	}
@@ -4647,8 +5887,17 @@ index fc26e9b3f8226fa0be78ff36dac50002945a0325..908b7a8ad7fd046fb0a555dee9123a5a
  	argslice = make([]string, argc)
  	for i := int32(0); i < argc; i++ {
  		argslice[i] = gostringnocopy(argv_index(argv, i))
+@@ -390,6 +395,8 @@ var dbgvars = []*dbgVar{
+ 	{name: "updatemaxprocs", value: &debug.updatemaxprocs, def: 1},
+ }
+ 
++func initOpenharmonyLog() { hilog.SetEnabled(gogetenv("GO_OHOS_HILOG") != "0") }
++
+ func parseRuntimeDebugVars(godebug string) {
+ 	// defaults
+ 	debug.cgocheck = 1
 diff --git a/src/runtime/runtime2.go b/src/runtime/runtime2.go
-index 9e0e0dfd2e5d5833db1a77b16bbf60406cda6e98..e59ed086d3642349503dd4fe9c7da900bf4820ef 100644
+index 9e0e0dfd..e59ed086 100644
 --- a/src/runtime/runtime2.go
 +++ b/src/runtime/runtime2.go
 @@ -641,20 +641,23 @@ type m struct {
@@ -4690,7 +5939,7 @@ index 9e0e0dfd2e5d5833db1a77b16bbf60406cda6e98..e59ed086d3642349503dd4fe9c7da900
  	isExtraInC      bool          // m is an extra m that does not have any Go frames
  	isExtraInSig    bool          // m is an extra m in a signal handler
 diff --git a/src/runtime/sigaction.go b/src/runtime/sigaction.go
-index 79497763546639e465f6fa4ba4a57a8617d9b4e8..313aae50a728783826d64fc89b1cbf2aaca831ed 100644
+index 79497763..313aae50 100644
 --- a/src/runtime/sigaction.go
 +++ b/src/runtime/sigaction.go
 @@ -2,7 +2,7 @@
@@ -4702,8 +5951,22 @@ index 79497763546639e465f6fa4ba4a57a8617d9b4e8..313aae50a728783826d64fc89b1cbf2a
  
  package runtime
  
+diff --git a/src/runtime/string.go b/src/runtime/string.go
+index 7207f834..16ba45fa 100644
+--- a/src/runtime/string.go
++++ b/src/runtime/string.go
+@@ -508,7 +508,8 @@ func findnull(s *byte) int {
+ 	// actual system page size is larger than this value.
+ 	// For Android, we set the page size to the MTE size, as MTE
+ 	// might be enforced. See issue 59090.
+-	const pageSize = 4096*(1-goos.IsAndroid) + 16*goos.IsAndroid
++	const taggedOS = goos.IsAndroid + goos.IsOpenharmony
++	const pageSize = 4096*(1-taggedOS) + 16*taggedOS
+ 
+ 	offset := 0
+ 	ptr := unsafe.Pointer(s)
 diff --git a/src/runtime/sys_linux_arm.s b/src/runtime/sys_linux_arm.s
-index f19e293d0fc3e034273ea36661774d4123b19cad..1040af1233250175eed01f0ced2d1c249a26232a 100644
+index f19e293d..1040af12 100644
 --- a/src/runtime/sys_linux_arm.s
 +++ b/src/runtime/sys_linux_arm.s
 @@ -569,8 +569,14 @@ TEXT runtime·sigtramp(SB),NOSPLIT|TOPFRAME,$0
@@ -4723,7 +5986,7 @@ index f19e293d0fc3e034273ea36661774d4123b19cad..1040af1233250175eed01f0ced2d1c24
  	MOVW	how+0(FP), R0
 diff --git a/src/runtime/sys_openharmony_arm.s b/src/runtime/sys_openharmony_arm.s
 new file mode 100644
-index 0000000000000000000000000000000000000000..55a16e145c98c08a48b65b699f26027957590ef5
+index 00000000..55a16e14
 --- /dev/null
 +++ b/src/runtime/sys_openharmony_arm.s
 @@ -0,0 +1,22 @@
@@ -4751,7 +6014,7 @@ index 0000000000000000000000000000000000000000..55a16e145c98c08a48b65b699f260279
 +	RET
 diff --git a/src/runtime/testdata/testprogcgo/exec_openharmony.go b/src/runtime/testdata/testprogcgo/exec_openharmony.go
 new file mode 100644
-index 0000000000000000000000000000000000000000..2f28b0ece490906d87bf79edafc666f11d3b60f9
+index 00000000..2f28b0ec
 --- /dev/null
 +++ b/src/runtime/testdata/testprogcgo/exec_openharmony.go
 @@ -0,0 +1,66 @@
@@ -4822,7 +6085,7 @@ index 0000000000000000000000000000000000000000..2f28b0ece490906d87bf79edafc666f1
 +	_ = *ptr
 +}
 diff --git a/src/runtime/testdata/testprogcgo/segv.go b/src/runtime/testdata/testprogcgo/segv.go
-index c776fe67d9c5f0db597ea344b339e12459d714be..cb19b0e73b1b092f79f140c54d0d9e6722fe312e 100644
+index c776fe67..cb19b0e7 100644
 --- a/src/runtime/testdata/testprogcgo/segv.go
 +++ b/src/runtime/testdata/testprogcgo/segv.go
 @@ -30,5 +30,9 @@ func SegvInCgo() {
@@ -4838,7 +6101,7 @@ index c776fe67d9c5f0db597ea344b339e12459d714be..cb19b0e73b1b092f79f140c54d0d9e67
  }
 diff --git a/src/runtime/testdata/testprogcgo/sigaction_openharmony.c b/src/runtime/testdata/testprogcgo/sigaction_openharmony.c
 new file mode 100644
-index 0000000000000000000000000000000000000000..d5fdd8c1e20b3a82339e95b788fbb1a9a795fc7b
+index 00000000..d5fdd8c1
 --- /dev/null
 +++ b/src/runtime/testdata/testprogcgo/sigaction_openharmony.c
 @@ -0,0 +1,18 @@
@@ -4861,7 +6124,7 @@ index 0000000000000000000000000000000000000000..d5fdd8c1e20b3a82339e95b788fbb1a9
 +    sigaction(SIGSEGV, &action, 0);
 +}
 diff --git a/src/runtime/tls_arm.s b/src/runtime/tls_arm.s
-index d224c5545204df25e429fc146e3b832655fed1e2..f4444ee84a57cbc32948193a471fd59cf3e43f9f 100644
+index d224c554..f4444ee8 100644
 --- a/src/runtime/tls_arm.s
 +++ b/src/runtime/tls_arm.s
 @@ -16,6 +16,7 @@
@@ -4939,7 +6202,7 @@ index d224c5545204df25e429fc146e3b832655fed1e2..f4444ee84a57cbc32948193a471fd59c
  
  // This is called from rt0_go, which runs on the system stack
 diff --git a/src/runtime/tls_arm64.h b/src/runtime/tls_arm64.h
-index 3aa8c63d39d7b244f5c7d32401899bd326a846d9..287c59f3a2042c2988ebdc6c39a831c1607c828e 100644
+index 3aa8c63d..287c59f3 100644
 --- a/src/runtime/tls_arm64.h
 +++ b/src/runtime/tls_arm64.h
 @@ -6,6 +6,9 @@
@@ -4953,7 +6216,7 @@ index 3aa8c63d39d7b244f5c7d32401899bd326a846d9..287c59f3a2042c2988ebdc6c39a831c1
  #define TLS_linux
  #endif
 diff --git a/src/runtime/tls_arm64.s b/src/runtime/tls_arm64.s
-index 52b3e8f2228e8078c8ae6b1c0a54ac283c1274b7..41309e296baec48b4b65d8c085729773f3b32b04 100644
+index 52b3e8f2..41309e29 100644
 --- a/src/runtime/tls_arm64.s
 +++ b/src/runtime/tls_arm64.s
 @@ -18,6 +18,21 @@ TEXT runtime·load_g(SB),NOSPLIT,$0
@@ -5017,7 +6280,7 @@ index 52b3e8f2228e8078c8ae6b1c0a54ac283c1274b7..41309e296baec48b4b65d8c085729773
  nocgo:
  	RET
 diff --git a/src/runtime/tls_loong64.s b/src/runtime/tls_loong64.s
-index bc3be3da1b470c6c5db3b532099dcb7826658eff..36d9582b787a59e98cec075da5d1a8b096c7378b 100644
+index bc3be3da..36d9582b 100644
 --- a/src/runtime/tls_loong64.s
 +++ b/src/runtime/tls_loong64.s
 @@ -10,17 +10,34 @@
@@ -5056,7 +6319,7 @@ index bc3be3da1b470c6c5db3b532099dcb7826658eff..36d9582b787a59e98cec075da5d1a8b0
  
  GLOBL runtime·tls_g(SB), TLSBSS, $8
 diff --git a/src/runtime/tls_ppc64x.s b/src/runtime/tls_ppc64x.s
-index 137214b8582c8fb18bfbfab76362c9f56fd860af..ac9820a862311b78c02aa4ec0a9e203964608593 100644
+index 137214b8..ac9820a8 100644
 --- a/src/runtime/tls_ppc64x.s
 +++ b/src/runtime/tls_ppc64x.s
 @@ -22,6 +22,8 @@
@@ -5106,7 +6369,7 @@ index 137214b8582c8fb18bfbfab76362c9f56fd860af..ac9820a862311b78c02aa4ec0a9e2039
  
  GLOBL runtime·tls_g+0(SB), TLSBSS+DUPOK, $8
 diff --git a/src/runtime/tls_riscv64.s b/src/runtime/tls_riscv64.s
-index 2aeb89aa271ac7ae8d14e3f37ff073b3cce6d234..6f7aa4b1ffd4789d2d4f3b88aa79ef23e6e6718d 100644
+index 2aeb89aa..6f7aa4b1 100644
 --- a/src/runtime/tls_riscv64.s
 +++ b/src/runtime/tls_riscv64.s
 @@ -10,17 +10,36 @@
@@ -5147,7 +6410,7 @@ index 2aeb89aa271ac7ae8d14e3f37ff073b3cce6d234..6f7aa4b1ffd4789d2d4f3b88aa79ef23
  
  GLOBL runtime·tls_g(SB), TLSBSS, $8
 diff --git a/src/runtime/tls_s390x.s b/src/runtime/tls_s390x.s
-index 388e7b88bd94ec79eb035c1927c2301fdc3639bf..8ee2b9834f61f90de5d3e9ea2f44defe54045921 100644
+index 388e7b88..8ee2b983 100644
 --- a/src/runtime/tls_s390x.s
 +++ b/src/runtime/tls_s390x.s
 @@ -20,14 +20,26 @@
@@ -5199,7 +6462,7 @@ index 388e7b88bd94ec79eb035c1927c2301fdc3639bf..8ee2b9834f61f90de5d3e9ea2f44defe
  
  GLOBL runtime·tls_g+0(SB),TLSBSS,$8
 diff --git a/src/testing/benchmark.go b/src/testing/benchmark.go
-index 9352e7380953f80d8429ec54bf40b3cbdaf8bceb..c2698b6e2b192a6b723811e6fc844507c9e26f3f 100644
+index 9352e738..c2698b6e 100644
 --- a/src/testing/benchmark.go
 +++ b/src/testing/benchmark.go
 @@ -8,6 +8,7 @@ import (
@@ -5230,7 +6493,7 @@ index 9352e7380953f80d8429ec54bf40b3cbdaf8bceb..c2698b6e2b192a6b723811e6fc844507
  				fmt.Printf("pkg: %s\n", b.importPath)
 diff --git a/src/time/export_openharmony_test.go b/src/time/export_openharmony_test.go
 new file mode 100644
-index 0000000000000000000000000000000000000000..74c7645a012bd96947f2e0906aed25cebc3cff71
+index 00000000..74c7645a
 --- /dev/null
 +++ b/src/time/export_openharmony_test.go
 @@ -0,0 +1,7 @@
@@ -5242,7 +6505,7 @@ index 0000000000000000000000000000000000000000..74c7645a012bd96947f2e0906aed25ce
 +
 +var OHOSLoadTzinfoForTest = ohosLoadTzinfoFromTzdata
 diff --git a/src/time/tick_test.go b/src/time/tick_test.go
-index 14ee0932207d108ddf5d14fab25373fa3a3fe391..b8b570cbce9ed3443d68f2ceb678d536f897d848 100644
+index 14ee0932..b8b570cb 100644
 --- a/src/time/tick_test.go
 +++ b/src/time/tick_test.go
 @@ -6,7 +6,9 @@ package time_test
@@ -5281,10 +6544,10 @@ index 14ee0932207d108ddf5d14fab25373fa3a3fe391..b8b570cbce9ed3443d68f2ceb678d536
  	inQ := make(chan func())
 diff --git a/src/time/zoneinfo_openharmony.go b/src/time/zoneinfo_openharmony.go
 new file mode 100644
-index 0000000000000000000000000000000000000000..4ff8d1ec90de3938881134f99393920880aa10ed
+index 00000000..da3bb40a
 --- /dev/null
 +++ b/src/time/zoneinfo_openharmony.go
-@@ -0,0 +1,121 @@
+@@ -0,0 +1,128 @@
 +// Copyright 2024 The Go Authors. All rights reserved.
 +// Use of this source code is governed by a BSD-style
 +// license that can be found in the LICENSE file.
@@ -5297,6 +6560,7 @@ index 0000000000000000000000000000000000000000..4ff8d1ec90de3938881134f993939208
 +
 +import (
 +	"errors"
++	"internal/ohos"
 +	"syscall"
 +)
 +
@@ -5315,6 +6579,12 @@ index 0000000000000000000000000000000000000000..4ff8d1ec90de3938881134f993939208
 +	tz, ok := syscall.Getenv("TZ")
 +	switch {
 +	case !ok:
++		if name := ohos.Timezone(); name != "" {
++			if z, err := loadLocation(name, platformZoneSources); err == nil {
++				localLoc = *z
++				return
++			}
++		}
 +		z, err := loadLocation("localtime", []string{"/etc"})
 +		if err == nil {
 +			localLoc = *z
@@ -5408,7 +6678,7 @@ index 0000000000000000000000000000000000000000..4ff8d1ec90de3938881134f993939208
 +}
 diff --git a/src/time/zoneinfo_openharmony_test.go b/src/time/zoneinfo_openharmony_test.go
 new file mode 100644
-index 0000000000000000000000000000000000000000..f345a33bee188e7ada34b4137bd0014be3a813d7
+index 00000000..f345a33b
 --- /dev/null
 +++ b/src/time/zoneinfo_openharmony_test.go
 @@ -0,0 +1,53 @@
@@ -5466,7 +6736,7 @@ index 0000000000000000000000000000000000000000..f345a33bee188e7ada34b4137bd0014b
 +	}
 +}
 diff --git a/src/time/zoneinfo_unix.go b/src/time/zoneinfo_unix.go
-index b52c67d069825ddcdac20a00abf145f7f7a82e55..bd978a1c62cdb1e575439b6a867310a36683baf5 100644
+index b52c67d0..bd978a1c 100644
 --- a/src/time/zoneinfo_unix.go
 +++ b/src/time/zoneinfo_unix.go
 @@ -2,7 +2,7 @@
@@ -5478,9 +6748,46 @@ index b52c67d069825ddcdac20a00abf145f7f7a82e55..bd978a1c62cdb1e575439b6a867310a3
  
  // Parse "zoneinfo" time zone file.
  // This is a fairly standard file format used on OS X, Linux, BSD, Sun, and others.
+diff --git a/src/time/zoneinfo_unix_test.go b/src/time/zoneinfo_unix_test.go
+index 92680c4f..d0b7baf6 100644
+--- a/src/time/zoneinfo_unix_test.go
++++ b/src/time/zoneinfo_unix_test.go
+@@ -7,7 +7,9 @@
+ package time_test
+ 
+ import (
++	"internal/ohos"
+ 	"os"
++	"runtime"
+ 	"testing"
+ 	"time"
+ )
+@@ -28,13 +30,21 @@ func TestEnvTZUsage(t *testing.T) {
+ 		localZoneName = "UTC"
+ 	}
+ 
++	systemZoneName := localZoneName
++	if runtime.IsOpenharmony {
++		if name := ohos.Timezone(); name != "" {
++			if _, err := time.LoadLocation(name); err == nil {
++				systemZoneName = name
++			}
++		}
++	}
+ 	cases := []struct {
+ 		nilFlag bool
+ 		tz      string
+ 		local   string
+ 	}{
+ 		// no $TZ means use the system default /etc/localtime.
+-		{true, "", localZoneName},
++		{true, "", systemZoneName},
+ 		// $TZ="" means use UTC.
+ 		{false, "", "UTC"},
+ 		{false, ":", "UTC"},
 diff --git a/test/cshared-musl/Dockerfile.alpine b/test/cshared-musl/Dockerfile.alpine
 new file mode 100644
-index 0000000000000000000000000000000000000000..53de99eb4d82bef6b90b51333bfff231d3cbf76b
+index 00000000..53de99eb
 --- /dev/null
 +++ b/test/cshared-musl/Dockerfile.alpine
 @@ -0,0 +1,32 @@
@@ -5518,7 +6825,7 @@ index 0000000000000000000000000000000000000000..53de99eb4d82bef6b90b51333bfff231
 +CMD ["./loader", "./libtest.so"]
 diff --git a/test/cshared-musl/Dockerfile.armv7-alpine b/test/cshared-musl/Dockerfile.armv7-alpine
 new file mode 100644
-index 0000000000000000000000000000000000000000..351b26e424a1f90a143af2ad1346dfcf99e9385a
+index 00000000..351b26e4
 --- /dev/null
 +++ b/test/cshared-musl/Dockerfile.armv7-alpine
 @@ -0,0 +1,14 @@
@@ -5538,7 +6845,7 @@ index 0000000000000000000000000000000000000000..351b26e424a1f90a143af2ad1346dfcf
 +CMD ["./loader", "./libtest.so"]
 diff --git a/test/cshared-musl/Dockerfile.riscv64-alpine b/test/cshared-musl/Dockerfile.riscv64-alpine
 new file mode 100644
-index 0000000000000000000000000000000000000000..240d6f4fdd9b7f003cf0e7952ef3f29206023f56
+index 00000000..240d6f4f
 --- /dev/null
 +++ b/test/cshared-musl/Dockerfile.riscv64-alpine
 @@ -0,0 +1,15 @@
@@ -5559,7 +6866,7 @@ index 0000000000000000000000000000000000000000..240d6f4fdd9b7f003cf0e7952ef3f292
 +CMD ["./loader", "./libtest.so"]
 diff --git a/test/cshared-musl/Dockerfile.riscv64-ubuntu b/test/cshared-musl/Dockerfile.riscv64-ubuntu
 new file mode 100644
-index 0000000000000000000000000000000000000000..dd6b9abcdd7d69c062fb3de032e87b056732abe3
+index 00000000..dd6b9abc
 --- /dev/null
 +++ b/test/cshared-musl/Dockerfile.riscv64-ubuntu
 @@ -0,0 +1,12 @@
@@ -5577,7 +6884,7 @@ index 0000000000000000000000000000000000000000..dd6b9abcdd7d69c062fb3de032e87b05
 +CMD ["./loader", "./libtest.so"]
 diff --git a/test/cshared-musl/Dockerfile.ubuntu b/test/cshared-musl/Dockerfile.ubuntu
 new file mode 100644
-index 0000000000000000000000000000000000000000..61165295ea78f6b9623f69d984977fdfa48b1712
+index 00000000..61165295
 --- /dev/null
 +++ b/test/cshared-musl/Dockerfile.ubuntu
 @@ -0,0 +1,36 @@
@@ -5619,7 +6926,7 @@ index 0000000000000000000000000000000000000000..61165295ea78f6b9623f69d984977fdf
 +CMD ["./loader", "./libtest.so"]
 diff --git a/test/cshared-musl/run.sh b/test/cshared-musl/run.sh
 new file mode 100755
-index 0000000000000000000000000000000000000000..f675bb410b09be6b1311426a51a114d7f0b82db8
+index 00000000..f675bb41
 --- /dev/null
 +++ b/test/cshared-musl/run.sh
 @@ -0,0 +1,50 @@
@@ -5675,7 +6982,7 @@ index 0000000000000000000000000000000000000000..f675bb410b09be6b1311426a51a114d7
 +fi
 diff --git a/test/cshared-musl/testdata/libtest.go b/test/cshared-musl/testdata/libtest.go
 new file mode 100644
-index 0000000000000000000000000000000000000000..580a537957ac34bf469db479281a091f7e32f10e
+index 00000000..580a5379
 --- /dev/null
 +++ b/test/cshared-musl/testdata/libtest.go
 @@ -0,0 +1,27 @@
@@ -5708,7 +7015,7 @@ index 0000000000000000000000000000000000000000..580a537957ac34bf469db479281a091f
 +func main() {}
 diff --git a/test/cshared-musl/testdata/loader.c b/test/cshared-musl/testdata/loader.c
 new file mode 100644
-index 0000000000000000000000000000000000000000..0e35555d1243a105ada99a691900942ac7c851b7
+index 00000000..0e35555d
 --- /dev/null
 +++ b/test/cshared-musl/testdata/loader.c
 @@ -0,0 +1,116 @@

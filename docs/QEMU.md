@@ -1,10 +1,12 @@
 # 全系统 QEMU 验证
 
+ABI revision 2 正在重新验证；当前进度见 [VALIDATION.md](VALIDATION.md)。系统服务专项运行 `scripts/test-platform.py`，上一轮 C18 记录只作历史参考。
+
 使用 manifest 固定的 OpenHarmony 镜像和完整系统 QEMU。标准库和工具链由 guest 原生编译测试；语言用例可由官方跨平台驱动编译，并在 guest 执行。标准 dist 自带 `-count=1`，每次完整运行都执行测试，不使用上次测试结果缓存。不是 Linux sysroot 加 user-mode QEMU。所有磁盘、端口、状态都属于本任务；不复用其他开发者正在运行的 QEMU。
 
 依赖：`qemu-system-aarch64`、`qemu-system-arm`、`qemu-system-x86_64`、HDC、e2fsprogs（resize2fs/e2fsck）、足够存储空间。每架构 userdata 默认 24GB，测试 cache 可能超过 5GB；建议 `.work/qemu` 放在有余量的本地或外置盘。暂停实例后才能移动镜像，完成后用 `--reuse-images` 恢复。扩容前会离线重放 ext4 journal 并检查文件系统。
 
-本轮 C18 的 ARM64 r11、ARMv7 r5、amd64 r5 完整测试已通过，[总报告](test-results/summary.json) 已生成。原始日志收集后，本任务三个实例均已关闭，镜像保留；本轮未追加 ARM 签名边界及剩余六个原生构建组合。以下命令用于独立复现，不表示这些补充组合本轮已完成。
+历史 C18 的 ARM64 r11、ARMv7 r5、amd64 r5 完整测试已通过，[历史总报告](test-results/history/c18/summary.json) 已生成。当时收集日志后关闭三个实例并保留镜像；当轮未追加 ARM 签名边界及剩余六个原生构建组合。以下命令用于独立复现，不表示这些补充组合本轮已完成。
 
 ## 启动
 
@@ -144,3 +146,16 @@ python3 scripts/test-signing-boundary.py --hosts arm
 HDC 继承的 oom_score_adj=-1000 会让测试进程免于 OOM 回收，原生脚本将自身及后代恢复为 0，并记录实际值。启动 x86_64 建议增加 --memory-mib 8192；默认 4096。ARMv7 固定内核只可利用约 3 GiB，增加 QEMU RAM 无法替代限制并发。所有这些运行条件均须随测试证据保留。
 
 原生构建默认 `GOFLAGS=-p=1`，串行安排包的构建与测试；单个包内部的并发用例保持启用，注册清单和测试工作量均不变。可用 `GO_OHOS_BUILD_PARALLELISM` 明确调整。ARM64/x86_64 完整套件建议至少 8 GiB QEMU 内存，ARMv7 固定内核可用约 3 GiB，尤需控制构建并发。早期完整运行使用的原始 run-native.sh 按 SHA256 保存在 docs/test-inputs/，可对应报告中的启动脚本校验值。
+
+
+## 本轮系统/应用验证边界
+
+C20 ARM64 完整套件及三架构 SDK 共享库/静态库冒烟已经通过；ARM/x64 的旧
+原生和语言套件结束后收集真实结果，再部署修正版复验。不要覆盖运行中的 Go、
+SDK、语言驱动或日志目录。每轮使用独立 run-id；原始日志与输入校验和保留，
+最终关闭本任务 QEMU，其他任务的端口、HDC server 和实例不操作。
+
+配套 gomobile 的三架构各 29 项在真实 Ark 环境中执行，独立 harness 仅为测试
+配置运行时；这些是 shell 沙箱验证。当前镜像缺少 `/dev/code_sign`、`/dev/xpm`，
+正常签名 HAP 安装返回 9568404。不能把 standalone Ark 或构建成功描述成已安装
+应用通过；不得通过修改信任根或关闭签名校验来替代缺失的系统能力。

@@ -1,5 +1,8 @@
 # 构建与验证 OHOS Go 工具链
 
+ABI revision 2 正在重新验证，C18 结果仅为历史记录。系统集成和设备专项见 [INTEGRATION.zh-CN.md](INTEGRATION.zh-CN.md)。
+
+
 [English](BUILD.md) | 简体中文 | [使用说明](../README.zh-CN.md)
 
 本文说明适配工具链的源码构建、补丁维护与本地产物核验。使用解压后的工具链开发应用，请阅读 [README](../README.zh-CN.md)。
@@ -137,9 +140,11 @@ python3 scripts/test-native-targets.py
 文档和报告定稿后，用同一份已测试源码重包，保留受测工具的二进制内容：
 
 ```sh
-python3 scripts/manage.py build --skip-host
+python3 scripts/manage.py build --skip-host --skip-tools
 python3 scripts/verify-release.py --require-tested-toolchains
 ```
+
+`--skip-tools` 必须与 `--skip-host` 一起使用，检查已有补丁和源码身份后直接重包，不重新编译或替换可执行工具。仅使用 `--skip-host` 仍会重建目标工具。
 
 该检查覆盖归档结构、版本、补丁、源码、中英文可复用文档包、可执行文件格式、完整 QEMU 证据、72 个原生工具/包装文件和四种已实测 Linux/macOS 宿主的 Go 二进制，生成 `dist/release-manifest.json` 与 `dist/SHA256SUMS`。受测二进制必须匹配已有指纹；文档重包不允许替换受测工具。
 

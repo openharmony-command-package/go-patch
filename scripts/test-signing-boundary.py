@@ -57,7 +57,7 @@ for host in hosts:
     if log.exists():
         raise SystemExit('refusing to overwrite an earlier attempt: ' + str(log))
     qemu(host, 'send', script, GUEST + '/signing-boundary.sh')
-    result = subprocess.run(command(host, 'shell', 'GOMAXPROCS=2 sh ' + GUEST +
+    result = subprocess.run(command(host, 'shell', 'GOMAXPROCS=2 GO_OHOS_SIGNING_RUN_ID='+a.run_id+' sh ' + GUEST +
                             '/signing-boundary.sh', '--timeout', '7200'), text=True,
                             stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     log.write_text(result.stdout)
@@ -72,7 +72,8 @@ for host in hosts:
     print('SIGNING_BOUNDARY_PASS', host, flush=True)
 
 paths = [reports / ('signing-boundary-' + host + '.json') for host in ARCHES]
-if all(path.is_file() for path in paths):
+if all(path.is_file() and json.loads(path.read_text()).get('patch_sha256') == patch_sha
+       and json.loads(path.read_text()).get('script_sha256') == sha(script) for path in paths):
     rows = [json.loads(path.read_text()) for path in paths]
     assert all(row['accepted'] and row['patch_sha256'] == patch_sha and
                row['script_sha256'] == sha(script) and row['go_version'] == lock['go']['version']

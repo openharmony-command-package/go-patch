@@ -1,24 +1,6 @@
 {
   "go_version": "go1.27.3",
-  "patch_sha256": "58bc568264a43a993ba6a9156a2916259fb599b91a0869f937a62702338a5bb3",
-  "release_status": "candidate",
-  "full_qemu_validation": true,
-  "signing_boundary_complete": false,
-  "native_target_matrix_complete": false,
-  "signing_boundary_passed": [
-    "arm64",
-    "amd64"
-  ],
-  "native_target_host_passed": [
-    "arm64"
-  ],
-  "uncompleted": [
-    "ARM signing boundary",
-    "ARM/AMD64 native hosts to three OHOS targets (six combinations)"
-  ],
-  "windows_runtime_verified": false,
-  "armv7_qemu_profile": "posix",
-  "real_device_verified": false,
-  "all_task_qemus_stopped": true,
-  "note": "Use --require-tested-toolchains for archive and tested-byte verification. --require-validation remains strict and must reject this incomplete supplemental matrix."
+  "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
+  "accepted": false,
+  "status": "candidate; complete fresh three-architecture and native matrix validation before release"
 }

@@ -1,0 +1,51 @@
+{
+  "arch": "amd64",
+  "method": "official runOnHost -target; signed execution in full-system OHOS QEMU",
+  "run_id": "full-c19",
+  "diagnostic_filter": null,
+  "exit_status": 1,
+  "test_cases": 2733,
+  "expected_cases": 2733,
+  "target_timeout_seconds": 7200,
+  "recipe_timeout_scale": 20,
+  "target_stdlib_archive_sha256": "b2c84f9c8ad73ff92b44891d73347045a572af32d8aa6eb9553ee1296c18093f",
+  "target_stdlib_packages": 380,
+  "tests": {
+    "skip": 47,
+    "pass": 2682,
+    "fail": 4
+  },
+  "target_executions": 1246,
+  "failures": [
+    "Test/fixedbugs/issue59334.go",
+    "Test/fixedbugs/issue68415.go",
+    "Test/fixedbugs/issue68525.go",
+    "Test/fixedbugs/issue34968.go",
+    "Test",
+    "<package>"
+  ],
+  "infrastructure_errors": [],
+  "accepted": false,
+  "patch_sha256": "1c499c950e255dfb26942112396c0ab334eeefda7315af9a30da77e78fbe4277",
+  "input_hashes": {
+    "/Users/ranger/Documents/ChatGPT/go-patch/patch/go-ohos-1.27.3.patch": "1c499c950e255dfb26942112396c0ab334eeefda7315af9a30da77e78fbe4277",
+    "/Users/ranger/Documents/ChatGPT/go-patch/.work/upstream/go/src/cmd/internal/testdir/testdir_test.go": "0904d876438380655df5b386c26e1867675d5072caacf95f3924a153cbf42465",
+    "/Users/ranger/Documents/ChatGPT/go-patch/scripts/qemu-exec.py": "f1f578e871f6cf7508576e2097eefeef7bc07fff61c5c74c63703bef3af7e486",
+    "/Users/ranger/Documents/ChatGPT/go-patch/scripts/test-language.py": "43967c1b496dd14435adb62af5a92fed00a81b7eb517ca371debb6f5d77a2807"
+  },
+  "inputs_unchanged": true,
+  "driver_sha256": "dd4559ffc6e722f11580c71191c0d79f509b1d0a7c347f149bdd6b425e45a1bd",
+  "qemu": {
+    "pid": 53725,
+    "port": 5571,
+    "server": 18769,
+    "hdc": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/hdc",
+    "archive_sha256": "a1173c39b4bd9ae3e46de176867b501af51eff605466811b86d8370caeccd7ca",
+    "profile": "stock",
+    "qmp": "/Users/ranger/Documents/ChatGPT/go-patch/.work/qemu/x86_64/qmp.sock",
+    "memory_mib": 8192,
+    "server_pid": 72890,
+    "power_policy": "powermgr stopped during headless Go tests"
+  },
+  "log_sha256": "3ac206d2a804ea0f3b3144e457bf0147f94b6304a12fee4d7b0ae44fac71131e"
+}

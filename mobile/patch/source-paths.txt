@@ -1,0 +1,17 @@
+bind/genopenharmony.go
+bind/openharmony/bridge.c.support
+bind/openharmony/bridge.h.support
+bind/openharmony/native.d.ts.support
+bind/openharmony/paths_host.go.support
+bind/openharmony/paths_openharmony.go.support
+bind/openharmony/runtime.go.support
+bind/openharmony/runtime.ts.support
+cmd/gobind/main.go
+cmd/gobind/ohos_version.go
+cmd/gomobile/bind.go
+cmd/gomobile/bind_ohos.go
+cmd/gomobile/init.go
+cmd/gomobile/ohos_version.go
+cmd/gomobile/version.go
+bind/genopenharmony_test.go
+cmd/gomobile/bind_ohos_test.go

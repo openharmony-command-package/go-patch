@@ -1,0 +1,57 @@
+{
+  "arch": "amd64",
+  "run_id": "amd64-cgo1-r4",
+  "exit_status": 1,
+  "packages": {
+    "pass": 440,
+    "skip": 246,
+    "fail": 1
+  },
+  "failures": {
+    "runtime": [
+      "<package>"
+    ]
+  },
+  "build_failures": [],
+  "log_sha256": "a4eda58ea0043fc345b074af3f495f148f2cfb11fbfafde39e7fc65c9fd5732f",
+  "qemu": {
+    "pid": 90142,
+    "port": 5571,
+    "server": 18769,
+    "hdc": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/hdc",
+    "archive_sha256": "a1173c39b4bd9ae3e46de176867b501af51eff605466811b86d8370caeccd7ca",
+    "profile": "stock",
+    "qmp": "/Users/ranger/Documents/ChatGPT/go-patch/.work/qemu/x86_64/qmp.sock",
+    "memory_mib": 8192,
+    "power_policy": "powermgr stopped during headless Go tests"
+  },
+  "inputs": {
+    "run_id": "amd64-cgo1-r4",
+    "scope": "stdlib-tools",
+    "cgo": "1",
+    "go_build_info": {
+      "target": {
+        "name": "openharmony-amd64",
+        "goos": "openharmony",
+        "goarch": "amd64",
+        "qemu_arch": "x86_64"
+      },
+      "upstream": "go1.27.3",
+      "patch_sha256": "df5494a401403fa9464d8d3e5f9f2d9a56f5eb21b7f0cbea4b7d3aef43f5a2bc"
+    },
+    "fixtures_sha256": {
+      "/data/local/tmp/go-patch/bin/cc": "68c1685f19377a895c7e74bab31d9239ffcfc6273210845d74fca9ddf2edc2e2",
+      "/data/local/tmp/go-patch/bin/binary-sign-tool": "0f69c8bf60d08dd6c7b66d80b0b8d1df3f0513f092cd01119fd6d71b3764d711",
+      "/data/local/tmp/go-patch/bin/native-runner": "b15dc2a80bb8885cb8573398106c5510103288dc5ce4c21eb17872898130a4a5",
+      "/data/local/tmp/go-patch/native-zig/zig": "f5b9efabe40911b49a43c8a5e93a4b0e047b9caf9e8abdbe5bd818cc62f321b1",
+      "/data/local/tmp/go-patch/run-native.sh": "37784c0f87645e804315d9de556a4b7770345621a6c708f87da95f3525813d1b",
+      "/data/local/tmp/go-patch/go/bin/go": "0687fb6c62ffab21f3669ca8b1859f4294a94972e62187ed95be42c0fc2f97e9",
+      "/data/local/tmp/go-patch/go.tar.gz": "8811fad6b08e36d88de25a2d3345307ba1aa8b0897cead264cac3cc74cdb8286"
+    }
+  },
+  "scope": "stdlib-tools",
+  "language_cases": 0,
+  "language_tests": {},
+  "expected_language_cases": 2733,
+  "accepted": false
+}

@@ -1,3 +1,5 @@
 *.patch -text
 *.sh text eol=lf
 *.py text eol=lf
+# Unified diff context intentionally contains a leading space before tabs.
+*.patch -whitespace

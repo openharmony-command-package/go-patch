@@ -54,7 +54,7 @@
   },
   "patch": {
     "filename": "go-ohos-1.27.3.patch",
-    "abi_revision": 1
+    "abi_revision": 2
   },
   "references": {
     "ohos": {
@@ -66,6 +66,11 @@
       "url": "https://github.com/golang/go/pull/75048",
       "commit": "1a087d05b5cf9573876b18812d8d5516f16bbe57",
       "status": "unmerged reference; ported locally"
+    },
+    "hilog": {
+      "repository": "https://github.com/openharmony/hiviewdfx_hilog",
+      "commit": "393d7e9a690edb76ed27e710b472623daf650dc8",
+      "protocol": "frameworks/libhilog/include/hilog_base.h (28-byte HilogMsg)"
     }
   },
   "hosts": [

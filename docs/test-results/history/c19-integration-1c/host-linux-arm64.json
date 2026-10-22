@@ -1,0 +1,27 @@
+{
+  "host": "linux/arm64",
+  "version": "go version go1.27.3 linux/arm64",
+  "patch_sha256": "1c499c950e255dfb26942112396c0ab334eeefda7315af9a30da77e78fbe4277",
+  "archive_sha256": "098a9784ad1d5952023e4728fc46c8067d9eca9ce6f2404f7e3fa0e203df239a",
+  "go_binary_sha256": "7c14f65b98840ef2ed4411a1fda969c3d61cc9cf1ff507bef55a79230848b484",
+  "results": [
+    {
+      "target": "openharmony/arm64",
+      "result": "build-pass",
+      "cgo": false,
+      "pure_sha256": "cdc030a6e5a94308d33f54124566cb8a28937e7ef93287f193a4180d6318a057"
+    },
+    {
+      "target": "openharmony/arm",
+      "result": "build-pass",
+      "cgo": false,
+      "pure_sha256": "08bd711fbbf97a988286501a9e33ee6e2410b3600c5b78a0d11e08afe9bf2096"
+    },
+    {
+      "target": "openharmony/amd64",
+      "result": "build-pass",
+      "cgo": false,
+      "pure_sha256": "b8cd9af3a32e11a17e69611d72e29d6a86b7c5b1ddb9d432a33c09fe17597496"
+    }
+  ]
+}

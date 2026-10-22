@@ -1,0 +1,51 @@
+{
+  "arch": "arm64",
+  "run_id": "arm64-cgo1-r7",
+  "exit_status": 0,
+  "packages": {
+    "pass": 450,
+    "skip": 245
+  },
+  "failures": {},
+  "build_failures": [],
+  "log_sha256": "35b2b98b64bf53343b0d6992dca1aec7468deca07742821892ab29ecc8dc0239",
+  "qemu": {
+    "pid": 56963,
+    "port": 5569,
+    "server": 18769,
+    "hdc": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/hdc",
+    "archive_sha256": "86c1d6ce17ea42b8732d2aa64a3081da7e704e084ba0c70923b72cc8a4cdfbd9"
+  },
+  "inputs": {
+    "run_id": "arm64-cgo1-r7",
+    "scope": "full",
+    "cgo": "1",
+    "go_build_info": {
+      "target": {
+        "name": "openharmony-arm64",
+        "goos": "openharmony",
+        "goarch": "arm64",
+        "qemu_arch": "arm64"
+      },
+      "upstream": "go1.27.3",
+      "patch_sha256": "c15f9e9c88326816f9f37aec711426afbaa80f474cfddb058b1660e3169ed94a"
+    },
+    "fixtures_sha256": {
+      "/data/local/tmp/go-patch/bin/cc": "5eda92ee8b39190108139a1e9d020f95a093188979a4a38b8f85a1264ebc3f7a",
+      "/data/local/tmp/go-patch/bin/binary-sign-tool": "8b21a15093f5d83785cf9edec477107062a11fe54d21f3cf1c71c158b9576fe0",
+      "/data/local/tmp/go-patch/bin/native-runner": "0fb9163bba005a82a5a013482bc8b77dbdd2fda81aedf8504555342087c2dd64",
+      "/data/local/tmp/go-patch/native-zig/zig": "04a2ef0c1890786621d455367e0b6a30650894d2cd9e9773793af6699ed4d192",
+      "/data/local/tmp/go-patch/run-native.sh": "4d9943cc4382eac024e6d64ba2f29ba3c0f1466ed43b4585e41e5f443fbd7299",
+      "/data/local/tmp/go-patch/go/bin/go": "7ce2851dcf0d8e089de9127b396709e3eb390972045e434c8a527b2dbce5ba09",
+      "/data/local/tmp/go-patch/go.tar.gz": "d8321dc7ace6bdb047fb80ba3cfb34c55669f325b305e12c85b1cd71b4a686fd"
+    }
+  },
+  "scope": "full",
+  "language_cases": 2733,
+  "language_tests": {
+    "pass": 2673,
+    "skip": 60
+  },
+  "expected_language_cases": 2733,
+  "accepted": true
+}

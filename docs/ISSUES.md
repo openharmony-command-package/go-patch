@@ -1,10 +1,12 @@
+> ABI revision 2 正在补充系统集成及重新验收。下表原有“三架构通过”描述对应历史 C18，当前补丁结果以 [VALIDATION.md](VALIDATION.md) 为准。
+
 # 参考仓库 issue 审计
 
 快照日期：2026-10-21。来源：[GitCode 全部 issue](https://gitcode.com/openharmony-sig/ohos_golang_go/issues)，公开 API `state=all&per_page=100` 返回 72 条（24 open，48 closed）。原始公开内容保存在 [issues-snapshot.json](issues-snapshot.json)。编号不连续是原仓库现状。
 
 分类汇总：45 条本次适配、19 条官方版本继承、2 条本地脚本替代、2 条上游流程无需代码处理，其余 4 条分别为无需额外兼容、保留测试、文档处理及版本策略。
 
-本表逐条记录处理方式。上游 closed 不是本项目通过测试的证据；“本次适配”表示代码已处理，运行验收状态单独列出。当前 C18 的 ARM64 r11、ARMv7 r5 与 amd64 r5 完整测试已通过，见 [验证记录](VALIDATION.md) 与匹配补丁 SHA256 的 [总报告](test-results/summary.json)。这是本地固定镜像下的验证结果，不表示上游所有 issue 已关闭、真机或所有部署场景均已验证。
+本表逐条记录处理方式。上游 closed 不是本项目通过测试的证据；“本次适配”表示代码已处理，运行验收状态单独列出。历史 C18 的 ARM64 r11、ARMv7 r5 与 amd64 r5 完整测试已通过，原报告见 [C18 历史总报告](test-results/history/c18/summary.json)。当前 C20 的 ARM64 全套已通过，ARM/x64 尚待补验，以 [验证记录](VALIDATION.md) 为准。这是本地固定镜像下的验证结果，不表示上游所有 issue 已关闭、真机或所有部署场景均已验证。
 
 | Issue | 原状态 | 标题 | 处理 | 代码/理由 | 验证与限制 |
 |---|---|---|---|---|---|
@@ -80,3 +82,19 @@
 | [#73](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/73) | open | cmd/link: add missing fields in Shlibs | 本次适配 | 补齐共享库符号地址与 GC mask 重定位字段；使用当前版本对象表示。 | 三架构 testshared 完整包测试通过。 |
 | [#74](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/74) | open | runtIme: move SP to makesure __tlsdesc-stub does not overwrite FP saved at SP-8 | 本次适配 | ARM64 GD TLS 调用前在栈上保存 R1/LR，预留 32 字节，保护 SP-8 的 FP。 | 三架构 C 四线程回调及 runtime 完整包测试通过。 |
 | [#75](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/75) | open | net: add cgo implements for interfaceTable&interfaceAddrTable on openharmony system | 本次适配 | libc getifaddrs 获取接口和地址，释放链表并关闭 ioctl fd；修正 IPv4 16 字节表示。 | 三架构冒烟通过；三架构 net 完整包测试通过。 |
+
+
+## 系统与 gomobile 补充审计（2026-10-23）
+
+C20 在系统集成补丁上补齐 HiLog 的 debug/NOSPLIT 浅调用链、三架构原始系统调用
+叶入口、关闭标准 fd 后的日志通道，以及显式空 TZ 的测试边界。C19 ARM64 全套
+和 x64 语言失败记录保留，不能用 C18 通过报告代替新补丁。C20 ARM64 完整
+450 pass/249 skip/0 fail；ARMv7/x64 在旧套件结束后重新验证。
+
+#58 的 C19 三架构签名边界和原生九组合已通过；C20 必须独立重跑，目前 ARM64
+边界和三个目标直接执行已通过，其余待补。HiShell 真机仍未验证。
+
+新增 gomobile companion 提供三 ABI HAR/ArkTS/N-API、双向回调、Context 初始化
+和九种工具包。真实 Ark 各 29 项、宿主 Node 27 项、HAP 编译通过，签名 HAP
+因镜像缺少 code_sign/xpm 设备而安装失败。应用 UID、真实应用私有目录、生命周期
+及纯 Go UI 后端不计通过。详见 [gomobile 验证](../mobile/docs/VALIDATION.zh-CN.md)。

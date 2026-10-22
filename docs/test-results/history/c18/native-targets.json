@@ -1,0 +1,47 @@
+{
+  "go_version": "go1.27.3",
+  "patch_sha256": "58bc568264a43a993ba6a9156a2916259fb599b91a0869f937a62702338a5bb3",
+  "accepted": false,
+  "deployment_resigned": false,
+  "hosts": [
+    {
+      "host": "arm64",
+      "go_version": "go1.27.3",
+      "patch_sha256": "58bc568264a43a993ba6a9156a2916259fb599b91a0869f937a62702338a5bb3",
+      "native_go_sha256": "5b9c640b270138fe1a7cfce583059b21767f1c0b4d986b7fa448326b57c52be0",
+      "script_sha256": "b3ae95f4ddd928e4373ceabaf6a6208a64c0d0a7c4e1602dfc5c0f4e80e0ce68",
+      "deployment_resigned": false,
+      "accepted": true,
+      "cases": [
+        {
+          "host": "arm64",
+          "target": "arm64",
+          "program_sha256": "5f11a2ac1abd0714902e53055dac867021aea1fc03eb4b2ed7b31fa1b599b061",
+          "output": "NATIVE_TARGET_OK arm64",
+          "exit_status": 0
+        },
+        {
+          "host": "arm64",
+          "target": "arm",
+          "program_sha256": "1e1418fd444fee0bbfe08be6af2e7d848f3d82bb35d17a238593325ab03fd21b",
+          "output": "NATIVE_TARGET_OK arm",
+          "exit_status": 0
+        },
+        {
+          "host": "arm64",
+          "target": "amd64",
+          "program_sha256": "04ab106706cd8b3ecead1b5e3138dc65a75828be8ce0bd18bc7b9acafef338fc",
+          "output": "NATIVE_TARGET_OK amd64",
+          "exit_status": 0
+        }
+      ]
+    }
+  ],
+  "missing_hosts": [
+    "arm",
+    "amd64"
+  ],
+  "completed_combinations": 3,
+  "expected_combinations": 9,
+  "note": "Current full suites passed. No additional guest validation was started after the requested VM shutdown; remaining native host/target combinations were not revalidated with C18."
+}

@@ -1,0 +1,74 @@
+{
+  "accepted": true,
+  "arch": "arm64",
+  "run_id": "c20-final-r2",
+  "scope": "OHOS Ark N-API shell sandbox, two runtime environments",
+  "hap_installation": false,
+  "application_private_directory_test": false,
+  "har_sha256": "86a9a0018007ff9ec73620d45baa4023ba9f4547c1a8ed2e9326658bc214e692",
+  "runner_sha256": "9886369361991086b6984d632d987603653a270479abd3b7a3ba6dcc149b90ae",
+  "suite_sha256": "a74ca625c3eec91ec0b08fb87c176855a28a603dc1a3dd57c123c2caf954ceea",
+  "compile_driver_sha256": "940d9124c4f987c49d3ab30e50b15fa3e4966a60ac6176ff99bb5803b4c5c4c2",
+  "harness_header": {
+    "commit": "4bb2d6b20afb63d3de5ea767d32c9306a25e4901",
+    "date": "2026-07-04T16:22:27Z",
+    "source_url": "https://github.com/openharmony/ability_ability_runtime/commit/4bb2d6b20afb63d3de5ea767d32c9306a25e4901"
+  },
+  "started_at": "2026-10-22T19:22:39Z",
+  "mobile_patch_sha256": "ad21eedc994b950fdb8e075bf83c8aaf52f646ead4428367ca50af685d2ff9de",
+  "go_patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
+  "native_library_sha256": "16399c2a6b0e4909e51bd8e11cb16776a96dd90c770c2efb5f313da77935d3ee",
+  "go_executable_sha256": "723b4531ad6a3eb0df5c54cd57f6cc60d25bd5acae35764edd7bb3a43398b90c",
+  "runtime_reports": [
+    {
+      "accepted": true,
+      "cases": 27,
+      "checks": [
+        "initialization-required",
+        "Context-directories-visible-in-Go",
+        "UTF8-and-NUL",
+        "int64-lossless",
+        "bytes-copy",
+        "nil-bytes",
+        "Go-errors",
+        "Go-panic-rejection",
+        "scalar-type-check",
+        "integer-range-check",
+        "struct-constructor-fields-method",
+        "Go-constructor",
+        "disposed-reference",
+        "variables-constants",
+        "sync-interface-callback",
+        "async-interface-callback",
+        "callback-rejection",
+        "nil-interface",
+        "invalid-interface",
+        "Go-interface-result",
+        "retained-callback",
+        "concurrent-callbacks",
+        "nonfinite-float-values",
+        "callback-external-named-type",
+        "callback-returning-interface",
+        "callback-object-bytes-bigint",
+        "nested-Go-calls-from-callbacks"
+      ],
+      "scope": "OHOS Ark N-API conformance",
+      "round": 1
+    },
+    {
+      "accepted": true,
+      "cases": 2,
+      "checks": [
+        "previous-environment-closed",
+        "fresh-environment-usable"
+      ],
+      "scope": "OHOS Ark N-API conformance",
+      "round": 2
+    }
+  ],
+  "cases": 29,
+  "runner_binary_sha256": "1402283621544ddc22d800723de27c5d3b30bccd03d3363e634d0a7d003945c1",
+  "bytecode_sha256": "c25bf7fd739d5667ed03717d6ae1036a160fff0619c9b0896766f7f43fba458d",
+  "raw_log_sha256": "920934997abc4eee448726627c16423059f117f1b8e2f69d7182b7215f17942d",
+  "finished_at": "2026-10-22T19:22:59Z"
+}

@@ -1,0 +1,51 @@
+{
+  "recorded_at": "2026-10-21T19:24:40.014140+00:00",
+  "all_task_qemus_stopped": true,
+  "other_task_qemus_untouched": true,
+  "targets": [
+    {
+      "arch": "arm64",
+      "stopped": true,
+      "stopped_at": "2026-10-21T14:46:14.741137+00:00",
+      "run_id": "arm64-cgo1-r11",
+      "image_preserved": true,
+      "note": "Explicit user-requested shutdown after full report and raw log collection; owned process group exit was checked."
+    },
+    {
+      "arch": "armv7a",
+      "stopped": true,
+      "stopped_at": "2026-10-21T19:15:52.072101+00:00",
+      "run_id": "arm-cgo1-r5",
+      "qemu": {
+        "pid": 72368,
+        "port": 5570,
+        "server": 18769,
+        "hdc": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/hdc",
+        "archive_sha256": "98dda34c8120948605d36d3f2d546086a2c8e2370e24aa8f06f95d6eaac3ce25",
+        "profile": "posix",
+        "power_policy": "powermgr stopped during headless Go tests (applied while run active)",
+        "server_pid": 1343
+      },
+      "image_preserved": true
+    },
+    {
+      "arch": "x86_64",
+      "stopped": true,
+      "stopped_at": "2026-10-21T18:08:01.025524+00:00",
+      "run_id": "amd64-cgo1-r5",
+      "qemu": {
+        "pid": 90142,
+        "port": 5571,
+        "server": 18769,
+        "hdc": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/hdc",
+        "archive_sha256": "a1173c39b4bd9ae3e46de176867b501af51eff605466811b86d8370caeccd7ca",
+        "profile": "stock",
+        "qmp": "/Users/ranger/Documents/ChatGPT/go-patch/.work/qemu/x86_64/qmp.sock",
+        "memory_mib": 8192,
+        "power_policy": "powermgr stopped during headless Go tests",
+        "server_pid": 1345
+      },
+      "image_preserved": true
+    }
+  ]
+}

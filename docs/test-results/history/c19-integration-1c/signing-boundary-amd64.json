@@ -1,0 +1,13 @@
+{
+  "arch": "amd64",
+  "go_version": "go1.27.3",
+  "patch_sha256": "1c499c950e255dfb26942112396c0ab334eeefda7315af9a30da77e78fbe4277",
+  "script_sha256": "fc6beceb721286e37586a572004774eb5f904a77eacf59db6d2a295d9c00c9cf",
+  "accepted": true,
+  "linux_build_without_signer": true,
+  "ohos_build_without_signer_rejected": true,
+  "ohos_signed_build_direct_execution": true,
+  "go_binary_sha256": "72d64bafc708e41d524fc2c821c26802052cf57f2e9e18e8f6f5d7813e165e71",
+  "log_sha256": "ae2fe3833ed431bb3b7b60fd2c38c98a9a60e4e4766a52a8a7e5231dd6e9cc12",
+  "log_path": ".work/logs/signing-boundary/amd64-c19-r2.log"
+}

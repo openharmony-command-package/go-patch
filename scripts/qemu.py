@@ -44,6 +44,15 @@ def shell(a, command, timeout=120):
     return output.rsplit('__GO_PATCH_EXIT__=', 1)[0]
 
 
+def ensure_connection(a, timeout=120):
+    # Repeated tconn during daemon startup can leave parallel sessions with
+    # channels permanently "being established". Keep an existing connection.
+    key = '127.0.0.1:' + str(a.port)
+    targets = hdc(a, 'list', 'targets', target=False, timeout=timeout).split()
+    if key not in targets:
+        hdc(a, 'tconn', key, target=False, timeout=timeout)
+
+
 def state_path(a):
     return a.work / a.arch / 'state.json'
 
@@ -214,7 +223,7 @@ def boot(a):
         if proc.poll() is not None:
             raise RuntimeError('QEMU exited; inspect ' + str(dest / 'serial.log'))
         try:
-            hdc(a, 'tconn', '127.0.0.1:' + str(a.port), target=False, timeout=10)
+            ensure_connection(a, timeout=10)
             if 'GO_PATCH_READY' in shell(a, 'echo GO_PATCH_READY', timeout=15):
                 # A headless device's power service can suspend the complete
                 # guest while Go is busy. Disable that service for this test VM.
@@ -252,6 +261,10 @@ def stop(a):
         if 'No target available' not in str(error):
             raise
     finally:
+        # Retain this task's VM identity after removing its live state, so the
+        # final audit can confirm that the exact processes have exited.
+        completed = dict(s, stop_requested_at_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()))
+        (a.work / a.arch / 'completed-state.json').write_text(json.dumps(completed, indent=2) + '\n')
         state_path(a).unlink()
         if s.get('qmp'):Path(s['qmp']).unlink(missing_ok=True)
 
@@ -313,7 +326,7 @@ def main():
         stop(a)
     else:
         load(a)
-        hdc(a, 'tconn', '127.0.0.1:' + str(a.port), target=False)
+        ensure_connection(a)
         if a.command == 'shell':
             output = shell(a, a.script, timeout=a.timeout)
             if len(output) > 16000:

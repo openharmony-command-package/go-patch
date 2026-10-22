@@ -1,12 +1,13 @@
 {
   "arch": "arm64",
-  "patch_sha256": "58bc568264a43a993ba6a9156a2916259fb599b91a0869f937a62702338a5bb3",
   "go_version": "go1.27.3",
-  "script_sha256": "0286e0694da4e1f1e879257ec623ae6656d6d2d114845c63df01f17be082248c",
+  "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
+  "script_sha256": "fc6beceb721286e37586a572004774eb5f904a77eacf59db6d2a295d9c00c9cf",
   "accepted": true,
   "linux_build_without_signer": true,
   "ohos_build_without_signer_rejected": true,
   "ohos_signed_build_direct_execution": true,
-  "go_binary_sha256": "5b9c640b270138fe1a7cfce583059b21767f1c0b4d986b7fa448326b57c52be0",
-  "log_sha256": "ae2fe3833ed431bb3b7b60fd2c38c98a9a60e4e4766a52a8a7e5231dd6e9cc12"
+  "go_binary_sha256": "5fec26a887607abcf6ff47b7fe53018ceda220ea266d0a8887abe4c9f0ce2346",
+  "log_sha256": "ae2fe3833ed431bb3b7b60fd2c38c98a9a60e4e4766a52a8a7e5231dd6e9cc12",
+  "log_path": ".work/logs/signing-boundary/arm64-c20-r1.log"
 }

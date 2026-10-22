@@ -1,26 +1,26 @@
 {
   "host": "darwin/arm64",
   "version": "go version go1.27.3 darwin/arm64",
-  "patch_sha256": "58bc568264a43a993ba6a9156a2916259fb599b91a0869f937a62702338a5bb3",
-  "go_binary_sha256": "2a01e906edfcc3b01abf0a2861487fce83eabfacede70260111eb99a0b9531da",
+  "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
+  "go_binary_sha256": "723b4531ad6a3eb0df5c54cd57f6cc60d25bd5acae35764edd7bb3a43398b90c",
   "results": [
     {
       "target": "openharmony/arm64",
       "result": "build-pass",
       "cgo": true,
-      "pure_sha256": "74447a72b675e7813671e9ff2db80cdcce964e67adacc2157c75ff30314e816f"
+      "pure_sha256": "b012b280f166e6959ece703e37b00dbb1e9083f40d2493a7cda220d6935d143d"
     },
     {
       "target": "openharmony/arm",
       "result": "build-pass",
       "cgo": true,
-      "pure_sha256": "cd77c780921caa6df92c3e3ff15e6ea51dc07bd776bd9cd51e141623cfa943ab"
+      "pure_sha256": "806070dab8de5017d7a026c2256a3cde0c459c35c7b65c17f76dc5ed6a5fc6e6"
     },
     {
       "target": "openharmony/amd64",
       "result": "build-pass",
       "cgo": true,
-      "pure_sha256": "e0e87e0e14fd3797080a5a9d8c3309c002a78610a15ebe9fb14ce7625bdf8b47"
+      "pure_sha256": "98c6b2b679123084066b259228431a242e9876c2eb620603405a3d0cd43c93db"
     }
   ]
 }

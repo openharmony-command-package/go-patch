@@ -1,0 +1,13 @@
+{
+  "host": "openharmony-arm64",
+  "accepted": true,
+  "patch_sha256": "ad21eedc994b950fdb8e075bf83c8aaf52f646ead4428367ca50af685d2ff9de",
+  "binaries_sha256": {
+    "gomobile": "be14b07d2e5ef51499abe5869e5a204f944a571d145a695d20869c14e081d384",
+    "gobind": "2932e58c2e942283ffe96bdf98a91c59a79e53b98de29b6eccf4a65c2bad92b8"
+  },
+  "scope": "paired command execution; not full SDK bind on this host",
+  "deployment_self_signed": true,
+  "output": "10-23 03:17:50.237 INFO  - add codesign section success\n10-23 03:17:50.283 INFO  - write code sign data success\n10-23 03:17:50.284 INFO  - sign success\n10-23 03:17:50.318 INFO  - add codesign section success\n10-23 03:17:50.345 INFO  - write code sign data success\n10-23 03:17:50.347 INFO  - sign success\ngomobile OHOS ad21eedc994b950fdb8e075bf83c8aaf52f646ead4428367ca50af685d2ff9de (openharmony/arm64,openharmony/arm,openharmony/amd64)\ngobind ohos ad21eedc994b950fdb8e075bf83c8aaf52f646ead4428367ca50af685d2ff9de",
+  "raw_log_sha256": "48fb1f4565dfc2b8f15584a0210347059a4c24faa0fc81d5095ac6dab812c8a6"
+}
