@@ -111,7 +111,7 @@ TCG 语言驱动采用官方跨平台测试机制，在宿主编译，将目标�
 每轮测试结束后，先收集原始日志，再关闭本任务对应实例：
 
 ```sh
-python3 scripts/test-qemu.py --arch armv7a --run-id arm-cgo1-r5 collect
+python3 scripts/test-qemu.py --arch armv7a --run-id arm-cgo1-c20-r1 collect
 python3 scripts/qemu.py --arch armv7a stop
 ```
 
@@ -119,11 +119,11 @@ python3 scripts/qemu.py --arch armv7a stop
 
 ```sh
 python3 scripts/verify-validation.py \
-  --arm64 .work/logs/qemu/arm64/arm64-cgo1-r11/summary.json \
-  --arm .work/logs/qemu/armv7a/arm-cgo1-r5/summary.json \
-  --amd64 .work/logs/qemu/x86_64/amd64-cgo1-r5/summary.json \
-  --arm-language .work/logs/language/armv7a/full-c18/summary.json \
-  --amd64-language .work/logs/language/x86_64/full-c18/summary.json
+  --arm64 .work/logs/qemu/arm64/arm64-cgo1-c20-r1/summary.json \
+  --arm .work/logs/qemu/armv7a/arm-cgo1-c20-r1/summary.json \
+  --amd64 .work/logs/qemu/x86_64/amd64-cgo1-c20-r1/summary.json \
+  --arm-language .work/logs/language/armv7a/full-c20/summary.json \
+  --amd64-language .work/logs/language/x86_64/full-c20/summary.json
 ```
 
 当三个实例均已部署、完整套件结束且仍在运行时，可另行验证：
@@ -133,7 +133,7 @@ python3 scripts/test-signing-boundary.py
 python3 scripts/test-native-targets.py
 ```
 
-它们检查自签名边界和原生九种主机/目标组合，与完整套件门槛分别计算。当前三架构完整套件通过，但 ARM 签名边界及六种原生组合尚未完成，见 [packaging-status.json](test-results/packaging-status.json)。不能用其他补丁的历史通过记录替代。
+它们检查自签名边界和原生九种主机/目标组合，与完整套件门槛分别计算。C20 三架构签名边界和原生九组合已通过，ARM64 全量通过，ARMv7/x64 的 C20 全量仍在运行，见 [packaging-status.json](test-results/packaging-status.json)。不能用其他补丁的历史通过记录替代。
 
 ## 5. 重包与核验
 
@@ -154,7 +154,7 @@ python3 scripts/verify-release.py --require-tested-toolchains
 python3 scripts/verify-release.py --require-validation
 ```
 
-当前补充覆盖不完整，该严格检查会明确拒绝。`--require-tested-toolchains` 不替代该门槛；未使用 `--require-validation` 生成的清单保持 `release_status=candidate` 和 `validation_required=false`。不带两个选项时，仅校验归档内容与结构。
+当前 ARMv7/x64 的 C20 全量证据尚未完成，该严格检查会明确拒绝。`--require-tested-toolchains` 不替代该门槛；未使用 `--require-validation` 生成的清单保持 `release_status=candidate` 和 `validation_required=false`。不带两个选项时，仅校验归档内容与结构。
 
 压缩包和产物元数据保留本地，不提交 Git；上传二进制发布是独立步骤。具体覆盖及限制见 [VALIDATION.md](VALIDATION.md) 和 [JSON 总报告](test-results/summary.json)。
 

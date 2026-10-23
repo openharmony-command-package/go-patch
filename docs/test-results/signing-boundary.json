@@ -1,6 +1,47 @@
 {
   "go_version": "go1.27.3",
   "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
-  "accepted": false,
-  "status": "ARM64 passed; ARM/x64 current C20 matrix pending"
+  "script_sha256": "fc6beceb721286e37586a572004774eb5f904a77eacf59db6d2a295d9c00c9cf",
+  "accepted": true,
+  "targets": [
+    {
+      "arch": "arm64",
+      "go_version": "go1.27.3",
+      "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
+      "script_sha256": "fc6beceb721286e37586a572004774eb5f904a77eacf59db6d2a295d9c00c9cf",
+      "accepted": true,
+      "linux_build_without_signer": true,
+      "ohos_build_without_signer_rejected": true,
+      "ohos_signed_build_direct_execution": true,
+      "go_binary_sha256": "5fec26a887607abcf6ff47b7fe53018ceda220ea266d0a8887abe4c9f0ce2346",
+      "log_sha256": "ae2fe3833ed431bb3b7b60fd2c38c98a9a60e4e4766a52a8a7e5231dd6e9cc12",
+      "log_path": ".work/logs/signing-boundary/arm64-c20-r1.log"
+    },
+    {
+      "arch": "arm",
+      "go_version": "go1.27.3",
+      "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
+      "script_sha256": "fc6beceb721286e37586a572004774eb5f904a77eacf59db6d2a295d9c00c9cf",
+      "accepted": true,
+      "linux_build_without_signer": true,
+      "ohos_build_without_signer_rejected": true,
+      "ohos_signed_build_direct_execution": true,
+      "go_binary_sha256": "5784323f5497f173552c15c0b38116f16cc9f6863e2950c145d8193bbfd7d730",
+      "log_sha256": "ae2fe3833ed431bb3b7b60fd2c38c98a9a60e4e4766a52a8a7e5231dd6e9cc12",
+      "log_path": ".work/logs/signing-boundary/arm-c20-r1.log"
+    },
+    {
+      "arch": "amd64",
+      "go_version": "go1.27.3",
+      "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
+      "script_sha256": "fc6beceb721286e37586a572004774eb5f904a77eacf59db6d2a295d9c00c9cf",
+      "accepted": true,
+      "linux_build_without_signer": true,
+      "ohos_build_without_signer_rejected": true,
+      "ohos_signed_build_direct_execution": true,
+      "go_binary_sha256": "3d58e313754ef741e214d219f83ae849ba7c022775bb18ccd6c56d19e30b1d26",
+      "log_sha256": "ae2fe3833ed431bb3b7b60fd2c38c98a9a60e4e4766a52a8a7e5231dd6e9cc12",
+      "log_path": ".work/logs/signing-boundary/amd64-c20-r1.log"
+    }
+  ]
 }

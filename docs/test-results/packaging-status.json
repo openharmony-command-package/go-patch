@@ -2,5 +2,9 @@
   "go_version": "go1.27.3",
   "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
   "accepted": false,
-  "status": "candidate; complete fresh three-architecture and native matrix validation before release"
+  "status": "candidate; ARMv7/x64 C20 full validation running",
+  "platform_integration_accepted": true,
+  "native_signing_accepted": true,
+  "native_matrix_accepted": true,
+  "full_three_architecture_accepted": false
 }

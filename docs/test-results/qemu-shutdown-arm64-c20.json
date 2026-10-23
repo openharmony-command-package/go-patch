@@ -1,0 +1,14 @@
+{
+  "arch": "arm64",
+  "run_id": "arm64-cgo1-c20-r1",
+  "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
+  "closed": true,
+  "stop_requested_at_utc": "2026-10-23T01:12:16Z",
+  "checked_at_utc": "2026-10-23T01:18:45.767284+00:00",
+  "launcher_pid": 46808,
+  "qemu_pid": 46831,
+  "processes_absent": true,
+  "live_state_absent": true,
+  "completion_record_sha256": "7fd55262e7955a83d029abfffbb1a99c6533df8a81b6842d15465d00230298ec",
+  "scope": "this task ARM64 VM only; ARMv7 and x64 remain active for C20 full validation"
+}
