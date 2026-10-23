@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "confirmed_date": "2026-10-23",
+  "scope": "har-bindings-three-abis",
+  "confirmation": {
+    "mobile_scope": "先完成 HAR 绑定与三架构交付",
+    "qemu_signing": "可以先跳过签名。在 qemu 上面"
+  },
+  "go_patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
+  "mobile_patch_sha256": "5a8ce153a45eb0abf4a8e9bc553ab70908335e4dce4de98377903d904b988923",
+  "har_sha256": "2350bf2901c27e6f7ac454961ce7510fa032ef9ef030db317681f4310de56237",
+  "qemu_signed_hap_validation": "deferred_by_user",
+  "application_uid_execution": "unverified",
+  "private_directory_permissions": "unverified",
+  "application_lifecycle": "unverified",
+  "pure_go_ui_backend": "outside_confirmed_scope",
+  "go_native_self_signing": "required",
+  "security_configuration_modified": false,
+  "full_application_gate_unchanged": true
+}

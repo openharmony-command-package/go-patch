@@ -5,7 +5,10 @@ ROOT=pathlib.Path(__file__).resolve().parents[1];REPO=ROOT.parent
 p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('--dist',type=pathlib.Path,default=REPO/'dist/gomobile')
 p.add_argument('--require-validation',action='store_true')
+p.add_argument('--validation-scope',choices=['application','har'],default='application',
+ help='application also requires signed HAP execution; har validates library bindings only')
 a=p.parse_args();lock=json.loads((ROOT/'manifest.json').read_text())
+if a.validation_scope=='har' and not a.require_validation:p.error('--validation-scope har requires --require-validation')
 sha=lambda data:hashlib.sha256(data).hexdigest()
 revision=sha((ROOT/'patch'/lock['patch']).read_bytes())
 assert revision==(ROOT/'patch/mobile-ohos.patch.sha256').read_text().split()[0]
@@ -44,7 +47,7 @@ for row in manifest['archives']:
   for tool in ['gomobile','gobind']:
    data=read('gomobile/bin/'+tool+suffix);executable(data,row['target'])
    assert sha(data)==info['binaries_sha256'][tool]==row['binaries_sha256'][tool]
-  for name in ['README.md','README.zh-CN.md','manifest.json','patch/mobile-ohos.patch','scripts/sign-installed.sh','scripts/test-ark.py','tests/ark/runtime.h']:
+  for name in ['README.md','README.zh-CN.md','manifest.json','patch/mobile-ohos.patch','scripts/sign-installed.sh','scripts/test-ark.py','scripts/verify.py','tests/ark/runtime.h','docs/BUILD.md','docs/BUILD.zh-CN.md','docs/VALIDATION.md','docs/VALIDATION.zh-CN.md','docs/test-results/delivery-scope.json']:
    assert read('gomobile/'+name)==(ROOT/name).read_bytes(),'stale packaged file: '+name
  products[row['target']]=info
 bundle=manifest['port_bundle'];assert sha((a.dist/bundle['filename']).read_bytes())==bundle['sha256']
@@ -82,6 +85,15 @@ if a.require_validation:
  for target in set(lock['targets'])-{'windows-arm64','windows-amd64'}:
   r=json.loads((evidence/('tools-'+target+'.json')).read_text())
   assert r['accepted'] and r['patch_sha256']==revision and r['binaries_sha256']==products[target]['binaries_sha256']
- r=json.loads((evidence/'hap-runtime.json').read_text())
- assert r['accepted'] and r['mobile_patch_sha256']==revision and r['har_sha256']==sha(har.read_bytes()),'HAP application execution remains unverified'
-print(json.dumps(dict(archives=len(products),har_abis=len(libs),patch_sha256=revision,validation_required=a.require_validation),indent=2))
+ r=json.loads((evidence/'hap-build.json').read_text())
+ assert r['accepted'] and r['mobile_patch_sha256']==revision and r['har_sha256']==sha(har.read_bytes())
+ hap=a.dist/'gomobile-ohos-example-unsigned.hap'
+ assert sha(hap.read_bytes())==r['hap_sha256']
+ with zipfile.ZipFile(hap) as archive:
+  for arch,abi in [('arm64','arm64-v8a'),('arm','armeabi-v7a'),('amd64','x86_64')]:
+   assert sha(archive.read('libs/'+abi+'/libgomobile.so'))==libs[arch]==r['native_libraries_sha256'][abi]
+ for name,digest in r['example_sources_sha256'].items():assert sha((ROOT/'examples/arkts'/name).read_bytes())==digest,'stale caller example: '+name
+ if a.validation_scope=='application':
+  r=json.loads((evidence/'hap-runtime.json').read_text())
+  assert r['accepted'] and r['mobile_patch_sha256']==revision and r['har_sha256']==sha(har.read_bytes()),'HAP application execution remains unverified'
+print(json.dumps(dict(archives=len(products),har_abis=len(libs),patch_sha256=revision,validation_required=a.require_validation,validation_scope=a.validation_scope if a.require_validation else 'static',signed_hap_execution_required=a.require_validation and a.validation_scope=='application'),indent=2))

@@ -42,8 +42,11 @@ A separate `gomobile-ohos-port-<commit>.tar.gz` contains the reusable patch,
 scripts, bilingual documentation, tests and ArkTS example. The same sources
 are included in each tool archive. Run `python3 mobile/scripts/verify.py` after
 packaging to check all nine executable formats, binary hashes and HAR ABIs.
-The strict `--require-validation` gate currently rejects the missing signed
-HAP application execution evidence.
+For the confirmed HAR scope, run
+`python3 mobile/scripts/verify.py --require-validation --validation-scope har`.
+The default `--require-validation` gate still requires signed HAP application
+execution. QEMU signed HAP validation is deferred by the user; native Go/tool
+self-signing remains required. See the [scope record](test-results/delivery-scope.json).
 
 Native OHOS installation needs the matching patched Go in `PATH` and a real
 `binary-sign-tool`. Before executing cross-built commands, run on the device:

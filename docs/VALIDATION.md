@@ -8,9 +8,9 @@
 | C20 项目 | ARM64 | ARMv7 | x64 |
 |---|---|---|---|
 | SDK 纯 Go/cgo/c-shared/c-archive 构建运行 | 通过 | 通过 | 通过 |
-| 系统集成 28 项 | 通过 | 待补验 | 待补验 |
-| 完整标准库、工具链、语言套件 | 通过 | 待旧套件结束后补验 | 待旧套件结束后补验 |
-| 自签名边界 | 通过 | 待补验 | 待补验 |
+| 系统集成 28 项 | 通过 | 待补验 | 通过 |
+| 完整标准库、工具链、语言套件 | 通过 | 待旧套件结束后补验 | 已部署 C20，待完整补验 |
+| 自签名边界 | 通过 | 待补验 | 通过 |
 | 原生宿主构建三目标并直接执行 | 通过 | 待补验 | 待补验 |
 
 ARM64 C20 完整套件为 **450 pass / 249 skip / 0 fail**，退出状态 0；官方语言
@@ -33,8 +33,10 @@ C20 补丁已在全新官方归档基线上应用，全部 190 个适配源码�
 C19 ARM64 全套失败于 time.TestEnvTZUsage 和三个 debug 构建；x64 语言套件
 2733 个完整执行，2682 pass、47 skip、4 fail，均为 HiLog NOSPLIT 构建限制。
 失败轮次及原始输入不覆盖为通过，汇总位于
-[history/c19-integration-1c](test-results/history/c19-integration-1c/)。ARMv7 语言套件已通过 2656 pass/77 skip；ARM/x64 原生套件仍正常执行，结束后保存真实记录，再部署 C20；不混用旧补丁
-结果。只有三架构 C20 全部通过，才能生成当前 accepted=true 的总报告。
+[history/c19-integration-1c](test-results/history/c19-integration-1c/)。ARMv7 语言套件已通过 2656 pass/77 skip；其旧原生套件仍在正常执行。
+x64 旧原生套件已结束，为 437 pass/250 skip/4 fail；失败涉及旧版时区用例及
+HiLog NOSPLIT 构建限制，报告已归档。x64 已部署 C20，28 项系统检查和签名边界
+通过，完整套件尚待执行。不混用旧补丁结果。只有三架构 C20 全部通过，才能生成当前 accepted=true 的总报告。
 
 所有完整套件使用官方 short 模式、CGO_ENABLED=1。ARM64 运行完整 native dist；
 ARM/x64 的原生标准库/工具链及全部 2733 个官方语言用例分开执行，语言采用
@@ -55,7 +57,10 @@ dist -maxbg=1，包内并发用例保留。具体输入、页大小、内存和�
 
 配套 gomobile 已完成三架构真实 Ark 各 29 项和宿主 Node 27 项，HAP 编译及库
 一致性检查通过；镜像缺少 `/dev/code_sign`、`/dev/xpm`，签名 HAP 正常安装返回
-9568404，应用执行不计通过。见 [gomobile 验证矩阵](../mobile/docs/VALIDATION.zh-CN.md)。
+9568404，应用执行不计通过。用户于 2026-10-23 确认先完成 HAR 绑定与三架构交付，
+QEMU 内暂缓签名 HAP 验证，使用显式 `--validation-scope har` 验收绑定链路；
+默认完整应用门槛不变，Go 原生自签名验证继续保留。见
+[gomobile 验证矩阵](../mobile/docs/VALIDATION.zh-CN.md)。
 
 C18 完整通过与当时关机记录保留为 [历史说明](test-results/history/c18/VALIDATION.md)，
 不用于本轮补丁验收。

@@ -1,0 +1,71 @@
+{
+  "arch": "amd64",
+  "run_id": "amd64-cgo1-c19-r1",
+  "exit_status": 1,
+  "packages": {
+    "pass": 437,
+    "skip": 250,
+    "fail": 4
+  },
+  "failures": {
+    "time": [
+      "TestEnvTZUsage",
+      "<package>"
+    ],
+    "cmd/cgo/internal/testshared": [
+      "<package>"
+    ],
+    "cmd/cgo/internal/testplugin": [
+      "TestIssue75102",
+      "<package>"
+    ],
+    "cmd/link": [
+      "TestDWARFLocationList",
+      "<package>"
+    ]
+  },
+  "build_failures": [],
+  "log_sha256": "f3fd5e3d33e61fb448cb747fdf764be04d2ba3e00510ca6873b47cc7f92e4ab9",
+  "qemu": {
+    "pid": 53725,
+    "port": 5571,
+    "server": 18769,
+    "hdc": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/hdc",
+    "archive_sha256": "a1173c39b4bd9ae3e46de176867b501af51eff605466811b86d8370caeccd7ca",
+    "profile": "stock",
+    "qmp": "/Users/ranger/Documents/ChatGPT/go-patch/.work/qemu/x86_64/qmp.sock",
+    "memory_mib": 8192,
+    "server_pid": 72890,
+    "power_policy": "powermgr stopped during headless Go tests"
+  },
+  "inputs": {
+    "run_id": "amd64-cgo1-c19-r1",
+    "scope": "stdlib-tools",
+    "cgo": "1",
+    "free_data_bytes_at_start": 20230946816,
+    "go_build_info": {
+      "target": {
+        "name": "openharmony-amd64",
+        "goos": "openharmony",
+        "goarch": "amd64",
+        "qemu_arch": "x86_64"
+      },
+      "upstream": "go1.27.3",
+      "patch_sha256": "1c499c950e255dfb26942112396c0ab334eeefda7315af9a30da77e78fbe4277"
+    },
+    "fixtures_sha256": {
+      "/data/local/tmp/go-patch/bin/cc": "68c1685f19377a895c7e74bab31d9239ffcfc6273210845d74fca9ddf2edc2e2",
+      "/data/local/tmp/go-patch/bin/binary-sign-tool": "0f69c8bf60d08dd6c7b66d80b0b8d1df3f0513f092cd01119fd6d71b3764d711",
+      "/data/local/tmp/go-patch/bin/native-runner": "b15dc2a80bb8885cb8573398106c5510103288dc5ce4c21eb17872898130a4a5",
+      "/data/local/tmp/go-patch/native-zig/zig": "f5b9efabe40911b49a43c8a5e93a4b0e047b9caf9e8abdbe5bd818cc62f321b1",
+      "/data/local/tmp/go-patch/run-native.sh": "5b2fe600a4873494fe1e7a5cb90e1014627ab3239c089240ba9a76f0216e6a97",
+      "/data/local/tmp/go-patch/go/bin/go": "72d64bafc708e41d524fc2c821c26802052cf57f2e9e18e8f6f5d7813e165e71",
+      "/data/local/tmp/go-patch/go.tar.gz": "dd151e7a85923f9c49eb18723ad31489b0e18ee09648c25075028e0a0ab1d1de"
+    }
+  },
+  "scope": "stdlib-tools",
+  "language_cases": 0,
+  "language_tests": {},
+  "expected_language_cases": 2733,
+  "accepted": false
+}

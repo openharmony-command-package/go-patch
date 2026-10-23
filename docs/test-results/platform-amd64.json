@@ -1,7 +1,168 @@
 {
-  "arch": "amd64",
   "go_version": "go1.27.3",
   "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
-  "accepted": false,
-  "status": "pending fresh C20 verification after older native suite finishes"
+  "arch": "amd64",
+  "accepted": true,
+  "cases": [
+    {
+      "test": "pure-system",
+      "result": "pass",
+      "log_sha256": "1e92c78bcf08a1024499cf90455117dffc2387270bf0d3e9be768b3b5e286ca3"
+    },
+    {
+      "test": "pure-context",
+      "result": "pass",
+      "log_sha256": "e7e4f973240ff2432b467c5857d24d06886dd91bc61828976fbe6216ac11aeb0"
+    },
+    {
+      "test": "pure-network",
+      "result": "pass",
+      "log_sha256": "ca5c2ff8ab75ed592a79e6cea4555d7a2cbfa971f1532706fb694467bf6ce91a"
+    },
+    {
+      "test": "cgo-system",
+      "result": "pass",
+      "log_sha256": "fe705ca19e5baf28de2fba1b5cebde4ca93080eed883635b0b6d613212be49fa"
+    },
+    {
+      "test": "cgo-context",
+      "result": "pass",
+      "log_sha256": "e7e4f973240ff2432b467c5857d24d06886dd91bc61828976fbe6216ac11aeb0"
+    },
+    {
+      "test": "cgo-network",
+      "result": "pass",
+      "log_sha256": "ca5c2ff8ab75ed592a79e6cea4555d7a2cbfa971f1532706fb694467bf6ce91a"
+    },
+    {
+      "test": "netgo-system",
+      "result": "pass",
+      "log_sha256": "dcf502a6022fcf52563dd879dd6cfbc55cd68453b5cbdff266ab339e34755c7a"
+    },
+    {
+      "test": "netgo-context",
+      "result": "pass",
+      "log_sha256": "e7e4f973240ff2432b467c5857d24d06886dd91bc61828976fbe6216ac11aeb0"
+    },
+    {
+      "test": "netgo-network",
+      "result": "pass",
+      "log_sha256": "ca5c2ff8ab75ed592a79e6cea4555d7a2cbfa971f1532706fb694467bf6ce91a"
+    },
+    {
+      "test": "pie-system",
+      "result": "pass",
+      "log_sha256": "a5c15447004c0ef9218a0ca0670c9a25b336fedf93f149dd44d36bf5c7326da4"
+    },
+    {
+      "test": "pie-context",
+      "result": "pass",
+      "log_sha256": "e7e4f973240ff2432b467c5857d24d06886dd91bc61828976fbe6216ac11aeb0"
+    },
+    {
+      "test": "pie-network",
+      "result": "pass",
+      "log_sha256": "ca5c2ff8ab75ed592a79e6cea4555d7a2cbfa971f1532706fb694467bf6ce91a"
+    },
+    {
+      "test": "debug-system",
+      "result": "pass",
+      "log_sha256": "e90af3b3b2109e6d9828a0284f522d0f8b42328d8c1d54070bd99e161273701e"
+    },
+    {
+      "test": "debug-context",
+      "result": "pass",
+      "log_sha256": "e7e4f973240ff2432b467c5857d24d06886dd91bc61828976fbe6216ac11aeb0"
+    },
+    {
+      "test": "debug-network",
+      "result": "pass",
+      "log_sha256": "ca5c2ff8ab75ed592a79e6cea4555d7a2cbfa971f1532706fb694467bf6ce91a"
+    },
+    {
+      "test": "cgo-hook",
+      "result": "pass",
+      "log_sha256": "da4aac276e7843ebf1da1d2cedcb84343499d1e4205aef1bf76d075822845dab"
+    },
+    {
+      "test": "netgo-hook",
+      "result": "pass",
+      "log_sha256": "da4aac276e7843ebf1da1d2cedcb84343499d1e4205aef1bf76d075822845dab"
+    },
+    {
+      "test": "pie-hook",
+      "result": "pass",
+      "log_sha256": "da4aac276e7843ebf1da1d2cedcb84343499d1e4205aef1bf76d075822845dab"
+    },
+    {
+      "test": "timezone-override",
+      "result": "pass",
+      "log_sha256": "3e6f30cbf760c8c68587620ddc6bfe80f9516d8cd81bdae035e77b7bf980e4cd"
+    },
+    {
+      "test": "timezone-empty",
+      "result": "pass",
+      "log_sha256": "feca3ba80b2ffead388251afdcc23e72207d07d695462441df76c40063f8a53f"
+    },
+    {
+      "test": "stdio-closed",
+      "result": "pass",
+      "log_sha256": "734581f9740953ca7a71964948d239b898ebe7787cd40e5d798a001e716c4444"
+    },
+    {
+      "test": "pure-panic",
+      "result": "pass",
+      "log_sha256": "36e8dd8f07c01ced533ecb7ad177a829c40954df00ba2899c2f9c324b7f0fb3a"
+    },
+    {
+      "test": "pure-copy",
+      "result": "pass",
+      "log_sha256": "a0a553cda2854f76254c5784baaeecedf2a3a8cf269d0222bd13eb9165badb23"
+    },
+    {
+      "test": "cgo-panic",
+      "result": "pass",
+      "log_sha256": "36e8dd8f07c01ced533ecb7ad177a829c40954df00ba2899c2f9c324b7f0fb3a"
+    },
+    {
+      "test": "cgo-copy",
+      "result": "pass",
+      "log_sha256": "a0a553cda2854f76254c5784baaeecedf2a3a8cf269d0222bd13eb9165badb23"
+    },
+    {
+      "test": "cgo-fatal",
+      "result": "pass",
+      "log_sha256": "d8c78f231ee0196822ef3017bddba9b3a40e61e50595ce9b0962a935f37fd0ae"
+    },
+    {
+      "test": "long",
+      "result": "pass",
+      "log_sha256": "af6ddb8e3ff52dd888e26e55e0596f5ea20fad2b953e0c1e58de0e997866340c"
+    },
+    {
+      "test": "disabled",
+      "result": "pass",
+      "log_sha256": "bcb52ac25bdabcd283cf949531f02e50c034acf075f6bc1139f895c3b4cc069c"
+    }
+  ],
+  "source_digest": "0321fa42095e298eac55b6ab02a34f420a6583b59d5975d572c36b1a1879c7c9",
+  "go_binary_sha256": "723b4531ad6a3eb0df5c54cd57f6cc60d25bd5acae35764edd7bb3a43398b90c",
+  "system_timezone": "Asia/Shanghai",
+  "fixtures_sha256": {
+    "tests/platform/cgo-fatal.c": "a8112db8e5ff9c9b176177072a98418f3decf4239a971cc8b67c6a52b7d550d6",
+    "tests/platform/socket-hook.c": "9904a090581d84fb61d60b71af752b0d6791a85505b09c425ef85cd7bb999d4a",
+    "tests/platform/main.go": "7925477ec97461234155e96ee6e2f8b85bcdd205b854177dd99b5a57018ec113"
+  },
+  "binaries_sha256": {
+    "pure": "86159feaa12365435792475403fddcee96946f4d96bf9c2db81ec2e8287b0f17",
+    "cgo": "415310516de22d18d49c739625850c3d467f59f17960f2bfe9069059c2a2eb4e",
+    "netgo": "19e1d954d89cc438df2693f24b3488173211c1f12fdcd150cbaf8e94d90b0ee1",
+    "pie": "52c8a4385a2b85312a3271576d7cd15c58f55daa78929411132680f4e0d7ee98",
+    "debug": "74909c706c64cbc636ad8e87ad91795cb37a055ae634ff7da1a2f08dbf4060bc",
+    "socket-hook.so": "bac0b810a0c73ded7ce85618c1935f4281d9e607ef8cc1cc664888b750ae48e0",
+    "cgo-fatal": "74f06c424b2312dccff386dbdd685cd0c78c60ccdd21718a6e06b30632d77cdb"
+  },
+  "hilog_sha256": "882f6e4b6fdef81a3be6c7caee27e360f8f571f24103717336adfae1b03d5dc3",
+  "script_sha256": "dbb84730d340762e3b15765de9305c562b16897592ad5fa9cc9d45d305e8870c",
+  "scope": "full-system QEMU shell; native app sandbox and physical network policies require application tests"
 }

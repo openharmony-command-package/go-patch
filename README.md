@@ -132,7 +132,8 @@ typed ArkTS calls, N-API callbacks and Context directory initialization. It
 provides gomobile/gobind for the same nine tool hosts, plus reusable patch and
 build scripts. See its independent [build guide](mobile/docs/BUILD.md),
 [ArkTS caller example](mobile/examples/arkts/README.md) and
-[validation record](mobile/docs/VALIDATION.md).
+[validation record](mobile/docs/VALIDATION.md). The confirmed scope is HAR
+bindings and three-ABI delivery; signed HAP validation in QEMU is deferred.
 
 ## Validation status
 

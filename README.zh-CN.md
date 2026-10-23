@@ -129,7 +129,8 @@ Go 标准输出和 runtime 诊断会额外进入 HiLog。`log/hilog` 可指定�
 相同九种宿主组合，并提供可复用补丁与脚本。构建方式、独立 ArkTS 调用工程和
 实际通过范围分别见 [构建说明](mobile/docs/BUILD.zh-CN.md)、
 [应用示例](mobile/examples/arkts/README.zh-CN.md) 和
-[验证记录](mobile/docs/VALIDATION.zh-CN.md)。
+[验证记录](mobile/docs/VALIDATION.zh-CN.md)。本次确认先交付 HAR 绑定与三架构，
+QEMU 内暂缓签名 HAP 验证。
 
 ## 验证状态
 

@@ -37,7 +37,10 @@ HAR 使用 gzip tar 的 `package/` 结构，通过 OHPM 引入。调用方 HAP �
 的 `gomobile-ohos-port-<commit>.tar.gz`，包含补丁、脚本、中英文文档、测试与
 ArkTS 示例，每份工具包也携带这些文件。重包后执行
 `python3 mobile/scripts/verify.py`，核对九种工具格式、二进制校验和及 HAR 三种 ABI。
-严格的 `--require-validation` 当前会因签名 HAP 应用执行证据缺失而拒绝发布。
+本次 HAR 交付使用
+`python3 mobile/scripts/verify.py --require-validation --validation-scope har`。
+默认 `--require-validation` 仍要求签名 HAP 应用执行证据。用户确认 QEMU 内暂缓
+此项，原生 Go/工具的自签名验证继续保留，见 [范围记录](test-results/delivery-scope.json)。
 
 OHOS 原生使用时，`PATH` 需有匹配的适配 Go 和真正的 `binary-sign-tool`。
 首次执行交叉构建的命令前，在设备内运行：

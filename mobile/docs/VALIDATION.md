@@ -2,7 +2,11 @@
 
 [中文](VALIDATION.zh-CN.md)
 
-The current artifacts are **candidates**. The mobile patch SHA256 is
+The confirmed delivery scope is **HAR bindings for three OHOS ABIs**. The user
+confirmed this scope on 2026-10-23 and deferred signed HAP validation in QEMU;
+see the [scope record](test-results/delivery-scope.json). The parent Go release
+validation is still running, so the combined artifacts remain candidates.
+The mobile patch SHA256 is
 `5a8ce153a45eb0abf4a8e9bc553ab70908335e4dce4de98377903d904b988923`.
 The example HAR was built with Go 1.27.3 and Go patch
 `cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69`.
@@ -21,7 +25,7 @@ checks does not replace those gates.
 | Tool command execution | macOS/Linux arm64+amd64 and OHOS all three passed |
 | Windows arm64+amd64 tools | Built; executable formats checked; not executed |
 | ArkTS caller HAP | Built; all three libraries equal the tested HAR byte for byte |
-| Signed caller HAP installation and application UID execution | Blocked by current image; not passed |
+| Signed caller HAP installation and application UID execution | Deferred in QEMU by the user; unverified |
 
 The 29 Ark checks cover 27 functional cases and two checks in a second runtime
 environment. They exercise UTF-8/NUL, bytes, bigint limits, objects, errors and
@@ -39,8 +43,9 @@ stay local under `.work/` and `dist/`.
 
 The current QEMU image lacks `/dev/code_sign` and `/dev/xpm`. Normal installation
 of the signed HAP fails with 9568404 while adding the certificate path. No trust
-roots, code-sign checks, or application privileges were bypassed. A compatible
-image or real HDC device is still needed for signed HAP execution, application
+roots, code-sign checks, or application privileges were bypassed. The user
+authorized deferring this QEMU check; it is excluded only from the explicit HAR
+validation scope. A compatible image or real HDC device is still needed for signed HAP execution, application
 UID/private directory permissions, and application lifecycle validation. Use
 [the caller example](../examples/arkts/README.md) for that next step.
 
@@ -52,6 +57,14 @@ Linux/Windows SDK-driven HAR builds, HiShell devices, other API images, and the
 pure Go window/input/OpenGL application backend have not been validated.
 
 `python3 mobile/scripts/verify.py` checks the nine archives and example HAR.
-`--require-validation` also requires current runtime evidence, including a
-successful signed HAP application report; it intentionally fails while that
-application check is blocked.
+For the confirmed scope, run:
+
+```sh
+python3 mobile/scripts/verify.py --require-validation --validation-scope har
+```
+
+This requires current three-ABI Ark evidence, Node/TypeScript tests, seven host
+command reports, and caller HAP compilation with byte-identical libraries. It
+does not claim signed application execution. The default `--require-validation`
+continues to require a successful signed HAP application report and still fails
+while that evidence is missing. Go native self-signing remains required.

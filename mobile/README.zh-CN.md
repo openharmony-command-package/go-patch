@@ -41,7 +41,7 @@ const message = await hello.Hello('OpenHarmony');
 应在同一次 bind 中绑定，应用每个进程使用一个 Go 运行库。
 
 这里提供供 ArkUI 应用调用的库绑定。纯 Go `x/mobile/app` 的窗口、输入、OpenGL
-后端，以及 `gomobile build/install` 直接生成 HAP 属于另一项应用移植工作。
+后端，以及 `gomobile build/install` 直接生成 HAP 不在本次确认的 HAR 交付范围内。
 调用方 HAP 由应用的 SDK 工具构建和签名。实际验证及限制见
 [验证说明](docs/VALIDATION.zh-CN.md)，HAR 构建成功不能替代 OHOS 应用执行证据。
 
@@ -50,4 +50,5 @@ const message = await hello.Hello('OpenHarmony');
 
 OHOS 原生工具包包含 `scripts/sign-installed.sh`，供首次安装时为命令签名。
 示例 HAR 和独立 ArkTS 调用工程见 [应用示例](examples/arkts/README.zh-CN.md)。
-当前产物为候选包，实际通过范围见 [验证矩阵](docs/VALIDATION.zh-CN.md)。
+本次已确认 HAR 绑定与三架构交付，QEMU 内的签名 HAP 验证暂缓，Go 发行验收
+仍在运行。实际通过范围及 HAR 验证命令见 [验证矩阵](docs/VALIDATION.zh-CN.md)。

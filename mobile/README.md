@@ -47,7 +47,7 @@ in one invocation so the application uses one Go runtime library per process.
 
 This backend provides library bindings for an ArkUI application. The existing
 pure Go `x/mobile/app` window/input/OpenGL backend and `gomobile build/install`
-HAP generation are a separate application-port scope. Build and sign the caller
+HAP generation are outside the confirmed HAR delivery scope. Build and sign the caller
 HAP with the application's SDK tooling. See [validation](docs/VALIDATION.md)
 for actual test evidence and remaining limits; a compiled HAR alone does not
 prove execution in an OHOS application.
@@ -58,4 +58,6 @@ Use `dispose(value)` for returned Go interface objects. Go `int`/`uint` map to s
 Native OHOS tool archives include `scripts/sign-installed.sh` for initial
 installation signing. The generated HAR example and an independent ArkTS
 caller are described in [the example](examples/arkts/README.md).
-Current artifacts are candidates; see the exact [validation matrix](docs/VALIDATION.md).
+The user confirmed HAR bindings and three-ABI delivery; signed HAP validation
+in QEMU is deferred. Go release validation is still running. See the exact
+[validation matrix](docs/VALIDATION.md) and its explicit HAR validation command.
