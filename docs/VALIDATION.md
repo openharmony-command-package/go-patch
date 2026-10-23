@@ -9,7 +9,8 @@
 |---|---|---|---|
 | SDK 纯 Go/cgo/c-shared/c-archive 构建运行 | 通过 | 通过 | 通过 |
 | 系统集成 28 项 | 通过 | 通过 | 通过 |
-| 完整标准库、工具链、语言套件 | 通过 | C20 全量运行中 | C20 全量运行中 |
+| 原生完整标准库、工具链 | 通过 | C20 全量运行中 | C20 全量运行中 |
+| 官方语言用例（全部 2733 个） | 2673 pass / 60 skip | 2656 pass / 77 skip | 2686 pass / 47 skip |
 | 自签名边界 | 通过 | 通过 | 通过 |
 | 原生宿主构建三目标并直接执行 | 通过 | 通过 | 通过 |
 
@@ -37,7 +38,10 @@ C19 ARM64 全套失败于 time.TestEnvTZUsage 和三个 debug 构建；x64 语�
 438 pass/247 skip/1 fail，仅 time.TestEnvTZUsage 失败。
 x64 旧原生套件已结束，为 437 pass/250 skip/4 fail；失败涉及旧版时区用例及
 HiLog NOSPLIT 构建限制，报告已归档。x64 已部署 C20，28 项系统检查和签名边界
-通过；ARMv7/x64 的 C20 原生完整标准库/工具链与全部 2733 个语言用例均已启动。
+通过。三架构 C20 官方语言用例已全部通过，ARMv7/x64 均无过滤，输入哈希
+复核一致；见 [ARMv7 语言报告](test-results/language-arm-full-c20.json) 和
+[x64 语言报告](test-results/language-amd64-full-c20.json)。
+ARMv7/x64 的 C20 原生完整标准库和工具链仍在运行。
 不混用旧补丁结果。只有三架构 C20 全部通过，才能生成当前 accepted=true 的总报告。
 
 所有完整套件使用官方 short 模式、CGO_ENABLED=1。ARM64 运行完整 native dist；
