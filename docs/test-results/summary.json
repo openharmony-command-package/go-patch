@@ -2,7 +2,7 @@
   "go_version": "go1.27.3",
   "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
   "accepted": false,
-  "status": "ARM64 C20 full passed and closed; all three architectures passed all 2733 language cases; ARMv7/x64 native standard library and tools still running; platform/signing and nine native combinations passed",
+  "status": "ARM64/x64 C20 full passed and closed; all languages passed; ARM native r1 incomplete after kernel stall and archived, r2 running on fresh boot with identical inputs",
   "arm64": {
     "packages": {
       "pass": 450,
@@ -10,5 +10,19 @@
     },
     "language_cases": 2733,
     "accepted": true
+  },
+  "amd64": {
+    "packages": {
+      "pass": 441,
+      "skip": 250
+    },
+    "language_cases": 2733,
+    "accepted": true
+  },
+  "arm": {
+    "native_accepted": false,
+    "native_run": "arm-cgo1-c20-r2",
+    "language_cases": 2733,
+    "language_accepted": true
   }
 }

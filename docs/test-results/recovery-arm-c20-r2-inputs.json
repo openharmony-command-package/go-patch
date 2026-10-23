@@ -1,0 +1,28 @@
+{
+  "previous_run": "arm-cgo1-c20-r1",
+  "new_run": "arm-cgo1-c20-r2",
+  "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
+  "source_files_checked": 190,
+  "same_fixtures_sha256": true,
+  "guest_sha256": {
+    "/data/local/tmp/go-patch/bin/cc": "513a87b3824d448e570b58414a0aed7fdaff17b064efbbafcc7e092d2801f78b",
+    "/data/local/tmp/go-patch/bin/binary-sign-tool": "f7a562aa8f3b40840fdcd777e60fd3d19d3a12320e7ba55316faa390a23741a0",
+    "/data/local/tmp/go-patch/bin/native-runner": "9411382d16672df48db145890cf3fe0820db447918c46c3483c9e232002b9612",
+    "/data/local/tmp/go-patch/native-zig/zig": "c60473c53fcd5fbc4ea58ba330dd7457b7b44c2efdd64b9559f97ea8b37c652f",
+    "/data/local/tmp/go-patch/run-native.sh": "5b2fe600a4873494fe1e7a5cb90e1014627ab3239c089240ba9a76f0216e6a97",
+    "/data/local/tmp/go-patch/go/bin/go": "5784323f5497f173552c15c0b38116f16cc9f6863e2950c145d8193bbfd7d730",
+    "/data/local/tmp/go-patch/go.tar.gz": "4177129150aa05e66e9a18b52419cdb85e32ca877771e526438f75929791283c"
+  },
+  "recovery": "fresh boot of same pinned own POSIX image after preserved kernel-stall attempt; no source or binary changes",
+  "native_scope": "stdlib-tools",
+  "cgo": "1",
+  "same_native_build_info": true,
+  "same_native_fixtures": true,
+  "base_image_sha256": "98dda34c8120948605d36d3f2d546086a2c8e2370e24aa8f06f95d6eaac3ce25",
+  "profile": "posix",
+  "source_manifest_sha256": "92fca785adb556f87a6004d663c54edbe09b8367eaee6fb2be684d81c4dba025",
+  "identity_log_sha256": "3432e6ba9a1ce493e1956d72ab22fc25e526ff040547e55ec944eb8b322e7643",
+  "record_type": "preflight identity check",
+  "native_completed_at_identity_check": false,
+  "checked_at_utc": "2026-10-23T06:10:21.775537+00:00"
+}

@@ -140,8 +140,10 @@ bindings and three-ABI delivery; signed HAP validation in QEMU is deferred.
 ABI revision 2 adds system/application integration and is undergoing fresh
 validation. C20 ARM64 full validation, the three platform integration checks
 (28 cases each), native signing boundaries, and all nine native host/target
-combinations have passed. ARMv7/x64 C20 full validation is running; the task
-ARM64 QEMU has been closed. Reports must match the current patch. Previous C18 three-architecture
+combinations have passed. C20 x64 full validation and all three language suites
+have also passed. The ARM64/x64 VMs are closed. ARMv7 native attempt r1 was
+incomplete after a guest kernel stall; r2 is running on a fresh boot with the
+same verified inputs. Reports must match the current patch. Previous C18 three-architecture
 full-suite results are retained as [history](docs/test-results/history/c18/summary.json).
 Current archives remain candidates until their own gates pass. See the
 [validation record](docs/VALIDATION.md) and [current summary](docs/test-results/summary.json).

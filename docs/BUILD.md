@@ -111,16 +111,16 @@ The TCG language driver uses the official cross-platform test machinery, compile
 After each suite finishes, collect raw logs before stopping that task's VM:
 
 ```sh
-python3 scripts/test-qemu.py --arch armv7a --run-id arm-cgo1-c20-r1 collect
+python3 scripts/test-qemu.py --arch armv7a --run-id arm-cgo1-c20-r2 collect
 python3 scripts/qemu.py --arch armv7a stop
 ```
 
-The commands below identify the retained complete runs for the current patch. For a new run, replace paths/run IDs with its actual collected results; the verifier requires the raw logs and target-execution audits, not just committed summaries:
+The commands below identify the current C20 runs; the ARMv7 r2 result is still pending. For a new run, replace paths/run IDs with its actual collected results; the verifier requires the raw logs and target-execution audits, not just committed summaries:
 
 ```sh
 python3 scripts/verify-validation.py \
   --arm64 .work/logs/qemu/arm64/arm64-cgo1-c20-r1/summary.json \
-  --arm .work/logs/qemu/armv7a/arm-cgo1-c20-r1/summary.json \
+  --arm .work/logs/qemu/armv7a/arm-cgo1-c20-r2/summary.json \
   --amd64 .work/logs/qemu/x86_64/amd64-cgo1-c20-r1/summary.json \
   --arm-language .work/logs/language/armv7a/full-c20/summary.json \
   --amd64-language .work/logs/language/x86_64/full-c20/summary.json
@@ -133,7 +133,7 @@ python3 scripts/test-signing-boundary.py
 python3 scripts/test-native-targets.py
 ```
 
-These certify signing boundaries and the nine native host/target combinations. They are independent of the full-suite gate. C20 signing boundaries and all nine native combinations have passed. ARM64 full validation passed; ARMv7/x64 C20 full validation is running, as recorded in [packaging-status.json](test-results/packaging-status.json). Do not substitute historical success from another patch.
+These certify signing boundaries and the nine native host/target combinations. They are independent of the full-suite gate. C20 signing boundaries and all nine native combinations have passed. ARM64/x64 full validation and all three language suites passed; ARMv7 native r2 is running after preserving the incomplete r1 kernel-stall attempt, as recorded in [packaging-status.json](test-results/packaging-status.json). Do not substitute historical success from another patch.
 
 ## 5. Repackage and verify
 
@@ -154,7 +154,7 @@ For final release certification, the signing boundaries and all nine native comb
 python3 scripts/verify-release.py --require-validation
 ```
 
-This strict command currently rejects the incomplete ARMv7/x64 C20 full-suite evidence. `--require-tested-toolchains` does not bypass it: a manifest produced without `--require-validation` retains `release_status=candidate` and `validation_required=false`. Running the verifier without either option checks archive contents/structure only.
+This strict command currently rejects the incomplete ARMv7 C20 native full-suite evidence. `--require-tested-toolchains` does not bypass it: a manifest produced without `--require-validation` retains `release_status=candidate` and `validation_required=false`. Running the verifier without either option checks archive contents/structure only.
 
 Archives and artifact metadata remain local and are excluded from Git. Publishing binary releases is a separate step. Current coverage and limitations are in [VALIDATION.md](VALIDATION.md) (Chinese) and the [JSON summary](test-results/summary.json).
 

@@ -1,0 +1,47 @@
+{
+  "arch": "arm",
+  "run_id": "arm-cgo1-c20-r1",
+  "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
+  "detected_at_utc": "2026-10-23T05:47:15Z",
+  "checked_at_utc": "2026-10-23T05:55:35.711273+00:00",
+  "accepted": false,
+  "status": "incomplete kernel-stall attempt preserved; original VM closed; same-input native suite restarted on fresh boot as arm-cgo1-c20-r2",
+  "qemu_pid": 53723,
+  "launcher_pid": 53714,
+  "port": 5570,
+  "server": 18769,
+  "hdc_timeouts_seconds": [
+    30,
+    120,
+    60,
+    45
+  ],
+  "pause_resume_attempt": "one brief QMP stop/cont; no VM restart; guest still not responding",
+  "root_cause": "undetermined",
+  "monitor_warning": "ARM validate worker raised RPC timeout; ThreadPoolExecutor waits for x64; live JSON may retain old phase",
+  "x64_status": "complete C20 full validation passed; VM closed 2026-10-23T05:51:02Z",
+  "logs_sha256": {
+    "serial-complete.log": "bd63b11eee94f74ce2113810b1601c700ce93c9d6b4b275ec362435517007b27",
+    "hdc-recovery-check.log": "5417f9d4775dd4b54552da378cb29677662be8da0d26abf443321bcfc49c6102",
+    "qmp-all-cpus.json": "af75d14d39e50b8fbc1954133625ce5dc09c0d838ce4aa2b787a45279290692b",
+    "hdc-after-resume.log": "3df72e61405404c6e726508732215814149ca9e69e85df1460ebd96104d2ee5a",
+    "monitor.log": "83af1636482943725b19e607ec80376f0e94967bfe3ed4e540808a8221a9a792",
+    "qmp.json": "5d572b491ba14d5e9a92e5cbc85421a7179f0339fbe7ac5109ceb75a9dc86e63",
+    "journal-replay.log": "dcf1ba5280893f6c0fe1bbc24492c42f9db98a577a5baa1a18d0cebce901ee29",
+    "disk-snapshot.json": "3a5ef805ba2e05dd35c5bb9b81ddbcb1fc23e05fcf67d961a4203c0ce261abd7",
+    "qmp-code.json": "ac59e320ec790a468b7fe37aea1597091f2cf079da3a12cf72d7abb701f77605",
+    "stop.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "serial-tail.log": "67458648327100732f75cd23ecec85e2bf0eed790071066829356fff43b1118f",
+    "qmp-pause-resume.json": "f2387c298ae6266a9b2ee122a5bb4f5aeeba7a7eaeea749157cc4dec7b81a76b"
+  },
+  "closed_at_utc": "2026-10-23T06:00:05Z",
+  "partial_packages": {
+    "pass": 305,
+    "skip": 156
+  },
+  "native_exit_status": null,
+  "original_attempt_completed": false,
+  "offline_collection": "crash-consistent APFS clone; journal replay and debugfs extraction on clone only",
+  "snapshot_virtual_bytes": 25769803776,
+  "recovery_run_id": "arm-cgo1-c20-r2"
+}

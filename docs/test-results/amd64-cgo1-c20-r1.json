@@ -1,0 +1,54 @@
+{
+  "arch": "amd64",
+  "run_id": "amd64-cgo1-c20-r1",
+  "exit_status": 0,
+  "packages": {
+    "pass": 441,
+    "skip": 250
+  },
+  "failures": {},
+  "build_failures": [],
+  "log_sha256": "c211d0c6672b80df406e5fa96c1c5d7823fd7bea42aade8aecdf23ce9a46f0f3",
+  "qemu": {
+    "pid": 53725,
+    "port": 5571,
+    "server": 18769,
+    "hdc": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/hdc",
+    "archive_sha256": "a1173c39b4bd9ae3e46de176867b501af51eff605466811b86d8370caeccd7ca",
+    "profile": "stock",
+    "qmp": "/Users/ranger/Documents/ChatGPT/go-patch/.work/qemu/x86_64/qmp.sock",
+    "memory_mib": 8192,
+    "server_pid": 72890,
+    "power_policy": "powermgr stopped during headless Go tests"
+  },
+  "inputs": {
+    "run_id": "amd64-cgo1-c20-r1",
+    "scope": "stdlib-tools",
+    "cgo": "1",
+    "free_data_bytes_at_start": 20218966016,
+    "go_build_info": {
+      "target": {
+        "name": "openharmony-amd64",
+        "goos": "openharmony",
+        "goarch": "amd64",
+        "qemu_arch": "x86_64"
+      },
+      "upstream": "go1.27.3",
+      "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69"
+    },
+    "fixtures_sha256": {
+      "/data/local/tmp/go-patch/bin/cc": "68c1685f19377a895c7e74bab31d9239ffcfc6273210845d74fca9ddf2edc2e2",
+      "/data/local/tmp/go-patch/bin/binary-sign-tool": "0f69c8bf60d08dd6c7b66d80b0b8d1df3f0513f092cd01119fd6d71b3764d711",
+      "/data/local/tmp/go-patch/bin/native-runner": "b15dc2a80bb8885cb8573398106c5510103288dc5ce4c21eb17872898130a4a5",
+      "/data/local/tmp/go-patch/native-zig/zig": "f5b9efabe40911b49a43c8a5e93a4b0e047b9caf9e8abdbe5bd818cc62f321b1",
+      "/data/local/tmp/go-patch/run-native.sh": "5b2fe600a4873494fe1e7a5cb90e1014627ab3239c089240ba9a76f0216e6a97",
+      "/data/local/tmp/go-patch/go/bin/go": "3d58e313754ef741e214d219f83ae849ba7c022775bb18ccd6c56d19e30b1d26",
+      "/data/local/tmp/go-patch/go.tar.gz": "0efd50c0e81205938bb3bf6650b6d6cf8d13de6560525cacc647e91cf8c0e213"
+    }
+  },
+  "scope": "stdlib-tools",
+  "language_cases": 0,
+  "language_tests": {},
+  "expected_language_cases": 2733,
+  "accepted": true
+}

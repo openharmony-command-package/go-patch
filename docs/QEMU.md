@@ -1,14 +1,16 @@
 # 全系统 QEMU 验证
 
 ABI revision 2 正在重新验证。C20 三架构各 28 项系统集成、自签名边界及原生
-九组合均已通过，ARM64 全套通过后已关闭实例；ARMv7/x64 C20 全量运行中。
+九组合均已通过，ARM64/x64 全量及三架构语言套件通过，两个实例均已关闭。
+ARMv7 原生 r1 出现内核 RCU stall，已保留为未完成；离线保存磁盘副本和日志后
+关闭故障实例。当前使用新启动的同一固定镜像运行原生 r2，源码和工具字节一致。
 当前进度见 [VALIDATION.md](VALIDATION.md)。系统服务专项运行 `scripts/test-platform.py`，上一轮 C18 记录只作历史参考。
 
 使用 manifest 固定的 OpenHarmony 镜像和完整系统 QEMU。标准库和工具链由 guest 原生编译测试；语言用例可由官方跨平台驱动编译，并在 guest 执行。标准 dist 自带 `-count=1`，每次完整运行都执行测试，不使用上次测试结果缓存。不是 Linux sysroot 加 user-mode QEMU。所有磁盘、端口、状态都属于本任务；不复用其他开发者正在运行的 QEMU。
 
 依赖：`qemu-system-aarch64`、`qemu-system-arm`、`qemu-system-x86_64`、HDC、e2fsprogs（resize2fs/e2fsck）、足够存储空间。每架构 userdata 默认 24GB，测试 cache 可能超过 5GB；建议 `.work/qemu` 放在有余量的本地或外置盘。暂停实例后才能移动镜像，完成后用 `--reuse-images` 恢复。扩容前会离线重放 ext4 journal 并检查文件系统。
 
-历史 C18 的 ARM64 r11、ARMv7 r5、amd64 r5 完整测试已通过，[历史总报告](test-results/history/c18/summary.json) 已生成。当时收集日志后关闭三个实例并保留镜像；当轮未追加 ARM 签名边界及剩余六个原生构建组合。本轮 C20 已独立补齐三架构签名边界和原生九组合，完整套件仍等待 ARMv7/x64。
+历史 C18 的 ARM64 r11、ARMv7 r5、amd64 r5 完整测试已通过，[历史总报告](test-results/history/c18/summary.json) 已生成。当时收集日志后关闭三个实例并保留镜像；当轮未追加 ARM 签名边界及剩余六个原生构建组合。本轮 C20 已独立补齐三架构签名边界和原生九组合，完整原生套件仍等待 ARMv7 r2。
 以下命令用于独立复现。
 
 ## 启动

@@ -135,8 +135,9 @@ QEMU 内暂缓签名 HAP 验证。
 ## 验证状态
 
 ABI revision 2 新增系统与应用集成。C20 ARM64 全套、三架构各 28 项系统集成、
-自签名边界及原生九组合已通过，ARMv7/x64 的 C20 全量验证正在运行。
-本任务 ARM64 QEMU 已关闭，报告必须匹配当前补丁。
+自签名边界及原生九组合已通过。x64 全套及三架构语言套件也已通过，
+ARM64/x64 QEMU 已关闭。ARMv7 原生 r1 因 guest 内核停滞未完成；
+r2 已在新启动的同一固定镜像上补验，受测输入已核对一致。报告必须匹配当前补丁。
 上一版 C18 三架构完整测试结果保留在 [历史记录](docs/test-results/history/c18/summary.json)。
 当前归档在各自验收门槛通过前保持候选状态，见 [验证记录](docs/VALIDATION.md)
 和 [当前总报告](docs/test-results/summary.json)。

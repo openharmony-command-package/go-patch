@@ -9,7 +9,7 @@
 |---|---|---|---|
 | SDK 纯 Go/cgo/c-shared/c-archive 构建运行 | 通过 | 通过 | 通过 |
 | 系统集成 28 项 | 通过 | 通过 | 通过 |
-| 原生完整标准库、工具链 | 通过 | C20 全量运行中 | C20 全量运行中 |
+| 原生完整标准库、工具链 | 450 pass / 249 skip | r1 内核停滞；r2 补验中 | 441 pass / 250 skip |
 | 官方语言用例（全部 2733 个） | 2673 pass / 60 skip | 2656 pass / 77 skip | 2686 pass / 47 skip |
 | 自签名边界 | 通过 | 通过 | 通过 |
 | 原生宿主构建三目标并直接执行 | 通过 | 通过 | 通过 |
@@ -41,7 +41,15 @@ HiLog NOSPLIT 构建限制，报告已归档。x64 已部署 C20，28 项系统�
 通过。三架构 C20 官方语言用例已全部通过，ARMv7/x64 均无过滤，输入哈希
 复核一致；见 [ARMv7 语言报告](test-results/language-arm-full-c20.json) 和
 [x64 语言报告](test-results/language-amd64-full-c20.json)。
-ARMv7/x64 的 C20 原生完整标准库和工具链仍在运行。
+x64 C20 原生完整套件已通过，441 pass/250 skip/0 fail，退出状态 0，见
+[x64 原生报告](test-results/amd64-cgo1-c20-r1.json)。
+ARMv7 r1 在 305 pass/156 skip 后出现 guest 内核 RCU stall，HDC 失联，未生成
+完成状态；已保存磁盘副本并离线提取原始日志，明确记为未完成，根因仍未确定。
+故障实例已关闭，参见 [r1 原始结果](test-results/arm-cgo1-c20-r1.json) 和
+[基础设施记录](test-results/arm-c20-r1-infrastructure.json)。
+仅补跑未完成的 ARMv7 原生完整套件，编号 arm-cgo1-c20-r2；使用新启动的同一
+固定 POSIX 镜像，受测 Go、测试依赖及 190 个适配源码均核对一致，见
+[恢复输入](test-results/recovery-arm-c20-r2-inputs.json)。
 不混用旧补丁结果。只有三架构 C20 全部通过，才能生成当前 accepted=true 的总报告。
 
 所有完整套件使用官方 short 模式、CGO_ENABLED=1。ARM64 运行完整 native dist；
@@ -58,10 +66,11 @@ dist -maxbg=1，包内并发用例保留。具体输入、页大小、内存和�
 
 签名边界和原生九组合必须与 C20 完整套件的受测 Go 二进制一致。
 `scripts/verify-release.py --require-validation` 门槛保持不变。当前为候选产物，
-ARMv7/x64 完整复测尚未结束。三架构签名和原生九组合已通过，分别见
+ARMv7 原生完整复测尚未结束。三架构签名和原生九组合已通过，分别见
 [签名边界](test-results/signing-boundary.json) 和 [原生矩阵](test-results/native-targets.json)。
 ARM64 已在完成全部接收目标验证后关闭，已确认 launcher/QEMU 进程退出，见
-[关机记录](test-results/qemu-shutdown-arm64-c20.json)；只保留 ARMv7/x64 本轮活动实例。
+[ARM64 关机记录](test-results/qemu-shutdown-arm64-c20.json)。x64 已在全量完成后关闭，
+见 [x64 关机记录](test-results/qemu-shutdown-amd64-c20.json)。当前仅 ARMv7 r2 实例运行。
 HiShell 真机、应用 UID/私有目录、其他 API 版本、
 真实 MTE/不同页大小内核仍未验证。
 

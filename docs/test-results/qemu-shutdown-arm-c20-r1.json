@@ -1,0 +1,14 @@
+{
+  "arch": "arm",
+  "run_id": "arm-cgo1-c20-r1",
+  "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
+  "closed": true,
+  "reason": "unresponsive guest; crash-consistent userdata snapshot saved and partial logs extracted",
+  "stop_requested_at_utc": "2026-10-23T06:00:05Z",
+  "checked_at_utc": "2026-10-23T06:02:47.346149+00:00",
+  "launcher_pid": 53714,
+  "qemu_pid": 53723,
+  "processes_absent": true,
+  "live_state_absent": true,
+  "completion_record_sha256": "1a0561f677a5504a47211d2c63fffb56e65c11dbe470bd4e0a5fa2deb48a425f"
+}

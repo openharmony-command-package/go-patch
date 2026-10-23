@@ -1,0 +1,12 @@
+{
+  "arch": "amd64",
+  "run_id": "amd64-cgo1-c20-r1",
+  "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
+  "closed": true,
+  "stop_requested_at_utc": "2026-10-23T05:51:02Z",
+  "checked_at_utc": "2026-10-23T06:00:28.888863+00:00",
+  "qemu_pid": 53725,
+  "processes_absent": true,
+  "live_state_absent": true,
+  "completion_record_sha256": "7d98fa33f61dc53a13500963704a711c7ddb2e009637b280fc03ebb5e97142a6"
+}
