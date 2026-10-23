@@ -137,16 +137,17 @@ bindings and three-ABI delivery; signed HAP validation in QEMU is deferred.
 
 ## Validation status
 
-ABI revision 2 adds system/application integration and is undergoing fresh
-validation. C20 ARM64 full validation, the three platform integration checks
-(28 cases each), native signing boundaries, and all nine native host/target
-combinations have passed. C20 x64 full validation and all three language suites
-have also passed. The ARM64/x64 VMs are closed. ARMv7 native attempt r1 was
-incomplete after a guest kernel stall; r2 is running on a fresh boot with the
-same verified inputs. Reports must match the current patch. Previous C18 three-architecture
-full-suite results are retained as [history](docs/test-results/history/c18/summary.json).
-Current archives remain candidates until their own gates pass. See the
-[validation record](docs/VALIDATION.md) and [current summary](docs/test-results/summary.json).
+ABI revision 2 adds system/application integration. The current C20 patch has
+passed complete three-architecture validation: native standard library and tools,
+all 2,733 official language cases per architecture, 28 platform checks per
+architecture, native signing boundaries, and all nine native host/target
+combinations. All task QEMU instances are closed. ARMv7 r1 remains recorded as
+incomplete after a guest kernel stall; r2 passed with the same verified inputs.
+See the [validation record](docs/VALIDATION.md) and
+[current summary](docs/test-results/summary.json) for counts and limits.
+Archive certification uses `scripts/verify-release.py --require-validation`;
+its local `dist/release-manifest.json` records the result. Previous C18 results
+remain [history](docs/test-results/history/c18/summary.json).
 
 ## Documentation and references
 

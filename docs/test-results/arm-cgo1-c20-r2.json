@@ -1,0 +1,70 @@
+{
+  "arch": "arm",
+  "run_id": "arm-cgo1-c20-r2",
+  "exit_status": 0,
+  "packages": {
+    "pass": 439,
+    "skip": 247
+  },
+  "failures": {},
+  "build_failures": [],
+  "log_sha256": "74fed5d3d4b74ac4e68613cc60ba2c2a9550cb19c11a5ae5e826bf972ab19252",
+  "qemu": {
+    "pid": 49174,
+    "port": 5570,
+    "server": 18769,
+    "hdc": "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/hdc",
+    "archive_sha256": "98dda34c8120948605d36d3f2d546086a2c8e2370e24aa8f06f95d6eaac3ce25",
+    "profile": "posix",
+    "qmp": "/Users/ranger/Documents/ChatGPT/go-patch/.work/qemu/armv7a/qmp.sock",
+    "memory_mib": 4096,
+    "power_policy": "powermgr stopped during headless Go tests"
+  },
+  "inputs": {
+    "run_id": "arm-cgo1-c20-r2",
+    "scope": "stdlib-tools",
+    "cgo": "1",
+    "free_data_bytes_at_start": 14114807808,
+    "go_build_info": {
+      "target": {
+        "name": "openharmony-arm",
+        "goos": "openharmony",
+        "goarch": "arm",
+        "qemu_arch": "armv7a"
+      },
+      "upstream": "go1.27.3",
+      "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69"
+    },
+    "fixtures_sha256": {
+      "/data/local/tmp/go-patch/bin/cc": "513a87b3824d448e570b58414a0aed7fdaff17b064efbbafcc7e092d2801f78b",
+      "/data/local/tmp/go-patch/bin/binary-sign-tool": "f7a562aa8f3b40840fdcd777e60fd3d19d3a12320e7ba55316faa390a23741a0",
+      "/data/local/tmp/go-patch/bin/native-runner": "9411382d16672df48db145890cf3fe0820db447918c46c3483c9e232002b9612",
+      "/data/local/tmp/go-patch/native-zig/zig": "c60473c53fcd5fbc4ea58ba330dd7457b7b44c2efdd64b9559f97ea8b37c652f",
+      "/data/local/tmp/go-patch/run-native.sh": "5b2fe600a4873494fe1e7a5cb90e1014627ab3239c089240ba9a76f0216e6a97",
+      "/data/local/tmp/go-patch/go/bin/go": "5784323f5497f173552c15c0b38116f16cc9f6863e2950c145d8193bbfd7d730",
+      "/data/local/tmp/go-patch/go.tar.gz": "4177129150aa05e66e9a18b52419cdb85e32ca877771e526438f75929791283c"
+    }
+  },
+  "scope": "stdlib-tools",
+  "language_cases": 0,
+  "language_tests": {},
+  "expected_language_cases": 2733,
+  "accepted": true,
+  "qemu_profile": {
+    "profile": "posix",
+    "edits": [
+      {
+        "file": "/etc/init/foundation.cfg",
+        "change": "critical[0] = 0",
+        "before_sha256": "c85dc083eeaae7592ad66672a7222dd4fbf09a3482a19bdc144bf25584d56ff1",
+        "after_sha256": "dac04b58c848985fa3174fcefc189ccd861cffe38cd2de5f6d503dbe597b2806"
+      },
+      {
+        "file": "/etc/init/graphic.cfg",
+        "change": "critical[0] = 0",
+        "before_sha256": "63fc73a3f8430ba2ed0e3167834e8ec35d46630ddf9705f4ff56c2e704971253",
+        "after_sha256": "239988befc89c13f0b09cdc07536466d5bf47971dfec134602ca24a32fac2b80"
+      }
+    ]
+  }
+}

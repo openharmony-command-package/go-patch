@@ -50,5 +50,5 @@ const message = await hello.Hello('OpenHarmony');
 
 OHOS 原生工具包包含 `scripts/sign-installed.sh`，供首次安装时为命令签名。
 示例 HAR 和独立 ArkTS 调用工程见 [应用示例](examples/arkts/README.zh-CN.md)。
-本次已确认 HAR 绑定与三架构交付，QEMU 内的签名 HAP 验证暂缓，Go 发行验收
-仍在运行。实际通过范围及 HAR 验证命令见 [验证矩阵](docs/VALIDATION.zh-CN.md)。
+本次已确认 HAR 绑定与三架构交付，QEMU 内的签名 HAP 验证暂缓。上级 Go 的
+三架构完整套件、自签名和原生矩阵验收均已通过。实际通过范围及 HAR 验证命令见 [验证矩阵](docs/VALIDATION.zh-CN.md)。

@@ -1,4 +1,4 @@
-# Go OHOS 验证进度
+# Go OHOS 验证结果
 
 本轮验证基线为 Go 1.27.3、ABI revision 2。修正版 C20 补丁 SHA256：
 `cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69`。
@@ -9,7 +9,7 @@
 |---|---|---|---|
 | SDK 纯 Go/cgo/c-shared/c-archive 构建运行 | 通过 | 通过 | 通过 |
 | 系统集成 28 项 | 通过 | 通过 | 通过 |
-| 原生完整标准库、工具链 | 450 pass / 249 skip | r1 内核停滞；r2 补验中 | 441 pass / 250 skip |
+| 原生完整标准库、工具链 | 450 pass / 249 skip | 439 pass / 247 skip（r2） | 441 pass / 250 skip |
 | 官方语言用例（全部 2733 个） | 2673 pass / 60 skip | 2656 pass / 77 skip | 2686 pass / 47 skip |
 | 自签名边界 | 通过 | 通过 | 通过 |
 | 原生宿主构建三目标并直接执行 | 通过 | 通过 | 通过 |
@@ -24,7 +24,7 @@ ARM64 C20 完整套件为 **450 pass / 249 skip / 0 fail**，退出状态 0；�
 macOS arm64/amd64（含 Rosetta）已运行 C20 Go，构建三目标 pure/cgo/c-shared/
 c-archive。Linux arm64/amd64（容器）已运行 C20 Go 并构建三目标纯 Go 程序。
 Windows 两架构构建完成，仍只有静态格式证据；不计为 Windows 实际运行通过。
-九种候选归档已在本地 dist 生成；重包必须保持 [72 项原生文件及四种宿主 Go
+九种工具链归档保留在本地 dist；最终归档验收由 `verify-release.py --require-validation` 记录在 `dist/release-manifest.json`。重包必须保持 [72 项原生文件及四种宿主 Go
 校验和](test-results/tested-toolchains.json) 不变。
 
 C20 补丁已在全新官方归档基线上应用，全部 190 个适配源码逐文件一致，见
@@ -49,8 +49,10 @@ ARMv7 r1 在 305 pass/156 skip 后出现 guest 内核 RCU stall，HDC 失联，�
 [基础设施记录](test-results/arm-c20-r1-infrastructure.json)。
 仅补跑未完成的 ARMv7 原生完整套件，编号 arm-cgo1-c20-r2；使用新启动的同一
 固定 POSIX 镜像，受测 Go、测试依赖及 190 个适配源码均核对一致，见
-[恢复输入](test-results/recovery-arm-c20-r2-inputs.json)。
-不混用旧补丁结果。只有三架构 C20 全部通过，才能生成当前 accepted=true 的总报告。
+[恢复输入](test-results/recovery-arm-c20-r2-inputs.json)。r2 已完整通过，439 pass/247 skip/0 fail，
+退出状态 0，见 [ARMv7 原生报告](test-results/arm-cgo1-c20-r2.json)。
+三架构原始日志和输入经 `verify-validation.py` 核验，已生成当前补丁
+[accepted=true 总报告](test-results/summary.json)，没有混用旧补丁结果。
 
 所有完整套件使用官方 short 模式、CGO_ENABLED=1。ARM64 运行完整 native dist；
 ARM/x64 的原生标准库/工具链及全部 2733 个官方语言用例分开执行，语言采用
@@ -65,12 +67,13 @@ dist -maxbg=1，包内并发用例保留。具体输入、页大小、内存和�
 保存，详见 [QEMU](QEMU.md)。测试结束后收集日志并关闭本任务实例。
 
 签名边界和原生九组合必须与 C20 完整套件的受测 Go 二进制一致。
-`scripts/verify-release.py --require-validation` 门槛保持不变。当前为候选产物，
-ARMv7 原生完整复测尚未结束。三架构签名和原生九组合已通过，分别见
+`scripts/verify-release.py --require-validation` 门槛保持不变，当前三架构完整证据已满足。
+三架构签名和原生九组合已通过，分别见
 [签名边界](test-results/signing-boundary.json) 和 [原生矩阵](test-results/native-targets.json)。
 ARM64 已在完成全部接收目标验证后关闭，已确认 launcher/QEMU 进程退出，见
 [ARM64 关机记录](test-results/qemu-shutdown-arm64-c20.json)。x64 已在全量完成后关闭，
-见 [x64 关机记录](test-results/qemu-shutdown-amd64-c20.json)。当前仅 ARMv7 r2 实例运行。
+见 [x64 关机记录](test-results/qemu-shutdown-amd64-c20.json)。ARMv7 r2 完成后亦已关闭，
+见 [ARMv7 关机记录](test-results/qemu-shutdown-arm-c20-r2.json)。本任务已无活动 QEMU。
 HiShell 真机、应用 UID/私有目录、其他 API 版本、
 真实 MTE/不同页大小内核仍未验证。
 

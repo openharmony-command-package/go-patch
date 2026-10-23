@@ -8,7 +8,7 @@
 
 下表未明确标注 C20 的三架构完整测试通过描述均指 C18 历史记录，不能计入当前补丁验收。
 
-本表逐条记录处理方式。上游 closed 不是本项目通过测试的证据；“本次适配”表示代码已处理，运行验收状态单独列出。历史 C18 的 ARM64 r11、ARMv7 r5 与 amd64 r5 完整测试已通过，原报告见 [C18 历史总报告](test-results/history/c18/summary.json)。当前 C20 的 ARM64/x64 全套、三架构语言/系统集成/自签名、原生九组合已通过；ARM 原生 r1 内核停滞未完成，r2 正在补验，以 [验证记录](VALIDATION.md) 为准。这是本地固定镜像下的验证结果，不表示上游所有 issue 已关闭、真机或所有部署场景均已验证。
+本表逐条记录处理方式。上游 closed 不是本项目通过测试的证据；“本次适配”表示代码已处理，运行验收状态单独列出。历史 C18 的 ARM64 r11、ARMv7 r5 与 amd64 r5 完整测试已通过，原报告见 [C18 历史总报告](test-results/history/c18/summary.json)。当前 C20 三架构原生和语言完整套件、系统集成、自签名及原生九组合已通过，QEMU 均已关闭；ARM 原生 r1 内核停滞未完成记录保留，同一输入的 r2 已通过，以 [验证记录](VALIDATION.md) 为准。这是本地固定镜像下的验证结果，不表示上游所有 issue 已关闭、真机或所有部署场景均已验证。
 
 | Issue | 原状态 | 标题 | 处理 | 代码/理由 | 验证与限制 |
 |---|---|---|---|---|---|
@@ -16,7 +16,7 @@
 | [#2](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/2) | closed | internal/platform: use external link when ohos using cgo | 本次适配 | OHOS cgo 强制外部链接，使用 SDK musl 初始化。 | 三架构外部链接构建与可执行产物 QEMU 冒烟均通过。 |
 | [#3](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/3) | closed | runtime: skip registration error for 43 sig | 本次适配 | 仅在 OHOS 的 43 号信号注册失败时继续初始化。 | 三架构启动和 runtime 完整包测试通过。 |
 | [#4](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/4) | closed | runtime: hold traceAcquire across casgstatus in injectglist | 官方版本继承 |runtime：injectglist/casgstatus 的 traceAcquire 生命周期；直接采用 go1.27.3，避免重复回移旧版补丁。 [官方源码](https://github.com/golang/go/blob/go1.27.3/src/runtime/proc.go)。 | 已核对当前官方实现；三架构完整套件通过。 |
-| [#5](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/5) | closed | proposal: all: support openharmony/arm64 | 本次适配 | 统一 GOOS=openharmony，支持 arm64、arm(GOARM=7)、amd64；版本使用官方 go1.27.3。 | 9 种本地工具链已构建，三架构完整 QEMU 测试通过；归档为候选状态，补充签名/原生九组合覆盖见 VALIDATION.md。 |
+| [#5](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/5) | closed | proposal: all: support openharmony/arm64 | 本次适配 | 统一 GOOS=openharmony，支持 arm64、arm(GOARM=7)、amd64；版本使用官方 go1.27.3。 | 9 种本地工具链已构建；C20 三架构完整 QEMU、签名边界和原生九组合已通过，最终归档验收及限制见 VALIDATION.md。 |
 | [#6](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/6) | open | runtime: fix crash with musllibc | 本次适配 | GD TLS、FP 保护、非 glibc 初始化共同处理 musl c-shared 崩溃。 | 三架构 release 构建 dlopen+GC+四 C 线程回调均通过；三架构完整套件通过。 |
 | [#7](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/7) | closed | crypto/x509: properly check for IPv6 hosts in URIs | 官方版本继承 |crypto/x509：URI 的 IPv6 主机判断；直接采用 go1.27.3，避免重复回移旧版补丁。 [官方源码](https://github.com/golang/go/blob/go1.27.3/src/crypto/x509/verify.go)。 | 已核对当前官方实现；三架构完整套件通过。 |
 | [#8](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/8) | open | 有计划将opehharmony的支持合并到官方golang仓库吗？ | 无需代码处理 | 是否合入官方由上游维护流程决定，当前交付为独立可重用补丁。 | 不能以本地适配承诺上游合入时间。 |
@@ -30,10 +30,10 @@
 | [#16](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/16) | closed | Add dynamic TLS model for ARM64 | 本次适配 | 参考 PR 75048 实现 GD TLS；补充 ARMv7 TLS 与寄存器保存。 | 三架构构建及 dlopen/C 四线程回调均通过；三架构 QEMU 完整测试通过。 |
 | [#17](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/17) | closed | security: fix CVE-2025-22870 | 官方版本继承 |vendored x/net：CVE-2025-22870；直接采用 go1.27.3，避免重复回移旧版补丁。 [官方源码](https://github.com/golang/go/blob/go1.27.3/src/vendor/golang.org/x/net/http/httpproxy/proxy.go)。 | 已核对当前官方实现；三架构完整套件通过。 |
 | [#18](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/18) | closed | net/http: reject bare LF in chunked encoding | 官方版本继承 |net/http：拒绝 chunk-size 裸 LF；直接采用 go1.27.3，避免重复回移旧版补丁。 [官方源码](https://github.com/golang/go/blob/go1.27.3/src/net/http/internal/chunked.go)。 | 已核对当前官方实现；三架构完整套件通过。 |
-| [#20](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/20) | open | 有时候需要在模拟器上使用，但是没有支持openharmony/amd64，后续可以考虑支持吗 | 本次适配 | 统一 GOOS=openharmony，支持 arm64、arm(GOARM=7)、amd64；版本使用官方 go1.27.3。 | 9 种本地工具链已构建，三架构完整 QEMU 测试通过；归档为候选状态，补充签名/原生九组合覆盖见 VALIDATION.md。 |
+| [#20](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/20) | open | 有时候需要在模拟器上使用，但是没有支持openharmony/amd64，后续可以考虑支持吗 | 本次适配 | 统一 GOOS=openharmony，支持 arm64、arm(GOARM=7)、amd64；版本使用官方 go1.27.3。 | 9 种本地工具链已构建；C20 三架构完整 QEMU、签名边界和原生九组合已通过，最终归档验收及限制见 VALIDATION.md。 |
 | [#22](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/22) | closed | runtime: c-shared lib crash when using release mode to build openharmony app | 本次适配 | GD TLS、FP 保护、非 glibc 初始化共同处理 musl c-shared 崩溃。 | 三架构 release 构建 dlopen+GC+四 C 线程回调均通过；三架构完整套件通过。 |
 | [#23](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/23) | closed | ci: add build scirpts | 本地脚本替代 | 提供固定版本下载、补丁应用、构建、交叉验证和 QEMU 脚本；旧仓库门禁配置不直接回移。 | 尚未接入远程 CI；本地脚本执行记录见验证报告。 |
-| [#24](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/24) | closed | proposal: all: support openharmony/arm64 | 本次适配 | 统一 GOOS=openharmony，支持 arm64、arm(GOARM=7)、amd64；版本使用官方 go1.27.3。 | 9 种本地工具链已构建，三架构完整 QEMU 测试通过；归档为候选状态，补充签名/原生九组合覆盖见 VALIDATION.md。 |
+| [#24](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/24) | closed | proposal: all: support openharmony/arm64 | 本次适配 | 统一 GOOS=openharmony，支持 arm64、arm(GOARM=7)、amd64；版本使用官方 go1.27.3。 | 9 种本地工具链已构建；C20 三架构完整 QEMU、签名边界和原生九组合已通过，最终归档验收及限制见 VALIDATION.md。 |
 | [#25](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/25) | open | 验证TestSetgidStress用例 | 保留测试 | TestSetgidStress 保持启用，不按旧参考仓库禁用。 | 三架构 TestSetgidStress 与 cshared 完整包测试通过。 |
 | [#26](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/26) | closed | all: use runtime.IsOpenharmony instead of runtime.GOOS=="openharmony" | 本次适配 | 保持 runtime.GOOS=linux 兼容第三方判断，新增 runtime.IsOpenharmony；go env 仍输出 openharmony。 | 三架构原生工具启动和标准库/工具链构建测试通过。 |
 | [#27](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/27) | closed | cmd/link: read gcdata address from relocation info in shlib | 本次适配 | 从共享库重定位恢复 GC data 地址；不回移已从新版删除的 Gcprog 表示。 | 三架构 testshared 完整包测试通过。 |
@@ -64,13 +64,13 @@
 | [#53](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/53) | closed | net: add cgo implements for interfaceTable&interfaceAddrTable on openharmony system | 本次适配 | libc getifaddrs 获取接口和地址，释放链表并关闭 ioctl fd；修正 IPv4 16 字节表示。 | 三架构冒烟通过；三架构 net 完整包测试通过。 |
 | [#54](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/54) | open | 编译得到的二进制如何在鸿蒙中运行 | 文档处理 | README 提供 SDK 交叉编译、HDC 传输、签名工具与运行方式。 | 仅提供有权限的设备 shell 场景；应用沙箱权限另由部署方管理。 |
 | [#55](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/55) | open | 对 golang 官方版本更新跟进的计划 | 版本策略 | 锁定官方最新稳定 release tag；升级时重新生成补丁与验证。 | 当前基线 go1.27.3；长期更新排期由维护者决定。 |
-| [#56](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/56) | open | 改用tar.gz等通用压缩格式 | 本次适配 | Unix 工具链使用 tar.gz 保留执行权限；Windows 使用 zip。 | 本地产物使用通用格式及 SHA256；候选归档校验方式与发布覆盖限制见 README。 |
+| [#56](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/56) | open | 改用tar.gz等通用压缩格式 | 本次适配 | Unix 工具链使用 tar.gz 保留执行权限；Windows 使用 zip。 | 本地产物使用通用格式及 SHA256；归档校验方式与发布覆盖限制见 README。 |
 | [#57](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/57) | closed | Add a patch to temporaily replace syscall.Fallocate(), which is not supported on HarmonyOS yet. | 本次适配 | Fallocate 返回 ENOSYS/ENOTSUP 时保留 Truncate 后的 mmap 回退。 | 源码已处理；HiShell 真机未测。 |
 | [#58](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/58) | closed | Integrate external-binary signing method into the ohos_golang_go workflow, enabled direct complier usage on HiShell. | 本次适配 | 仅 OHOS 宿主构建 OHOS ELF EXEC/DYN 时调用 binary-sign-tool；最终 build ID 写入后签名。 | 三架构原生完整套件通过并实际签名输出；ARM64/amd64 缺失签名工具时失败及 OHOS→Linux 不签名的边界通过，ARM 边界与其余六种原生交叉组合本轮未完成，HiShell 真机未测。 |
 | [#59](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/59) | closed | Add a patch to temporaily replace syscall.Fallocate(), which is not supported on HarmonyOS yet. | 本次适配 | Fallocate 返回 ENOSYS/ENOTSUP 时保留 Truncate 后的 mmap 回退。 | 源码已处理；HiShell 真机未测。 |
-| [#60](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/60) | open | go升级到1.26.5 | 本次适配 | 统一 GOOS=openharmony，支持 arm64、arm(GOARM=7)、amd64；版本使用官方 go1.27.3。 | 9 种本地工具链已构建，三架构完整 QEMU 测试通过；归档为候选状态，补充签名/原生九组合覆盖见 VALIDATION.md。 |
+| [#60](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/60) | open | go升级到1.26.5 | 本次适配 | 统一 GOOS=openharmony，支持 arm64、arm(GOARM=7)、amd64；版本使用官方 go1.27.3。 | 9 种本地工具链已构建；C20 三架构完整 QEMU、签名边界和原生九组合已通过，最终归档验收及限制见 VALIDATION.md。 |
 | [#61](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/61) | closed | Correction of the directory after bootstrapping. | 本次适配 | GOOSForTools 保证原生工具目录、引导默认平台与运行时 Linux 兼容值分离。 | 三架构原生 go env GOOS/GOHOSTOS=openharmony，完整工具链测试通过。 |
-| [#62](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/62) | open | all: Adaptation on openharmony/arm64 platform. | 本次适配 | 统一 GOOS=openharmony，支持 arm64、arm(GOARM=7)、amd64；版本使用官方 go1.27.3。 | 9 种本地工具链已构建，三架构完整 QEMU 测试通过；归档为候选状态，补充签名/原生九组合覆盖见 VALIDATION.md。 |
+| [#62](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/62) | open | all: Adaptation on openharmony/arm64 platform. | 本次适配 | 统一 GOOS=openharmony，支持 arm64、arm(GOARM=7)、amd64；版本使用官方 go1.27.3。 | 9 种本地工具链已构建；C20 三架构完整 QEMU、签名边界和原生九组合已通过，最终归档验收及限制见 VALIDATION.md。 |
 | [#63](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/63) | open | CMD/Link: read gcdata address from relocation info in shlib | 本次适配 | 从共享库重定位恢复 GC data 地址；不回移已从新版删除的 Gcprog 表示。 | 三架构 testshared 完整包测试通过。 |
 | [#64](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/64) | open | internal/platform: use external link when ohos using cgo | 本次适配 | OHOS cgo 强制外部链接，使用 SDK musl 初始化。 | 三架构外部链接构建与可执行产物 QEMU 冒烟均通过。 |
 | [#65](https://gitcode.com/openharmony-sig/ohos_golang_go/issues/65) | open | net: set preferCgo=true for openharmony | 本次适配 | OHOS 默认 preferCgo，通过 libc 解析 DNS。 | 配置已移植；三架构 net 完整包测试通过，外网域名服务不由此补丁保证。 |
@@ -90,11 +90,13 @@
 
 C20 在系统集成补丁上补齐 HiLog 的 debug/NOSPLIT 浅调用链、三架构原始系统调用
 叶入口、关闭标准 fd 后的日志通道，以及显式空 TZ 的测试边界。C19 ARM64 全套
-和 x64 语言失败记录保留，不能用 C18 通过报告代替新补丁。C20 ARM64 完整
-450 pass/249 skip/0 fail；ARMv7/x64 在旧套件结束后重新验证。
+和 x64 语言失败记录保留，不能用 C18 通过报告代替新补丁。C20 原生完整结果为
+ARM64 450 pass/249 skip、ARMv7 r2 439 pass/247 skip、x64 441 pass/250 skip，
+均为 0 fail；每架构全部 2733 个语言用例完成。ARMv7 r1 内核停滞记录继续保留。
 
-#58 的 C19 三架构签名边界和原生九组合已通过；C20 必须独立重跑，目前 ARM64
-边界和三个目标直接执行已通过，其余待补。HiShell 真机仍未验证。
+#58 的 C20 三架构签名边界及原生九种主机/目标组合已独立通过，受测签名 Go
+校验和与完整套件一致，见 [签名边界](test-results/signing-boundary.json) 和
+[原生矩阵](test-results/native-targets.json)。HiShell 真机仍未验证。
 
 新增 gomobile companion 提供三 ABI HAR/ArkTS/N-API、双向回调、Context 初始化
 和九种工具包。真实 Ark 各 29 项、宿主 Node 27 项、HAP 编译通过，签名 HAP

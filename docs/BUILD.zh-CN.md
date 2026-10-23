@@ -115,7 +115,7 @@ python3 scripts/test-qemu.py --arch armv7a --run-id arm-cgo1-c20-r2 collect
 python3 scripts/qemu.py --arch armv7a stop
 ```
 
-下列命令对应当前 C20 测试轮次，ARMv7 r2 的结果仍待完成。新一轮应替换成实际收集的 run-id 与路径；核验需要原始日志和目标执行审计，不能只靠仓库里的摘要：
+下列命令对应当前 C20 已完成轮次，包括 ARMv7 恢复验证 r2。新一轮应替换成实际收集的 run-id 与路径；核验需要原始日志和目标执行审计，不能只靠仓库里的摘要：
 
 ```sh
 python3 scripts/verify-validation.py \
@@ -133,7 +133,7 @@ python3 scripts/test-signing-boundary.py
 python3 scripts/test-native-targets.py
 ```
 
-它们检查自签名边界和原生九种主机/目标组合，与完整套件门槛分别计算。C20 三架构签名边界和原生九组合已通过，ARM64/x64 全量和三架构语言套件通过，ARMv7 原生 r1 内核停滞已保留为未完成，r2 正在补验，见 [packaging-status.json](test-results/packaging-status.json)。不能用其他补丁的历史通过记录替代。
+它们检查自签名边界和原生九种主机/目标组合，与完整套件门槛分别计算。C20 三架构签名边界、原生九组合以及三架构原生和语言完整套件均已通过；ARMv7 原生 r1 内核停滞保留为未完成，同一输入的 r2 已通过，见 [packaging-status.json](test-results/packaging-status.json)。不能用其他补丁的历史通过记录替代。
 
 ## 5. 重包与核验
 
@@ -154,7 +154,7 @@ python3 scripts/verify-release.py --require-tested-toolchains
 python3 scripts/verify-release.py --require-validation
 ```
 
-当前 ARMv7 的 C20 原生全量证据尚未完成，该严格检查会明确拒绝。`--require-tested-toolchains` 不替代该门槛；未使用 `--require-validation` 生成的清单保持 `release_status=candidate` 和 `validation_required=false`。不带两个选项时，仅校验归档内容与结构。
+当前 C20 证据已满足该严格验收门槛，该命令还会核对重包后的文件与受测工具一致。`--require-tested-toolchains` 不替代该门槛；未使用 `--require-validation` 生成的清单保持 `release_status=candidate` 和 `validation_required=false`。不带两个选项时，仅校验归档内容与结构。
 
 压缩包和产物元数据保留本地，不提交 Git；上传二进制发布是独立步骤。具体覆盖及限制见 [VALIDATION.md](VALIDATION.md) 和 [JSON 总报告](test-results/summary.json)。
 

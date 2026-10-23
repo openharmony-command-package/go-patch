@@ -59,5 +59,6 @@ Native OHOS tool archives include `scripts/sign-installed.sh` for initial
 installation signing. The generated HAR example and an independent ArkTS
 caller are described in [the example](examples/arkts/README.md).
 The user confirmed HAR bindings and three-ABI delivery; signed HAP validation
-in QEMU is deferred. Go release validation is still running. See the exact
+in QEMU is deferred. The parent Go three-architecture full-suite, self-signing,
+and native matrix validation has passed. See the exact
 [validation matrix](docs/VALIDATION.md) and its explicit HAR validation command.

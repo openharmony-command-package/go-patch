@@ -1,10 +1,11 @@
 {
   "go_version": "go1.27.3",
   "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
-  "accepted": false,
-  "status": "candidate; ARM native r1 incomplete after guest kernel stall; same-input full native r2 running; all other C20 gates passed",
+  "accepted": true,
+  "status": "C20 three-architecture full suites, platform integration, signing boundaries and nine native combinations passed; all task QEMU instances closed",
   "platform_integration_accepted": true,
   "native_signing_accepted": true,
   "native_matrix_accepted": true,
-  "full_three_architecture_accepted": false
+  "full_three_architecture_accepted": true,
+  "archive_certification": "Run verify-release.py --require-validation after repack; result is recorded locally in dist/release-manifest.json"
 }

@@ -1,0 +1,13 @@
+{
+  "arch": "arm",
+  "run_id": "arm-cgo1-c20-r2",
+  "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
+  "closed": true,
+  "stop_requested_at_utc": "2026-10-23T09:26:36Z",
+  "checked_at_utc": "2026-10-23T09:36:33.028271+00:00",
+  "launcher_pid": 49174,
+  "launcher_process_absent": true,
+  "task_qemu_processes_absent": true,
+  "live_state_absent": true,
+  "completion_record_sha256": "77d1e2f3b1d818169c0d01191d5b64a42c302bc228630f7a572107e3d125aea5"
+}

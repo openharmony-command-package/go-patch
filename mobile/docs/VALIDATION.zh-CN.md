@@ -4,7 +4,8 @@
 
 用户于 2026-10-23 确认本次交付范围为 **HAR 绑定与 OHOS 三架构**，QEMU 内先
 跳过签名 HAP 验证，见 [范围记录](test-results/delivery-scope.json)。上级 Go 的
-发行验收仍在运行，因此组合产物仍标为候选。gomobile 补丁 SHA256：
+三架构完整套件、原生自签名边界及九种原生主机/目标组合均已通过。显式 HAR
+交付门槛通过，默认完整应用门槛仍缺少下文列出的应用证据。gomobile 补丁 SHA256：
 `5a8ce153a45eb0abf4a8e9bc553ab70908335e4dce4de98377903d904b988923`。
 示例 HAR 使用 Go 1.27.3，Go 补丁 SHA256：
 `cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69`。

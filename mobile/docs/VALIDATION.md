@@ -4,8 +4,10 @@
 
 The confirmed delivery scope is **HAR bindings for three OHOS ABIs**. The user
 confirmed this scope on 2026-10-23 and deferred signed HAP validation in QEMU;
-see the [scope record](test-results/delivery-scope.json). The parent Go release
-validation is still running, so the combined artifacts remain candidates.
+see the [scope record](test-results/delivery-scope.json). The parent Go
+three-architecture full suites, native self-signing boundaries, and all nine
+native host/target combinations have passed. The explicit HAR delivery gate
+passes; the default full application gate remains unfulfilled as documented below.
 The mobile patch SHA256 is
 `5a8ce153a45eb0abf4a8e9bc553ab70908335e4dce4de98377903d904b988923`.
 The example HAR was built with Go 1.27.3 and Go patch

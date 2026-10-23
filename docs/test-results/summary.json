@@ -1,28 +1,68 @@
 {
   "go_version": "go1.27.3",
   "patch_sha256": "cb9c9199b60e78fcb052526b86dcb657c11b07e4dbd3d13b757ddfa583cb8d69",
-  "accepted": false,
-  "status": "ARM64/x64 C20 full passed and closed; all languages passed; ARM native r1 incomplete after kernel stall and archived, r2 running on fresh boot with identical inputs",
-  "arm64": {
-    "packages": {
-      "pass": 450,
-      "skip": 249
+  "verified_at": "2026-10-23T09:26:37.026509+00:00",
+  "accepted": true,
+  "targets": [
+    {
+      "arch": "arm64",
+      "native_run": "arm64-cgo1-c20-r1",
+      "packages": {
+        "pass": 450,
+        "skip": 249
+      },
+      "native_log_sha256": "6f9065a7868599304603ae23082511ca890202610eaee0447400fd45d0530a12",
+      "qemu_profile": "stock",
+      "tested_archive_sha256": "44a9fbfd6d7661602d946e35955189fbffe4803ce12f279c694e6149d17ddc17",
+      "signed_native_go_sha256": "5fec26a887607abcf6ff47b7fe53018ceda220ea266d0a8887abe4c9f0ce2346",
+      "language_cases": 2733,
+      "language_tests": {
+        "skip": 60,
+        "pass": 2673
+      },
+      "method": "native full dist"
     },
-    "language_cases": 2733,
-    "accepted": true
-  },
-  "amd64": {
-    "packages": {
-      "pass": 441,
-      "skip": 250
+    {
+      "arch": "arm",
+      "native_run": "arm-cgo1-c20-r2",
+      "packages": {
+        "pass": 439,
+        "skip": 247
+      },
+      "native_log_sha256": "74fed5d3d4b74ac4e68613cc60ba2c2a9550cb19c11a5ae5e826bf972ab19252",
+      "qemu_profile": "posix",
+      "tested_archive_sha256": "4177129150aa05e66e9a18b52419cdb85e32ca877771e526438f75929791283c",
+      "signed_native_go_sha256": "5784323f5497f173552c15c0b38116f16cc9f6863e2950c145d8193bbfd7d730",
+      "language_run": "full-c20",
+      "language_cases": 2733,
+      "language_tests": {
+        "skip": 77,
+        "pass": 2656
+      },
+      "target_executions": 1240,
+      "language_log_sha256": "612a9c88bf7fe94d744b1c14533e10955f7a27dbd54452b3f6bf7f5a039ad0b2",
+      "method": "native stdlib-tools plus official cross-language driver in full-system QEMU"
     },
-    "language_cases": 2733,
-    "accepted": true
-  },
-  "arm": {
-    "native_accepted": false,
-    "native_run": "arm-cgo1-c20-r2",
-    "language_cases": 2733,
-    "language_accepted": true
-  }
+    {
+      "arch": "amd64",
+      "native_run": "amd64-cgo1-c20-r1",
+      "packages": {
+        "pass": 441,
+        "skip": 250
+      },
+      "native_log_sha256": "c211d0c6672b80df406e5fa96c1c5d7823fd7bea42aade8aecdf23ce9a46f0f3",
+      "qemu_profile": "stock",
+      "tested_archive_sha256": "0efd50c0e81205938bb3bf6650b6d6cf8d13de6560525cacc647e91cf8c0e213",
+      "signed_native_go_sha256": "3d58e313754ef741e214d219f83ae849ba7c022775bb18ccd6c56d19e30b1d26",
+      "language_run": "full-c20",
+      "language_cases": 2733,
+      "language_tests": {
+        "pass": 2686,
+        "skip": 47
+      },
+      "target_executions": 1250,
+      "language_log_sha256": "749e61715153b1d96aae24fbc45bb4b4408fb07bdc1a2dec044720d0df15bdda",
+      "method": "native stdlib-tools plus official cross-language driver in full-system QEMU"
+    }
+  ]
 }
